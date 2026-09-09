@@ -409,7 +409,13 @@ a{color:inherit;text-decoration:none}
 
 
 /* ================= ПАЛУБЫ И ПОИСК ================= */
-.decks-wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px;display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.decks-wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:6px 20px 0;display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.navmode{margin-left:auto;margin-bottom:7px;appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);color:#93A6D0;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 13px;border-radius:99px;transition:background .15s,color .15s,border-color .15s;white-space:nowrap}
+.navmode:hover{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.34)}
+.navmode:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.navmode i{display:flex;gap:2px;align-items:center}
+.navmode i b{display:block;width:4px;height:11px;border-radius:1.5px;background:currentColor;font-size:0}
+.navmode i b.w{width:11px;height:4px}
 .decks{display:flex;gap:4px;flex-wrap:wrap}
 .deck{appearance:none;cursor:pointer;font-family:"Russo One",sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.03em;padding:11px 18px 12px;border-radius:13px 13px 0 0;border:none;background:rgba(255,255,255,.07);color:#93A6D0;transition:background .15s,color .15s;position:relative;text-align:left}
 .deck:hover{background:rgba(255,255,255,.14);color:#fff}
@@ -797,8 +803,9 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       </div>
     </div>
   </div>
-  <div class="decks-wrap">
+  <div class="decks-wrap" id="decksWrap">
     <div class="decks" id="decks" role="tablist"></div>
+    <button class="navmode" id="navMode" type="button" title="Переключить вид вкладок"></button>
   </div>
   <nav class="subjects"><div class="inner" id="mainNav" role="tablist"></div></nav>
 </header>
@@ -1000,18 +1007,24 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--amber)">
-    <h3>Палубы и поиск <em>как устроена шапка</em></h3>
+    <h3>Два вида вкладок <em>кнопка справа над строкой</em></h3>
     <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
-      Двенадцать разделов разложены по четырём палубам, поэтому в строке вкладок никогда не больше четырёх кнопок — сколько бы разборов ни добавилось за год. Верхний ряд — палубы, под ним вкладки выбранной.</p>
+      Шапка умеет показывать разделы двумя способами, и переключается это одной кнопкой справа над строкой вкладок. Выбор запоминается.</p>
+    <div class="grid g2" style="margin-bottom:18px">
+      <div class="term" style="--tc2:var(--blue)"><b>Одной строкой</b><span>Так стоит по умолчанию. Все разделы видны сразу: у капитана семь, у штурмана двенадцать. Ничего не спрятано, до любого — одно нажатие.</span><span class="hint">На узком экране строка листается вбок пальцем.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>По палубам</b><span>Разделы собраны в четыре группы, в строке не больше четырёх кнопок. Полезно, когда разборов накопится много и строка станет длинной.</span><span class="hint">Кнопка «Разложить по палубам» — справа над строкой.</span></div>
+    </div>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
+      Если включены палубы, разделы лежат так:</p>
     <div class="grid g2">
       <div class="term" style="--tc2:var(--green)"><b>Сегодня</b><span>Вахта, план дня и календарь. Сюда заходят каждый день и почти никуда больше.</span></div>
-      <div class="term" style="--tc2:var(--cyan)"><b>Учёба</b><span>Уроки, Тесты, а у штурмана ещё Проверка и Что нужно. Все новые разборы приходят сюда — верхний ряд от этого не растёт.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Учёба</b><span>Уроки, Тесты, а у штурмана ещё Проверка и Что нужно. Все новые разборы приходят сюда.</span></div>
       <div class="term" style="--tc2:var(--red)"><b>Тело и дух</b><span>ГТО и Вызовы. Раз в неделю: замеры и новая карточка.</span></div>
       <div class="term" style="--tc2:var(--amber)"><b>Рубка</b><span>Только у штурмана: Курс, Печать, Прогресс, Инструкция. У капитана вместо неё «Справка» с одной инструкцией.</span></div>
     </div>
     <div class="note" style="--nc2:var(--red);margin-top:14px;max-width:80ch">
-      <b>Цветная точка на палубе</b>
-      <span>Значит, внутри что-то ждёт. Красная — есть непокрытые пункты в «Что нужно», из-за которых часть разбора остаётся непроверенной. Янтарная — не отмечена сегодняшняя вахта или накопились вопросы для работы над ошибками. Точка гаснет, когда дело закрыто. Свёрнутое не значит забытое.</span>
+      <b>Цветная точка</b>
+      <span>Значит, что-то ждёт. Красная — есть непокрытые пункты в «Что нужно», из-за которых часть разбора остаётся непроверенной. Янтарная — не отмечена сегодняшняя вахта или накопились вопросы для работы над ошибками. В строке точка сидит на самой вкладке, в режиме палуб — ещё и на палубе, внутри которой лежит эта вкладка. Гаснет, когда дело закрыто.</span>
     </div>
   </div>
 
@@ -1036,7 +1049,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   <div class="sec" style="--sc2:var(--green)">
     <h3>Если пошло не так <em>восемь частых ситуаций</em></h3>
     <div class="grid g2">
-      <div class="fix"><b>«Не вижу нужную вкладку»</b><span>Она на другой палубе — верхний ряд в шапке. Уроки, Тесты, Проверка и Что нужно живут на «Учёбе»; Курс, Печать, Прогресс и Инструкция — в «Рубке».</span></div>
+      <div class="fix"><b>«Не вижу нужную вкладку»</b><span>Скорее всего включены палубы, и она на другой — верхний ряд в шапке. Уроки, Тесты, Проверка и Что нужно живут на «Учёбе»; Курс, Печать, Прогресс и Инструкция — в «Рубке». Кнопка «Показать одной строкой» справа вернёт все вкладки в один ряд.</span></div>
       <div class="fix"><b>«Забыл код штурмана»</b><span>В окне ввода нажмите «Забыли код?» — там способ сброса. Прогресс при этом не теряется, снимается только замок; новый код ставится во вкладке «Прогресс».</span></div>
       <div class="fix"><b>«Пропустил три дня подряд»</b><span>Серия обнулилась, узлы остались — так и задумано. Ничего не говорите до воскресенья. На совете спросите одно: не завышен ли минимум.</span></div>
       <div class="fix"><b>«Не хочет отмечать вахту»</b><span>Заведите себе колонку в бумажном чек-листе и держите вахту сами. Взрослый, который делает то же самое, работает лучше уговоров.</span></div>
@@ -1091,6 +1104,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">9 сен</td><td style="color:var(--ink-2)">Новая тема по биологии «Ботаника — наука о растениях» (Введение, стр. 6–9) собрана по фото учебника: 20 вопросов в тесте, 15 устных. Разбор §1 переставлен на свои стр. 10–13 и помечен как несверенный. В «Курсе» появилось оглавление учебника биологии, в «Что нужно» закрыты три пункта</td></tr>
           <tr><td class="num" style="text-align:left">9 сен</td><td style="color:var(--ink-2)">Новая тема по английскому «Hot spots»: шестнадцать слов с карточки учителя, скелет рекламы места и образец с переводом, 20 вопросов в тесте, 15 устных, карточка приёмки письменной работы</td></tr>
           <tr><td class="num" style="text-align:left">9 сен</td><td style="color:var(--ink-2)">Разбор предлогов сверен по фото учебника: список из одиннадцати подтверждён, добавлены слова урока 1a, маршрут к дому Линды из упр. 4b и рамка Check these words. В «Курсе» появилось оглавление Starlight 6 на весь год</td></tr>
+          <tr><td class="num" style="text-align:left">9 сен</td><td style="color:var(--ink-2)">Два вида вкладок с переключателем: одной строкой (по умолчанию) или по палубам. Кнопка справа над строкой, выбор запоминается</td></tr>
         </tbody>
       </table>
     </div>
@@ -2936,7 +2950,7 @@ const MONTHS = [
 
 /* ================= СОСТОЯНИЕ ================= */
 const STORE_KEY = "bortovoy-journal-v2";
-const DEFAULT = {v:3, role:"cap", checks:{}, taken:[], done:[], gto:{}, stage:"3", sex:"m", tests:{}, bonus:0, qstats:{}, history:[], oral:{}, ostats:{}, manual:{}, verified:{}, todo:{}, pin:""};
+const DEFAULT = {v:3, role:"cap", checks:{}, taken:[], done:[], gto:{}, stage:"3", sex:"m", tests:{}, bonus:0, qstats:{}, history:[], oral:{}, ostats:{}, manual:{}, verified:{}, todo:{}, pin:"", nav:"flat"};
 let state = JSON.parse(JSON.stringify(DEFAULT));
 
 function load(){
@@ -3024,11 +3038,16 @@ const TABS = [
 ];
 let view = "today";
 
+function navFlat(){ return (state.nav || "flat") !== "decks"; }
+
 function renderNav(){
   const D = decks();
   if(!D.some(d=>d.id === deck)) deck = D[0].id;
   const cur = D.find(d=>d.id === deck), A = attn();
-  document.getElementById("mainNav").innerHTML = cur.ids.map(id=>{
+  const ids = navFlat()
+    ? TABS.filter(t=>t.role === "all" || t.role === state.role).map(t=>t.id)
+    : cur.ids;
+  document.getElementById("mainNav").innerHTML = ids.map(id=>{
     const t = TABS.find(x=>x.id === id);
     return '<button data-t="'+id+'" class="'+(id===flashId?"flash":"")+'" style="--tc:'+C[t.color]+'" aria-selected="'+(view===id)+'">'
       + (A[id] && id!==view ? '<span class="attn" style="--fc:'+C[A[id]]+'"></span>' : '')
@@ -4381,7 +4400,14 @@ function attn(){
 }
 
 function renderDecks(){
-  const A = attn(), D = decks();
+  const A = attn(), D = decks(), flat = navFlat();
+  const btn = document.getElementById("navMode");
+  btn.innerHTML = flat
+    ? '<i><b class="w"></b><b class="w"></b></i> Разложить по палубам'
+    : '<i><b></b><b></b><b></b></i> Показать одной строкой';
+  btn.setAttribute("aria-pressed", String(!flat));
+  document.getElementById("decksWrap").classList.toggle("flat", flat);
+  if(flat){ document.getElementById("decks").innerHTML = ""; return; }
   document.getElementById("decks").innerHTML = D.map(d=>{
     const hit = d.ids.filter(id=>A[id]);
     const fc = (d.id !== deck && hit.length) ? C[A[hit[0]]] : null;
@@ -4395,6 +4421,15 @@ function renderDecks(){
     show(d.ids.includes(view) ? view : d.ids[0]);
   }));
 }
+
+/* переключатель вида: одной строкой ↔ по палубам, выбор запоминается */
+document.getElementById("navMode").addEventListener("click", ()=>{
+  state.nav = navFlat() ? "decks" : "flat";
+  save();
+  deck = deckOf(view).id;
+  renderNav();
+  toast(navFlat() ? "Все вкладки одной строкой" : "Вкладки разложены по палубам");
+});
 
 /* ================= КОД ШТУРМАНА ================= */
 /* Это защита от ребёнка, а не настоящая криптография: код лежит в браузере
