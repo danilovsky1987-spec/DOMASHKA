@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Домашка">
+  <rect width="512" height="512" rx="96" fill="#111E42"/>
+  <g>
+    <rect x="82" y="122" width="348" height="52" rx="26" fill="#E8402A"/>
+    <rect x="82" y="197" width="348" height="52" rx="26" fill="#1B6FE0"/>
+    <rect x="82" y="272" width="348" height="52" rx="26" fill="#F2A104"/>
+    <rect x="82" y="347" width="348" height="52" rx="26" fill="#7A4FD1"/>
+    <rect x="82" y="422" width="348" height="52" rx="26" fill="#12A05E"/>
+  </g>
+</svg>
