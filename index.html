@@ -201,7 +201,7 @@ ol.steps li::before{content:counter(si);counter-increment:si;position:absolute;l
 .weekmeta .th{font-family:"Russo One",sans-serif;font-size:22px;text-transform:uppercase;overflow-wrap:anywhere}
 .weekmeta .go{font-size:12.5px;line-height:1.35;font-weight:600;opacity:.95}
 .days{display:grid;grid-template-columns:repeat(7,1fr)}
-.day{border-right:1px solid var(--line-2);border-top:4px solid var(--dc,transparent);padding:9px 10px 11px;min-height:142px;display:flex;flex-direction:column;gap:6px;background:var(--surface);cursor:pointer;transition:background .12s}
+.day{border-right:1px solid var(--line-2);border-top:4px solid var(--dc,transparent);padding:10px 11px 12px;min-height:118px;display:flex;flex-direction:column;gap:6px;background:var(--surface);cursor:pointer;transition:background .12s}
 .day:hover{background:var(--surface-2)}
 .day:last-child{border-right:none}
 .day.empty{background:var(--surface-2);cursor:default;border-top-color:transparent}
@@ -212,17 +212,66 @@ ol.steps li::before{content:counter(si);counter-increment:si;position:absolute;l
 .day .dwd{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;color:var(--ink-3);letter-spacing:.06em;font-weight:700}
 .day .di{font-size:12.5px;line-height:1.35;color:var(--ink-2);font-weight:600}
 .day .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto}
+.day .tags .tag{font-size:9px;padding:2px 7px}
 .tag{font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:99px;color:#fff;background:var(--gc,var(--blue))}
 .tag.amber{color:var(--on-amber)}
-.dots{display:flex;gap:4px}
+.dots{display:flex;gap:4px;margin-top:6px}
 .dots i{width:7px;height:7px;border-radius:99px;background:var(--line);display:block}
 .dots i.on{background:var(--green)}
-.legend{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 20px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 18px}
+.lchip{appearance:none;display:inline-flex;align-items:center;gap:7px;border:2px solid var(--line);background:var(--surface);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:7px 13px;border-radius:99px;cursor:pointer}
+.lchip .sq{width:11px;height:11px;border-radius:4px;background:var(--lc);flex:none}
+.lchip .qt{font-size:10px;opacity:.6}
+.lchip:hover{border-color:var(--lc);color:var(--ink)}
+.lchip[aria-pressed="true"]{background:var(--lc);border-color:var(--lc);color:#fff}
+.lchip[aria-pressed="true"] .sq{background:#fff}
+.lchip.amber[aria-pressed="true"]{color:var(--on-amber)}
+.lchip.amber[aria-pressed="true"] .sq{background:var(--on-amber)}
+.lreset{appearance:none;border:none;background:transparent;color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding:7px 6px}
+.lreset:hover{color:var(--red)}
+.lhint{font-size:12.5px;font-weight:600;color:var(--ink-3);margin-left:4px}
+.mprog{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px}
+.mprog .track{flex:1;min-width:180px;height:10px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.mprog .track > i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),#4FD08A);transition:width .25s}
+.mprog .cnt{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.weekrow.dim{opacity:.6}
+.day.mute{opacity:.22}
+.day.mute .di, .day.mute .tags{visibility:hidden}
+.day .tags .tag.off{background:var(--line-2)!important;color:var(--ink-3)!important}
+.mgrid{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.mhead{display:grid;grid-template-columns:repeat(7,1fr);background:var(--navy)}
+.mhead span{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8FA8DE;font-weight:700;text-align:center;padding:9px 0}
+.mbody{display:grid;grid-template-columns:repeat(7,1fr)}
+.mcell{border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2);min-height:78px;padding:8px 9px 7px;display:flex;flex-direction:column;gap:5px;cursor:pointer;background:var(--surface)}
+.mcell:hover{background:var(--surface-2)}
+.mcell.empty{background:var(--surface-2);cursor:default}
+.mcell.wknd{background:color-mix(in srgb,var(--blue) 4%,var(--surface))}
+.mcell.today{box-shadow:inset 0 0 0 3px var(--amber);background:color-mix(in srgb,var(--amber) 13%,var(--surface))}
+.mcell.mute{opacity:.25}
+.mcell .n{font-family:"Russo One",sans-serif;font-size:16px;line-height:1}
+.mcell.wknd .n{color:var(--ink-3)}
+.mcell .pts{display:flex;gap:4px;flex-wrap:wrap}
+.mcell .pts i{width:8px;height:8px;border-radius:99px;background:var(--pc);display:block}
+.mcell .pts i.off{opacity:.18}
+.mcell .vb{margin-top:auto;height:4px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.mcell .vb > i{display:block;height:100%;background:var(--green);border-radius:99px}
+.mweek{grid-column:1/-1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:7px 12px;background:var(--wc);color:var(--on-color)}
+.mweek.amber{color:var(--on-amber)}
+.mweek .th{font-family:"Russo One",sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.mweek .go{font-size:12px;font-weight:600;opacity:.95}
+.mbtn.now{border-color:var(--amber);color:var(--amber)}
+.weekmeta .rep{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;margin-top:6px;padding-top:8px;border-top:1px solid rgba(255,255,255,.3);opacity:.9}
+.weekmeta.amber .rep{border-top-color:rgba(58,38,0,.25)}
 @media (max-width:860px){
   .weekrow{grid-template-columns:1fr}
   .weekmeta{flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap}
-  .days{grid-template-columns:repeat(2,1fr)}
-  .day{border-bottom:1px solid var(--line-2);min-height:0}
+  .days{grid-template-columns:1fr}
+  .day{border-right:none;border-bottom:1px solid var(--line-2);min-height:0;flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap}
+  .day .dn{flex-direction:column;gap:0;min-width:42px;align-items:flex-start}
+  .day .di{flex:1;min-width:140px}
+  .day .tags,.day .dots{margin:0}
+  .mcell{min-height:62px}
+  .mcell .n{font-size:14px}
 }
 
 /* ============ вахта ============ */
@@ -260,8 +309,162 @@ ol.steps li::before{content:counter(si);counter-increment:si;position:absolute;l
 .seg{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:var(--surface);box-shadow:var(--shadow)}
 .seg button{appearance:none;border:none;background:transparent;color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:8px 15px;border-radius:99px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--blue);color:#fff}
-.res-in{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;width:86px;padding:6px 9px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-align:right}
+.res-in{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13.5px;width:64px;padding:6px 7px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-align:right}
 .res-in:focus{outline:none;border-color:var(--blue)}
+.res-in[data-best="1"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 10%,var(--surface))}
+.res-3{display:flex;gap:5px;justify-content:flex-end;flex-wrap:nowrap}
+.pickcell{width:104px}
+.takebtn{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:99px;cursor:pointer;white-space:nowrap}
+.takebtn:hover{border-color:var(--red);color:var(--red)}
+.takebtn[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+tr.gto-off td{opacity:.35}
+tr.gto-on td:nth-child(2){box-shadow:inset 4px 0 0 var(--red)}
+.gto-empty td{color:var(--ink-3);font-weight:700;text-align:center;padding:26px 12px}
+.qpass{background:var(--surface-2);border-left:5px solid var(--cyan);border-radius:10px;padding:14px 17px;margin-bottom:16px;font-size:14.5px;color:var(--ink-2);font-weight:600}
+.qpass p{margin:0 0 9px}.qpass p:last-child{margin:0}
+.honest{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.hchip{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:9px 15px;border-radius:99px;cursor:pointer}
+.hchip:hover{border-color:var(--amber);color:var(--amber)}
+.hchip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--on-amber)}
+.hchip.dk:hover{border-color:var(--ink-3);color:var(--ink-2)}
+.hnote{font-size:12.5px;font-weight:600;color:var(--ink-3)}
+.qmark{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--amber);color:var(--on-amber);padding:2px 8px;border-radius:99px;margin-left:8px}
+.shelves{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:18px}
+.shelf{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);border-top:6px solid var(--shc);padding:16px 18px}
+.shelf .sh{font-family:"Russo One",sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--shc);margin-bottom:3px}
+.shelf .ss{font-size:13px;font-weight:600;color:var(--ink-3);margin-bottom:12px}
+.sitem{border-radius:10px;background:var(--surface-2);padding:11px 13px;margin-bottom:9px}
+.sitem .nm{font-family:"Russo One",sans-serif;font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.sitem .nm span{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-3)}
+.sitem .tr{height:8px;border-radius:99px;background:var(--line-2);overflow:hidden;margin:8px 0 6px;display:flex}
+.sitem .tr > i{display:block;height:100%}
+.sitem .tr > i.s{background:var(--green)}
+.sitem .tr > i.k{background:var(--amber)}
+.sitem .tr > i.w{background:var(--red)}
+.sitem .wr{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.sitem button{appearance:none;border:none;background:var(--shc);color:#fff;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:99px;cursor:pointer;margin-top:9px}
+.sempty{font-size:13.5px;font-weight:600;color:var(--ink-3);padding:6px 0 10px}
+.keyline{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 14px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
+.keyline span{display:inline-flex;align-items:center;gap:6px}
+.keyline i{width:11px;height:11px;border-radius:3px;display:block}
+.remind{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.rbtn{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:10px 17px;border-radius:99px;cursor:pointer}
+.rbtn:hover{border-color:var(--amber);color:var(--amber)}
+.rbtn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--on-amber)}
+.rstate{font-size:13px;font-weight:700;color:var(--ink-3)}
+.growsum{background:var(--navy);color:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:20px 24px;margin-bottom:16px}
+.growsum .st{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8FA8DE;font-weight:700}
+.growsum .sb{font-family:"Russo One",sans-serif;font-size:clamp(18px,2.4vw,23px);line-height:1.25;margin:7px 0 0}
+.growsum .ss{font-size:14px;font-weight:600;opacity:.85;margin-top:9px;max-width:72ch}
+.growrows{display:flex;flex-direction:column;gap:11px}
+.growrow{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);border-left:6px solid var(--gc,var(--blue));padding:15px 19px;display:grid;grid-template-columns:220px 1fr 140px;gap:16px;align-items:center}
+@media(max-width:860px){.growrow{grid-template-columns:1fr;gap:9px}}
+.growrow .nm{font-family:"Russo One",sans-serif;font-size:14.5px}
+.growrow .nm span{display:block;font-family:"Nunito",sans-serif;font-size:12.5px;font-weight:600;color:var(--ink-3);text-transform:none;letter-spacing:0;margin-top:2px}
+.pairbar{display:flex;flex-direction:column;gap:6px}
+.pb{display:flex;align-items:center;gap:10px}
+.pb .lab{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700;width:56px;flex:none}
+.pb .track{flex:1;height:13px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.pb .track > i{display:block;height:100%;border-radius:99px}
+.pb .val{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:12.5px;width:96px;text-align:right;flex:none;white-space:nowrap}
+.gdelta{text-align:right}
+.gdelta .d{font-family:"Russo One",sans-serif;font-size:21px;line-height:1.1}
+.gdelta .dt{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
+.gup{color:var(--green)}.gdown{color:var(--red)}.gflat{color:var(--ink-3)}
+.mcard{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);border-top:6px solid var(--mc3,var(--blue));padding:20px 22px;margin-bottom:16px}
+.mcard .ct{font-family:"Russo One",sans-serif;font-size:17px;margin-bottom:3px}
+.mcard .cs{font-size:13.5px;font-weight:600;color:var(--ink-3);margin-bottom:12px}
+label.fl{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:12px 0 5px}
+input.t,textarea.t,select.t{width:100%;font-family:inherit;font-size:15px;font-weight:600;padding:11px 14px;border:2px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink)}
+input.t:focus,textarea.t:focus,select.t:focus{outline:none;border-color:var(--blue)}
+textarea.t{min-height:62px;resize:vertical}
+.opts4{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:640px){.opts4{grid-template-columns:1fr}}
+.optrow{display:flex;align-items:center;gap:9px}
+.optrow .rk{appearance:none;width:20px;height:20px;border:2px solid var(--line);border-radius:99px;flex:none;cursor:pointer;position:relative;background:var(--surface)}
+.optrow .rk:checked{border-color:var(--green);background:var(--green)}
+.optrow .rk:checked::after{content:"";position:absolute;left:4px;top:4px;width:8px;height:8px;border-radius:99px;background:#fff}
+.send{appearance:none;border:none;background:var(--green);color:#fff;font-family:"Russo One",sans-serif;font-size:14px;letter-spacing:.05em;text-transform:uppercase;padding:12px 24px;border-radius:99px;cursor:pointer;margin-top:16px}
+.send[disabled]{opacity:.4;cursor:default}
+.hintl{font-size:13px;font-weight:600;color:var(--ink-3);margin-top:9px}
+.mitem{background:var(--surface);border-radius:12px;box-shadow:0 1px 3px rgba(16,27,51,.09);border-left:5px solid var(--ic2,var(--blue));padding:13px 16px;margin-bottom:10px}
+.mitem .ih{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:3px}
+.mitem .it{font-weight:700;font-size:15px;flex:1;min-width:180px}
+.mitem .im{font-size:13px;font-weight:600;color:var(--ink-2)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.acts button{appearance:none;border:none;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:9px 15px;border-radius:99px;cursor:pointer}
+.acts .yes{background:var(--green);color:#fff}
+.acts .fix{background:var(--surface-2);color:var(--ink-2);box-shadow:inset 0 0 0 2px var(--line)}
+.feed{display:flex;flex-direction:column;gap:9px}
+.fitem{background:var(--surface);border-radius:11px;box-shadow:0 1px 3px rgba(16,27,51,.08);padding:12px 15px;border-left:5px solid var(--cyan);display:flex;gap:13px;align-items:baseline;flex-wrap:wrap}
+.fitem .fd{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;color:var(--ink-3);white-space:nowrap}
+.fitem .ft{flex:1;min-width:200px;font-size:14.5px;font-weight:600}
+.pill.wait{background:var(--amber);color:var(--on-amber)}
+.pill.back{background:var(--red)}
+.slip{background:var(--surface);border-radius:12px;box-shadow:0 1px 3px rgba(16,27,51,.09);border-left:5px solid var(--red);padding:14px 17px;margin-bottom:10px}
+.slip .sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:5px}
+.slip .sd{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;color:var(--ink-3);white-space:nowrap}
+.slip .sw{font-family:"Russo One",sans-serif;font-size:15px;flex:1;min-width:200px}
+.slip .sy{font-size:14px;font-weight:600;color:var(--ink-2)}
+.slip .sf{font-size:14px;font-weight:700;color:#0A6B3E;background:#E8F7EF;border-radius:8px;padding:9px 12px;margin-top:9px}
+.slip .sf b{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px;opacity:.75}
+.slip.rep{border-left-color:var(--navy)}
+.slip .again{font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--navy);color:#fff;padding:3px 9px;border-radius:99px}
+.slipdel{appearance:none;border:none;background:transparent;color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;padding:6px 0 0}
+.slipdel:hover{color:var(--red)}
+/* капитанский режим: простой экран */
+body.capnav .subjects, body.capnav .decks-wrap{display:none}
+.capback{display:flex;gap:13px;align-items:center;margin:0 0 18px}
+.capback button{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:9px 16px;border-radius:99px;cursor:pointer}
+.capback button:hover{border-color:var(--green);color:var(--green)}
+.capback span{font-family:"Russo One",sans-serif;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+#view-today.capmode #revPanel, #view-today.capmode #todayCol2{display:none}
+#view-today.capmode .today{grid-template-columns:1fr}
+.tiles{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.tile{display:flex;align-items:center;gap:15px;background:var(--surface);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);border-left:7px solid var(--tc,var(--blue));cursor:pointer;text-align:left;border-top:none;border-right:none;border-bottom:none;width:100%;font-family:inherit;transition:transform .12s,box-shadow .12s}
+.tile:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(16,27,51,.4)}
+.tile .ic{font-size:30px;line-height:1;flex:none}
+.tile .tx{flex:1;min-width:0}
+.tile .t1{font-family:"Russo One",sans-serif;font-size:17px;color:var(--ink);display:block}
+.tile .t2{font-size:14px;font-weight:600;color:var(--ink-2);display:block;margin-top:2px}
+.tile .ar{color:var(--tc,var(--blue));font-size:22px;font-weight:800;flex:none}
+.capmore{margin-top:20px;text-align:center}
+.capmore > button{appearance:none;border:none;background:transparent;color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:9px}
+.capmore > button:hover{color:var(--violet)}
+.capmorebox{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.capmorebox button{appearance:none;border:none;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:9px 15px;border-radius:99px;background:var(--surface);color:var(--ink-2);box-shadow:var(--shadow);cursor:pointer}
+.capmorebox button:hover{color:var(--mc2,var(--violet))}
+.medseg{padding:5px;gap:5px}
+.medseg button{display:inline-flex;align-items:center;gap:9px;padding:7px 18px 7px 11px;color:var(--ink-2);transition:background .15s,color .15s,box-shadow .15s}
+.medseg button[data-sign="b"]{--mc:var(--bronze)}
+.medseg button[data-sign="s"]{--mc:var(--silver)}
+.medseg button[data-sign="g"]{--mc:var(--gold)}
+.medseg .med{width:20px;height:26px;flex:none;display:block;overflow:visible;filter:drop-shadow(0 1px 1.5px rgba(16,27,51,.3))}
+.medseg .med .rb{fill:var(--navy)}
+.medseg .med .rb.b{fill:var(--navy);opacity:.55}
+.medseg .med .dsc{fill:var(--mc);stroke:rgba(255,255,255,.5);stroke-width:1.4}
+.medseg .med .rng{fill:none;stroke:rgba(255,255,255,.45);stroke-width:1.2}
+.medseg button:hover{color:var(--ink)}
+.medseg button[aria-pressed="true"]{background:var(--mc);box-shadow:0 2px 9px -2px rgba(16,27,51,.5)}
+.medseg button[data-sign="b"][aria-pressed="true"]{color:#fff}
+.medseg button[data-sign="s"][aria-pressed="true"]{color:#161C2B}
+.medseg button[data-sign="g"][aria-pressed="true"]{color:#2B1F00}
+.medseg button[aria-pressed="true"] .med .dsc{fill:#fff;stroke:var(--navy);stroke-width:1.4}
+.medseg button[aria-pressed="true"] .med .rng{stroke:var(--mc);stroke-width:1.6}
+.goalbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.goalbar .track{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.goalbar .track > i{display:block;height:100%;border-radius:99px;background:var(--gc,var(--green));transition:width .25s}
+.goalbar .cnt{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;color:var(--ink);white-space:nowrap}
+.gaplist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.gaplist li{background:var(--surface-2);border-left:4px solid var(--lc,var(--amber));border-radius:9px;padding:10px 13px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.gaplist li b{display:block;color:var(--ink);font-size:14.5px}
+.gaplist li .g{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--ink-3);font-size:12.5px}
+.delta{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.delta.up{background:#E1F5EA;color:#0A6B3E}
+.delta.dn{background:#FDECEA;color:#9B2415}
+.delta.eq{background:var(--line-2);color:var(--ink-3)}
+.emptybox{background:var(--surface-2);border-radius:10px;padding:18px;color:var(--ink-3);font-weight:700;text-align:center}
+.res-best{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px}
 .catrow td{background:var(--navy)!important;color:#C7D4F0;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
 .medalbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .medal{border-radius:var(--r);padding:16px 18px;color:#fff;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
@@ -812,6 +1015,8 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 
 <main>
 
+<div class="capback noprint" id="capBack" hidden><button id="capBackBtn" type="button">← Сегодня</button><span id="capBackTitle"></span></div>
+
 <!-- ================= СЕГОДНЯ ================= -->
 <section id="view-today" hidden>
   <div class="hero" style="--hc:var(--green);margin-bottom:16px">
@@ -825,15 +1030,22 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
         <div class="ph">Вахта <span class="pcount" id="vCount">0 / 5</span></div>
         <div class="pbody" id="vahtaList"></div>
       </div>
-      <div class="panelbox" style="--pc2:var(--amber)">
+      <div class="panelbox" id="revPanel" style="--pc2:var(--amber)">
         <div class="ph">Пора повторить <span class="pcount" id="revCount"></span></div>
         <div class="pbody"><div class="rev" id="revList"></div></div>
       </div>
     </div>
-    <div class="tcol">
+    <div class="tcol" id="todayCol2">
       <div class="panelbox" style="--pc2:var(--blue)">
         <div class="ph">Сегодня по плану</div>
         <div class="pbody"><div class="dayplan" id="dayPlan"></div></div>
+      </div>
+      <div class="panelbox" id="remindPanel" style="--pc2:var(--amber)">
+        <div class="ph">Сегодня напоминал?</div>
+        <div class="pbody">
+          <div class="remind" id="remindBox"></div>
+          <div class="pempty" style="margin-top:8px">Одно нажатие вечером. Через месяц из этого получается цифра «сколько дней справился сам» — единственная честная мера самостоятельности.</div>
+        </div>
       </div>
       <div class="panelbox" style="--pc2:var(--violet)">
         <div class="ph">Вызовы недели</div>
@@ -845,6 +1057,11 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       </div>
     </div>
   </div>
+  <div id="capTiles" hidden></div>
+  <div class="capmore" id="capMore" hidden>
+    <button id="capMoreBtn" type="button">ещё ▾</button>
+    <div class="capmorebox" id="capMoreBox" hidden></div>
+  </div>
 </section>
 
 <!-- ================= КАЛЕНДАРЬ ================= -->
@@ -853,15 +1070,23 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     <span class="eyebrow" id="calEyebrow">Переход</span>
     <h2 id="calTitle">Календарь</h2>
     <p class="lede" id="calLede"></p>
+    <div class="mprog">
+      <span class="cnt" id="mProgTxt"></span>
+      <span class="track"><i id="mProgBar"></i></span>
+    </div>
   </div>
-  <div class="monthbar">
-    <button class="mbtn" id="mPrev">← Назад</button>
-    <span class="mnow" id="mNow"></span>
-    <button class="mbtn" id="mNext">Вперёд →</button>
-    <span class="termtag" id="mTerm" style="margin-left:auto"></span>
+  <div class="monthbar noprint">
+    <button class="mbtn" id="mPrev">←</button>
+    <button class="mbtn" id="mNext">→</button>
+    <button class="mbtn now" id="mToday">Сегодня</button>
+    <span class="termtag" id="mTerm"></span>
+    <div class="seg" id="segCalView" style="margin-left:auto">
+      <button data-cv="week" aria-pressed="true">Неделя</button>
+      <button data-cv="month" aria-pressed="false">Месяц</button>
+    </div>
   </div>
   <div class="legend noprint" id="legend"></div>
-  <div class="weekstrip" id="calendar"></div>
+  <div id="calendar"></div>
 </section>
 
 <!-- ================= УРОКИ ================= -->
@@ -920,12 +1145,12 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <div class="who" style="--wc:var(--green)">
         <div class="wh">Капитан · ребёнок</div>
         <ul>
-          <li><b>Сегодня</b> — вахта, план дня, что пора повторить</li>
-          <li><b>Календарь</b> — переход по дням, клик по дню открывает его</li>
-          <li><b>Уроки</b> — разборы тем с объяснениями</li>
-          <li><b>Тесты</b> — самопроверка, четыре варианта ответа</li>
-          <li><b>Вызовы</b> — банк карточек, берёт сам</li>
-          <li><b>ГТО</b> — нормативы и свои замеры</li>
+          <li><b>Вкладок нет</b> — один экран «Сегодня»</li>
+          <li><b>Вахта</b> — пять пунктов, три минуты</li>
+          <li><b>Разобрать урок</b> — большая кнопка, ведёт в «Уроки»</li>
+          <li><b>Пройти тест</b> — большая кнопка, ведёт в «Тесты»</li>
+          <li><b>Тренировка</b> — большая кнопка, ведёт в ГТО</li>
+          <li><b>«Ещё»</b> — календарь, вызовы, ГТО, Моё, инструкция</li>
         </ul>
       </div>
       <div class="who" style="--wc:var(--blue)">
@@ -939,6 +1164,10 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <li><b>Прогресс</b> — сохранение в файл, слабые места, история</li>
         </ul>
       </div>
+    </div>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:80ch">
+      <b>Почему у ребёнка нет вкладок</b>
+      <span>Одиннадцатилетнему бесполезно давать семь вкладок и четыре панели: он не выбирает, что делать первым, и не делает ничего. Поэтому у капитана один экран: вахта и три большие кнопки — <b>разобрать урок</b>, <b>пройти тест</b>, <b>тренировка</b>. Подписи на них живые: сколько тем ждёт повторения, сколько вопросов в работе над ошибками, какой сегодня день микроцикла. Всё остальное — календарь, вызовы, ГТО, инструкция — спрятано под словом «ещё» внизу. Внутри любого раздела сверху появляется кнопка «← Сегодня». У штурмана вкладки остались как были.</span>
     </div>
     <div class="note" style="--nc2:var(--amber);margin-top:16px;max-width:74ch">
       <b>Зачем это разделение</b>
@@ -1007,37 +1236,129 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--amber)">
-    <h3>Два вида вкладок <em>кнопка справа над строкой</em></h3>
+    <h3>Два вида вкладок <em>только в режиме штурмана</em></h3>
     <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
-      Шапка умеет показывать разделы двумя способами, и переключается это одной кнопкой справа над строкой вкладок. Выбор запоминается.</p>
+      У штурмана шапка умеет показывать разделы двумя способами, и переключается это одной кнопкой справа над строкой вкладок. Выбор запоминается. У капитана строки вкладок нет вообще — см. блок про капитанский экран выше.</p>
     <div class="grid g2" style="margin-bottom:18px">
-      <div class="term" style="--tc2:var(--blue)"><b>Одной строкой</b><span>Так стоит по умолчанию. Все разделы видны сразу: у капитана семь, у штурмана двенадцать. Ничего не спрятано, до любого — одно нажатие.</span><span class="hint">На узком экране строка листается вбок пальцем.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Одной строкой</b><span>Так стоит по умолчанию. Все двенадцать разделов видны сразу. Ничего не спрятано, до любого — одно нажатие.</span><span class="hint">На узком экране строка листается вбок пальцем.</span></div>
       <div class="term" style="--tc2:var(--amber)"><b>По палубам</b><span>Разделы собраны в четыре группы, в строке не больше четырёх кнопок. Полезно, когда разборов накопится много и строка станет длинной.</span><span class="hint">Кнопка «Разложить по палубам» — справа над строкой.</span></div>
     </div>
     <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
       Если включены палубы, разделы лежат так:</p>
     <div class="grid g2">
       <div class="term" style="--tc2:var(--green)"><b>Сегодня</b><span>Вахта, план дня и календарь. Сюда заходят каждый день и почти никуда больше.</span></div>
-      <div class="term" style="--tc2:var(--cyan)"><b>Учёба</b><span>Уроки, Тесты, а у штурмана ещё Проверка и Что нужно. Все новые разборы приходят сюда.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Учёба</b><span>Уроки, Тесты, Проверка и Что нужно. Все новые разборы приходят сюда.</span></div>
       <div class="term" style="--tc2:var(--red)"><b>Тело и дух</b><span>ГТО и Вызовы. Раз в неделю: замеры и новая карточка.</span></div>
-      <div class="term" style="--tc2:var(--amber)"><b>Рубка</b><span>Только у штурмана: Курс, Печать, Прогресс, Инструкция. У капитана вместо неё «Справка» с одной инструкцией.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Рубка</b><span>Курс, Печать, Прогресс, Инструкция.</span></div>
     </div>
     <div class="note" style="--nc2:var(--red);margin-top:14px;max-width:80ch">
       <b>Цветная точка</b>
-      <span>Значит, что-то ждёт. Красная — есть непокрытые пункты в «Что нужно», из-за которых часть разбора остаётся непроверенной. Янтарная — не отмечена сегодняшняя вахта или накопились вопросы для работы над ошибками. В строке точка сидит на самой вкладке, в режиме палуб — ещё и на палубе, внутри которой лежит эта вкладка. Гаснет, когда дело закрыто.</span>
+      <span>Значит, что-то ждёт. Красная — есть непокрытые пункты в «Что нужно», из-за которых часть разбора остаётся непроверенной. Янтарная — не отмечена сегодняшняя вахта или накопились вопросы для работы над ошибками. В строке точка сидит на самой вкладке, в режиме палуб — ещё и на палубе, внутри которой лежит эта вкладка. Гаснет, когда дело закрыто. У капитана вкладок нет, поэтому точек он не видит — вместо них живые подписи на трёх кнопках.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>ГТО <em>как устроено после переделки</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Только мальчики</b><span>Выбор пола убран, таблица всегда мальчиковая. Ступень переключается: III — 10–11 лет, IV — 12–13. Как исполнится двенадцать, нормативы станут заметно строже.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Три попытки</b><span>На каждое испытание три поля вместо одного. Лучшая выбирается сама и подсвечивается синим — где-то это наибольшее число, где-то наименьшее. Знак считается по ней.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Беру / только мои</b><span>У каждой строки кнопка «взять». Переключатель сверху показывает либо взятые испытания, либо все. По умолчанию взято по одному из каждой категории — это готовый комплект, его можно менять.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Цель на переход</b><span>Три медали: бронза, серебро, золото. Под ними видно, сколько взятых испытаний уже дотягивают до выбранного знака и сколько не хватает по каждому оставшемуся.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Замеры</b><span>Кнопка «Зафиксировать замер» запоминает текущие лучшие результаты на дату. Таблица показывает первый замер, последний и сдвиг: зелёное вверх, красное вниз. Делать в первую неделю месяца и в последнюю.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>Микроцикл</b><span>Собирается из взятых испытаний, а не написан заранее. Три занятия: вторник — сила и гибкость, четверг — скорость, суббота — выносливость. Под каждое испытание своё упражнение.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Календарь <em>два вида и фильтр</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--green)"><b>Неделя</b><span>Так открывается. Текущая неделя целиком, прошедшие приглушены. В дне — задача, румбы и точки вахты. Точки стоят только у прошедших дней: у будущих они всё равно пустые.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Месяц</b><span>Обзор без текста: число, цветные точки румбов, тонкая полоска вахты. Весь месяц помещается на экран. Текст дня открывается нажатием.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Фильтр по румбам</b><span>Пять плашек под панелью — не подпись, а фильтр. На каждой счётчик: сколько таких дней в месяце. Нажатие оставляет только их, лишние теги гаснут в серый. Можно выбрать несколько, «сбросить» снимает всё.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Дальше октября</b><span>Переходы с ноября 2026 по август 2027 журнал собирает сам: недели «Замер · Ритм · Рывок · Глубина · Гавань», замеры в первую и последнюю, тренировки по вт, чт, сб, совет каждое воскресенье. План можно переписать на совете.</span></div>
+    </div>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:80ch">
+      <b>Полоска месяца</b>
+      <span>В шапке календаря — «вахта закрыта N дней из 30». День считается закрытым, только если отмечены все пять пунктов. Это единственное место, где видно месяц целиком одной цифрой.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Работа без интернета <em>появилось 10 сентября</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
+      Журнал открывается офлайн. После первого захода на сайт он кладётся в память браузера: в самолёте, в деревне и просто без сети он всё равно откроется. Как только интернет появится, журнал сам возьмёт свежую версию.</p>
+    <div class="note" style="--nc2:var(--amber);max-width:80ch">
+      <b>Что важно при обновлении</b>
+      <span>Рядом с <b>index.html</b> в папке лежит файл <b>sw.js</b> — он и делает офлайн. При загрузке на GitHub перетаскивайте оба файла, а не один index.html. Если загрузить только index.html, ничего не сломается, но офлайн работать перестанет.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--gold)">
+    <h3>«Моё» <em>авторская роль капитана</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:82ch;margin:0 0 14px">
+      До этого всё содержимое делал взрослый, а ребёнок только нажимал. Раздел «Моё» это меняет. Придумать вопрос к теме труднее, чем ответить на него: чтобы вопрос получился, тему надо понять — пересказать недостаточно.</p>
+    <div class="grid g3">
+      <div class="term" style="--tc2:var(--blue)"><b>Свой вопрос</b><span>Капитан выбирает тему, пишет вопрос и четыре варианта, отмечает верный. Штурман принимает или возвращает с замечанием. Принятый вопрос встаёт в тест наравне с остальными.</span><span class="hint">Два вопроса в неделю. За принятый — 3 узла.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Свой вызов</b><span>Придумывает карточку в банк: название и что именно сделать. Цену назначает штурман при приёмке — 3, 5 или 8 узлов.</span><span class="hint">Один вызов в неделю. За принятый — 3 узла.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Что понял сегодня</b><span>Одна строка вечером. Никто не проверяет и не комментирует — это его лента, а не отчёт. Штурман её видит, но обсуждать стоит только на совете.</span><span class="hint">Узлов за это нет намеренно.</span></div>
+    </div>
+    <div class="note" style="--nc2:var(--red);margin-top:16px;max-width:82ch">
+      <b>Приёмка обязательна</b>
+      <span>Без неё банк за неделю зарастёт, а в тесте появятся вопросы с четырьмя верными ответами. Первые две недели приёмка отнимет больше времени, чем сэкономит: вопросы будут плохими вроде «Как звали учёного?». Это лечится замечанием при возврате, а не запретом. За возвращённый вопрос ничего не отнимается.</span>
+    </div>
+    <div class="note" style="--nc2:var(--amber);margin-top:14px;max-width:82ch">
+      <b>Почему за «что понял» не платят</b>
+      <span>Как только за строку начисляют узлы, она превращается в отписку ради узлов. Пусть лучше пишется реже, но честно.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Рост в цифрах <em>во вкладке «Прогресс»</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:82ch;margin:0 0 14px">
+      Узлы считают активность: сделал — получил. Они не отвечают на вопрос, стало ли лучше. Раздел «Рост» сравнивает месяц с предыдущим по шести показателям. Месяцы появляются сами, как только по ним есть данные.</p>
+    <div class="grid g3">
+      <div class="term" style="--tc2:var(--green)"><b>Дни с полной вахтой</b><span>Сколько дней месяца закрыты все пять пунктов.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Самая длинная серия</b><span>Максимум полных дней подряд внутри месяца.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Ответил сам</b><span>Доля «сам» в устной проверке против «с подсказкой» и «не смог».</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Сдал с первой попытки</b><span>Доля тем, где первый же тест дал 80% и выше.</span></div>
+      <div class="term" style="--tc2:var(--red)"><b>ГТО: улучшено</b><span>Сколько испытаний сдвинулось между первым и последним замером месяца.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Дни без напоминания</b><span>Из дней, когда журналом пользовались, — те, где не пришлось напоминать.</span></div>
+    </div>
+    <div class="note" style="--nc2:var(--amber);margin-top:16px;max-width:82ch">
+      <b>Кнопка «Напоминал сегодня»</b>
+      <span>На экране «Сегодня», только у штурмана — ребёнок её не видит. Одно нажатие вечером, если пришлось напомнить. Не нажали — значит справился сам. Это единственная честная мера самостоятельности, и посчитать её иначе невозможно.</span>
+    </div>
+    <div class="note" style="--nc2:var(--blue);margin-top:14px;max-width:82ch">
+      <b>Почему первые месяцы полупустые</b>
+      <span>Три вещи журнал начал копить только 10 сентября: помесячную статистику устной проверки, результат первой попытки по каждой теме и машинную дату замеров ГТО. Задним числом их не восстановить, поэтому по этим строкам будет написано «нет данных» — это честно, а не поломка. Школьных оценок здесь нет и не будет.</span>
     </div>
   </div>
 
   <div class="sec" style="--sc2:var(--violet)">
-    <h3>Где что искать <em>двенадцать разделов на четырёх палубах</em></h3>
+    <h3>Как журнал выбирает вопросы <em>«Большой тест» и тест по предмету</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:82ch;margin:0 0 14px">
+      Раньше бралось двадцать случайных вопросов из всех тем. При двенадцати темах и полутора сотнях вопросов это лотерея: открытая ошибка попадала в тест раз через раз. Теперь каждый вопрос взвешивается.</p>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Что тянет вверх</b><span>Сильнее всего — открытая ошибка: вопрос, где ошибался и ещё не ответил верно дважды подряд. Дальше доля ошибок за всю историю. Дальше давность показа. Отдельно — вопросы, которые ни разу не задавали.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Лестница повторения</b><span>1 → 3 → 7 → 21 день. Чем увереннее отвечают, тем реже спрашивают. Ошибка возвращает вопрос в начало лестницы. То же и с темами: каждая сдача на 80% и выше двигает тему на ступень дальше, результат ниже сбрасывает.</span></div>
+    </div>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:82ch">
+      <b>Что написано на карточке</b>
+      <span>Под названием «Большого теста» журнал пишет, что сейчас в очереди: сколько вопросов с ошибками, сколько пора повторить, сколько ни разу не спрашивали. Из одной темы подряд берётся не больше пяти вопросов, чтобы тест не превратился в допрос по одной теме.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Где что искать <em>тринадцать разделов на четырёх палубах</em></h3>
     <div class="grid g3">
       <div class="mini" style="--mc:var(--green)"><b>Сегодня</b><span>Вахта на сегодня, план дня из календаря, взятые вызовы, серия и блок «Пора повторить».</span></div>
-      <div class="mini" style="--mc:var(--blue)"><b>Календарь</b><span>Месяц по дням с задачей на каждый. Стрелки листают переходы вперёд и назад.</span></div>
+      <div class="mini" style="--mc:var(--blue)"><b>Календарь</b><span>Два вида: «Неделя» и «Месяц». Пять румбов под панелью — фильтр. Переходы собраны до августа 2027.</span></div>
       <div class="mini" style="--mc:var(--cyan)"><b>Уроки</b><span>Разборы тем. Поиск, фильтр по полугодиям, список по предметам. Внутри — кнопка теста.</span></div>
       <div class="mini" style="--mc:var(--cyan)"><b>Проверка</b><span>Устный опрос порциями по 12 и приёмка письменных работ. Только у штурмана.</span></div>
+      <div class="mini" style="--mc:var(--gold)"><b>Моё</b><span>Свой вопрос к теме, свой вызов в банк и лента «что понял сегодня». У штурмана — приёмка того же.</span></div>
       <div class="mini" style="--mc:var(--violet)"><b>Тесты</b><span>Самопроверка ребёнком: по теме, по предмету, большой тест и работа над ошибками.</span></div>
       <div class="mini" style="--mc:var(--pink)"><b>Вызовы</b><span>25 карточек по пяти румбам. Две берутся на неделю, выбирает ребёнок.</span></div>
-      <div class="mini" style="--mc:var(--red)"><b>ГТО</b><span>Нормативы по возрасту, автоматический подсчёт знака, микроцикл тренировок.</span></div>
+      <div class="mini" style="--mc:var(--red)"><b>ГТО</b><span>Только мальчики. Три попытки на испытание, знак по лучшей. Взятые испытания, цель на переход, замеры и микроцикл под них.</span></div>
       <div class="mini" style="--mc:var(--amber)"><b>Курс</b><span>Зачем всё это, звания, правила перехода, список учебников. Читается один раз.</span></div>
       <div class="mini" style="--mc:var(--amber)"><b>Печать</b><span>Плакат, недельный чек-лист, карточки вызовов на разрез, договор с подписями.</span></div>
       <div class="mini" style="--mc:var(--green)"><b>Прогресс</b><span>Сохранение в файл, код штурмана, слабые места по тестам и устной проверке, история попыток.</span></div>
@@ -1107,6 +1428,23 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">9 сен</td><td style="color:var(--ink-2)">Два вида вкладок с переключателем: одной строкой (по умолчанию) или по палубам. Кнопка справа над строкой, выбор запоминается</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Разбор «Hot spots» сверен по фото стр. 10: все пять объявлений с переводом, ответы на упражнения 2a и 2b, слова упр. 1 про места и занятия. В тесте стало 28 вопросов, в устной проверке 20</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Во вкладке «Курс» все восемь учебников с изданиями и оглавления шести из них: биология, русский, математика (обе части), история, география, литература. Раскрываются нажатием</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Разбор §1 биологии подтверждён найденным текстом параграфа: девять терминов, четыре вопроса и «Подумайте!» совпали дословно. Метка сменилась на «сверено с учебником»</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Журнал опубликован в сети. Во вкладке «Что нужно» закрыты публикация и §1, добавлены два пункта: титульный лист математики и разворот рабочей тетради покрупнее</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">В ГТО убран выбор пола — таблица только для мальчиков. На каждое испытание три попытки вместо одной: знак считается по лучшей, она подсвечена синим. У каждой строки кнопка «взять» / «✓ беру» и переключатель «Только мои / Все испытания»: по умолчанию видны взятые испытания, остальные скрыты. В печать кнопки не идут</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">В ГТО добавлены три блока: «Цель на переход» — выбрать знак и увидеть, сколько взятых испытаний уже дотягивают и сколько не хватает по каждому; «Замеры» — кнопка фиксирует текущие лучшие результаты на дату, таблица показывает сдвиг от первого замера к последнему; микроцикл подготовки теперь собирается из взятых испытаний, а не написан заранее</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Капитанский режим упрощён. У ребёнка больше нет ряда вкладок: экран «Сегодня» — это вахта и три большие кнопки «Разобрать урок», «Пройти тест», «Тренировка» с живыми подписями (сколько тем ждёт повторения, сколько вопросов в работе над ошибками, какой сегодня день микроцикла). Календарь, вызовы, ГТО и инструкция спрятаны под словом «ещё». Внутри раздела сверху кнопка «← Сегодня». У штурмана всё осталось как было</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Календарь больше не кончается в октябре: переходы с ноября 2026 по август 2027 журнал собирает сам — недели «Замер · Ритм · Рывок · Глубина · Гавань», замеры в первую и последнюю неделю, тренировки по вторникам, четвергам и субботам, совет каждое воскресенье. План можно переписать на совете</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Журнал работает без интернета. Рядом с index.html появился файл sw.js — его тоже надо загрузить на GitHub. После первого открытия сайт кладётся в память браузера и открывается на планшете в самолёте, в деревне и где угодно ещё; при появлении сети сам берёт свежую версию</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Инструкция приведена в соответствие: переписан блок «Два режима» (у капитана больше нет вкладок), добавлены три новых раздела — «ГТО: как устроено после переделки», «Календарь: два вида и фильтр» и «Работа без интернета». Поправлено описание палуб: два вида вкладок теперь только у штурмана</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Во вкладке «Тесты» появилась английская диагностика: семь умений и 61 задание с разбором к каждому — времена, служебные слова, лексика, чтение по двум текстам, построение фразы, модальные со степенями сравнения, будущее с much/many/any. Ошибки падают в общую работу над ошибками. В диагностике у вопроса есть кнопки «не уверен» и «не знаю», и считается время на ответ: верно дольше 25 секунд — тоже не «твёрдо». Наверху вкладки — карта из трёх полок: держится само, держится на удаче, не сформировано, с кнопкой «Отработать» и текстом штурману по самому слабому умению</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">«Большой тест» и тест по предмету больше не берут случайные 20 вопросов из 156. Журнал взвешивает каждый вопрос: открытая ошибка тянет сильнее всего, дальше доля ошибок за всю историю, дальше давность показа по лестнице 1–3–7–21 день, и отдельно те, что ни разу не спрашивали. Из одной темы подряд много не берётся. На карточке теста написано, что сейчас в очереди</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Блок «Пора повторить» на экране «Сегодня» стал интервальным: каждая сдача на 80% и выше отодвигает тему на следующую ступень 1 → 3 → 7 → 21 день, результат ниже 80% сбрасывает лестницу в начало. Просроченные темы поднимаются наверх списка</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Во вкладке «Прогресс» появился раздел «Рост в цифрах»: шесть показателей, каждый сравнивает выбранный месяц с предыдущим — дни с полной вахтой, самая длинная серия, доля «ответил сам» в устной проверке, доля тем, сданных с первой попытки, сдвиг по замерам ГТО и дни без напоминания. Узлы считают активность, этот экран считает сдвиг</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">На экране «Сегодня» у штурмана появилась кнопка «Напоминал сегодня» — одно нажатие вечером. Из неё получается цифра «сколько дней справился сам», которую иначе посчитать невозможно. Ребёнок этой кнопки не видит</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Во вкладке «Прогресс» появился раздел «Где я ошибался» — журнал промахов ассистента с причиной и правилом на будущее. Семь записей за три дня уже внесены, включая один повтор одной и той же ошибки. Новые добавляются формой внизу; если формулировка похожа на существующую, запись помечается «повтор». Капитан раздела не видит</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Инструкция дополнена: три новых раздела — «Моё», «Рост в цифрах» и «Как журнал выбирает вопросы»</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Появился раздел «Моё» — авторская роль капитана. Ребёнок придумывает свой вопрос к разобранной теме с четырьмя вариантами, свой вызов в банк и пишет одну строку «что понял сегодня». Штурман в том же разделе принимает или возвращает с замечанием; цену вызова назначает он. Принятый вопрос встаёт в тест наравне с остальными, принятый вызов — в банк карточек. За принятое — по 3 узла, за строку «что понял» узлов нет намеренно. Лимит: два вопроса и один вызов в неделю</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Календарь переделан. Два вида: «Неделя» — как было, но открывается на текущей неделе, прошедшие приглушены; «Месяц» — компактный обзор, весь месяц на экране без прокрутки. Название месяца больше не дублируется, появилась кнопка «Сегодня» и полоска «вахта закрыта N дней из 30». Пять румбов под панелью стали фильтром со счётчиками: нажатие оставляет только дни этого румба. Повторяющиеся тренировки ушли в описание недели, точки вахты остались только у прошедших дней</td></tr>
         </tbody>
       </table>
     </div>
@@ -1237,6 +1575,14 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <p class="lede">Вопросы собираются из разобранных тем. После каждого ответа сразу видно, верно или нет, и почему. Тест, сданный на 80% и выше, приносит 5 узлов и закрывает пункт «Ум» за сегодня.</p>
       <div class="chips" style="margin-top:20px" id="testScope"></div>
     </div>
+    <div class="sec" id="diagMapSec" style="--sc2:var(--blue);margin-top:26px" hidden>
+      <h3>Английский: что усвоено за 5 класс <em id="diagMapSub"></em></h3>
+      <div class="keyline"><span><i style="background:var(--green)"></i>твёрдо</span>
+        <span><i style="background:var(--amber)"></i>наугад или медленно</span>
+        <span><i style="background:var(--red)"></i>мимо</span></div>
+      <div class="shelves" id="diagShelves"></div>
+      <div id="diagRec"></div>
+    </div>
     <div class="tgrid" id="testList"></div>
   </div>
 
@@ -1267,8 +1613,14 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
         <div class="qprog"><i id="qBar" style="width:0%"></i></div>
         <span class="qcount" id="qScore">0 верных</span>
       </div>
+      <div class="qpass" id="qPass" hidden></div>
       <p class="qtext" id="qText"></p>
       <div class="qopts" id="qOpts"></div>
+      <div class="honest" id="qHonest" hidden>
+        <button class="hchip" id="qUnsure" type="button" aria-pressed="false">не уверен</button>
+        <button class="hchip dk" id="qDunno" type="button">не знаю</button>
+        <span class="hnote">«Не уверен» — ответ засчитается, но пойдёт в «на удаче». «Не знаю» честнее угадывания.</span>
+      </div>
       <div class="qwhy" id="qWhy" hidden></div>
       <div class="qnav">
         <button class="btn" id="qNext" hidden>Дальше</button>
@@ -1311,21 +1663,21 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   <div class="hero" style="--hc:var(--red)">
     <span class="eyebrow">Всероссийский комплекс ГТО</span>
     <h2>Нормативы и замеры</h2>
-    <p class="lede">Впишите результат в колонку «Мой результат» — знак посчитается сам. Значения приведены с портала gto.ru.</p>
+    <p class="lede">Кнопкой «взять» отметьте испытания, которые готовим — остальные скроются. Три попытки на каждое, знак по лучшей.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px" class="noprint">
       <div class="seg" id="segStage"><button data-stage="3" aria-pressed="true">III ступень · 10–11 лет</button><button data-stage="4" aria-pressed="false">IV ступень · 12–13 лет</button></div>
-      <div class="seg" id="segSex"><button data-sex="m" aria-pressed="true">Мальчики</button><button data-sex="f" aria-pressed="false">Девочки</button></div>
+      <div class="seg" id="segOnly"><button data-only="mine" aria-pressed="true">Только мои</button><button data-only="all" aria-pressed="false">Все испытания</button></div>
     </div>
   </div>
   <div class="sec" style="--sc2:var(--red)">
     <h3>Таблица нормативов <em id="gtoTitle"></em></h3>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Испытание</th><th class="num">Бронза</th><th class="num">Серебро</th><th class="num">Золото</th><th class="num">Мой результат</th><th class="num">Знак</th></tr></thead>
+        <thead><tr><th class="pickcell noprint">Беру</th><th>Испытание</th><th class="num">Бронза</th><th class="num">Серебро</th><th class="num">Золото</th><th class="num">Три попытки</th><th class="num">Лучшая</th><th class="num">Знак</th></tr></thead>
         <tbody id="gtoBody"></tbody>
       </table>
     </div>
-    <p style="font-size:13px;color:var(--ink-3);margin-top:10px;font-weight:600">Формат ввода: секунды через запятую (5,3), время через двоеточие (4:42), количество и сантиметры — числом.</p>
+    <p style="font-size:13px;color:var(--ink-3);margin-top:10px;font-weight:600">Секунды через запятую (5,3), время через двоеточие (4:42), остальное числом. Лучшая попытка подсвечена синим.</p>
   </div>
   <div class="sec" style="--sc2:var(--amber)">
     <h3>Сколько испытаний нужно</h3>
@@ -1335,6 +1687,21 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <div class="medal" style="background:var(--bronze)"><span class="mt">Бронза</span><span class="md">5 испытаний из пяти качеств. Реалистичная цель первого перехода, если ребёнок не занимается спортом.</span></div>
     </div>
   </div>
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Цель на переход <em>к какому знаку идём</em></h3>
+    <div class="seg medseg noprint" id="segGoal" style="margin-bottom:16px"><button data-sign="b" aria-pressed="false"><svg class="med" viewBox="0 0 22 29" aria-hidden="true"><path class="rb a" d="M3.5 0.5 L9.6 14 L13 14 L7 0.5 Z"/><path class="rb b" d="M18.5 0.5 L12.4 14 L9 14 L15 0.5 Z"/><circle class="dsc" cx="11" cy="20.5" r="8"/><circle class="rng" cx="11" cy="20.5" r="5"/></svg>Бронза</button><button data-sign="s" aria-pressed="false"><svg class="med" viewBox="0 0 22 29" aria-hidden="true"><path class="rb a" d="M3.5 0.5 L9.6 14 L13 14 L7 0.5 Z"/><path class="rb b" d="M18.5 0.5 L12.4 14 L9 14 L15 0.5 Z"/><circle class="dsc" cx="11" cy="20.5" r="8"/><circle class="rng" cx="11" cy="20.5" r="5"/></svg>Серебро</button><button data-sign="g" aria-pressed="false"><svg class="med" viewBox="0 0 22 29" aria-hidden="true"><path class="rb a" d="M3.5 0.5 L9.6 14 L13 14 L7 0.5 Z"/><path class="rb b" d="M18.5 0.5 L12.4 14 L9 14 L15 0.5 Z"/><circle class="dsc" cx="11" cy="20.5" r="8"/><circle class="rng" cx="11" cy="20.5" r="5"/></svg>Золото</button></div>
+    <div id="goalBox"></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Замеры <em>первая неделя и последняя</em></h3>
+    <div id="snapBox"></div>
+    <div class="noprint" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" id="snapBtn" style="background:var(--cyan)">Зафиксировать замер</button>
+      <button class="btn ghost" id="snapUndo" hidden>Убрать последний</button>
+    </div>
+  </div>
+
   <div class="sec" style="--sc2:var(--blue)">
     <h3>Порядок действий <em>сделать в первые две недели</em></h3>
     <ol class="steps" style="max-width:66ch">
@@ -1349,14 +1716,20 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     </div>
   </div>
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Микроцикл подготовки <em>три занятия в неделю по 20–25 минут</em></h3>
-    <div class="grid g3">
-      <div class="rumb" style="--rc:var(--red)"><div class="head"><span class="ic">💪</span><span class="t">Вт · Сила</span></div><div class="body"><span class="d">Разминка 5 мин. Подтягивания: 4 подхода «негативов» — запрыгнул и медленно опускаешься 5 секунд. Отжимания 3 подхода по «максимум минус два». Планка 3×30 сек. Наклон вперёд — 3 минуты растяжки.</span></div></div>
-      <div class="rumb" style="--rc:var(--blue)"><div class="head"><span class="ic">⚡</span><span class="t">Чт · Скорость</span></div><div class="body"><span class="d">Разминка и суставная 7 мин. Ускорения 4×30 м с полным отдыхом. Челночный бег 3×10 м — 4 попытки на технику разворота. Прыжок в длину с места — 5 попыток, замерить лучшую.</span></div></div>
-      <div class="rumb amber" style="--rc:var(--amber)"><div class="head"><span class="ic">🏃</span><span class="t">Сб · Выносливость</span></div><div class="body"><span class="d">Кросс: первая неделя 1 км, дальше +300 м каждую неделю. Финиш — 200 м быстро. После — метание мяча 150 г, 10 бросков на технику. Заминка и растяжка.</span></div></div>
-    </div>
+    <h3>Микроцикл подготовки <em>собран под взятые испытания · три занятия по 20–25 минут</em></h3>
+    <div class="grid g3" id="trainGrid"></div>
     <p style="font-size:14.5px;color:var(--ink-2);margin-top:16px;max-width:66ch;font-weight:600">Ежедневно вне занятий — только наклон вперёд, 3 минуты. Гибкость единственное качество, которое растёт от коротких ежедневных повторов, а не от нагрузки.</p>
   </div>
+</section>
+
+<!-- ================= МОЁ ================= -->
+<section id="view-mine" hidden>
+  <div class="hero" style="--hc:var(--gold)">
+    <span class="eyebrow" id="mineEyebrow">Авторская роль</span>
+    <h2 id="mineTitle">Моё</h2>
+    <p class="lede" id="mineLede"></p>
+  </div>
+  <div id="mineBody"></div>
 </section>
 
 <!-- ================= КУРС (штурман) ================= -->
@@ -1530,6 +1903,28 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <button class="btn ghost" id="resetBtn">Начать заново</button>
     </div>
   </div>
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Где я ошибался <em>журнал промахов ассистента</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:84ch;margin:0 0 14px">
+      Ошибки сборщика разборов повторяются: один и тот же промах я сделал дважды за три дня, потому что нигде не было записано, что он уже был. Здесь они записаны — с причиной и правилом, которое из неё следует. Это список для меня, а не для ребёнка: капитан его не видит.</p>
+    <div id="slipList"></div>
+    <div class="mcard noprint" style="--mc3:var(--red);margin-top:16px">
+      <div class="ct">Добавить промах</div>
+      <div class="cs">Пишите сразу, как заметили. Через день формулировка размоется, а правило не родится.</div>
+      <label class="fl">Что пошло не так</label><input class="t" id="slipWhat" placeholder="Например: разбор собран не по тому параграфу">
+      <label class="fl">Почему так вышло</label><input class="t" id="slipWhy" placeholder="Например: страницы из дневника не сверил с оглавлением">
+      <label class="fl">Правило на будущее</label><input class="t" id="slipFix" placeholder="Например: сначала оглавление, потом разбор">
+      <button class="send" id="slipAdd" style="background:var(--red)">Записать</button>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Рост в цифрах <em>узлы считают активность, это считает сдвиг</em></h3>
+    <div class="bar noprint"><div class="seg" id="segGrow"></div><span class="lhint" id="growHint"></span></div>
+    <div class="growsum" id="growSum"></div>
+    <div class="growrows" id="growRows"></div>
+  </div>
+
   <div class="sec" style="--sc2:var(--amber)">
     <h3>Код штурмана <em>чтобы ребёнок не открыл ответы</em></h3>
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
@@ -2046,7 +2441,8 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     <div class="grid g2">
       <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Фотосинтез</span><span class="gn">главный признак</span></div><div class="gb">
         <div class="row"><span>Процесс образования органических соединений из неорганических — <b>воды и углекислого газа</b> — за счёт энергии света.</span></div>
-        <span class="exs">Определение стоит знать этой фразой</span></div></div>
+        <div class="row"><span>В учебнике дословно: «Способность к фотосинтезу — <b>главная характерная особенность</b> представителей царства Растения».</span></div>
+        <span class="exs">Эту фразу стоит знать наизусть — она и есть ответ на первый вопрос</span></div></div>
 
       <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Пигменты</span><span class="gn">почему окрашены</span></div><div class="gb">
         <div class="row"><span>Окраска растений определяется наличием в их клетках особых красителей — <b>пигментов</b> (от латинского «пигментум» — краска). Главный из них зелёный хлорофилл, он и обеспечивает фотосинтез.</span></div>
@@ -2113,9 +2509,9 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <div class="term" style="--tc2:var(--red)"><b>Высшие семенные растения</b><span>Размножаются семенами. Делятся на голосеменные и покрытосеменные.</span></div>
       <div class="term" style="--tc2:var(--violet)"><b>Пигменты</b><span>Особые красители в клетках, которые определяют окраску растения. От латинского «пигментум» — краска.</span><span class="hint">Самый известный пигмент — зелёный хлорофилл.</span></div>
     </div>
-    <div class="note" style="--nc2:var(--amber);margin-top:16px;max-width:74ch">
-      <b>Эти девять слов ещё не сверены с книгой</b>
-      <span>Они собраны по двум независимым пересказам §1, и оба сошлись. Но самой страницы я не видел: присланное фото стр. 8 — это конец <b>Введения</b>, а §1 начинается на стр. 10. Как только придёт фото стр. 10–13, сверю и уберу эту оговорку.</span>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:76ch">
+      <b>Девять слов подтверждены текстом параграфа</b>
+      <span>10 сентября удалось найти текст §1 целиком. Рубрика «Запомните» в нём такая: <b>Слоевище · Таллом · Ткани · Органы · Низшие растения · Высшие растения · Высшие споровые растения · Высшие семенные растения · Пигменты</b> — ровно эти девять и в этом порядке. Совпали и четыре вопроса «Проверьте себя», и «Подумайте!».<br><br>Оговорка остаётся одна: это публикация текста учебника в сети, а не фотография вашей книги. Три источника сошлись, но кнопку «Я сверил с учебником» внизу разбора всё равно нажимаете вы, открыв параграф.</span>
     </div>
   </div>
 
@@ -2966,6 +3362,185 @@ const C = {red:"var(--red)",blue:"var(--blue)",amber:"var(--amber)",violet:"var(
 const HEX = {red:"#E8402A",blue:"#1B6FE0",amber:"#F2A104",violet:"#7A4FD1",green:"#12A05E",cyan:"#0E8E9E",pink:"#D6337F"};
 
 /* ================= РАЗБОРЫ ================= */
+
+/* ============ АНГЛИЙСКАЯ ДИАГНОСТИКА: что усвоено за 5 класс ============ */
+const DIAG_LESSONS = [
+  {
+    id:"D1", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Времена глагола",
+    source:"Диагностика «Английский после 5 класса» · 12 заданий · разбор к каждому",
+    desc:"Present Simple, Present Continuous, Past Simple и неправильные глаголы. Несущая стена курса: всё, что даёт 6 класс, ставится сверху.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  },
+  {
+    id:"D2", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Артикли, предлоги, местоимения",
+    source:"Диагностика «Английский после 5 класса» · 8 заданий · разбор к каждому",
+    desc:"Служебные слова: a/an/the, in/on, mine/her, there is. Учатся не правилом, а кусками фраз.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  },
+  {
+    id:"D3", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Словарный запас",
+    source:"Диагностика «Английский после 5 класса» · 8 заданий · разбор к каждому",
+    desc:"Антонимы, месяцы, профессии, устойчивые сочетания, вежливые формулы, погода, магазины.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  },
+  {
+    id:"D4", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Чтение и понимание",
+    source:"Диагностика «Английский после 5 класса» · 9 заданий · разбор к каждому",
+    desc:"Два текста: рассказ про мальчика и объявление о лагере. Понять рассказ и найти строку в расписании — разные умения.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  },
+  {
+    id:"D5", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Построение фразы",
+    source:"Диагностика «Английский после 5 класса» · 8 заданий · разбор к каждому",
+    desc:"Порядок слов, вопрос из утверждения, отрицание. Здесь видно, может ли он собрать фразу сам.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  },
+  {
+    id:"D6", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Модальные и сравнение",
+    source:"Диагностика «Английский после 5 класса» · 8 заданий · разбор к каждому",
+    desc:"can / must / have to и степени сравнения. В 5 классе проходят, в 6-м на этом строят половину заданий.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  },
+  {
+    id:"D7", subject:"Английский · диагностика", color:"blue", date:"2026-09-10",
+    title:"Будущее и количество",
+    source:"Диагностика «Английский после 5 класса» · 8 заданий · разбор к каждому",
+    desc:"will против be going to, much / many / any, время и дата. Треть системы времён.",
+    tags:["диагностика","английский","5 класс","что усвоено"],
+    checked:true
+  }
+];
+
+const DIAG_QUIZ = {
+  D1:[
+    {"q": "My sister _____ TV every evening.", "o": ["watch", "watches", "is watching", "watched"], "c": 1, "w": "watches — Present Simple, повторяющееся действие («каждый вечер»). После he / she / it глагол получает -s."},
+    {"q": "Look! The cat _____ on my bed.", "o": ["sleeps", "sleep", "is sleeping", "slept"], "c": 2, "w": "is sleeping — Present Continuous: происходит прямо сейчас. Сигнал — слово «Look!»."},
+    {"q": "We _____ to the zoo last Sunday.", "o": ["go", "goes", "are going", "went"], "c": 3, "w": "went — Past Simple, «last Sunday». Go неправильный: go → went → gone."},
+    {"q": "_____ you like pizza?", "o": ["Do", "Does", "Are", "Is"], "c": 0, "w": "Do — вопрос в Present Simple с you. Does идёт только с he / she / it."},
+    {"q": "She _____ got two brothers.", "o": ["have", "has", "is", "are"], "c": 1, "w": "has got — с she всегда has, а не have."},
+    {"q": "They _____ at school yesterday.", "o": ["was", "were", "are", "is"], "c": 1, "w": "were — прошедшее время to be для we / you / they. Was — для I / he / she / it."},
+    {"q": "I _____ my homework now.", "o": ["do", "does", "am doing", "did"], "c": 2, "w": "am doing — Present Continuous, сигнал «now»; с I используется am."},
+    {"q": "He didn't _____ the film.", "o": ["liked", "likes", "like", "liking"], "c": 2, "w": "like — после did / didn't глагол всегда в начальной форме: прошедшее время уже «внутри» didn't."},
+    {"q": "Tom _____ football every Friday, but today he _____ tennis.", "o": ["is playing / plays", "plays / is playing", "played / plays", "plays / played"], "c": 1, "w": "plays / is playing — сначала регулярное действие (Present Simple), потом сегодняшнее (Present Continuous). Это главное противопоставление 5 класса."},
+    {"q": "Where _____ your father work?", "o": ["do", "does", "is", "has"], "c": 1, "w": "does — your father = he, поэтому does, а сам глагол остаётся work без -s."},
+    {"q": "Yesterday I _____ a letter to my friend.", "o": ["writed", "wrote", "written", "write"], "c": 1, "w": "wrote — write неправильный: write → wrote → written. Окончание -ed к нему не приклеивается."},
+    {"q": "We _____ a lot of photos in London last summer.", "o": ["taked", "took", "taken", "take"], "c": 1, "w": "took — take → took → taken. Проверяется, учил ли он список неправильных глаголов, а не одно-два слова."}
+  ],
+  D2:[
+    {"q": "I have _____ apple and _____ banana.", "o": ["a / a", "an / a", "a / an", "an / an"], "c": 1, "w": "an / a — an перед гласным звуком (apple), a перед согласным (banana)."},
+    {"q": "_____ sun is very bright today.", "o": ["A", "An", "The", "—"], "c": 2, "w": "The — солнце одно в мире; единственные в своём роде объекты идут с the."},
+    {"q": "My birthday is _____ July.", "o": ["on", "in", "at", "to"], "c": 1, "w": "in — с месяцами и годами. On — с датами и днями недели, at — со временем."},
+    {"q": "The book is _____ the table.", "o": ["in", "at", "on", "under"], "c": 2, "w": "on — «на поверхности». In — внутри, under — под."},
+    {"q": "This bag isn't yours, it's _____.", "o": ["my", "mine", "me", "I"], "c": 1, "w": "mine — форма без существительного после неё. «my bag», но «it's mine»."},
+    {"q": "One child, three _____.", "o": ["childs", "childes", "children", "child"], "c": 2, "w": "children — исключение. Такие же: man → men, woman → women, foot → feet, mouse → mice."},
+    {"q": "This is Ann. _____ dog is white.", "o": ["His", "Her", "She", "Hers"], "c": 1, "w": "Her — притяжательное местоимение женского рода перед существительным."},
+    {"q": "There _____ some milk in the fridge.", "o": ["is", "are", "have", "be"], "c": 0, "w": "is — milk неисчисляемое, всегда единственное число."}
+  ],
+  D3:[
+    {"q": "Opposite of expensive:", "o": ["cheap", "big", "short", "early"], "c": 0, "w": "cheap — дешёвый. Задание проверяет, знает ли он пары антонимов, а не просто отдельные слова."},
+    {"q": "Which month comes after May?", "o": ["June", "July", "April", "March"], "c": 0, "w": "June. Месяцы в английском всегда пишутся с большой буквы."},
+    {"q": "A person who works at school and teaches children is a…", "o": ["a teacher", "a driver", "a doctor", "a worker"], "c": 0, "w": "teacher. Суффикс -er образует профессию: teach → teacher, drive → driver, work → worker."},
+    {"q": "Мы обычно завтракаем в восемь. → We usually _____ at eight.", "o": ["do breakfast", "make breakfast", "have breakfast", "eat the breakfast"], "c": 2, "w": "have breakfast — устойчивое сочетание, без артикля. Так же: have lunch, have dinner."},
+    {"q": "Which word is the odd one out?", "o": ["carrot", "potato", "banana", "tomato"], "c": 2, "w": "banana — фрукт, остальные овощи. Проверяется умение группировать слова по темам."},
+    {"q": "— Thank you very much! — _____", "o": ["Please.", "You're welcome.", "Not at all bad.", "Thank you too."], "c": 1, "w": "You're welcome. Русское «пожалуйста» в ответ на спасибо — это не please."},
+    {"q": "It's _____. Take an umbrella!", "o": ["sunny", "raining", "windy and dry", "hot"], "c": 1, "w": "raining — зонт нужен в дождь. Погода есть почти в каждом учебнике 5–6 класса."},
+    {"q": "We buy bread and cakes at the…", "o": ["the baker's", "the butcher's", "the chemist's", "the greengrocer's"], "c": 0, "w": "baker's или bakery. Магазины: baker's, butcher's, greengrocer's, chemist's."}
+  ],
+  D4:[
+    {"q": "How old is Max's sister Kate?", "o": ["She is eleven.", "She is younger than Max.", "She is older than Max.", "She is nine."], "c": 1, "w": "She is younger than Max. В тексте сказано только «his little sister» — точный возраст не назван. Задание на внимательность: не додумывать то, чего нет."},
+    {"q": "Which subject is difficult for Max?", "o": ["History", "PE", "Maths", "English"], "c": 2, "w": "Maths — «he doesn't like Maths — he thinks it is very difficult»."},
+    {"q": "What does Max usually do after school?", "o": ["He does his homework.", "He plays football in the park.", "He goes fishing.", "He walks the dog."], "c": 1, "w": "He plays football in the park. Собаку он выгуливает по субботам у бабушки с дедушкой — важно не смешать два абзаца."},
+    {"q": "Who has got a dog?", "o": ["Max", "Kate", "Max's grandparents", "Max's dad"], "c": 2, "w": "Max's grandparents — «They have a big brown dog called Rex»."},
+    {"q": "Who caught more fish last summer?", "o": ["Max", "His dad", "They caught the same number.", "Nobody caught any fish."], "c": 0, "w": "Max — семь рыб против трёх у папы. Проверяется понимание сравнения и чисел в тексте."},
+    {"q": "What do Max and his dad want to do next summer?", "o": ["Go fishing again", "Go to the sea", "Go to the mountains", "Stay at home"], "c": 2, "w": "Go to the mountains. В тексте прямо сказано, что рыбачить они больше не хотят."},
+    {"q": "Can a boy of eight go to this camp?", "o": ["Yes, of course.", "No, he is too young.", "No, he is too old.", "Only in June."], "c": 1, "w": "No, he is too young. В объявлении: for children 9–14. Восьмилетний младше девяти."},
+    {"q": "When is the camp closed?", "o": ["On Saturdays", "On Sundays", "In August", "After lunch"], "c": 1, "w": "On Sundays. Строка «Closed on Sundays». Задание на поиск конкретной строки, а не на понимание всего текста."},
+    {"q": "What do children do after lunch?", "o": ["They play sports.", "They go home.", "They have English lessons.", "They swim."], "c": 2, "w": "They have English lessons. «English lessons after lunch». Спорт — every morning, до обеда."}
+  ],
+  D5:[
+    {"q": "Choose the correct question:", "o": ["What you usually do at weekends?", "What do you usually do at weekends?", "What usually you do at weekends?", "What does you usually do at weekends?"], "c": 1, "w": "What do you usually do at weekends? Порядок: вопросительное слово → do/does → кто → что делает."},
+    {"q": "— _____ — He is twelve.", "o": ["How old is he?", "How many is he?", "What is he?", "How old he is?"], "c": 0, "w": "How old is he? В вопросе с to be глагол встаёт перед подлежащим."},
+    {"q": "_____ books have you got?", "o": ["How much", "How many", "How long", "What many"], "c": 1, "w": "How many — с исчисляемыми (books). How much — с неисчисляемыми (money, water, time)."},
+    {"q": "Choose the correct sentence:", "o": ["I like very much football.", "I very like football.", "I like football very much.", "I much like football."], "c": 2, "w": "I like football very much. «Very much» ставится в конец. Ошибка возникает из-за русского порядка слов."},
+    {"q": "She can _____ very well.", "o": ["swims", "to swim", "swim", "swimming"], "c": 2, "w": "swim — после модального can глагол без to и без окончаний."},
+    {"q": "They live in Moscow. → Отрицание:", "o": ["They not live in Moscow.", "They don't live in Moscow.", "They doesn't live in Moscow.", "They aren't live in Moscow."], "c": 1, "w": "They don't live in Moscow. С they — don't, и глагол остаётся в начальной форме."},
+    {"q": "Ann plays the piano. → _____ Ann play the piano?", "o": ["Does", "Do", "Is", "Did"], "c": 0, "w": "Does — Ann = she, поэтому вопрос начинается с Does, а play теряет -s."},
+    {"q": "There _____ a lot of books on the shelf.", "o": ["is", "are", "was", "has"], "c": 1, "w": "are — books во множественном числе, значит There are."}
+  ],
+  D6:[
+    {"q": "I _____ swim very well.", "o": ["can", "must", "am", "do"], "c": 0, "w": "can — умение, то, что человек умеет. После can глагол без to и без -s."},
+    {"q": "You _____ wear a helmet when you ride a bike.", "o": ["can", "must", "are", "do"], "c": 1, "w": "must — правило, которое нельзя нарушать. Can здесь означало бы «умеешь надевать шлем»."},
+    {"q": "We _____ to get up early tomorrow.", "o": ["must", "have", "can", "are"], "c": 1, "w": "have to — вынужденность извне: так сложились обстоятельства. У must частицы to нет, у have to есть."},
+    {"q": "She _____ speak French, but she speaks German well.", "o": ["can't", "doesn't can", "not can", "isn't can"], "c": 0, "w": "can't — отрицание модального глагола делается прямо, без do/does."},
+    {"q": "My bag is _____ than yours.", "o": ["heavy", "heavier", "heaviest", "more heavy"], "c": 1, "w": "heavier — короткое прилагательное берёт -er, а не more. Буква y перед -er меняется на i."},
+    {"q": "Tom is a good pupil, but Ann is _____.", "o": ["gooder", "more good", "better", "the best"], "c": 2, "w": "better — good меняется целиком: good → better → the best. Это надо просто помнить."},
+    {"q": "Winter is _____ season of the year.", "o": ["cold", "colder", "the coldest", "coldest"], "c": 2, "w": "the coldest — превосходная степень всегда с the: одна такая на весь год."},
+    {"q": "Maths is more difficult _____ History.", "o": ["that", "then", "than", "as"], "c": 2, "w": "than — «чем» при сравнении. Then значит «затем» и к сравнению отношения не имеет."}
+  ],
+  D7:[
+    {"q": "Tomorrow we _____ visit our grandmother. We have already bought the tickets.", "o": ["go", "are going to", "went", "goes"], "c": 1, "w": "are going to — заранее решённый план. Билеты уже куплены, значит решение принято раньше."},
+    {"q": "I think it _____ rain tomorrow.", "o": ["will", "is", "does", "was"], "c": 0, "w": "will — предположение, мнение о будущем. «I think» — сигнал, что это догадка, а не план."},
+    {"q": "Look at the black clouds! It _____ rain.", "o": ["will", "is going to", "rains", "rained"], "c": 1, "w": "is going to — есть видимый признак прямо сейчас. Разница с will именно в этом: увидел — going to, подумал — will."},
+    {"q": "How _____ apples do you want?", "o": ["much", "many", "a lot", "lot of"], "c": 1, "w": "many — яблоки можно посчитать. Much идёт только с тем, что не считается: water, time, money."},
+    {"q": "There isn't _____ milk in the bottle.", "o": ["some", "any", "many", "a"], "c": 1, "w": "any — в отрицании и вопросе some меняется на any. Это одно из самых частых мест ошибки."},
+    {"q": "We haven't got _____ time.", "o": ["many", "much", "a lot", "few"], "c": 1, "w": "much — время не считается по штукам, поэтому much, а не many."},
+    {"q": "— What time is it? — It's 7:30. → _____", "o": ["seven thirty past", "half past seven", "half to eight", "thirty past seven"], "c": 1, "w": "half past seven — половина восьмого по-английски отсчитывается от прошедшего часа: половина ПОСЛЕ семи."},
+    {"q": "My birthday is on the _____ of May. (5-е мая)", "o": ["five", "fifth", "fiveth", "the five"], "c": 1, "w": "fifth — в датах нужны порядковые числительные: first, second, third, fourth, fifth."}
+  ]
+};
+
+const DIAG_PASSAGE = {D4:{main:"<p>Max is eleven. He lives in a small town near the sea with his mum, his dad and his little sister Kate. Max goes to school five days a week. His favourite subjects are History and PE, but he doesn't like Maths — he thinks it is very difficult.</p><p>After school Max usually plays football with his friends in the park. On Saturdays the family visits Max's grandparents. They have a big brown dog called Rex, and Max always takes him for a walk.</p><p>Last summer Max and his dad went fishing every morning. Max caught seven fish, but his dad caught only three! Next summer they don't want to go fishing — they want to go to the mountains.</p>", second:"<p><b>SUMMER CAMP «GREEN HILL»</b></p><p>Open: 1 June – 20 August. For children 9–14.<br>Sports every morning. English lessons after lunch.<br>Price: 120 pounds a week. Closed on Sundays.<br>Phone: 020 7946 0123</p>", secondFrom:6}};
+
+const DIAG_RECS = {
+ "D1": {
+  "low": "Это фундамент, и он сейчас шатается. Начните с одного противопоставления: «каждый день» → Present Simple, «прямо сейчас» → Present Continuous. По 10 минут в день, устно, на примерах из его собственной жизни: «Что ты делаешь сейчас? А что обычно делаешь после школы?» Past Simple подключайте только когда первые два разделяются автоматически, иначе всё смешается.",
+  "mid": "Формы он знает, но путается, какую взять. Помогает не таблица, а пересказ дня: три предложения про «обычно», три про «сейчас», три про «вчера». Отдельно — 20 самых частых неправильных глаголов карточками.",
+  "good": "Времена держатся. Можно двигаться к тому, что даёт 6 класс: Past Continuous, конструкция be going to, сравнение с Present Perfect."
+ },
+ "D2": {
+  "low": "Артикли и предлоги проседают у тех, кто учит отдельные слова, но не фразы. Лечится заучиванием кусков целиком: «in July», «on Monday», «at 5 o'clock», «on the table», «an apple». Пять готовых сочетаний в неделю дают больше, чем выученное правило.",
+  "mid": "Основное он понимает, сбои точечные. Выпишите вместе его ошибки из этого теста на один листок и повесьте на видное место — обычно там всего 3–4 повторяющихся места.",
+  "good": "Служебные слова в порядке — довольно редкая сильная сторона в этом возрасте. На ней хорошо строить письменные задания."
+ },
+ "D3": {
+  "low": "Словарного запаса не хватает даже на школьные темы. Не увеличивайте объём — увеличьте частоту: 5 слов в день с обязательным возвратом к старым (Anki, Quizlet или обычные бумажные карточки). Слово учить с картинкой или примером-фразой, а не переводом в столбик.",
+  "mid": "База есть, не хватает второго слоя: антонимов, устойчивых сочетаний, вежливых формул. Хорошо заходят адаптированные книжки уровня A1–A2 — по одной главе в день с выписыванием 3–5 слов.",
+  "good": "Слов достаточно для своего уровня. Дальше — более взрослые темы: путешествия, здоровье, технологии, описание характера."
+ },
+ "D4": {
+  "low": "Проблема, скорее всего, не в английском, а в стратегии: он читает и пытается перевести каждое слово, теряя смысл. Научите порядку — сначала прочитать вопросы, потом искать ответ в тексте — и прямо разрешите не понимать отдельные слова. Это даёт прирост быстрее любой грамматики.",
+  "mid": "Текст понимает, но теряется на деталях и додумывает то, чего в тексте нет. Тренируйте один вопрос: «покажи пальцем, где это написано». Если показать нечего — значит, ответ придуман.",
+  "good": "Чтение — его сильная сторона, и это ресурс: через чтение проще всего подтянуть и слова, и грамматику, потому что они приходят в готовых фразах."
+ },
+ "D5": {
+  "low": "Он узнаёт английский, но не строит его: фразы собираются по русской модели. Самое полезное упражнение — брать утвердительное предложение и делать из него вопрос и отрицание. По 5 предложений в день, обязательно вслух.",
+  "mid": "Порядок слов в целом верный, сбои на вопросах. Отработайте до автоматизма схему: вопросительное слово → do / does / is → кто → что делает.",
+  "good": "Фразы строит правильно — значит, он готов к говорению, и это сейчас самое ценное вложение. Ищите разговорную практику: клуб, одно занятие в неделю с преподавателем, игры на английском."
+ },
+ "D6": {
+  "low": "Can и must он пока не различает — а это разные вещи: «умею» и «обязан». Разбирайте на его жизни: «Ты умеешь плавать?» — can. «Тебе надо надеть шлем» — must. Степени сравнения ставьте отдельно и на предметах в комнате: «Какая книга толще? А самая толстая какая?» Пять пар в день устно.",
+  "mid": "Формы знает, но выбирает наугад между can и must, и путается, когда брать -er, а когда more. Правило простое: слово короткое — -er, длинное — more. Выпишите на листок пять его собственных ошибок из этого теста, обычно там одно и то же место.",
+  "good": "Модальные и сравнение держатся. Можно добавлять should, could и конструкции as … as, которые дают в 6 классе."
+ },
+ "D7": {
+  "low": "Будущего времени у него сейчас нет. Начните только с be going to и только про планы: «Что ты собираешься делать в субботу?» Will подключайте позже, иначе смешается. Отдельно и не смешивая — much / many: «много чего можно посчитать» (many apples) против «много того, что не считается» (much water).",
+  "mid": "Формы есть, не хватает выбора между will и be going to. Правило, которое работает у детей: увидел признак или уже решил — going to; просто думаю, что так будет — will. Any в отрицании и вопросе отрабатывается отдельно, десять фраз подряд.",
+  "good": "Будущее и количественные слова в порядке. Это редко бывает крепко после 5 класса — можно смело идти к Present Perfect и придаточным времени."
+ }
+};
+
 const LESSONS = [
   {
     id:"L5", subject:"Английский язык", color:"blue", date:"2026-09-09",
@@ -3002,12 +3577,15 @@ const LESSONS = [
   {
     id:"L2", subject:"Биология", color:"green", date:"2026-09-07",
     title:"Общие признаки и разнообразие растений",
-    source:"Линия жизни, §1 «Общие признаки, разнообразие, распространение, значение растений» · стр. 10–13 · собрано по пересказам, книгой не сверено",
+    source:"Линия жизни, §1 «Общие признаки, разнообразие, распространение, значение растений» · стр. 10–13 · текст параграфа найден и сверен, фото книги не видел",
     desc:"Четыре характерных признака растений, деление на низшие и высшие, высшие споровые и семенные, девять терминов рубрики «Запомните», ответы на вопросы в конце параграфа. Тема идёт после Введения.",
     tags:["растения","признаки","фотосинтез","пигменты","слоевище","таллом","ткани","органы","споровые","семенные"],
-    checked:false
+    checked:true
   },
 ];
+DIAG_LESSONS.forEach(function(l){ LESSONS.push(l); });
+Object.keys(DIAG_QUIZ).forEach(function(k){ QUIZ[k] = DIAG_QUIZ[k]; });
+
 
 
 
@@ -3062,9 +3640,57 @@ const MONTHS = [
    weeks:OCT_WEEKS, days:OCT_DAYS}
 ];
 
+/* ---- переходы после октября собираются сами, до конца учебного года ---- */
+const MNAME = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+const GEN_WEEKS = [
+  {n:"Неделя 1", th:"Замер",     c:"red",    go:"Снять честные цифры по взятым испытаниям и не пытаться их улучшить"},
+  {n:"Неделя 2", th:"Ритм",      c:"blue",   go:"Семь дней вахты подряд. Ничего героического"},
+  {n:"Неделя 3", th:"Рывок",     c:"amber",  go:"Одно слабое звено — и всё внимание туда"},
+  {n:"Неделя 4", th:"Глубина",   c:"violet", go:"Самое трудное место и работа над ошибками"},
+  {n:"Итог",     th:"Гавань",    c:"green",  go:"Повторить замеры, подвести узлы, забрать награду"}
+];
+function makeMonth(y, m, num){
+  const len = new Date(y, m+1, 0).getDate();
+  const firstDow = (new Date(y, m, 1).getDay() + 6) % 7;   /* 0 = понедельник */
+  const bounds = [[1,7],[8,14],[15,21],[22,28],[29,len]];
+  const weeks = [];
+  bounds.forEach((b,i)=>{ if(b[0] <= len) weeks.push(Object.assign({}, GEN_WEEKS[i], {from:b[0], to:Math.min(b[1],len)})); });
+  /* короткий февраль: последняя неделя всё равно «Гавань», а не «Глубина» */
+  if(weeks.length < 5){ const last = weeks[weeks.length-1]; weeks[weeks.length-1] = Object.assign({}, GEN_WEEKS[4], {from:last.from, to:last.to}); }
+
+  const days = {};
+  for(let d=1; d<=len; d++){
+    const dow = (firstDow + d - 1) % 7;      /* 0=Пн … 6=Вс */
+    const wk  = weeks.findIndex(w=>d>=w.from && d<=w.to);
+    let info = null;
+    if(d===1)            info = {i:"Совет: открыть переход, выбрать цель по ГТО и два вызова", tags:["lyudi","delo"]};
+    else if(d===len)     info = {i:"Гавань: подвести узлы, забрать награду, спланировать следующий месяц", tags:["lyudi"]};
+    else if(dow===6)     info = {i:"Совет в воскресенье: что сработало, что провалилось, что меняем", tags:["lyudi"]};
+    else if(wk===0 && (dow===1||dow===3||dow===5)) info = {i:"Замер по взятому испытанию ГТО. Записать цифру, не улучшать", tags:["telo"]};
+    else if(wk===weeks.length-1 && (dow===1||dow===3||dow===5)) info = {i:"Контрольный замер: то же испытание, что в первую неделю", tags:["telo"]};
+    else if(dow===1||dow===3||dow===5) info = {i:"", tags:["telo"], train:true};
+    else if(wk===2 && dow===0) info = {i:"Выбрать слабое звено месяца и держать его всю неделю", tags:["um"]};
+    if(info) days[d] = info;
+  }
+  return {
+    key: y + "-" + String(m+1).padStart(2,"0"),
+    y:y, m:m, len:len, firstDow:firstDow,
+    name: MNAME[m] + " " + y, num: num,
+    lede: "Переход № " + num + ": тот же ритм — замер в первую неделю, рывок по слабому месту, контрольный замер в последнюю. План собран журналом; на воскресном совете его можно переписать.",
+    weeks: weeks, days: days
+  };
+}
+(function(){
+  let y = 2026, m = 10, num = 3;                 /* ноябрь 2026 */
+  while(!(y === 2027 && m === 8)){                /* до августа 2027 включительно */
+    MONTHS.push(makeMonth(y, m, num));
+    num++; m++; if(m > 11){ m = 0; y++; }
+  }
+})();
+
 /* ================= СОСТОЯНИЕ ================= */
 const STORE_KEY = "bortovoy-journal-v2";
-const DEFAULT = {v:3, role:"cap", checks:{}, taken:[], done:[], gto:{}, stage:"3", sex:"m", tests:{}, bonus:0, qstats:{}, history:[], oral:{}, ostats:{}, manual:{}, verified:{}, todo:{}, pin:"", nav:"flat"};
+const DEFAULT = {v:3, role:"cap", checks:{}, taken:[], done:[], gto:{}, gtoPick:{}, gtoOnly:"mine", gtoGoal:"s", gtoSnap:[], remind:{}, omonth:{}, myq:[], mych:[], feed:[], slips:[], stage:"3", tests:{}, bonus:0, qstats:{}, history:[], oral:{}, ostats:{}, manual:{}, verified:{}, todo:{}, pin:"", nav:"flat"};
 let state = JSON.parse(JSON.stringify(DEFAULT));
 
 function load(){
@@ -3144,6 +3770,7 @@ const TABS = [
   {id:"need",    label:"Что нужно", color:"amber",  role:"nav"},
   {id:"test",    label:"Тесты",     color:"violet", role:"all"},
   {id:"chal",    label:"Вызовы",    color:"pink",   role:"all"},
+  {id:"mine",    label:"Моё",       color:"gold",   role:"all"},
   {id:"gto",     label:"ГТО",       color:"red",    role:"all"},
   {id:"kurs",    label:"Курс",      color:"amber",  role:"nav"},
   {id:"print",   label:"Печать",    color:"amber",  role:"nav"},
@@ -3169,6 +3796,12 @@ function renderNav(){
   }).join("");
   document.querySelectorAll("#mainNav button").forEach(b=>b.addEventListener("click", ()=>show(b.dataset.t)));
   renderDecks();
+  const cap = state.role === "cap";
+  document.body.classList.toggle("capnav", cap);
+  const cb = document.getElementById("capBack");
+  cb.hidden = !(cap && view !== "today");
+  const vt = TABS.find(x=>x.id===view);
+  document.getElementById("capBackTitle").textContent = vt ? vt.label : "";
   document.querySelectorAll("#roleSwitch button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.role === state.role)));
   document.getElementById("mastSub").textContent = state.role === "cap"
     ? "Твой журнал. Отмечай вахту сам — за тебя этого никто не делает."
@@ -3190,6 +3823,7 @@ function show(v){
   if(v==="need") renderNeed();
   if(v==="test") showTests();
   if(v==="chal") renderChallenges();
+  if(v==="mine") renderMine();
   if(v==="gto") renderGto();
   if(v==="kurs") renderKurs();
   if(v==="print") renderSheets();
@@ -3214,10 +3848,20 @@ document.querySelectorAll("#roleSwitch button").forEach(b=>b.addEventListener("c
 
 /* ================= СЕГОДНЯ ================= */
 function monthOf(dateKey){ return MONTHS.find(m=>dateKey.slice(0,7)===m.key); }
+function dayInfo(mo, d){
+  const info = mo && mo.days ? mo.days[d] : null;
+  if(!info) return null;
+  if(!info.train) return info;
+  const dow = (mo.firstDow + d - 1) % 7;
+  const t = dow===1 ? "Тренировка по микроциклу: сила и гибкость"
+          : dow===3 ? "Тренировка по микроциклу: скорость"
+          : "Тренировка по микроциклу: выносливость";
+  return {i:t, tags:info.tags, train:true};
+}
 function dayPlanFor(dateKey){
   const mo = monthOf(dateKey); if(!mo) return null;
   const d = +dateKey.split("-")[2];
-  return {info: mo.days[d], week: mo.weeks.find(w=>d>=w.from && d<=w.to), mo, d};
+  return {info: dayInfo(mo, d), week: mo.weeks.find(w=>d>=w.from && d<=w.to), mo, d};
 }
 
 function renderToday(){
@@ -3279,8 +3923,83 @@ function renderToday(){
     if((state.checks[kk]||[]).length >= VAHTA.length){ s++; d.setDate(d.getDate()-1); } else break;
   }
   document.getElementById("streak").textContent = s;
+  renderCapBoard();
+  renderRemind();
   renderHeader();
 }
+
+/* ================= НАПОМИНАНИЕ ================= */
+function renderRemind(){
+  const box = document.getElementById("remindBox");
+  if(!box) return;
+  const tk = todayKey(), on = !!(state.remind || {})[tk];
+  box.innerHTML = '<button class="rbtn" id="remBtn" aria-pressed="'+on+'">'+(on?"да, напоминал":"напоминал сегодня")+'</button>'
+    + '<span class="rstate">'+(on ? "отмечено: сегодня пришлось напомнить" : "не отмечено — значит справился сам")+'</span>';
+  document.getElementById("remBtn").addEventListener("click", ()=>{
+    state.remind = state.remind || {};
+    if(state.remind[tk]) delete state.remind[tk]; else state.remind[tk] = true;
+    save(); renderRemind();
+  });
+}
+
+/* ================= КАПИТАНСКИЙ ЭКРАН: ТРИ КНОПКИ ================= */
+const CAP_MORE = ["cal","chal","gto","mine","how"];
+function trainToday(){
+  const dow = (new Date()).getDay(); /* 0=вс */
+  if(dow===2) return {t:"Вт · сила и гибкость", on:true};
+  if(dow===4) return {t:"Чт · скорость",        on:true};
+  if(dow===6) return {t:"Сб · выносливость",    on:true};
+  return {t:"сегодня без тренировки", on:false};
+}
+function renderCapBoard(){
+  const cap = state.role === "cap";
+  const view = document.getElementById("view-today");
+  view.classList.toggle("capmode", cap);
+  document.getElementById("capTiles").hidden = !cap;
+  document.getElementById("capMore").hidden = !cap;
+  if(!cap) return;
+
+  /* 1 — урок */
+  let rev = []; try{ rev = reviewList(); }catch(e){}
+  const pl = dayPlanFor(todayKey());
+  const lessonSub = rev.length
+    ? rev.length + " " + (rev.length===1?"тема ждёт":rev.length<5?"темы ждут":"тем ждут") + " повторения"
+    : (pl && pl.info ? pl.info.i : "Все разборы открыты — можно перечитать любой");
+
+  /* 2 — тест */
+  let wrongN = 0; try{ wrongN = wrongPool().length; }catch(e){}
+  const themes = Object.keys(QUIZ||{}).length;
+  const testSub = wrongN
+    ? wrongN + " " + (wrongN===1?"вопрос":wrongN<5?"вопроса":"вопросов") + ", где ошибался"
+    : themes + " " + (themes===1?"тема":themes<5?"темы":"тем") + " на выбор · 5 узлов за 80%";
+
+  /* 3 — тренировка */
+  const tr = trainToday();
+  const trSub = tr.on ? tr.t + " · 20–25 минут" : "Сегодня отдых. Только наклон вперёд, 3 минуты";
+
+  const T = [
+    {v:"lessons", c:"cyan",   ic:"📖", t1:"Разобрать урок",  t2:lessonSub},
+    {v:"test",    c:"violet", ic:"✅", t1:"Пройти тест",     t2:testSub},
+    {v:"gto",     c:"red",    ic:"⚡", t1:"Тренировка",      t2:trSub}
+  ];
+  document.getElementById("capTiles").innerHTML = '<div class="tiles">' + T.map(x=>
+    '<button class="tile" data-go="'+x.v+'" style="--tc:'+C[x.c]+'"><span class="ic">'+x.ic+'</span>'
+    + '<span class="tx"><b class="t1">'+x.t1+'</b><span class="t2">'+esc(x.t2)+'</span></span>'
+    + '<span class="ar">→</span></button>').join("") + '</div>';
+  document.querySelectorAll("#capTiles [data-go]").forEach(b=>b.addEventListener("click", ()=>show(b.dataset.go)));
+
+  document.getElementById("capMoreBox").innerHTML = CAP_MORE.map(id=>{
+    const t = TABS.find(x=>x.id===id); if(!t) return "";
+    return '<button data-go="'+id+'" style="--mc2:'+C[t.color]+'">'+t.label+'</button>';
+  }).join("");
+  document.querySelectorAll("#capMoreBox [data-go]").forEach(b=>b.addEventListener("click", ()=>show(b.dataset.go)));
+}
+document.getElementById("capMoreBtn").addEventListener("click", ()=>{
+  const b = document.getElementById("capMoreBox");
+  b.hidden = !b.hidden;
+  document.getElementById("capMoreBtn").textContent = b.hidden ? "ещё ▾" : "свернуть ▴";
+});
+document.getElementById("capBackBtn").addEventListener("click", ()=>show("today"));
 
 function toggleVahta(dateKey, id, on){
   const cur = state.checks[dateKey] ? state.checks[dateKey].slice() : [];
@@ -3293,17 +4012,27 @@ function toggleVahta(dateKey, id, on){
 }
 
 /* какие темы пора повторить */
+/* Интервальное повторение по темам: 1 → 3 → 7 → 21 день.
+   Каждая успешная сдача (80% и выше) отодвигает тему на следующую ступень.
+   Провал сбрасывает лестницу в начало. */
 function reviewList(){
   const tk = todayKey();
   return LESSONS.filter(l=>QUIZ[l.id] && QUIZ[l.id].length).map(l=>{
     const t = state.tests[l.id];
-    if(!t) return {l, why:"тест ни разу не пройден", pri:3};
+    if(!t) return {l, why:"тест ни разу не пройден", pri:4, due:99};
     const age = daysBetween(t.at, tk);
     const pct = t.best / QUIZ[l.id].length;
-    if(pct < 0.8) return {l, why:"последний результат "+t.last+" из "+QUIZ[l.id].length, pri:2};
-    if(age >= 14) return {l, why:"не открывал "+age+" дн.", pri:1};
+    if(pct < 0.8) return {l, why:"последний результат "+t.last+" из "+QUIZ[l.id].length, pri:3, due:age};
+    const pass = t.pass || 1;
+    const step = REVIEW_STEPS[Math.min(pass - 1, REVIEW_STEPS.length - 1)];
+    if(age >= step){
+      const over = age - step;
+      return {l, why: step + " " + (step===1?"день":step<5?"дня":"дней") + " прошло, пора повторить"
+                    + (over > step ? " — тянем " + age + " дн." : ""),
+              pri: over > step ? 2 : 1, due: age};
+    }
     return null;
-  }).filter(Boolean).sort((a,b)=>b.pri-a.pri);
+  }).filter(Boolean).sort((a,b)=> b.pri - a.pri || b.due - a.due);
 }
 
 function renderReview(){
@@ -3315,8 +4044,10 @@ function renderReview(){
     html += '<button class="revb" style="--ic:var(--red)" data-act="wrong">'
       + '<span class="rt">Работа над ошибками</span><span class="rm">'+wrongN+' вопросов, где ошибался</span></button>';
   }
+  const shown = list.slice(0, 5), restN = list.length - shown.length;
   html += list.length
-    ? list.map(r=>'<button class="revb" style="--ic:'+C[r.l.color]+'" data-id="'+r.l.id+'"><span class="rt">'+esc(r.l.title)+'</span><span class="rm">'+esc(r.l.subject)+' · '+esc(r.why)+'</span></button>').join("")
+    ? shown.map(r=>'<button class="revb" style="--ic:'+C[r.l.color]+'" data-id="'+r.l.id+'"><span class="rt">'+esc(r.l.title)+'</span><span class="rm">'+esc(r.l.subject)+' · '+esc(r.why)+'</span></button>').join("")
+      + (restN ? '<div class="pempty">И ещё '+restN+' '+(restN===1?"тема":restN<5?"темы":"тем")+' в очереди — они во вкладке «Тесты».</div>' : "")
     : (wrongN ? "" : '<div class="pempty">Всё свежее. Ничего повторять не надо — возвращайтесь через пару недель.</div>');
   document.getElementById("revList").innerHTML = html;
   document.querySelectorAll("#revList .revb").forEach(b=>b.addEventListener("click", ()=>{
@@ -3329,6 +4060,56 @@ function renderReview(){
 
 /* Вопрос считается «проблемным», пока не отвечен верно дважды подряд.
    Одна удачная догадка его из работы над ошибками не убирает. */
+/* ================= УМНЫЙ ОТБОР ВОПРОСОВ =================
+   Вместо случайных 20 из 156 берём те, где слабо и что пора повторить.
+   Вес вопроса складывается из четырёх вещей:
+     — ошибался и не закрыл (два верных подряд) — самое тяжёлое;
+     — доля ошибок за всю историю;
+     — сколько дней не показывался (1–3–7–21 и дальше);
+     — вопрос вообще ни разу не задавали.                                */
+const REVIEW_STEPS = [1, 3, 7, 21];
+function qWeight(lid, qi){
+  const st = (state.qstats || {})[lid + ":" + qi];
+  const tk = todayKey();
+  if(!st || !st.n) return 55;   /* новый материал важен, но не важнее забытого */
+  let w = 0;
+  if(st.w && st.streak < 2) w += 100;
+  w += Math.min(40, (st.w / st.n) * 40);
+  const age = st.seen ? daysBetween(st.seen, tk) : (st.last ? daysBetween(st.last, tk) : 99);
+  const step = REVIEW_STEPS[Math.min(st.streak, REVIEW_STEPS.length - 1)];
+  if(age >= step) w += Math.min(70, 12 + (age - step) * 4);
+  else w += 2;
+  return w;
+}
+function pickSmart(all, n){
+  const scored = all.map(it=>({it, w: qWeight(it.lid, it.qi) + Math.random() * 8}));
+  scored.sort((a,b)=>b.w - a.w);
+  const out = [], byLesson = {};
+  const cap = Math.max(3, Math.ceil(n / Math.max(1, new Set(all.map(x=>x.lid)).size)) + 2);
+  for(const s of scored){
+    const lid = s.it.lid;
+    byLesson[lid] = byLesson[lid] || 0;
+    if(byLesson[lid] >= cap) continue;
+    byLesson[lid]++; out.push(s.it);
+    if(out.length >= n) break;
+  }
+  if(out.length < n) for(const s of scored){ if(out.indexOf(s.it) < 0){ out.push(s.it); if(out.length >= n) break; } }
+  return shuffle(out);
+}
+function poolStats(all){
+  let hot = 0, due = 0, fresh = 0;
+  const tk = todayKey();
+  all.forEach(it=>{
+    const st = (state.qstats||{})[it.lid + ":" + it.qi];
+    if(!st || !st.n){ fresh++; return; }
+    if(st.w && st.streak < 2){ hot++; return; }
+    const age = st.seen ? daysBetween(st.seen, tk) : 99;
+    const step = REVIEW_STEPS[Math.min(st.streak, REVIEW_STEPS.length - 1)];
+    if(age >= step) due++;
+  });
+  return {hot, due, fresh};
+}
+
 function wrongPool(){
   const out = [];
   const st = state.qstats || {};
@@ -3358,55 +4139,115 @@ function startWrongTest(){
   const pool = wrongPool();
   if(!pool.length){ toast("Ошибок пока нет — работать не над чем"); return; }
   const ls = LESSONS.filter(l=>pool.some(p=>p.lid===l.id));
-  showIntro(shuffle(pool).slice(0,20), "WRONG", "Работа над ошибками", ls, "Только вопросы, где ошибался");
+  showIntro(pickSmart(pool, 20), "WRONG", "Работа над ошибками", ls, "Только вопросы, где ошибался");
 }
 
 /* ================= КАЛЕНДАРЬ ================= */
-let calIdx = 0;
+let calIdx = 0, calView = "week", calFilt = new Set();
 function currentMonthIdx(){
   const tk = todayKey().slice(0,7);
   const i = MONTHS.findIndex(m=>m.key===tk);
   return i < 0 ? 0 : i;
+}
+function calHit(info){ return !calFilt.size || (info && (info.tags||[]).some(t=>calFilt.has(t))); }
+function calTrainLine(mo, w){
+  for(let d=w.from; d<=w.to; d++){ const i = mo.days[d]; if(i && i.train) return "Тренировки: вт, чт, сб"; }
+  return "";
 }
 function renderCalendar(){
   const mo = MONTHS[calIdx], tk = todayKey();
   document.getElementById("calEyebrow").textContent = "Переход № " + mo.num;
   document.getElementById("calTitle").textContent = mo.name;
   document.getElementById("calLede").textContent = mo.lede;
-  document.getElementById("mNow").textContent = mo.name;
   document.getElementById("mTerm").textContent = termFull(mo.key + "-01");
   document.getElementById("mPrev").disabled = calIdx === 0;
   document.getElementById("mNext").disabled = calIdx === MONTHS.length-1;
-  document.getElementById("legend").innerHTML = RUMBS.map(r=>
-    '<span class="tag'+(r.c==="amber"?" amber":"")+'" style="--gc:'+C[r.c]+';font-size:11px;padding:5px 12px">'+r.ic+' '+r.n+'</span>').join("");
 
-  document.getElementById("calendar").innerHTML = mo.weeks.map(w=>{
+  /* полоска месяца */
+  let full = 0;
+  for(let d=1; d<=mo.len; d++) if((state.checks[key(mo.y,mo.m,d)]||[]).length >= VAHTA.length) full++;
+  document.getElementById("mProgTxt").textContent =
+    "Вахта закрыта " + full + " " + (full===1?"день":(full%10>=2&&full%10<=4&&(full<12||full>14))?"дня":"дней") + " из " + mo.len;
+  document.getElementById("mProgBar").style.width = Math.round(full/mo.len*100) + "%";
+
+  /* легенда-фильтр со счётчиками */
+  const cnt = {}; RUMBS.forEach(r=>cnt[r.id]=0);
+  for(let d=1; d<=mo.len; d++){ const i = dayInfo(mo,d); ((i&&i.tags)||[]).forEach(t=>{ if(cnt[t]!=null) cnt[t]++; }); }
+  document.getElementById("legend").innerHTML = RUMBS.map(r=>
+    '<button class="lchip'+(r.c==="amber"?" amber":"")+'" data-f="'+r.id+'" aria-pressed="'+calFilt.has(r.id)+'" style="--lc:'+C[r.c]+'">'
+    + '<span class="sq"></span>'+r.n+'<span class="qt">'+cnt[r.id]+'</span></button>').join("")
+    + (calFilt.size ? '<button class="lreset" id="lReset">сбросить</button>' : '')
+    + '<span class="lhint">' + (calFilt.size ? "показаны только отмеченные дни" : "нажмите румб, чтобы отфильтровать") + '</span>';
+
+  document.querySelectorAll("#segCalView button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.cv===calView)));
+  document.getElementById("calendar").innerHTML = calView==="week" ? calWeekView(mo, tk) : calMonthView(mo, tk);
+
+  document.querySelectorAll("#legend [data-f]").forEach(b=>b.addEventListener("click", ()=>{
+    const f = b.dataset.f;
+    if(calFilt.has(f)) calFilt.delete(f); else calFilt.add(f);
+    renderCalendar();
+  }));
+  const lr = document.getElementById("lReset");
+  if(lr) lr.addEventListener("click", ()=>{ calFilt.clear(); renderCalendar(); });
+  document.querySelectorAll("#calendar [data-k]").forEach(el=>el.addEventListener("click", ()=>openDay(el.dataset.k)));
+}
+
+function calWeekView(mo, tk){
+  const curW = mo.weeks.findIndex(w=>{
+    const a = key(mo.y,mo.m,w.from), b = key(mo.y,mo.m,w.to);
+    return tk >= a && tk <= b;
+  });
+  return '<div class="weekstrip">' + mo.weeks.map((w,wi)=>{
     let cells = "";
     if(w.from===1) for(let i=0;i<mo.firstDow;i++) cells += '<div class="day empty"></div>';
     for(let d=w.from; d<=w.to; d++){
-      const dow=(mo.firstDow+d-1)%7, info=mo.days[d]||{i:"",tags:[]}, k=key(mo.y,mo.m,d);
-      const done=(state.checks[k]||[]).length;
-      const main = info.tags && info.tags[0] ? C[RC(info.tags[0])] : "transparent";
-      cells += '<div class="day'+(dow>4?" wknd":"")+(k===tk?" today":"")+'" style="--dc:'+main+'" data-k="'+k+'">'
+      const dow=(mo.firstDow+d-1)%7, info=dayInfo(mo,d), k=key(mo.y,mo.m,d);
+      const done=(state.checks[k]||[]).length, past = k <= tk;
+      const main = info && info.tags && info.tags[0] ? C[RC(info.tags[0])] : "transparent";
+      const tags = ((info&&info.tags)||[]).map(t=>{
+        const r=RUMBS.find(x=>x.id===t);
+        return '<span class="tag'+(r.c==="amber"?" amber":"")+(!calFilt.size||calFilt.has(t)?"":" off")+'" style="--gc:'+C[r.c]+'">'+r.n+'</span>';
+      }).join("");
+      cells += '<div class="day'+(dow>4?" wknd":"")+(k===tk?" today":"")+(calHit(info)?"":" mute")+'" style="--dc:'+main+'" data-k="'+k+'">'
         + '<div class="dn"><span class="dnum">'+d+'</span><span class="dwd">'+WD[dow]+'</span></div>'
-        + '<div class="di">'+esc(info.i||"")+'</div>'
-        + '<div class="tags">'+(info.tags||[]).map(t=>{const r=RUMBS.find(x=>x.id===t);return '<span class="tag'+(r.c==="amber"?" amber":"")+'" style="--gc:'+C[r.c]+'">'+r.n+'</span>';}).join("")+'</div>'
-        + '<div class="dots">'+VAHTA.map((_,i)=>'<i class="'+(i<done?"on":"")+'"></i>').join("")+'</div></div>';
+        + '<div class="di">'+esc(info && !info.train ? (info.i||"") : "")+'</div>'
+        + '<div class="tags">'+tags+'</div>'
+        + (past ? '<div class="dots">'+VAHTA.map((_,i)=>'<i class="'+(i<done?"on":"")+'"></i>').join("")+'</div>' : '')
+        + '</div>';
     }
     if(w.to===mo.len){ const ld=(mo.firstDow+mo.len-1)%7; for(let i=ld+1;i<7;i++) cells+='<div class="day empty"></div>'; }
-    return '<div class="weekrow"><div class="weekmeta'+(w.c==="amber"?" amber":"")+'" style="--wc:'+C[w.c]+'">'
-      + '<span class="n">'+w.n+'</span><span class="th">'+w.th+'</span><span class="go">'+w.go+'</span></div>'
+    const tl = calTrainLine(mo, w);
+    return '<div class="weekrow'+(wi===curW?" cur":(curW>-1&&wi<curW?" dim":""))+'">'
+      + '<div class="weekmeta'+(w.c==="amber"?" amber":"")+'" style="--wc:'+C[w.c]+'">'
+      + '<span class="n">'+w.n+'</span><span class="th">'+w.th+'</span><span class="go">'+w.go+'</span>'
+      + (tl ? '<span class="rep">'+tl+'</span>' : '') + '</div>'
       + '<div class="days">'+cells+'</div></div>';
-  }).join("");
-
-  document.querySelectorAll("#calendar .day[data-k]").forEach(el=>{
-    el.addEventListener("click", ()=>openDay(el.dataset.k));
-  });
+  }).join("") + '</div>';
 }
+
+function calMonthView(mo, tk){
+  let cells = "";
+  mo.weeks.forEach(w=>{
+    cells += '<div class="mweek'+(w.c==="amber"?" amber":"")+'" style="--wc:'+C[w.c]+'"><span class="th">'+w.th+'</span><span class="go">'+esc(w.go)+'</span></div>';
+    if(w.from===1) for(let i=0;i<mo.firstDow;i++) cells += '<div class="mcell empty"></div>';
+    for(let d=w.from; d<=w.to; d++){
+      const dow=(mo.firstDow+d-1)%7, info=dayInfo(mo,d), k=key(mo.y,mo.m,d);
+      const done=(state.checks[k]||[]).length, past = k <= tk;
+      const pts = ((info&&info.tags)||[]).map(t=>'<i class="'+(!calFilt.size||calFilt.has(t)?"":"off")+'" style="--pc:'+C[RC(t)]+'"></i>').join("");
+      cells += '<div class="mcell'+(dow>4?" wknd":"")+(k===tk?" today":"")+(calHit(info)?"":" mute")+'" data-k="'+k+'">'
+        + '<span class="n">'+d+'</span><span class="pts">'+pts+'</span>'
+        + (past ? '<span class="vb"><i style="width:'+Math.round(done/VAHTA.length*100)+'%"></i></span>' : '')
+        + '</div>';
+    }
+    if(w.to===mo.len){ const ld=(mo.firstDow+mo.len-1)%7; for(let i=ld+1;i<7;i++) cells+='<div class="mcell empty"></div>'; }
+  });
+  return '<div class="mgrid"><div class="mhead">'+WD.map(w=>'<span>'+w+'</span>').join("")+'</div><div class="mbody">'+cells+'</div></div>';
+}
+
 function openDay(k){
   const set = state.checks[k] || [];
   const mo = monthOf(k), d = +k.split("-")[2];
-  const info = mo ? mo.days[d] : null;
+  const info = mo ? dayInfo(mo, d) : null;
   const lines = VAHTA.map(v=>{
     const r = RUMBS.find(x=>x.id===v.id);
     return (set.indexOf(v.id)>-1 ? "✓ " : "· ") + r.n;
@@ -3416,6 +4257,8 @@ function openDay(k){
 }
 document.getElementById("mPrev").addEventListener("click", ()=>{ if(calIdx>0){ calIdx--; renderCalendar(); } });
 document.getElementById("mNext").addEventListener("click", ()=>{ if(calIdx<MONTHS.length-1){ calIdx++; renderCalendar(); } });
+document.getElementById("mToday").addEventListener("click", ()=>{ calIdx = currentMonthIdx(); renderCalendar(); });
+document.querySelectorAll("#segCalView button").forEach(b=>b.addEventListener("click", ()=>{ calView = b.dataset.cv; renderCalendar(); }));
 
 /* ================= УРОКИ ================= */
 let curSubject = "", curLesson = "", filter = "", termFilter = "", lessonsMode = "all";
@@ -3590,6 +4433,183 @@ document.getElementById("q").addEventListener("input", e=>{ filter = e.target.va
 let testScope = "", quizItems = [], quizIdx = 0, quizRight = 0, quizMissed = [], quizKey = "", quizTitle = "", pending = null;
 function hasQuiz(id){ return !!(QUIZ[id] && QUIZ[id].length); }
 
+/* ================= АВТОРСКАЯ РОЛЬ =================
+   Ребёнок придумывает вопрос к теме и вызов в банк, штурман принимает.
+   Принятое встаёт в общий тест и в банк вызовов наравне с остальным.     */
+const MY_LIMIT_Q = 2, MY_LIMIT_C = 1;   /* в неделю */
+function myWeek(list){
+  const now = new Date(), lim = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+  const limK = key(lim.getFullYear(), lim.getMonth(), lim.getDate());
+  return (list || []).filter(x => (x.at || "") > limK).length;
+}
+function applyMine(){
+  /* принятые вопросы — в QUIZ, принятые вызовы — в банк; без дублей */
+  (state.myq || []).forEach(q=>{
+    if(q.st !== "ok" || !QUIZ[q.lid]) return;
+    if(QUIZ[q.lid].some(x=>x.myid === q.id)) return;
+    QUIZ[q.lid].push({q:q.q, o:q.o, c:q.c, w:"Этот вопрос придумал капитан.", myid:q.id, mine:true});
+  });
+  (state.mych || []).forEach(c=>{
+    if(c.st !== "ok") return;
+    if(CHALLENGES.some(x=>x.id === "my"+c.id)) return;
+    CHALLENGES.push({id:"my"+c.id, r:c.r || "delo", t:c.t, d:c.d, p:c.price || 5, mine:true});
+  });
+}
+function renderMine(){
+  const cap = state.role === "cap";
+  document.getElementById("mineEyebrow").textContent = cap ? "Авторская роль · капитан" : "Приёмка · штурман";
+  document.getElementById("mineTitle").textContent = cap ? "Моё" : "Что придумал капитан";
+  document.getElementById("mineLede").textContent = cap
+    ? "Придумать вопрос к теме труднее, чем ответить на него: чтобы вопрос получился, тему надо понять. Штурман принимает или возвращает с замечанием."
+    : "Приёмка вопросов и вызовов, которые придумал ребёнок. Без неё банк за неделю зарастёт, а в тесте появятся вопросы с четырьмя верными ответами.";
+  document.getElementById("mineBody").innerHTML = cap ? mineCap() : mineNav();
+  bindMine();
+}
+const MY_ST = {wait:["wait","ждёт приёмки"], ok:["ok","принято"], back:["back","вернули"]};
+function mineCap(){
+  const qLeft = MY_LIMIT_Q - myWeek((state.myq||[]).filter(x=>x.st!=="back")),
+        cLeft = MY_LIMIT_C - myWeek((state.mych||[]).filter(x=>x.st!=="back"));
+  const lessons = LESSONS.filter(l=>hasQuiz(l.id));
+
+  const mineQ = (state.myq||[]).map(q=>{
+    const l = LESSONS.find(x=>x.id===q.lid);
+    const c = q.st==="ok" ? "green" : q.st==="back" ? "red" : "amber";
+    return '<div class="mitem" style="--ic2:var(--'+c+')"><div class="ih"><span class="it">'+esc(q.q)+'</span>'
+      + '<span class="pill '+MY_ST[q.st][0]+'">'+MY_ST[q.st][1]+'</span></div>'
+      + '<div class="im">'+esc(l?l.title:"—")+' · верный ответ: '+esc(q.o[q.c])+'</div>'
+      + (q.note ? '<div class="im" style="color:var(--red);margin-top:6px">Замечание: '+esc(q.note)+'</div>' : '')
+      + '</div>';
+  }).join("") || '<div class="pempty">Пока ничего не отправлено.</div>';
+
+  const mineC = (state.mych||[]).map(c=>{
+    const col = c.st==="ok" ? "green" : c.st==="back" ? "red" : "amber";
+    return '<div class="mitem" style="--ic2:var(--'+col+')"><div class="ih"><span class="it">'+esc(c.t)+'</span>'
+      + '<span class="pill '+MY_ST[c.st][0]+'">'+MY_ST[c.st][1]+'</span></div>'
+      + '<div class="im">'+esc(c.d||"")+'</div>'
+      + (c.price ? '<div class="im" style="margin-top:5px">Штурман назначил '+c.price+' узлов</div>' : '')
+      + (c.note ? '<div class="im" style="color:var(--red);margin-top:6px">Замечание: '+esc(c.note)+'</div>' : '')
+      + '</div>';
+  }).join("") || '<div class="pempty">Пока ничего не отправлено.</div>';
+
+  const feed = (state.feed||[]).map(f=>
+    '<div class="fitem"><span class="fd">'+esc(f.d)+'</span><span class="ft">'+esc(f.t)+'</span></div>').join("")
+    || '<div class="pempty">Пусто. Первая строка появится сегодня вечером.</div>';
+
+  return '<div class="sec" style="--sc2:var(--blue)"><h3>Свой вопрос к теме <em>осталось на этой неделе: '+Math.max(0,qLeft)+' из '+MY_LIMIT_Q+'</em></h3>'
+    + '<div class="mcard" style="--mc3:var(--blue)"><div class="ct">Придумай вопрос</div>'
+    + '<div class="cs">Хороший вопрос — тот, где можно ошибиться. Спрашивай о том, что легко перепутать.</div>'
+    + '<label class="fl">Тема</label><select class="t" id="myLesson">'
+    + lessons.map(l=>'<option value="'+l.id+'">'+esc(l.title)+'</option>').join("") + '</select>'
+    + '<label class="fl">Вопрос</label><input class="t" id="myQ" placeholder="Например: чем анатомия отличается от морфологии?">'
+    + '<label class="fl">Четыре варианта — отметь верный</label><div class="opts4" id="myOpts">'
+    + [0,1,2,3].map(i=>'<div class="optrow"><input class="rk" type="radio" name="myc" value="'+i+'"'+(i===0?" checked":"")+'>'
+        + '<input class="t" data-mo="'+i+'" placeholder="вариант '+(i+1)+'"></div>').join("") + '</div>'
+    + '<button class="send" id="myQSend"'+(qLeft<=0?" disabled":"")+'>Отправить штурману</button>'
+    + '<div class="hintl">'+(qLeft>0 ? "За принятый вопрос — 3 узла. За возвращённый ничего не отнимается." : "На этой неделе лимит исчерпан. Следующий — со следующей недели.")+'</div></div>'
+    + mineQ + '</div>'
+
+    + '<div class="sec" style="--sc2:var(--violet)"><h3>Свой вызов <em>осталось: '+Math.max(0,cLeft)+' из '+MY_LIMIT_C+'</em></h3>'
+    + '<div class="mcard" style="--mc3:var(--violet)"><div class="ct">Придумай карточку</div>'
+    + '<div class="cs">Что-то, что тебе интересно и что можно проверить глазами. Цену назначает штурман.</div>'
+    + '<label class="fl">Название</label><input class="t" id="myCT" placeholder="Например: научиться жарить яичницу">'
+    + '<label class="fl">Что именно сделать</label><textarea class="t" id="myCD" placeholder="Пять раз за неделю, самому, без подсказок"></textarea>'
+    + '<button class="send" id="myCSend" style="background:var(--violet)"'+(cLeft<=0?" disabled":"")+'>Отправить штурману</button></div>'
+    + mineC + '</div>'
+
+    + '<div class="sec" style="--sc2:var(--cyan)"><h3>Что понял сегодня <em>одна строка, никто не проверяет</em></h3>'
+    + '<div class="mcard" style="--mc3:var(--cyan)">'
+    + '<input class="t" id="myF" placeholder="Например: понял, почему после did глагол без -ed">'
+    + '<button class="send" id="myFSend" style="background:var(--cyan)">Записать</button>'
+    + '<div class="hintl">Узлов за это нет. Это твоя лента, а не отчёт.</div></div>'
+    + '<div class="feed">'+feed+'</div></div>';
+}
+function mineNav(){
+  const wq = (state.myq||[]).filter(q=>q.st==="wait");
+  const wc = (state.mych||[]).filter(c=>c.st==="wait");
+
+  const qh = wq.length ? wq.map(q=>{
+    const l = LESSONS.find(x=>x.id===q.lid);
+    return '<div class="mitem" style="--ic2:var(--amber)"><div class="ih"><span class="it">'+esc(q.q)+'</span>'
+      + '<span class="pill wait">ждёт</span></div><div class="im">'+esc(l?l.title:"—")+'</div>'
+      + '<div class="im" style="margin-top:6px">'
+      + q.o.map((o,i)=> i===q.c ? '<b style="color:var(--green)">✓ '+esc(o)+'</b>' : esc(o)).join(" · ")+'</div>'
+      + '<div class="acts"><button class="yes" data-myqy="'+q.id+'">Принять · +3 узла</button>'
+      + '<button class="fix" data-myqn="'+q.id+'">Вернуть с замечанием</button></div></div>';
+  }).join("") : '<div class="pempty">Новых вопросов нет.</div>';
+
+  const ch = wc.length ? wc.map(c=>
+    '<div class="mitem" style="--ic2:var(--amber)"><div class="ih"><span class="it">'+esc(c.t)+'</span>'
+    + '<span class="pill wait">ждёт</span></div><div class="im">'+esc(c.d||"")+'</div>'
+    + '<div class="acts">'
+    + [3,5,8].map(p=>'<button class="yes" data-mycy="'+c.id+'" data-p="'+p+'">Принять за '+p+'</button>').join("")
+    + '<button class="fix" data-mycn="'+c.id+'">Вернуть</button></div></div>').join("")
+    : '<div class="pempty">Новых вызовов нет.</div>';
+
+  const feed = (state.feed||[]).map(f=>
+    '<div class="fitem"><span class="fd">'+esc(f.d)+'</span><span class="ft">'+esc(f.t)+'</span></div>').join("")
+    || '<div class="pempty">Лента пока пустая.</div>';
+
+  return '<div class="sec" style="--sc2:var(--amber)"><h3>Вопросы капитана <em>'+wq.length+' ждёт</em></h3>'+qh+'</div>'
+    + '<div class="sec" style="--sc2:var(--violet)"><h3>Вызовы капитана <em>'+wc.length+' ждёт</em></h3>'+ch+'</div>'
+    + '<div class="sec" style="--sc2:var(--cyan)"><h3>Лента «что понял» <em>только читать, не комментировать</em></h3>'
+    + '<div class="feed">'+feed+'</div>'
+    + '<div class="note" style="--nc2:var(--cyan);margin-top:14px;max-width:82ch"><b>Зачем вам это видно</b>'
+    + '<span>Лучший материал для воскресного совета: не «как дела», а «ты написал, что путал across и through — покажи на карте».</span></div></div>';
+}
+function bindMine(){
+  const qs = document.getElementById("myQSend");
+  if(qs) qs.addEventListener("click", ()=>{
+    const t = document.getElementById("myQ").value.trim();
+    const opts = [].slice.call(document.querySelectorAll("#myOpts [data-mo]")).map(i=>i.value.trim());
+    const c = +document.querySelector('input[name="myc"]:checked').value;
+    if(!t || opts.filter(Boolean).length < 4){ toast("Нужен вопрос и все четыре варианта"); return; }
+    state.myq = state.myq || [];
+    state.myq.unshift({id:Date.now(), lid:document.getElementById("myLesson").value, q:t, o:opts, c:c, st:"wait", note:"", at:todayKey()});
+    save(); renderMine(); toast("Отправлено штурману");
+  });
+  const cs = document.getElementById("myCSend");
+  if(cs) cs.addEventListener("click", ()=>{
+    const t = document.getElementById("myCT").value.trim(), d = document.getElementById("myCD").value.trim();
+    if(!t){ toast("Нужно название"); return; }
+    state.mych = state.mych || [];
+    state.mych.unshift({id:Date.now(), t:t, d:d, st:"wait", price:null, note:"", at:todayKey()});
+    save(); renderMine(); toast("Отправлено штурману");
+  });
+  const fs = document.getElementById("myFSend");
+  if(fs) fs.addEventListener("click", ()=>{
+    const t = document.getElementById("myF").value.trim();
+    if(!t) return;
+    state.feed = state.feed || [];
+    state.feed.unshift({d:fmtDate(todayKey()), t:t});
+    if(state.feed.length > 400) state.feed.length = 400;
+    save(); renderMine();
+  });
+  document.querySelectorAll("[data-myqy]").forEach(b=>b.addEventListener("click", ()=>{
+    const q = (state.myq||[]).find(x=>String(x.id)===b.dataset.myqy);
+    q.st = "ok"; q.note = "";
+    state.bonus = (state.bonus||0) + 3;
+    applyMine(); save(); renderMine(); renderHeader(); toast("Принято. Капитану +3 узла");
+  }));
+  document.querySelectorAll("[data-myqn]").forEach(b=>b.addEventListener("click", ()=>{
+    const q = (state.myq||[]).find(x=>String(x.id)===b.dataset.myqn);
+    const n = prompt("Что переделать?", "Спроси о том, что можно перепутать.");
+    if(n === null) return;
+    q.st = "back"; q.note = n; save(); renderMine();
+  }));
+  document.querySelectorAll("[data-mycy]").forEach(b=>b.addEventListener("click", ()=>{
+    const c = (state.mych||[]).find(x=>String(x.id)===b.dataset.mycy);
+    c.st = "ok"; c.price = +b.dataset.p; c.note = "";
+    state.bonus = (state.bonus||0) + 3;
+    applyMine(); save(); renderMine(); renderHeader(); toast("Вызов в банке. Капитану +3 узла");
+  }));
+  document.querySelectorAll("[data-mycn]").forEach(b=>b.addEventListener("click", ()=>{
+    const c = (state.mych||[]).find(x=>String(x.id)===b.dataset.mycn);
+    const n = prompt("Что переделать?", "Придумай то, что можно проверить глазами.");
+    if(n === null) return;
+    c.st = "back"; c.note = n; save(); renderMine();
+  }));
+}
+
 function renderTestScope(){
   const ts = terms();
   document.getElementById("testScope").innerHTML =
@@ -3598,6 +4618,73 @@ function renderTestScope(){
   document.querySelectorAll("#testScope .chip").forEach(b=>b.addEventListener("click", ()=>{
     testScope = b.dataset.t; renderTestScope(); renderTestList();
   }));
+}
+const DIAG_IDS = ["D1","D2","D3","D4","D5","D6","D7"];
+function diagLvl(rec){
+  if(!rec || !rec.total) return null;
+  const solid = rec.bestSolid || 0, right = rec.best || 0, t = rec.total;
+  return solid/t >= 0.8 ? "good" : right/t >= 0.5 ? "mid" : "low";
+}
+function renderDiagMap(){
+  const sec = document.getElementById("diagMapSec");
+  const done = DIAG_IDS.filter(id=>state.tests[id] && state.tests[id].total);
+  sec.hidden = done.length === 0;
+  if(!done.length) return;
+
+  const order = done.slice().sort((a,b)=>{
+    const A = state.tests[a], B = state.tests[b];
+    return (A.bestSolid||0)/A.total - (B.bestSolid||0)/B.total;
+  });
+  const B = {good:[], mid:[], low:[]};
+  order.forEach(id=>B[diagLvl(state.tests[id])].push(id));
+
+  let tot=0, right=0, solid=0;
+  done.forEach(id=>{ const r=state.tests[id]; tot+=r.total; right+=r.best||0; solid+=r.bestSolid||0; });
+  document.getElementById("diagMapSub").textContent =
+    "проверено " + tot + " заданий из 61 · верно " + right + " · из них твёрдо " + solid;
+
+  function shelf(kind, color, title, sub){
+    const items = B[kind].map(id=>{
+      const l = LESSONS.find(x=>x.id===id), r = state.tests[id];
+      const sd = r.bestSolid||0, rt = r.best||0, t = r.total, shaky = rt - sd;
+      const wr = (r.wrong||[]).length;
+      return '<div class="sitem"><div class="nm">'+esc(l.title)+'<span>'+sd+" твёрдо / "+t+'</span></div>'
+        + '<div class="tr"><i class="s" style="width:'+(sd/t*100)+'%"></i>'
+        + '<i class="k" style="width:'+(shaky/t*100)+'%"></i>'
+        + '<i class="w" style="width:'+((t-rt)/t*100)+'%"></i></div>'
+        + '<div class="wr">'+(shaky?shaky+" наугад или медленно · ":"")+(t-rt)+' мимо</div>'
+        + (kind!=="good" && wr ? '<button data-drill="'+id+'">Отработать '+wr+' →</button>' : '')
+        + '</div>';
+    }).join("");
+    return '<div class="shelf" style="--shc:var(--'+color+')"><div class="sh">'+title+'</div><div class="ss">'+sub+'</div>'
+      + (items || '<div class="sempty">Пока пусто.</div>')+'</div>';
+  }
+  document.getElementById("diagShelves").innerHTML =
+      shelf("good","green","Держится само","Твёрдо не меньше 80%. Можно опираться")
+    + shelf("mid","amber","Держится на удаче","Отвечает верно, но наугад или медленно")
+    + shelf("low","red","Не сформировано","Здесь сначала, иначе дальше будет хуже");
+
+  const weak = order[0], wl = diagLvl(state.tests[weak]);
+  document.getElementById("diagRec").innerHTML =
+    '<div class="note" style="--nc2:var(--'+(wl==="good"?"green":wl==="mid"?"amber":"red")+');max-width:82ch">'
+    + '<b>Штурману · '+esc(LESSONS.find(x=>x.id===weak).title)+'</b><span>'+esc(DIAG_RECS[weak][wl])+'</span></div>';
+
+  document.querySelectorAll("#diagShelves [data-drill]").forEach(b=>b.addEventListener("click", ()=>{
+    const id = b.dataset.drill, rec = state.tests[id] || {};
+    const items = (rec.wrong||[]).map(i=>Object.assign({lid:id, qi:i}, QUIZ[id][i])).filter(x=>x.q);
+    if(!items.length){ toast("Ошибок по этой теме нет"); return; }
+    const l = LESSONS.find(x=>x.id===id);
+    startQuiz(items, id, "Отработка · " + l.title);
+  }));
+}
+function mixLine(pool){
+  let all = []; pool.forEach(l=>QUIZ[l.id].forEach((x,i)=>all.push({lid:l.id, qi:i})));
+  const ps = poolStats(all), parts = [];
+  if(ps.hot) parts.push(ps.hot + " с ошибками");
+  if(ps.due) parts.push(ps.due + " пора повторить");
+  if(ps.fresh) parts.push(ps.fresh + " ни разу не спрашивали");
+  return "Не случайные вопросы: журнал берёт те, где слабо и что пора повторить. В очереди — "
+       + (parts.length ? parts.join(", ") : "всё свежее, возьмёт вперемешку") + ".";
 }
 function renderTestList(){
   const pool = LESSONS.filter(l=>hasQuiz(l.id) && (!testScope || termOf(l.date)===testScope));
@@ -3614,7 +4701,7 @@ function renderTestList(){
     const s = state.tests["MIX:"+(testScope||"ALL")];
     html += '<button class="tcard" style="--ic:var(--violet)" data-kind="mix">'
       + '<span class="tt">Большой тест</span>'
-      + '<span class="tm">Вопросы из всех тем' + (testScope ? " за "+termName(testScope).toLowerCase() : " за год") + ', вперемешку.</span>'
+      + '<span class="tm">' + mixLine(pool) + '</span>'
       + '<span class="tf"><span class="tq">'+Math.min(20,totalQ)+' вопросов</span>'
       + (s ? '<span class="score" style="background:'+scoreColor(s.best,s.total)+'">'+s.best+'/'+s.total+'</span>' : '')+'</span></button>';
   }
@@ -3645,11 +4732,11 @@ function renderTestList(){
     } else if(k === "subj"){
       const ls = LESSONS.filter(x=>x.subject===b.dataset.s && hasQuiz(x.id) && (!testScope || termOf(x.date)===testScope));
       let all = []; ls.forEach(l=>QUIZ[l.id].forEach((x,i)=>all.push(Object.assign({lid:l.id,qi:i},x))));
-      showIntro(shuffle(all).slice(0,20), "SUBJ:"+b.dataset.s+":"+(testScope||"ALL"), b.dataset.s, ls, ls.length+" тем"+(testScope?" · "+termName(testScope):" · весь год"));
+      showIntro(pickSmart(all, 20), "SUBJ:"+b.dataset.s+":"+(testScope||"ALL"), b.dataset.s, ls, ls.length+" тем"+(testScope?" · "+termName(testScope):" · весь год"));
     } else {
       const ls = LESSONS.filter(x=>hasQuiz(x.id) && (!testScope || termOf(x.date)===testScope));
       let all = []; ls.forEach(l=>QUIZ[l.id].forEach((x,i)=>all.push(Object.assign({lid:l.id,qi:i},x))));
-      showIntro(shuffle(all).slice(0,20), "MIX:"+(testScope||"ALL"), "Большой тест", ls, ls.length+" тем из всех предметов"+(testScope?" · "+termName(testScope):" · весь год"));
+      showIntro(pickSmart(all, 20), "MIX:"+(testScope||"ALL"), "Большой тест", ls, ls.length+" тем из всех предметов"+(testScope?" · "+termName(testScope):" · весь год"));
     }
   }));
 }
@@ -3677,6 +4764,8 @@ function startQuiz(items, key2, title){
   renderQuestion();
   window.scrollTo({top:0,behavior:"smooth"});
 }
+const SLOW_MS = 25000;
+let qUnsure = false, qT0 = 0;
 function renderQuestion(){
   const it = quizItems[quizIdx];
   document.getElementById("qCount").textContent = (quizIdx+1)+" / "+quizItems.length;
@@ -3685,6 +4774,20 @@ function renderQuestion(){
   document.getElementById("qText").textContent = it.q;
   document.getElementById("qWhy").hidden = true;
   document.getElementById("qNext").hidden = true;
+
+  /* текст для чтения */
+  const pas = document.getElementById("qPass");
+  const dp = it.lid && DIAG_PASSAGE[it.lid];
+  if(dp && typeof it.qi === "number"){
+    pas.innerHTML = it.qi >= dp.secondFrom ? dp.second : dp.main;
+    pas.hidden = false;
+  } else { pas.hidden = true; pas.innerHTML = ""; }
+
+  /* честные кнопки — только в диагностике */
+  qUnsure = false; qT0 = Date.now();
+  const hon = document.getElementById("qHonest");
+  hon.hidden = !(it.lid && DIAG_QUIZ[it.lid]);
+  document.getElementById("qUnsure").setAttribute("aria-pressed","false");
   const L = ["А","Б","В","Г","Д"];
   document.getElementById("qOpts").innerHTML = it.o.map((o,i)=>
     '<button class="qopt" data-i="'+i+'"><span class="ol">'+L[i]+'</span><span>'+esc(o)+'</span></button>').join("");
@@ -3695,21 +4798,28 @@ function noteAnswer(it, ok){
   if(!it.lid) return;
   state.qstats = state.qstats || {};
   const id = qid(it);
-  const s = state.qstats[id] || {n:0, w:0, streak:0, last:""};
+  const s = state.qstats[id] || {n:0, w:0, streak:0, last:"", seen:""};
   s.n++;
+  s.seen = todayKey();
   if(ok){ s.streak++; } else { s.w++; s.streak = 0; s.last = todayKey(); }
   state.qstats[id] = s;
 }
 function answer(i){
   const it = quizItems[quizIdx], ok = i === it.c;
+  const slow = (Date.now() - qT0) > SLOW_MS;
+  it._firm = ok && !qUnsure && !slow;
+  it._mark = ok ? (qUnsure ? "отмечено: не уверен" : slow ? "медленно" : "") : "";
   noteAnswer(it, ok);
   if(ok) quizRight++; else quizMissed.push(it);
+  document.getElementById("qHonest").hidden = true;
   document.querySelectorAll("#qOpts .qopt").forEach((b,idx)=>{
     b.disabled = true;
-    if(idx === it.c) b.classList.add("right"); else if(idx === i) b.classList.add("wrong");
+    if(idx === it.c) b.classList.add("right"); else if(i>=0 && idx === i) b.classList.add("wrong");
   });
   const why = document.getElementById("qWhy");
-  why.innerHTML = (ok ? "<b>Верно.</b> " : "<b>Правильный ответ: "+esc(it.o[it.c])+".</b> ") + esc(it.w);
+  why.innerHTML = (i<0 ? "<b>Не знаю. Правильный ответ: "+esc(it.o[it.c])+".</b> "
+                   : ok ? "<b>Верно.</b> " : "<b>Правильный ответ: "+esc(it.o[it.c])+".</b> ")
+                + esc(it.w) + (it._mark ? '<span class="qmark">'+it._mark+'</span>' : "");
   why.hidden = false;
   document.getElementById("qScore").textContent = quizRight+" верных";
   const nx = document.getElementById("qNext");
@@ -3738,6 +4848,12 @@ function finishQuiz(){
   const rec = state.tests[quizKey] || {best:0, last:0, total:total, at:tk, wrong:[], awarded:false};
   rec.last = quizRight; rec.total = total; rec.at = tk;
   if(quizRight > rec.best) rec.best = quizRight;
+  let firm = 0; quizItems.forEach(it=>{ if(it._firm) firm++; });
+  rec.solid = firm;
+  if(!(rec.bestSolid > firm)) rec.bestSolid = firm;
+  if(QUIZ[quizKey] && rec.first === undefined){ rec.first = pct; rec.firstAt = tk; }
+  if(pct >= 0.8 && QUIZ[quizKey]) rec.pass = (rec.pass || 0) + 1;   /* ступень повторения */
+  if(pct < 0.8 && QUIZ[quizKey]) rec.pass = 0;                       /* провал — лестница с начала */
   if(quizKey !== "WRONG" && !rec.awarded && pct >= 0.8){
     rec.awarded = true;
     state.bonus = (state.bonus||0) + 5;
@@ -3779,9 +4895,17 @@ function finishQuiz(){
 function showTests(){
   ["testRun","testDone","testIntro"].forEach(i=>document.getElementById(i).hidden = true);
   document.getElementById("testPick").hidden = false;
-  renderTestScope(); renderTestList();
+  renderTestScope(); renderTestList(); renderDiagMap();
 }
 document.getElementById("qNext").addEventListener("click", nextQuestion);
+document.getElementById("qUnsure").addEventListener("click", ()=>{
+  qUnsure = !qUnsure;
+  document.getElementById("qUnsure").setAttribute("aria-pressed", String(qUnsure));
+});
+document.getElementById("qDunno").addEventListener("click", ()=>{
+  if(document.getElementById("qHonest").hidden) return;
+  answer(-1);
+});
 document.getElementById("qQuit").addEventListener("click", showTests);
 document.getElementById("rBack").addEventListener("click", showTests);
 document.getElementById("rAgain").addEventListener("click", ()=>startQuiz(quizItems, quizKey, quizTitle));
@@ -3927,9 +5051,9 @@ const TODO = [
    t:"Фото разворота стр. 6–9",
    w:"Получено. Разобрано целиком: схема разделов, значение растений, все три вопроса «Проверьте себя», «Подумайте!», Теофраст и «Моя лаборатория»."},
 
-  {id:"T15", g:"Биология", color:"green", prio:"crit",
+  {id:"T15", g:"Биология", color:"green", prio:"crit", closed:"10 сен",
    t:"Фото стр. 10–13 — §1",
-   w:"Настоящий §1 «Общие признаки, разнообразие, распространение, значение растений». Разбор по нему уже есть, но собран по пересказам из сети: девять терминов рубрики «Запомните» книгой пока не подтверждены."},
+   w:"Закрыто без фото: 10 сентября нашёлся текст параграфа целиком. Все девять терминов рубрики «Запомните», четыре вопроса «Проверьте себя» и «Подумайте!» совпали с разбором дословно. Метку «вы сверили» по-прежнему ставите вы кнопкой внизу разбора."},
 
   {id:"T3", g:"Английский", color:"blue", prio:"crit", closed:"9 сен",
    t:"Фото стр. 9 — упражнение 4",
@@ -3957,19 +5081,27 @@ const TODO = [
    t:"Оглавление учебника английского",
    w:"Получено и записано во вкладке «Курс»: шесть модулей со страницами, грамматикой и лексикой на весь год. Оглавление рабочей тетради отдельно не нужно — нумерация разделов у них общая."},
   {id:"T9", g:"На весь год", color:"amber", prio:"year",
-   t:"Оглавление учебника информатики — единственное, чего нет",
-   w:"Босова, 6 класс. Нумерация параграфов у неё сквозная, по номеру из имени файла учителя сразу найду тему."},
+   t:"Оглавление учебника информатики",
+   w:"Босова, 6 класс. Искал 10 сентября в сети — не нашлось: по этому учебнику выложены только решебники по упражнениям, самого оглавления нет. Нумерация параграфов сквозная, по номеру из имени файла учителя тема найдётся сразу."},
   {id:"T10", g:"На весь год", color:"amber", prio:"year", closed:"10 сен",
    t:"Обложки учебников по остальным предметам",
    w:"Получено 10 сентября: русский, литература, математика (две части), история, география. Все издания записаны во вкладке «Курс», оглавления пяти учебников расшифрованы и лежат там же."},
+  {id:"T17", g:"На весь год", color:"amber", prio:"year",
+   t:"Титульный лист учебника математики",
+   w:"На обложке только «Математика 6 класс, базовый уровень». Изданий с такой обложкой несколько, и без авторов я не пойму, какое ваше. Нужна первая страница внутри, где указаны фамилии. Это единственное, чего фото заменить не может — в сети такого не найти."},
+
+  {id:"T18", g:"Английский", color:"blue", prio:"nice",
+   t:"Разворот рабочей тетради покрупнее",
+   w:"Стр. 4–5 Starlight Workbook уже присылали, но снимок под углом и мелкий текст читается не весь. Сканов рабочих тетрадей в открытом доступе не бывает, так что разобрать упражнения смогу только по вашему фото — ровно сверху и поближе."},
+
   {id:"T11", g:"На весь год", color:"amber", prio:"year",
    t:"Расписание уроков",
    w:"Скриншот из дневника. Помогает понимать, какие предметы в обороте и когда ждать заданий по каждому."},
 
   /* --- решения и действия, не фотографии --- */
-  {id:"T12", g:"Действия", color:"violet", prio:"nice",
+  {id:"T12", g:"Действия", color:"violet", prio:"nice", closed:"10 сен",
    t:"Опубликовать журнал на GitHub Pages",
-   w:"Папка domashka-github готова, инструкция внутри в файле ПРОЧТИ-МЕНЯ.txt. После публикации журнал откроется по ссылке на планшете и телефоне без пересылки файлов."},
+   w:"Сделано 10 сентября. Адрес: danilovsky1987-spec.github.io/DOMASHKA/ — открывается на планшете и телефоне без пересылки файлов. Обновление: Add file → Upload files → перетащить index.html из папки domashka-github → Commit changes."},
   {id:"T13", g:"Действия", color:"violet", prio:"nice",
    t:"Первый раз сохранить прогресс в файл",
    w:"Вкладка «Прогресс» → «Сохранить в файл». Проверим, что выгрузка и загрузка работают, до того как накопятся отметки за месяц."},
@@ -4079,31 +5211,244 @@ function renderChallenges(){
 }
 
 /* ================= ГТО ================= */
+function gtoAttempts(rid){
+  const raw = (state.gto||{})[rid];
+  if(raw==null) return ["","",""];
+  if(Array.isArray(raw)) return [raw[0]||"", raw[1]||"", raw[2]||""];
+  return [String(raw), "", ""];
+}
+function gtoBest(att, dir){
+  let best = "", bv = NaN;
+  att.forEach(v=>{
+    const n = parseVal(v);
+    if(isNaN(n)) return;
+    if(isNaN(bv) || (dir==="less" ? n<bv : n>bv)){ bv=n; best=v; }
+  });
+  return best;
+}
+function gtoPicks(kk){
+  state.gtoPick = state.gtoPick || {};
+  if(!Array.isArray(state.gtoPick[kk])){
+    /* по умолчанию — первое испытание в каждой категории */
+    const rows = GTO[kk].rows, def = []; let cat = -1;
+    rows.forEach((row,i)=>{ if(row[0]==="cat") cat=i; else if(cat>-1){ def.push(kk+"_"+i); cat=-1; } });
+    state.gtoPick[kk] = def;
+  }
+  return state.gtoPick[kk];
+}
 function renderGto(){
-  const kk = (state.sex||"m")+(state.stage||"3"), g = GTO[kk];
+  const kk = "m"+(state.stage||"3"), g = GTO[kk];
+  const pick = gtoPicks(kk), only = (state.gtoOnly||"mine")==="mine";
+  let total = 0; g.rows.forEach(r=>{ if(r[0]!=="cat") total++; });
   document.getElementById("gtoTitle").textContent = g.title;
-  document.getElementById("gtoBody").innerHTML = g.rows.map((row,idx)=>{
-    if(row[0]==="cat") return '<tr class="catrow"><td colspan="6">'+row[1]+'</td></tr>';
+
+  let html = "", cat = null, shown = 0;
+  g.rows.forEach((row,idx)=>{
+    if(row[0]==="cat"){ cat = '<tr class="catrow"><td colspan="8">'+row[1]+'</td></tr>'; return; }
     const name=row[1], dir=row[2], b=row[3], s=row[4], gd=row[5];
-    const rid = kk+"_"+idx, val = (state.gto||{})[rid] || "";
-    const m = medal(parseVal(val),dir,b,s,gd);
+    const rid = kk+"_"+idx, on = pick.indexOf(rid)>-1;
+    if(only && !on) return;
+    if(cat){ html += cat; cat = null; }
+    const att = gtoAttempts(rid);
+    const best = gtoBest(att, dir), bv = parseVal(best);
+    const m = medal(bv,dir,b,s,gd);
     const label = {g:"Золото",s:"Серебро",b:"Бронза",none:"Ниже"}[m] || "";
-    return '<tr><td style="font-weight:700">'+name+'</td><td class="num">'+b+'</td><td class="num">'+s+'</td><td class="num">'+gd+'</td>'
-      + '<td class="num"><input class="res-in" data-rid="'+rid+'" value="'+esc(val)+'" inputmode="decimal" aria-label="Мой результат: '+esc(name)+'"></td>'
+    const inputs = att.map((v,i)=>{
+      const isBest = v.trim()!=="" && !isNaN(bv) && parseVal(v)===bv;
+      return '<input class="res-in" data-rid="'+rid+'" data-att="'+i+'" value="'+esc(v)+'" inputmode="decimal" placeholder="'+(i+1)+'"'+(isBest?' data-best="1"':'')+' aria-label="Попытка '+(i+1)+': '+esc(name)+'">';
+    }).join("");
+    shown++;
+    html += '<tr class="'+(on?"gto-on":"gto-off")+'">'
+      + '<td class="pickcell noprint" style="text-align:center"><button class="takebtn" data-pick="'+rid+'" aria-pressed="'+on+'">'+(on?"✓ беру":"взять")+'</button></td>'
+      + '<td style="font-weight:700">'+name+'</td><td class="num">'+b+'</td><td class="num">'+s+'</td><td class="num">'+gd+'</td>'
+      + '<td class="num"><div class="res-3">'+inputs+'</div></td>'
+      + '<td class="num">'+(best ? '<span class="res-best">'+esc(best)+'</span>' : '<span style="color:var(--ink-3)">—</span>')+'</td>'
       + '<td class="num">'+(m ? '<span class="pill '+m+'">'+label+'</span>' : '<span style="color:var(--ink-3)">—</span>')+'</td></tr>';
-  }).join("");
+  });
+  if(!shown) html = '<tr class="gto-empty"><td colspan="8">Ничего не взято. Нажмите «Все испытания» и отметьте нужные.</td></tr>';
+  document.getElementById("gtoBody").innerHTML = html;
+
   document.querySelectorAll("#gtoBody .res-in").forEach(inp=>{
     inp.addEventListener("change", ()=>{
       state.gto = state.gto||{};
-      if(inp.value.trim()) state.gto[inp.dataset.rid]=inp.value.trim(); else delete state.gto[inp.dataset.rid];
+      const rid = inp.dataset.rid, i = +inp.dataset.att;
+      const att = gtoAttempts(rid);
+      att[i] = inp.value.trim();
+      if(att.some(v=>v!=="")) state.gto[rid] = att; else delete state.gto[rid];
       save(); renderGto();
     });
   });
+  document.querySelectorAll("#gtoBody .takebtn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const arr = gtoPicks(kk), i = arr.indexOf(btn.dataset.pick);
+      if(i>-1) arr.splice(i,1); else arr.push(btn.dataset.pick);
+      save(); renderGto();
+    });
+  });
+  if(document.getElementById("goalBox")){ renderGoal(); renderSnaps(); renderTrain(); }
   document.querySelectorAll("#segStage button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.stage===(state.stage||"3"))));
-  document.querySelectorAll("#segSex button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.sex===(state.sex||"m"))));
+  document.querySelectorAll("#segOnly button").forEach(b=>{
+    b.setAttribute("aria-pressed", String(b.dataset.only===(state.gtoOnly||"mine")));
+    b.textContent = b.dataset.only==="mine" ? "Только мои · "+pick.length : "Все испытания · "+total;
+  });
 }
 document.querySelectorAll("#segStage button").forEach(b=>b.addEventListener("click", ()=>{ state.stage=b.dataset.stage; save(); renderGto(); }));
-document.querySelectorAll("#segSex button").forEach(b=>b.addEventListener("click", ()=>{ state.sex=b.dataset.sex; save(); renderGto(); }));
+document.querySelectorAll("#segOnly button").forEach(b=>b.addEventListener("click", ()=>{ state.gtoOnly=b.dataset.only; save(); renderGto(); }));
+
+/* ---- цель на переход ---- */
+const SIGN = {b:{n:"бронза", i:3, c:"var(--bronze)"}, s:{n:"серебро", i:4, c:"var(--silver)"}, g:{n:"золото", i:5, c:"var(--gold)"}};
+function gtoRow(rid){
+  const kk = rid.split("_")[0], idx = +rid.split("_")[1];
+  return GTO[kk] ? GTO[kk].rows[idx] : null;
+}
+function gtoBestOf(rid){
+  const row = gtoRow(rid); if(!row) return "";
+  return gtoBest(gtoAttempts(rid), row[2]);
+}
+function renderGoal(){
+  const kk = "m"+(state.stage||"3"), pick = gtoPicks(kk);
+  const sign = state.gtoGoal || "s", info = SIGN[sign];
+  document.querySelectorAll("#segGoal button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.sign===sign)));
+
+  if(!pick.length){ document.getElementById("goalBox").innerHTML = '<div class="emptybox">Сначала возьмите испытания в таблице выше.</div>'; return; }
+
+  let ok = 0; const gaps = [];
+  pick.forEach(rid=>{
+    const row = gtoRow(rid); if(!row) return;
+    const dir = row[2], target = row[info.i], best = gtoBestOf(rid);
+    const bv = parseVal(best), tv = parseVal(target);
+    const done = !isNaN(bv) && (dir==="less" ? bv<=tv : bv>=tv);
+    if(done){ ok++; return; }
+    let need;
+    if(isNaN(bv)) need = "замера ещё не было";
+    else {
+      const d = Math.abs(bv - tv);
+      if(row[1].indexOf(":")>-1 || String(target).indexOf(":")>-1){
+        const mm = Math.floor(d/60), ss = Math.round(d%60);
+        need = "не хватает " + (mm ? mm+" мин " : "") + ss + " сек";
+      } else {
+        need = "не хватает " + (Math.round(d*10)/10).toString().replace(".",",");
+      }
+    }
+    gaps.push({name:row[1], target:target, need:need});
+  });
+
+  const pct = Math.round(ok/pick.length*100);
+  let html = '<div class="goalbar" style="--gc:'+info.c+'">'
+    + '<span class="cnt">'+ok+' из '+pick.length+' на '+info.n+'</span>'
+    + '<span class="track"><i style="width:'+pct+'%"></i></span></div>';
+  if(gaps.length) html += '<ul class="gaplist">' + gaps.map(g=>
+      '<li style="--lc:'+info.c+'"><b>'+esc(g.name)+'</b><span class="g">норматив '+esc(String(g.target))+' · '+esc(g.need)+'</span></li>').join("") + '</ul>';
+  else html += '<div class="note" style="--nc2:var(--green);margin:0"><b>Цель закрыта</b><span>Все взятые испытания вытянуты на '+info.n+'. Можно поднять планку или записаться на сдачу.</span></div>';
+  document.getElementById("goalBox").innerHTML = html;
+}
+document.querySelectorAll("#segGoal button").forEach(b=>b.addEventListener("click", ()=>{ state.gtoGoal=b.dataset.sign; save(); renderGoal(); }));
+
+/* ---- замеры ---- */
+function snapLabel(i){ return i===0 ? "Замер 1" : "Замер "+(i+1); }
+function renderSnaps(){
+  const kk = "m"+(state.stage||"3"), pick = gtoPicks(kk);
+  const snaps = (state.gtoSnap||[]).filter(sn=>sn.kk===kk);
+  document.getElementById("snapUndo").hidden = !snaps.length;
+
+  if(!snaps.length){
+    document.getElementById("snapBox").innerHTML = '<div class="emptybox">Замеров пока нет. Впишите результаты в таблицу и нажмите «Зафиксировать замер» — журнал запомнит цифры на сегодняшнюю дату, и в конце месяца будет видно, что сдвинулось.</div>';
+    return;
+  }
+  const rids = [];
+  pick.forEach(r=>{ if(rids.indexOf(r)<0) rids.push(r); });
+  snaps.forEach(sn=>Object.keys(sn.res||{}).forEach(r=>{ if(rids.indexOf(r)<0) rids.push(r); }));
+
+  const head = '<thead><tr><th>Испытание</th>' + snaps.map((sn,i)=>'<th class="num">'+snapLabel(i)+' · '+esc(sn.d)+'</th>').join("") + '<th class="num">Сдвиг</th></tr></thead>';
+  const body = rids.map(rid=>{
+    const row = gtoRow(rid); if(!row) return "";
+    const dir = row[2];
+    const cells = snaps.map(sn=>{
+      const v = (sn.res||{})[rid];
+      return '<td class="num">'+(v ? esc(v) : '<span style="color:var(--ink-3)">—</span>')+'</td>';
+    }).join("");
+    const first = (snaps[0].res||{})[rid], last = (snaps[snaps.length-1].res||{})[rid];
+    let d = '<span class="delta eq">—</span>';
+    if(snaps.length>1 && first && last){
+      const fv = parseVal(first), lv = parseVal(last);
+      if(!isNaN(fv) && !isNaN(lv) && fv!==lv){
+        const better = dir==="less" ? lv<fv : lv>fv;
+        const diff = Math.abs(lv-fv);
+        const isTime = String(first).indexOf(":")>-1;
+        const txt = isTime ? (Math.floor(diff/60)?Math.floor(diff/60)+" мин ":"")+Math.round(diff%60)+" сек"
+                           : (Math.round(diff*10)/10).toString().replace(".",",");
+        d = '<span class="delta '+(better?"up":"dn")+'">'+(better?"▲ ":"▼ ")+txt+'</span>';
+      }
+    }
+    return '<tr><td style="font-weight:700">'+esc(row[1])+'</td>'+cells+'<td class="num">'+d+'</td></tr>';
+  }).join("");
+  document.getElementById("snapBox").innerHTML = '<div class="tbl-wrap"><table>'+head+'<tbody>'+body+'</tbody></table></div>';
+}
+document.getElementById("snapBtn").addEventListener("click", ()=>{
+  const kk = "m"+(state.stage||"3"), pick = gtoPicks(kk), res = {};
+  pick.forEach(rid=>{ const b = gtoBestOf(rid); if(b) res[rid] = b; });
+  if(!Object.keys(res).length){ toast("Нечего фиксировать: во взятых испытаниях нет ни одного результата"); return; }
+  const d = TODAY.getDate()+" "+MN[TODAY.getMonth()];
+  state.gtoSnap = state.gtoSnap || [];
+  state.gtoSnap.push({kk:kk, d:d, iso:todayKey(), res:res});
+  save(); renderSnaps();
+  toast("Замер записан на "+d);
+});
+document.getElementById("snapUndo").addEventListener("click", ()=>{
+  const kk = "m"+(state.stage||"3");
+  for(let i=(state.gtoSnap||[]).length-1;i>=0;i--){ if(state.gtoSnap[i].kk===kk){ state.gtoSnap.splice(i,1); break; } }
+  save(); renderSnaps(); toast("Последний замер убран");
+});
+
+/* ---- микроцикл под взятые испытания ---- */
+const DRILL = {
+  "Бег 30 м":            {q:"Скорость",       day:1, d:"Ускорения 4×30 м с полным отдыхом между попытками. Отдельно — старт: 6 раз по 10 м на реакцию."},
+  "Бег 60 м":            {q:"Скорость",       day:1, d:"Ускорения 3×60 м в три четверти силы, затем 2×60 м на результат. Между попытками 3 минуты."},
+  "Бег 1000 м":          {q:"Выносливость",   day:2, d:"Первая неделя — 1 км ровно, дальше +300 м. Последние 200 м быстро."},
+  "Бег 1500 м":          {q:"Выносливость",   day:2, d:"Первая неделя — 1,5 км ровно, дальше +300 м. Последние 300 м быстро."},
+  "Кросс 2 км":          {q:"Выносливость",   day:2, d:"Кросс по пересечённой местности, темп разговорный. Каждую неделю +300 м."},
+  "Кросс 3 км":          {q:"Выносливость",   day:2, d:"Кросс по пересечённой местности, темп разговорный. Каждую неделю +400 м."},
+  "Бег на лыжах 1 км":   {q:"Выносливость",   day:2, d:"Лыжи: 3 км спокойно, из них 1 км в темпе испытания. Летом заменяется кроссом."},
+  "Бег на лыжах 2 км":   {q:"Выносливость",   day:2, d:"Лыжи: 4 км спокойно, из них 2 км в темпе испытания. Летом заменяется кроссом."},
+  "Наклон вперёд":       {q:"Гибкость",       day:0, d:"3 минуты растяжки задней поверхности бедра. Плюс ежедневно вне занятий — те же 3 минуты."},
+  "Подтягивания на высокой перекладине": {q:"Сила", day:0, d:"4 подхода «негативов»: запрыгнул и опускаешься 5 секунд. Через две недели — подтягивания с резинкой."},
+  "Подтягивания на низкой перекладине":  {q:"Сила", day:0, d:"3 подхода до «максимум минус два». Ноги дальше — тяжелее, ближе — легче."},
+  "Сгибание рук в упоре лёжа":           {q:"Сила", day:0, d:"3 подхода по «максимум минус два», отдых 2 минуты. Локти к телу, корпус в линию."},
+  "Челночный бег 3×10 м": {q:"Координация",  day:1, d:"4 попытки на технику разворота: последний шаг короткий, разворот через стопу. Полный отдых между попытками."},
+  "Прыжок в длину с места":{q:"Скоростно-силовое", day:1, d:"5 попыток, замерить лучшую. Плюс 3×10 выпрыгиваний из полуприседа."},
+  "Поднимание туловища за 1 мин":{q:"Скоростно-силовое", day:0, d:"3 подхода по 30 секунд в темпе испытания, отдых 1 минута. Плюс планка 3×30 сек."},
+  "Плавание 50 м":       {q:"Прикладное",     day:2, d:"В бассейне: 8×25 м с отдыхом, следить за поворотом и дыханием. Один раз в неделю — 50 м на результат."},
+  "Метание мяча 150 г":  {q:"Прикладное",     day:2, d:"10 бросков на технику: разбег три шага, бросок из-за головы, а не от плеча. Перед этим размять плечо."}
+};
+const TRAIN_DAYS = [
+  {t:"Вт · Сила и гибкость", ic:"💪", c:"red"},
+  {t:"Чт · Скорость",        ic:"⚡", c:"blue"},
+  {t:"Сб · Выносливость",    ic:"🏃", c:"amber"}
+];
+function drillFor(name){
+  const base = String(name).split(",")[0].trim();
+  return DRILL[base] || null;
+}
+function renderTrain(){
+  const kk = "m"+(state.stage||"3"), pick = gtoPicks(kk);
+  const buckets = [[],[],[]];
+  pick.forEach(rid=>{
+    const row = gtoRow(rid); if(!row) return;
+    const dr = drillFor(row[1]); if(!dr) return;
+    buckets[dr.day].push({n:row[1], q:dr.q, d:dr.d});
+  });
+  const el = document.getElementById("trainGrid");
+  if(!pick.length){ el.innerHTML = '<div class="emptybox" style="grid-column:1/-1">Возьмите испытания в таблице выше — микроцикл соберётся под них.</div>'; return; }
+  el.innerHTML = TRAIN_DAYS.map((day,i)=>{
+    const list = buckets[i];
+    const body = list.length
+      ? list.map(x=>'<span class="d"><b style="color:var(--ink)">'+esc(x.n)+'</b><br>'+esc(x.d)+'</span>').join('<span style="display:block;height:10px"></span>')
+      : '<span class="d" style="color:var(--ink-3)">В этот день ничего не выпало: из взятых испытаний нет ни одного этого качества. Можно поставить общую разминку и растяжку.</span>';
+    return '<div class="rumb'+(day.c==="amber"?" amber":"")+'" style="--rc:var(--'+day.c+')">'
+      + '<div class="head"><span class="ic">'+day.ic+'</span><span class="t">'+day.t+'</span></div>'
+      + '<div class="body">'+body+'</div></div>';
+  }).join("");
+}
 
 /* ================= КУРС ================= */
 function renderKurs(){
@@ -4286,6 +5631,10 @@ function markOral(m){
   s[m]++; s.last = todayKey();
   s.streak = (m === "ok") ? s.streak+1 : 0;
   state.ostats[id] = s;
+  const mk = todayKey().slice(0,7);
+  state.omonth = state.omonth || {};
+  state.omonth[mk] = state.omonth[mk] || {ok:0, hint:0, bad:0};
+  state.omonth[mk][m]++;
   save();
   oIdx++;
   renderOralItem();
@@ -4393,8 +5742,200 @@ function renderOralProg(){
 }
 
 /* ================= ПРОГРЕСС: СОХРАНЕНИЕ ================= */
+/* ================= РОСТ В ЦИФРАХ =================
+   Не «сколько сделал», а «стало ли лучше». Сравниваем месяц с предыдущим. */
+function growMonths(){
+  const set = {};
+  for(const k in state.checks) set[k.slice(0,7)] = 1;
+  for(const k in (state.remind||{})) set[k.slice(0,7)] = 1;
+  for(const k in (state.omonth||{})) set[k] = 1;
+  LESSONS.forEach(l=>{ const t = state.tests[l.id]; if(t && t.firstAt) set[t.firstAt.slice(0,7)] = 1; });
+  (state.gtoSnap||[]).forEach(sn=>{ if(sn.iso) set[sn.iso.slice(0,7)] = 1; });
+  const list = Object.keys(set).sort();
+  if(!list.length) list.push(todayKey().slice(0,7));
+  return list;
+}
+function monthName(mk){
+  const y = +mk.slice(0,4), m = +mk.slice(5,7) - 1;
+  return ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"][m] + " " + y;
+}
+function growStats(mk){
+  const y = +mk.slice(0,4), m = +mk.slice(5,7) - 1;
+  const len = new Date(y, m+1, 0).getDate(), tk = todayKey();
+  let full = 0, active = 0, remind = 0, best = 0, run = 0;
+  for(let d=1; d<=len; d++){
+    const k = key(y, m, d);
+    if(k > tk) break;
+    const n = (state.checks[k]||[]).length;
+    if(n) active++;
+    if((state.remind||{})[k]) remind++;
+    if(n >= VAHTA.length){ full++; run++; if(run > best) best = run; } else run = 0;
+  }
+  const om = (state.omonth||{})[mk];
+  const oralTot = om ? om.ok + om.hint + om.bad : 0;
+
+  let firstN = 0, firstOk = 0;
+  LESSONS.forEach(l=>{
+    const t = state.tests[l.id];
+    if(t && t.firstAt && t.firstAt.slice(0,7) === mk){ firstN++; if(t.first >= 0.8) firstOk++; }
+  });
+
+  /* ГТО: сколько испытаний улучшилось между первым и последним замером месяца */
+  const snaps = (state.gtoSnap||[]).filter(sn=>sn.iso && sn.iso.slice(0,7) === mk);
+  let gtoUp = null, gtoAll = 0;
+  if(snaps.length >= 2){
+    const a = snaps[0].res || {}, b = snaps[snaps.length-1].res || {};
+    gtoUp = 0;
+    Object.keys(b).forEach(rid=>{
+      if(a[rid] === undefined) return;
+      gtoAll++;
+      const row = gtoRow(rid); if(!row) return;
+      const av = parseVal(a[rid]), bv = parseVal(b[rid]);
+      if(isNaN(av) || isNaN(bv)) return;
+      if(row[2] === "less" ? bv < av : bv > av) gtoUp++;
+    });
+  }
+  return {len, full, active, remind, best, om, oralTot, firstN, firstOk, gtoUp, gtoAll};
+}
+const GROW_METRICS = [
+  {nm:"Дни с полной вахтой", sub:"отмечены все пять пунктов", c:"green",
+   val:g=>g.full, tot:g=>g.len, has:g=>g.active > 0, fmt:g=>g.full+" из "+g.len},
+  {nm:"Самая длинная серия", sub:"дней подряд без пропуска", c:"blue",
+   val:g=>g.best, tot:()=>21, has:g=>g.active > 0, fmt:g=>g.best+" дн."},
+  {nm:"Ответил сам", sub:"доля «сам» в устной проверке", c:"violet",
+   val:g=>g.om ? g.om.ok : 0, tot:g=>g.oralTot, has:g=>g.oralTot > 0, fmt:g=>Math.round(g.om.ok/g.oralTot*100)+"% из "+g.oralTot},
+  {nm:"Сдал с первой попытки", sub:"тем, где первый тест сразу на 80%", c:"cyan",
+   val:g=>g.firstOk, tot:g=>g.firstN, has:g=>g.firstN > 0, fmt:g=>g.firstOk+" из "+g.firstN},
+  {nm:"ГТО: улучшено", sub:"испытаний сдвинулось между замерами", c:"red",
+   val:g=>g.gtoUp, tot:g=>g.gtoAll, has:g=>g.gtoUp !== null && g.gtoAll > 0, fmt:g=>g.gtoUp+" из "+g.gtoAll},
+  {nm:"Дни без напоминания", sub:"взрослому не пришлось напоминать", c:"amber",
+   val:g=>g.active - g.remind, tot:g=>g.active, has:g=>g.active > 0, fmt:g=>(g.active-g.remind)+" из "+g.active}
+];
+let growIdx = -1;
+function renderGrow(){
+  const box = document.getElementById("growRows");
+  if(!box) return;
+  const months = growMonths();
+  if(growIdx < 0 || growIdx >= months.length) growIdx = months.length - 1;
+  const mk = months[growIdx], pk = growIdx > 0 ? months[growIdx-1] : null;
+  const g = growStats(mk), pg = pk ? growStats(pk) : null;
+
+  document.getElementById("segGrow").innerHTML = months.map((m,i)=>
+    '<button data-g="'+i+'" aria-pressed="'+(i===growIdx)+'">'+monthName(m).split(" ")[0]+'</button>').join("");
+  document.getElementById("growHint").textContent = pk ? "сравниваем с предыдущим месяцем" : "первый месяц, сравнивать не с чем";
+
+  let up = 0, down = 0, none = 0;
+  GROW_METRICS.forEach(mt=>{
+    if(!mt.has(g)){ none++; return; }
+    if(!pg || !mt.has(pg)) return;
+    const a = mt.val(pg)/Math.max(1,mt.tot(pg)), b = mt.val(g)/Math.max(1,mt.tot(g));
+    if(b > a + 0.001) up++; else if(b < a - 0.001) down++;
+  });
+  let head, sub;
+  if(!pg){ head = "Первая точка отсчёта"; sub = "Через месяц здесь появится сдвиг."; }
+  else if(up >= 4){ head = "Растёт по " + up + " показателям из шести"; sub = "Это измеримо, а не «стал стараться». Показывать ребёнку стоит именно это, а не количество узлов."; }
+  else if(up > down){ head = "Скорее вверх: " + up + " вверх, " + down + " вниз"; sub = "Смешанный месяц. На совете стоит обсудить именно то, что просело."; }
+  else if(down > up){ head = "Просело: " + down + " показателей вниз"; sub = "Месяц хуже предыдущего. Это не повод ругать — повод спросить, что изменилось."; }
+  else { head = "Держит уровень"; sub = "Без сдвига. Для одиннадцати лет это тоже результат."; }
+  if(none){
+    const w = none===1 ? " показатель не меряется" : (none%10>=2 && none%10<=4 && (none<12||none>14)) ? " показателя не меряются" : " показателей не меряются";
+    sub += " " + none + w + " — данных пока нет.";
+  }
+  document.getElementById("growSum").innerHTML =
+    '<div class="st">'+monthName(mk)+(pk ? " против " + monthName(pk).split(" ")[0].toLowerCase() : "")+'</div>'
+    + '<div class="sb">'+head+'</div><div class="ss">'+sub+'</div>';
+
+  box.innerHTML = GROW_METRICS.map(mt=>{
+    const okNow = mt.has(g), okPrev = pg && mt.has(pg);
+    const pNow = okNow ? mt.val(g)/Math.max(1,mt.tot(g)) : 0;
+    const pPrev = okPrev ? mt.val(pg)/Math.max(1,mt.tot(pg)) : 0;
+    let bars = "";
+    if(okPrev) bars += '<div class="pb"><span class="lab">'+monthName(pk).split(" ")[0].slice(0,3).toLowerCase()+'</span>'
+      + '<span class="track"><i style="width:'+Math.min(100,pPrev*100)+'%;background:var(--line)"></i></span>'
+      + '<span class="val" style="color:var(--ink-3)">'+mt.fmt(pg)+'</span></div>';
+    bars += '<div class="pb"><span class="lab">'+monthName(mk).split(" ")[0].slice(0,3).toLowerCase()+'</span>'
+      + '<span class="track"><i style="width:'+Math.min(100,pNow*100)+'%;background:var(--'+mt.c+')"></i></span>'
+      + '<span class="val">'+(okNow ? mt.fmt(g) : "нет данных")+'</span></div>';
+
+    let dh;
+    if(!okNow) dh = '<div class="d gflat">—</div><div class="dt">не меряется</div>';
+    else if(!okPrev) dh = '<div class="d gflat">·</div><div class="dt">первая точка</div>';
+    else {
+      const diff = pNow - pPrev;
+      const cls = Math.abs(diff) < 0.001 ? "gflat" : diff > 0 ? "gup" : "gdown";
+      const sign = Math.abs(diff) < 0.001 ? "" : diff > 0 ? "▲ " : "▼ ";
+      dh = '<div class="d '+cls+'">'+sign+Math.abs(Math.round(diff*100))+'%</div>'
+         + '<div class="dt">'+(cls==="gup" ? "лучше" : cls==="gdown" ? "хуже" : "без сдвига")+'</div>';
+    }
+    return '<div class="growrow" style="--gc:var(--'+mt.c+')">'
+      + '<div class="nm">'+mt.nm+'<span>'+mt.sub+'</span></div>'
+      + '<div class="pairbar">'+bars+'</div><div class="gdelta">'+dh+'</div></div>';
+  }).join("");
+
+  document.querySelectorAll("#segGrow button").forEach(b=>b.addEventListener("click", ()=>{ growIdx = +b.dataset.g; renderGrow(); }));
+}
+document.getElementById("slipAdd").addEventListener("click", ()=>{
+  const w = document.getElementById("slipWhat").value.trim();
+  const y = document.getElementById("slipWhy").value.trim();
+  const f = document.getElementById("slipFix").value.trim();
+  if(!w || !f){ toast("Нужно хотя бы «что пошло не так» и правило"); return; }
+  const list = slipList();
+  const rep = list.some(x=>x.w.toLowerCase().slice(0,20) === w.toLowerCase().slice(0,20));
+  list.unshift({d:fmtDate(todayKey()), w:w, y:y, f:f, rep:rep});
+  save(); renderSlips();
+  ["slipWhat","slipWhy","slipFix"].forEach(id=>document.getElementById(id).value = "");
+  toast(rep ? "Записано. Это уже было — помечено как повтор" : "Записано");
+}); 
+
+/* ================= ЖУРНАЛ ПРОМАХОВ =================
+   Ошибки сборщика повторяются, если их нигде не записывать. */
+const SLIPS_SEED = [
+  {d:"9 сен", w:"Разбор биологии собран не по тому параграфу",
+   y:"Взял страницы 6–9 из дневника и решил, что это §1. Оказалось Введение, а §1 начинается на стр. 10.",
+   f:"Сначала оглавление, потом разбор. Проверять, что страницы из дневника — действительно тот параграф.", rep:false},
+  {d:"10 сен", w:"Та же ошибка с параграфом повторилась",
+   y:"Правило было проговорено вслух накануне, но нигде не записано — и не сработало.",
+   f:"Проговорить недостаточно. Правило живёт только записанным — отсюда и этот список.", rep:true},
+  {d:"10 сен", w:"Правка в ГТО сделана вместо показа",
+   y:"Попросили показать варианты, а я сразу изменил журнал. Пришлось откатывать.",
+   f:"«Покажи» ≠ «сделай». Вариант — это мокап отдельным файлом, журнал не трогать до слова «внедряй».", rep:false},
+  {d:"10 сен", w:"Инструкция полдня врала про капитанский режим",
+   y:"Вкладки у ребёнка убрал, строку в журнал изменений вписал, а сам текст инструкции не поправил.",
+   f:"Менять инструкцию, а не только журнал изменений. Это разные вещи.", rep:false},
+  {d:"10 сен", w:"Четыре задания диагностики не показывались",
+   y:"В присланном тесте часть заданий на впечатывание слова, а не с вариантами. Я этого не заметил и написал движок только под варианты.",
+   f:"Перед переносом чужих данных пройти их программой и проверить, что все записи одного вида.", rep:false},
+  {d:"10 сен", w:"Кнопка «← Сегодня» не появлялась",
+   y:"Правило [hidden]{display:none!important} глушило её, а я проверял разметку, а не видимость.",
+   f:"Проверять поведение, а не наличие в коде. Разметка на месте — ещё не значит, что видно.", rep:false},
+  {d:"10 сен", w:"Убрал теги румбов из дней календаря",
+   y:"Решил, что цветной полосы сверху достаточно. В дне бывает два румба, полоса показывает только первый.",
+   f:"Прежде чем убирать элемент как лишний, проверить, что он не несёт того, чего нет больше нигде.", rep:false}
+];
+function slipList(){
+  if(!state.slips || !state.slips.length) state.slips = SLIPS_SEED.slice();
+  return state.slips;
+}
+function renderSlips(){
+  const box = document.getElementById("slipList");
+  if(!box) return;
+  const list = slipList();
+  box.innerHTML = list.map((x,i)=>
+    '<div class="slip'+(x.rep?" rep":"")+'"><div class="sh"><span class="sd">'+esc(x.d)+'</span>'
+    + '<span class="sw">'+esc(x.w)+'</span>'
+    + (x.rep?'<span class="again">повтор</span>':'')+'</div>'
+    + '<div class="sy">'+esc(x.y)+'</div>'
+    + '<div class="sf"><b>Правило</b>'+esc(x.f)+'</div>'
+    + '<button class="slipdel noprint" data-slip="'+i+'">убрать</button></div>').join("");
+  document.querySelectorAll("[data-slip]").forEach(b=>b.addEventListener("click", ()=>{
+    state.slips.splice(+b.dataset.slip, 1); save(); renderSlips();
+  }));
+}
+
 function renderProgress(){
   renderPinBox();
+  renderSlips();
+  renderGrow();
   let pts = 0, logged = 0;
   for(const k in state.checks){ logged++; pts += state.checks[k].length; }
   const done = (state.done||[]).length;
@@ -4491,7 +6032,7 @@ document.getElementById("resetBtn").addEventListener("click", ()=>{
 const DECKS = [
   {id:"day", n:"Сегодня",    c:"green", ids:["today","cal"]},
   {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","test","oral","need"]},
-  {id:"bod", n:"Тело и дух", c:"red",   ids:["gto","chal"]},
+  {id:"bod", n:"Тело и дух", c:"red",   ids:["gto","chal","mine"]},
   {id:"br",  n:"Рубка",      c:"amber", ids:["kurs","print","prog","how"], capN:"Справка"}
 ];
 let deck = "day", flashId = "";
@@ -4693,7 +6234,13 @@ function pinEmergencyReset(){
 load();
 pinEmergencyReset();
 /* Журнал всегда открывается капитаном: режим штурмана не переживает перезагрузку. */
+applyMine();
 if(state.role === "nav"){ state.role = "cap"; save(); }
+
+/* ================= ОФЛАЙН ================= */
+if("serviceWorker" in navigator && location.protocol.indexOf("http") === 0){
+  window.addEventListener("load", ()=>{ navigator.serviceWorker.register("sw.js").catch(()=>{}); });
+}
 calIdx = currentMonthIdx();
 renderHeader();
 show("today");
