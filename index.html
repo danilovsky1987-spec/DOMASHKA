@@ -419,7 +419,19 @@ body.capnav .subjects, body.capnav .decks-wrap{display:none}
 .capback button:hover{border-color:var(--green);color:var(--green)}
 .capback span{font-family:"Russo One",sans-serif;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 #view-today.capmode #revPanel, #view-today.capmode #todayCol2{display:none}
-#view-today.capmode .today{grid-template-columns:1fr}
+#view-today.capmode .today{grid-template-columns:1fr;margin:0}
+#view-today.capmode{max-width:760px;margin:0 auto}
+@media(min-width:980px){
+  #view-today.capmode{display:grid;grid-template-columns:1.05fr 1fr;gap:20px;align-items:start;max-width:1060px}
+  #view-today.capmode .hero{grid-column:1/-1;margin-bottom:0}
+  #view-today.capmode .today{grid-column:1}
+  #view-today.capmode #capTiles{grid-column:2}
+  #view-today.capmode .capmore{grid-column:1/-1;margin-top:6px}
+}
+.capplan{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);border-left:6px solid var(--blue);padding:15px 18px;margin-bottom:12px}
+.capplan .ph2{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:4px}
+.capplan .pt2{font-size:15px;font-weight:700;color:var(--ink)}
+.capplan .pw{font-size:13px;font-weight:600;color:var(--ink-2);margin-top:4px}
 .tiles{display:flex;flex-direction:column;gap:12px;margin-top:16px}
 .tile{display:flex;align-items:center;gap:15px;background:var(--surface);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);border-left:7px solid var(--tc,var(--blue));cursor:pointer;text-align:left;border-top:none;border-right:none;border-bottom:none;width:100%;font-family:inherit;transition:transform .12s,box-shadow .12s}
 .tile:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(16,27,51,.4)}
@@ -428,12 +440,15 @@ body.capnav .subjects, body.capnav .decks-wrap{display:none}
 .tile .t1{font-family:"Russo One",sans-serif;font-size:17px;color:var(--ink);display:block}
 .tile .t2{font-size:14px;font-weight:600;color:var(--ink-2);display:block;margin-top:2px}
 .tile .ar{color:var(--tc,var(--blue));font-size:22px;font-weight:800;flex:none}
-.capmore{margin-top:20px;text-align:center}
-.capmore > button{appearance:none;border:none;background:transparent;color:var(--ink-3);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:9px}
-.capmore > button:hover{color:var(--violet)}
-.capmorebox{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-.capmorebox button{appearance:none;border:none;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:9px 15px;border-radius:99px;background:var(--surface);color:var(--ink-2);box-shadow:var(--shadow);cursor:pointer}
-.capmorebox button:hover{color:var(--mc2,var(--violet))}
+.capicons{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:2px 20px 14px;display:flex;gap:9px;flex-wrap:wrap}
+.capicons button{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:5px 17px 5px 5px;color:#C7D4F0;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;transition:background .15s,color .15s,border-color .15s,transform .12s}
+.capicons button .ci{width:36px;height:36px;border-radius:99px;background:rgba(255,255,255,.11);display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;flex:none;filter:grayscale(.4);transition:filter .15s,background .15s}
+.capicons button:hover{background:rgba(255,255,255,.18);color:#fff;border-color:var(--cic,#8FA8DE);transform:translateY(-2px)}
+.capicons button:hover .ci{background:var(--cic,rgba(255,255,255,.2));filter:none}
+.capicons button[aria-current="page"]{background:var(--cic);border-color:var(--cic);color:#0B1330}
+.capicons button[aria-current="page"] .ci{background:rgba(255,255,255,.35);filter:none}
+.capicons button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media(max-width:560px){.capicons{gap:7px;padding-bottom:12px}.capicons button{font-size:9.5px;padding:4px 13px 4px 4px;gap:8px}.capicons button .ci{width:31px;height:31px;font-size:16px}}
 .medseg{padding:5px;gap:5px}
 .medseg button{display:inline-flex;align-items:center;gap:9px;padding:7px 18px 7px 11px;color:var(--ink-2);transition:background .15s,color .15s,box-shadow .15s}
 .medseg button[data-sign="b"]{--mc:var(--bronze)}
@@ -601,10 +616,10 @@ a{color:inherit;text-decoration:none}
 .flagbar{display:grid;grid-template-columns:repeat(5,1fr);height:9px}
 .mast{background:var(--navy);color:#EAF0FF;position:relative;overflow:hidden}
 .mast::after{content:"";position:absolute;inset:0;background:radial-gradient(900px 220px at 86% -30%,rgba(122,79,209,.5),transparent 70%),radial-gradient(600px 180px at 8% 130%,rgba(27,111,224,.42),transparent 70%);pointer-events:none}
-.mast-in{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:24px 20px 20px;display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;justify-content:space-between}
-.mast h1{font-size:clamp(28px,5vw,48px);text-transform:uppercase;color:#fff}
+.mast-in{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:18px 20px 14px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between}
+.mast h1{font-size:clamp(26px,4.4vw,42px);text-transform:uppercase;color:#fff;line-height:1.05}
 .mast .eyebrow{color:#8FA8DE}
-.mast .sub{font-size:14.5px;color:#B9C7E8;max-width:52ch;margin-top:8px;font-weight:600}
+.mast .sub{font-size:14px;color:#B9C7E8;max-width:46ch;margin-top:6px;font-weight:600}
 .counts{display:flex;gap:11px;flex-wrap:wrap}
 .cbox{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);padding:11px 17px;min-width:92px}
 .cbox .cv{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:28px;line-height:1;color:#fff}
@@ -612,7 +627,7 @@ a{color:inherit;text-decoration:none}
 
 
 /* ================= ПАЛУБЫ И ПОИСК ================= */
-.decks-wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:6px 20px 0;display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.decks-wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:2px 20px 0;display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
 .navmode{margin-left:auto;margin-bottom:7px;appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.16);color:#93A6D0;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 13px;border-radius:99px;transition:background .15s,color .15s,border-color .15s;white-space:nowrap}
 .navmode:hover{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.34)}
 .navmode:focus-visible{outline:3px solid #fff;outline-offset:2px}
@@ -620,7 +635,7 @@ a{color:inherit;text-decoration:none}
 .navmode i b{display:block;width:4px;height:11px;border-radius:1.5px;background:currentColor;font-size:0}
 .navmode i b.w{width:11px;height:4px}
 .decks{display:flex;gap:4px;flex-wrap:wrap}
-.deck{appearance:none;cursor:pointer;font-family:"Russo One",sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.03em;padding:11px 18px 12px;border-radius:13px 13px 0 0;border:none;background:rgba(255,255,255,.07);color:#93A6D0;transition:background .15s,color .15s;position:relative;text-align:left}
+.deck{appearance:none;cursor:pointer;font-family:"Russo One",sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.03em;padding:9px 18px 10px;border-radius:13px 13px 0 0;border:none;background:rgba(255,255,255,.07);color:#93A6D0;transition:background .15s,color .15s;position:relative;text-align:left}
 .deck:hover{background:rgba(255,255,255,.14);color:#fff}
 .deck[aria-selected="true"]{background:rgba(255,255,255,.16);color:#fff}
 .deck[aria-selected="true"]::after{content:"";position:absolute;left:13px;right:13px;bottom:0;height:3px;background:var(--dc);border-radius:99px}
@@ -634,7 +649,7 @@ nav.subjects button.flash{animation:tflash 1.3s}
 @media (prefers-reduced-motion:reduce){nav.subjects button.flash{animation:none}}
 @media print{.decks-wrap{display:none!important}}
 nav.subjects{background:var(--navy);position:relative;z-index:1}
-nav.subjects .inner{max-width:var(--maxw);margin:0 auto;padding:13px 20px 16px;display:flex;gap:8px;overflow-x:auto}
+nav.subjects .inner{max-width:var(--maxw);margin:0 auto;padding:10px 20px 12px;display:flex;gap:8px;overflow-x:auto}
 nav.subjects button{appearance:none;cursor:pointer;white-space:nowrap;font-family:"Russo One",sans-serif;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;padding:9px 17px;border-radius:99px;transition:background .14s,color .14s,border-color .14s,transform .12s;background:rgba(255,255,255,.10);color:#C7D4F0;border:1.5px solid rgba(255,255,255,.16);position:relative}
 nav.subjects button:hover{background:rgba(255,255,255,.24);color:#fff;border-color:var(--tc,#8FA8DE);transform:translateY(-1px)}
 nav.subjects button[aria-selected="true"],nav.subjects button[aria-selected="true"]:hover{background:var(--tc,var(--amber));color:#0B1330;border-color:var(--tc,var(--amber))}
@@ -830,11 +845,17 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 
 
 /* ================= НОВОЕ: роли, «Сегодня», прогресс ================= */
-.roleswitch{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34)}
-.roleswitch button{appearance:none;border:none;background:transparent;color:#F2F6FF;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:99px;cursor:pointer}
-.roleswitch button:hover{background:rgba(255,255,255,.14)}
-.roleswitch button[aria-pressed="true"]{background:#fff;color:#111E42}
-.roleswitch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.roleswitch{display:inline-flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.roleswitch button{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:11px;padding:9px 18px 9px 13px;border-radius:14px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.16);color:#C7D4F0;font-family:inherit;text-align:left;transition:background .15s,border-color .15s,color .15s,transform .12s}
+.roleswitch button:hover{background:rgba(255,255,255,.14);color:#fff;transform:translateY(-1px)}
+.roleswitch .ri{font-size:21px;line-height:1;flex:none;filter:grayscale(.4);transition:filter .15s}
+.roleswitch .rt{font-family:"Russo One",sans-serif;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.roleswitch .rt small{display:block;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;font-weight:700;color:#8298C4;text-transform:uppercase;margin-top:3px}
+.roleswitch button[aria-pressed="true"] .ri{filter:none}
+.roleswitch button[aria-pressed="true"] .rt small{color:rgba(255,255,255,.82)}
+.roleswitch button[data-role="cap"][aria-pressed="true"]{background:var(--green);border-color:#3FD08A;color:#fff;box-shadow:0 4px 14px -4px rgba(18,160,94,.7)}
+.roleswitch button[data-role="nav"][aria-pressed="true"]{background:var(--blue);border-color:#5C9CF0;color:#fff;box-shadow:0 4px 14px -4px rgba(27,111,224,.7)}
+.roleswitch button:focus-visible{outline:3px solid #fff;outline-offset:2px}
 
 .today{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
 @media (max-width:940px){.today{grid-template-columns:1fr}}
@@ -988,9 +1009,15 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <span class="eyebrow" id="mastEyebrow">Проект роста · 6-Я класс</span>
       <h1>Бортовой журнал</h1>
       <p class="sub" id="mastSub">Ребёнок — капитан. Взрослый — штурман: даёт карты и ресурсы, но не крутит штурвал.</p>
-      <div class="roleswitch" style="margin-top:12px" id="roleSwitch">
-        <button data-role="cap" aria-pressed="true">Капитан</button>
-        <button data-role="nav" aria-pressed="false">Штурман</button>
+      <div class="roleswitch" id="roleSwitch">
+        <button data-role="cap" aria-pressed="true">
+          <span class="ri" aria-hidden="true">⚓</span>
+          <span class="rt">Капитан<small>сын · его журнал</small></span>
+        </button>
+        <button data-role="nav" aria-pressed="false">
+          <span class="ri" aria-hidden="true">🧭</span>
+          <span class="rt">Штурман<small id="navHint">отец · по коду</small></span>
+        </button>
       </div>
     </div>
     <div class="rankwrap">
@@ -1006,6 +1033,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       </div>
     </div>
   </div>
+  <div class="capicons noprint" id="capIcons" hidden></div>
   <div class="decks-wrap" id="decksWrap">
     <div class="decks" id="decks" role="tablist"></div>
     <button class="navmode" id="navMode" type="button" title="Переключить вид вкладок"></button>
@@ -1058,10 +1086,6 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     </div>
   </div>
   <div id="capTiles" hidden></div>
-  <div class="capmore" id="capMore" hidden>
-    <button id="capMoreBtn" type="button">ещё ▾</button>
-    <div class="capmorebox" id="capMoreBox" hidden></div>
-  </div>
 </section>
 
 <!-- ================= КАЛЕНДАРЬ ================= -->
@@ -1150,7 +1174,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <li><b>Разобрать урок</b> — большая кнопка, ведёт в «Уроки»</li>
           <li><b>Пройти тест</b> — большая кнопка, ведёт в «Тесты»</li>
           <li><b>Тренировка</b> — большая кнопка, ведёт в ГТО</li>
-          <li><b>«Ещё»</b> — календарь, вызовы, ГТО, Моё, инструкция</li>
+          <li><b>Значки в шапке</b> — календарь, вызовы, ГТО, Моё, справка</li>
         </ul>
       </div>
       <div class="who" style="--wc:var(--blue)">
@@ -1167,7 +1191,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     </div>
     <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:80ch">
       <b>Почему у ребёнка нет вкладок</b>
-      <span>Одиннадцатилетнему бесполезно давать семь вкладок и четыре панели: он не выбирает, что делать первым, и не делает ничего. Поэтому у капитана один экран: вахта и три большие кнопки — <b>разобрать урок</b>, <b>пройти тест</b>, <b>тренировка</b>. Подписи на них живые: сколько тем ждёт повторения, сколько вопросов в работе над ошибками, какой сегодня день микроцикла. Всё остальное — календарь, вызовы, ГТО, инструкция — спрятано под словом «ещё» внизу. Внутри любого раздела сверху появляется кнопка «← Сегодня». У штурмана вкладки остались как были.</span>
+      <span>Одиннадцатилетнему бесполезно давать семь вкладок и четыре панели: он не выбирает, что делать первым, и не делает ничего. Поэтому у капитана один экран: вахта и три большие кнопки — <b>разобрать урок</b>, <b>пройти тест</b>, <b>тренировка</b>. Подписи на них живые: сколько тем ждёт повторения, сколько вопросов в работе над ошибками, какой сегодня день микроцикла. Всё остальное — календарь, вызовы, ГТО, «Моё», справка — пятью значками в шапке, рядом со званием и узлами. Внутри любого раздела сверху появляется кнопка «← Сегодня». У штурмана вкладки остались как были.</span>
     </div>
     <div class="note" style="--nc2:var(--amber);margin-top:16px;max-width:74ch">
       <b>Зачем это разделение</b>
@@ -1433,6 +1457,12 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">В ГТО убран выбор пола — таблица только для мальчиков. На каждое испытание три попытки вместо одной: знак считается по лучшей, она подсвечена синим. У каждой строки кнопка «взять» / «✓ беру» и переключатель «Только мои / Все испытания»: по умолчанию видны взятые испытания, остальные скрыты. В печать кнопки не идут</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">В ГТО добавлены три блока: «Цель на переход» — выбрать знак и увидеть, сколько взятых испытаний уже дотягивают и сколько не хватает по каждому; «Замеры» — кнопка фиксирует текущие лучшие результаты на дату, таблица показывает сдвиг от первого замера к последнему; микроцикл подготовки теперь собирается из взятых испытаний, а не написан заранее</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Капитанский режим упрощён. У ребёнка больше нет ряда вкладок: экран «Сегодня» — это вахта и три большие кнопки «Разобрать урок», «Пройти тест», «Тренировка» с живыми подписями (сколько тем ждёт повторения, сколько вопросов в работе над ошибками, какой сегодня день микроцикла). Календарь, вызовы, ГТО и инструкция спрятаны под словом «ещё». Внутри раздела сверху кнопка «← Сегодня». У штурмана всё осталось как было</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Капитанский экран поправлен: на широком мониторе он больше не растянут во всю ширину пустой простынёй — вахта слева, кнопки справа, всё вместе не шире 1060 точек. Вернулся блок «Сегодня по плану» из календаря, который был скрыт по недосмотру. Значок у «Пройти тест» сменён с зелёной галочки на карандаш: галочка читалась как «уже сделано»</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Бледная строка «ещё» внизу капитанского экрана убрана. Пять редких разделов переехали значками в шапку: календарь, вызовы, ГТО, «Моё», справка. Тело экрана освободилось, а значки видны всегда, на любой вкладке</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Значки переставлены: вместо пяти квадратных карточек в одном ряду со «Званием» и «Узлами» — отдельная полоса под шапкой. Каждая кнопка это круглый значок и подпись справа от него. Звание и узлы снова читаются как главное, а навигация не путается с достижениями. Текущий раздел заливается своим цветом</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">В «Прогрессе» рядом с кодом штурмана появилась кнопка «Не спрашивать пока». Код при этом не стирается — он сохранён и включается обратно одним нажатием. Пока пауза включена, значок кода краснеет, под кнопкой висит предупреждение, а на кнопке роли вместо «по коду» написано «код на паузе». Сделано, чтобы не вводить четыре цифры каждый раз при настройке</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Три пункта по информатике сняты с очереди: учебника у ребёнка нет, учитель выкладывает материал презентациями в МЭШ. Фото параграфа, фото конспекта и оглавление ждать бессмысленно. Вместо них появился один срочный пункт — присылать презентацию из МЭШ по каждой новой теме: это единственный источник по предмету. Перечень тем журнал будет вести сам, по мере поступления</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Переключатель ролей переделан: вместо одинаковых половинок серого тумблера — две разные кнопки. «⚓ Капитан · сын · его журнал» загорается зелёным, «🧭 Штурман · отец · по коду» синим. Значок неактивной роли приглушён. Заодно шапка стала плотнее примерно на 40 точек: подтянуты отступы заголовка, палуб и строки вкладок</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Календарь больше не кончается в октябре: переходы с ноября 2026 по август 2027 журнал собирает сам — недели «Замер · Ритм · Рывок · Глубина · Гавань», замеры в первую и последнюю неделю, тренировки по вторникам, четвергам и субботам, совет каждое воскресенье. План можно переписать на совете</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Журнал работает без интернета. Рядом с index.html появился файл sw.js — его тоже надо загрузить на GitHub. После первого открытия сайт кладётся в память браузера и открывается на планшете в самолёте, в деревне и где угодно ещё; при появлении сети сам берёт свежую версию</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Инструкция приведена в соответствие: переписан блок «Два режима» (у капитана больше нет вкладок), добавлены три новых раздела — «ГТО: как устроено после переделки», «Календарь: два вида и фильтр» и «Работа без интернета». Поправлено описание палуб: два вида вкладок теперь только у штурмана</td></tr>
@@ -1445,6 +1475,8 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Инструкция дополнена: три новых раздела — «Моё», «Рост в цифрах» и «Как журнал выбирает вопросы»</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Появился раздел «Моё» — авторская роль капитана. Ребёнок придумывает свой вопрос к разобранной теме с четырьмя вариантами, свой вызов в банк и пишет одну строку «что понял сегодня». Штурман в том же разделе принимает или возвращает с замечанием; цену вызова назначает он. Принятый вопрос встаёт в тест наравне с остальными, принятый вызов — в банк карточек. За принятое — по 3 узла, за строку «что понял» узлов нет намеренно. Лимит: два вопроса и один вызов в неделю</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Календарь переделан. Два вида: «Неделя» — как было, но открывается на текущей неделе, прошедшие приглушены; «Месяц» — компактный обзор, весь месяц на экране без прокрутки. Название месяца больше не дублируется, появилась кнопка «Сегодня» и полоска «вахта закрыта N дней из 30». Пять румбов под панелью стали фильтром со счётчиками: нажатие оставляет только дни этого румба. Повторяющиеся тренировки ушли в описание недели, точки вахты остались только у прошедших дней</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Новый разбор по литературе: Гомер, «Одиссея», Одиссей на острове циклопов. Восемь шагов эпизода для пересказа, ответы на все десять вопросов рубрики «Размышляем о прочитанном» со стр. 30, эпитеты и сравнения с цитатами, шесть терминов. 20 вопросов в тесте, 12 устных, карточка приёмки. Вопросы сверены по двум источникам</td></tr>
+          <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Первый разбор по математике: движение по реке и дробь от числа. Четыре скорости, три формулы пути, все три задачи разобраны по шагам с проверками (160 км, 2,6 ч, 180), шесть ловушек — главная из них «вычли течение один раз вместо двух». 20 вопросов в тесте, 12 устных, карточка приёмки. Появились два новых предмета и два новых цвета: литература фиолетовая, математика красная</td></tr>
         </tbody>
       </table>
     </div>
@@ -1932,7 +1964,12 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <div class="filebtns" style="margin-top:0">
         <button class="btn" id="pinSet">Поставить код</button>
         <button class="btn ghost" id="pinOff" hidden>Снять код</button>
+        <button class="btn ghost" id="pinPause">Не спрашивать пока</button>
       </div>
+    </div>
+    <div class="note" id="pinPauseNote" style="--nc2:var(--red);margin:0 0 14px;max-width:78ch" hidden>
+      <b>Код временно отключён</b>
+      <span>Пока идёт настройка, в режим штурмана пускает без кода. Сам код никуда не делся — он сохранён и включится обратно одним нажатием. <b>Не забудьте включить перед тем, как отдавать журнал ребёнку:</b> сейчас он может открыть ответы, устную проверку и приёмку работ.</span>
     </div>
     <p style="font-size:14.5px;color:var(--ink-2);font-weight:600;line-height:1.55;max-width:74ch" id="pinStateTxt"></p>
     <div class="note" style="--nc2:var(--red);margin-top:16px;max-width:74ch">
@@ -2758,6 +2795,271 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 </article>
 
+<article id="L6">
+  <div class="hero" style="--hc:var(--violet)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Литература · 6-Я · 11 сентября · Коровина, Полухина, Журавлёв, часть 1 · стр. 30</span>
+        <h2>Гомер. «Одиссея». Одиссей на острове циклопов. Полифем</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Это отрывок из поэмы, которой почти три тысячи лет. Сюжет простой: Одиссей с товарищами попадает в пещеру одноглазого великана, тот съедает шестерых, а остальные спасаются хитростью. Но спрашивать будут не сюжет. Спросят, <b>чем Одиссей отличается от Геракла</b> — и правильный ответ в том, что Геракл побеждает силой, а Одиссей побеждает умом. Вся глава про это.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Где мы находимся <em>раздел «Античная литература», это начало года</em></h3>
+    <div class="grid g3">
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Гомер</span><span class="gn">автор</span></div><div class="gb">
+        <div class="row"><span>Древнегреческий поэт, примерно VIII век до нашей эры. По преданию был слепым певцом-сказителем. Достоверно о нём почти ничего не известно — за право называться его родиной спорили семь городов.</span></div>
+        <span class="exs">Самый ранний известный нам европейский поэт</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">«Илиада»</span><span class="gn">первая поэма</span></div><div class="gb">
+        <div class="row"><span>О Троянской войне: гнев Ахилла, осада Трои, гибель Гектора. Действие укладывается всего в несколько недель десятого года войны.</span></div>
+        <span class="exs">Война</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">«Одиссея»</span><span class="gn">наша поэма</span></div><div class="gb">
+        <div class="row"><span>О возвращении домой. Одиссей, царь Итаки, десять лет плывёт с войны к жене Пенелопе и сыну Телемаку. Эпизод с Полифемом — одно из его приключений в пути.</span></div>
+        <span class="exs">Дорога домой</span></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Эпос</span><span class="gn">род литературы</span></div><div class="gb">
+        <div class="row"><span>Повествование о событиях со стороны. Автор рассказывает о герое, а не о себе. «Одиссея» — <b>эпическая поэма</b>: большое стихотворное произведение с сюжетом.</span></div>
+        <span class="exs">Три рода: эпос, лирика, драма</span></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">Гекзаметр</span><span class="gn">размер</span></div><div class="gb">
+        <div class="row"><span>Стих, которым написаны обе поэмы. Длинная строка без рифмы, с торжественным раскачивающимся ритмом. Рифмы в античном стихе нет вообще — это нормально, а не ошибка перевода.</span></div>
+        <span class="exs">На русский перевёл В. А. Жуковский</span></div></div>
+      <div class="grp" style="--gc:var(--ink-3)"><div class="gh"><span class="gt">Миф или легенда</span><span class="gn">вопрос 10</span></div><div class="gb">
+        <div class="row"><span><b>Миф</b> объясняет устройство мира и держится на богах. <b>Легенда</b> — рассказ о том, что вроде бы было на самом деле, но обросло вымыслом.</span></div>
+        <span class="exs">В «Одиссее» есть и то и другое</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Что произошло в пещере <em>восемь шагов — этого хватит для пересказа</em></h3>
+    <div class="grid" style="gap:11px">
+      <div class="sent" style="--nc:var(--blue)"><span class="sn">1</span><div><span class="st">Высадились на остров</span><span class="ss">Одиссей берёт с корабля двенадцать спутников и мех сладкого вина, полученного от жреца Марона, и идёт осматривать землю циклопов. Вино он взял неспроста — с ним и связано спасение.</span></div></div>
+      <div class="sent" style="--nc:var(--cyan)"><span class="sn">2</span><div><span class="st">Нашли пещеру</span><span class="ss">В пещере загоны с козами и овцами, корзины сыра, вёдра молока. Спутники просят взять сыр и уходить. Одиссей отказывается: ему хочется увидеть хозяина и получить подарок по обычаю гостеприимства.</span></div></div>
+      <div class="sent" style="--nc:var(--red)"><span class="sn">3</span><div><span class="st">Пришёл Полифем</span><span class="ss">Великан загоняет стадо и закрывает вход камнем, который не сдвинуть и двадцати повозкам. Ловушка захлопнулась: даже убей они циклопа сразу — выйти было бы нельзя. Он спрашивает, кто они, и, услышав про Зевса, отвечает, что циклопам нет дела до богов.</span></div></div>
+      <div class="sent" style="--nc:var(--red)"><span class="sn">4</span><div><span class="st">Съел шестерых</span><span class="ss">Двоих вечером, двоих утром и ещё двоих на следующий вечер — всего шесть человек. Гомер повторяет это трижды почти одними словами: жестокость показана как привычка, а не как вспышка.</span></div></div>
+      <div class="sent" style="--nc:var(--amber)"><span class="sn">5</span><div><span class="st">Приготовили кол</span><span class="ss">Из оливкового бревна вытесали кол, заострили, обожгли на огне и спрятали. Четверых помощников выбрали по жребию — Одиссей вызвался пятым сам.</span></div></div>
+      <div class="sent" style="--nc:var(--violet)"><span class="sn">6</span><div><span class="st">«Меня зовут Никто»</span><span class="ss">Одиссей поит циклопа неразбавленным вином. Тот, довольный, обещает подарок: съесть Никого последним. Имя выбрано заранее и с расчётом — это не шутка, а часть плана.</span></div></div>
+      <div class="sent" style="--nc:var(--green)"><span class="sn">7</span><div><span class="st">Ослепили</span><span class="ss">Пьяного великана лишают единственного глаза. На крик сбегаются соседи-циклопы, спрашивают, кто его обидел. «Никто!» — и они уходят, решив, что он бредит. Хитрость сработала.</span></div></div>
+      <div class="sent" style="--nc:var(--blue)"><span class="sn">8</span><div><span class="st">Вышли под баранами</span><span class="ss">Слепой Полифем ощупывает спины овец у выхода — и пропускает людей, привязанных снизу. Уже с корабля Одиссей кричит своё настоящее имя. Полифем зовёт отца, Посейдона, и с этой минуты бог моря преследует Одиссея десять лет.</span></div></div>
+    </div>
+    <div class="note" style="--nc2:var(--red);margin-top:16px;max-width:74ch">
+      <b>Самый важный поворот всей главы</b>
+      <span>Хитрость спасла Одиссея, а <b>гордость его подвела</b>. Пока он «Никто» — он неуязвим. Как только назвал имя, чтобы похвастаться, дал врагу власть над собой: проклясть можно только того, чьё имя знаешь. Если на уроке спросят про недостаток героя — это он.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Ловушки <em>где обычно отвечают неправильно</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>«Одиссей убил циклопа»</b><span>Не убил, а ослепил. И не мог убить: без Полифема камень от входа было бы не отодвинуть, все погибли бы в пещере.</span><span class="hint">Это не жалость, а расчёт — типичная одиссеева черта.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>«Одиссей испугался и остался случайно»</b><span>Он остался нарочно, из любопытства и в надежде на подарок гостю. Спутники уговаривали уходить — он не послушал.</span><span class="hint">Это его ошибка, и Гомер её не скрывает.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>«Циклопы — это боги»</b><span>Циклопы — великаны, дети богов, но сами не боги. Полифем — сын Посейдона, и именно поэтому месть оказалась такой долгой.</span><span class="hint">Он прямо говорит, что богов не боится.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>«Повторы — потому что автор не следил за текстом»</b><span>Наоборот. Поэму пели наизусть, и повторы держали ритм и помогали запомнить. А ещё они выделяют главное.</span><span class="hint">Это вопрос 9, и «автор забыл» там не засчитают.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>«Гомер написал книгу»</b><span>Поэмы сначала пели, а записали их намного позже. Гомер — сказитель, аэд, а не писатель за столом.</span><span class="hint">Отсюда и гекзаметр: под него удобно петь.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Эпитет и сравнение путают</b><span><b>Эпитет</b> — красочное определение: «хитроумный Одиссей», «божественная Эос». <b>Сравнение</b> — сопоставление со словами как, словно, будто: «как лев», «подобен скале».</span><span class="hint">В вопросе 3 просят найти и то и другое — не смешивать.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Размышляем о прочитанном <em>все десять вопросов со страницы 30 — с ответами</em></h3>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">1</span><div>
+      <p class="en">Что насторожило Одиссея, когда он увидел пещеру циклопа Полифема? Какие чувства он испытал?</p>
+      <p class="why">Насторожили размеры: пещера огромная, вход завален камнем, который человеку не сдвинуть. Значит, хозяин — не человек. Внутри порядок и хозяйство: загоны со скотом, корзины сыра, вёдра молока — здесь кто-то живёт постоянно. Чувства смешанные: тревога и любопытство разом. Любопытство пересилило — и в этом уже видна вся его натура.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">2</span><div>
+      <p class="en">Почему Одиссей остался на острове и ждал циклопа, ведь в этом не было особой нужды?</p>
+      <p class="why">Он хотел увидеть, «какой там народ обитает», и рассчитывал на подарок: у греков был закон гостеприимства — хозяин обязан принять странника и одарить его, за этим следит сам Зевс. Одиссей был уверен, что закон работает везде. Оказалось, что на циклопов он не распространяется — они богов не признают. Спутники предлагали взять сыр и уйти, и они были правы: <b>это ошибка героя, за неё заплатили шесть жизней</b>.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">3</span><div>
+      <p class="en">Каким предстал циклоп Полифем? Найдите эпитеты и сравнения.</p>
+      <p class="why"><b>Сравнения:</b> «подобен скале необъятной был он», «как бешеный зверь», «жадно, как лев, разъяряемый гладом, съел их». <b>Эпитеты и оценки:</b> «голос гремящий», «образ чудовища», «с неописанной злостью», «злому циклопу». Обрати внимание: его сравнивают то с неживой скалой, то со зверем — с человеком не сравнивают ни разу.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">4</span><div>
+      <p class="en">Как встретил циклоп гостей? Какое впечатление произвёл? Прочитайте вслух соответствующие строки.</p>
+      <p class="why">Встретил грубо, допросом: «Странники, кто вы? Откуда пришли водяною дорогой? Дело ль какое у вас? Иль без дела скитаетесь всюду…» На просьбу о гостеприимстве во имя Зевса отвечает с презрением: «Нам, циклопам, нет нужды ни в боге Зевесе, ни в прочих ваших блаженных богах, мы породой их всех знаменитей». Впечатление — ужас: «наш ум помутился от скорби». Эти строки как раз и стоит прочитать вслух — их обычно и просят.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">5</span><div>
+      <p class="en">Гомер называет Одиссея «хитроумным», «многострадальным», «постоянным в бедах», «богоравным». Как он оправдывает это в эпизоде с Полифемом?</p>
+      <p class="why">Разобрать по одному — это и есть готовый ответ:<br>• <b>хитроумный</b> — придумал имя Никто, вино, кол и выход под баранами;<br>• <b>многострадальный</b> — заперт в пещере, потерял шестерых товарищей;<br>• <b>постоянный в бедах</b> — не сломался, действовал по плану, а не в панике;<br>• <b>богоравный</b> — сделал то, что человеку кажется невозможным, и вывел людей живыми.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">6</span><div>
+      <p class="en">Каким предстаёт Одиссей? Какие качества особенно подчёркиваются?</p>
+      <p class="why">Ум и хитрость прежде всего: он просчитывает шаги наперёд — сначала вино, потом ложное имя, потом кол, потом бараны. Каждый ход подготавливает следующий. Рядом с умом — храбрость (сам вызвался пятым к колу, сам говорил с великаном) и ответственность за людей (выводит спутников первыми, сам уходит последним). И тут же слабость — тщеславие в конце.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">7</span><div>
+      <p class="en">Что общего у Одиссея с Гераклом и чем эти герои отличаются?</p>
+      <p class="why"><b>Общее:</b> оба герои, оба смелы, оба выходят из безнадёжных положений, обоим помогают и мешают боги. <b>Разное:</b> Геракл — сын Зевса, полубог, его главное оружие — нечеловеческая сила. Одиссей — обычный смертный, и оружие у него одно: голова. Геракл душит льва, Одиссей поит циклопа вином. <b>Это ключевой вопрос главы</b>: в «Одиссее» на место силы впервые встаёт ум.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">8</span><div>
+      <p class="en">Каково отношение автора к своему герою?</p>
+      <p class="why">Гомер любуется Одиссеем и сочувствует ему. Это видно по эпитетам — «хитроумный», «богоравный», «многострадальный»: все они хвалебные. Но автор не превращает героя в идеал: он показывает и его ошибку с криком имени, и цену этой ошибки. Восхищение с сочувствием, а не слепое восхваление.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">9</span><div>
+      <p class="en">Обратите внимание на повторы: «С трепетом сердца мы ждали явленья божественной Эос: Вышла из мрака младая с перстами пурпурными Эос». Найдите другие примеры и объясните их роль.</p>
+      <p class="why">Другие повторы: описание циклопов — «свирепых, не знающих правды» — повторяется дважды; трижды почти теми же словами сказано, как Полифем хватает и съедает по двое; трижды повторяется, как он доит стадо и «под каждую матку клал сосуна».<br><b>Зачем:</b> поэму пели наизусть, и повторяющаяся формула была опорой для памяти певца. Плюс повтор задаёт круговорот времени (рассвет наступает всегда, что бы ни случилось) и показывает, что жестокость Полифема — не случай, а обыкновение.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">10</span><div>
+      <p class="en">Мифом или легендой можно назвать рассказ о приключениях Одиссея?</p>
+      <p class="why">Здесь ждут рассуждения, а не одного слова. <b>За миф:</b> действуют боги (Афина помогает, Посейдон мстит), встречаются фантастические существа — циклопы, сирены, чудовища. <b>За легенду:</b> главный герой — обычный смертный, а события привязаны к Троянской войне, которая, судя по раскопкам Трои, действительно была. Честный ответ: в «Одиссее» соединились оба начала — историческая основа обросла мифом.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Термины наизусть <em>шесть слов, которые спросят на уроке</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--violet)"><b>Эпос</b><span>Род литературы: повествование о событиях и людях со стороны, от лица рассказчика.</span><span class="hint">Три рода: эпос, лирика, драма.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Поэма</b><span>Большое стихотворное произведение с сюжетом и героями.</span><span class="hint">«Илиада» и «Одиссея» — эпические поэмы.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Эпитет</b><span>Красочное определение, которое передаёт отношение автора: «хитроумный Одиссей», «божественная Эос».</span><span class="hint">Не всякое прилагательное эпитет: «каменная стена» — просто признак.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Сравнение</b><span>Сопоставление двух предметов со словами как, словно, будто, подобен: «как лев», «подобен скале».</span><span class="hint">Есть слово-связка — значит, сравнение.</span></div>
+      <div class="term" style="--tc2:var(--red)"><b>Гипербола</b><span>Сильное преувеличение: камень, который не сдвинуть двадцати повозкам; великан ростом с гору.</span><span class="hint">В эпосе она везде — так подчёркивают величие.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>Гекзаметр</b><span>Стихотворный размер античных поэм. Длинная строка без рифмы с плавным торжественным ритмом.</span><span class="hint">Русский перевод сделал В. А. Жуковский, размер он сохранил.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Почему Одиссей не убил Полифема сразу, пока тот спал?</summary><div class="ans">Ответ: вход был завален <b>огромным камнем</b>, который могли сдвинуть только руки великана. Убей они циклопа — и остались бы замурованными в пещере. Поэтому его надо было именно ослепить, а не убить.</div></details>
+    <details><summary>Зачем Одиссей назвался Никем?</summary><div class="ans">Ответ: чтобы соседи-циклопы не пришли на помощь. На крик они спросили, кто его обидел, услышали «Никто» и ушли. Имя было выбрано заранее — это часть плана, а не шутка.</div></details>
+    <details><summary>Какую ошибку Одиссей совершил в самом конце и чем она обернулась?</summary><div class="ans">Ответ: уже с корабля <b>назвал своё настоящее имя</b>, чтобы похвалиться. Полифем попросил отца-Посейдона отомстить — и бог моря преследовал Одиссея десять лет. Хитрость спасла, гордость едва не погубила.</div></details>
+    <details><summary>Чем Одиссей отличается от Геракла?</summary><div class="ans">Ответ: Геракл — <b>полубог</b>, сын Зевса, побеждает силой. Одиссей — <b>простой смертный</b>, побеждает умом и хитростью. Общее у них — храбрость и умение выйти из безвыходного положения.</div></details>
+    <details><summary>Зачем в поэме так много повторов?</summary><div class="ans">Ответ: поэму <b>пели наизусть</b>, повторяющиеся формулы держали ритм и помогали певцу помнить текст. А ещё повтор подчёркивает главное: если трижды сказано, как циклоп съедает людей, — значит, для него это обыкновение.</div></details>
+    <details><summary>Какие сравнения относятся к Полифему?</summary><div class="ans">Ответ: «подобен скале необъятной», «как бешеный зверь», «жадно, как лев, разъяряемый гладом». Все они — про неживое или про зверя: с человеком его не сравнивают.</div></details>
+    <details><summary>Как называется поэма о Троянской войне и как — о возвращении домой?</summary><div class="ans">Ответ: о войне — <b>«Илиада»</b> (от Илион, второго имени Трои), о возвращении — <b>«Одиссея»</b>. Обе создал Гомер, обе написаны гекзаметром.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Порядок работы <em>примерно сорок минут</em></h3>
+    <ol class="how" style="--hc2:var(--violet)">
+      <li>Прочитать эпизод в учебнике целиком, не по диагонали. Тут важны слова, а не только события.</li>
+      <li>Карандашом отметить прямо в тексте три сравнения про Полифема и три эпитета Одиссея — они понадобятся в вопросах 3 и 5.</li>
+      <li>Пересказать вслух восемь шагов из блока «Что произошло в пещере», закрыв текст. Если пересказ сходится — сюжет усвоен.</li>
+      <li>Ответить на десять вопросов страницы 30 <b>своими словами</b>. Разбор здесь есть, но списывать его нельзя: спросят устно, и заученная чужая фраза слышна сразу.</li>
+      <li>Отдельно приготовить ответ на вопрос 7 про Геракла — он самый вероятный и самый ценный.</li>
+      <li>Выучить шесть терминов и уметь отличить эпитет от сравнения на примере из текста.</li>
+      <li>Пройти тест на вкладке «Тесты». Ниже 80% — вернуться к тексту и пройти ещё раз.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="L7">
+  <div class="hero" style="--hc:var(--red)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Математика · 6-Я · 11 сентября · три задачи из МЭШ · условия приведены полностью</span>
+        <h2>Движение по реке и дробь от числа</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Три задачи, две темы. Первые две — на движение по реке: там всё держится на <b>четырёх скоростях</b>, и если правильно их выписать, решение выходит само. Третья — на дробь от числа, и в ней проверяют, понимаешь ли ты, что «найти число по его части» — это <b>деление</b>, а не умножение. Разбор показывает ход решения; в тетради всё это надо записать самому.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Ключ ко всем задачам на реку <em>четыре скорости, выучить один раз</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--blue)"><b>v<sub>собств</sub> — собственная скорость</b><span>Скорость лодки или теплохода в стоячей воде, без течения. Это «своя» скорость судна.</span><span class="hint">В озере лодка идёт ровно с этой скоростью.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>v<sub>теч</sub> — скорость течения</b><span>Скорость самой реки. Она одинакова и туда, и обратно.</span><span class="hint">По течению помогает, против — мешает, ровно на одну и ту же величину.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>v<sub>по теч</sub> = v<sub>собств</sub> + v<sub>теч</sub></b><span>Река подталкивает — скорости складываются.</span><span class="hint">По течению всегда быстрее.</span></div>
+      <div class="term" style="--tc2:var(--red)"><b>v<sub>против</sub> = v<sub>собств</sub> − v<sub>теч</sub></b><span>Река тормозит — скорость течения вычитается.</span><span class="hint">Против течения всегда медленнее.</span></div>
+    </div>
+    <div class="note" style="--nc2:var(--amber);margin-top:16px;max-width:74ch">
+      <b>Два следствия, которыми и решаются обе задачи</b>
+      <span>Если известна скорость <b>по течению</b>, то собственную получают вычитанием: v<sub>собств</sub> = v<sub>по теч</sub> − v<sub>теч</sub>. И наоборот. А разница между скоростью по течению и против течения — это <b>две скорости течения</b>, потому что одну прибавили, а другую отняли. Плюс три обычные формулы: S = v · t, v = S : t, t = S : v.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Задача «а» <em>теплоход — найти путь</em></h3>
+    <div class="ex" style="--nc:var(--green)"><span class="n">а</span><div>
+      <p class="en">Теплоход шёл 3,2 ч по течению реки и 2,7 ч против течения. Какой путь прошёл теплоход, если его скорость по течению 28,4 км/ч, а скорость течения 1,4 км/ч?</p>
+      <p class="why" style="margin-top:12px"><b>Что спрашивают.</b> Весь путь: туда плюс обратно. Значит, нужны два отрезка — по течению и против.</p>
+      <p class="why"><b>Шаг 1. Путь по течению.</b> Скорость по течению дана прямо: 28,4 км/ч. Умножаем на время: 28,4 · 3,2 = <b>90,88 км</b>.</p>
+      <p class="why"><b>Шаг 2. Собственная скорость.</b> Против течения теплоход пойдёт медленнее, но его собственной скорости в условии нет — её надо достать из скорости по течению: 28,4 − 1,4 = <b>27 км/ч</b>.</p>
+      <p class="why"><b>Шаг 3. Скорость против течения.</b> Теперь вычитаем течение ещё раз: 27 − 1,4 = <b>25,6 км/ч</b>.<br><span style="color:var(--ink-2)">Короткий путь тот же: скорость против течения меньше скорости по течению ровно на два течения, 28,4 − 2 · 1,4 = 25,6.</span></p>
+      <p class="why"><b>Шаг 4. Путь против течения.</b> 25,6 · 2,7 = <b>69,12 км</b>.</p>
+      <p class="why"><b>Шаг 5. Складываем.</b> 90,88 + 69,12 = <b>160 км</b>.</p>
+      <p class="why"><b>Ответ: 160 км.</b> Ровное число — хороший признак: в учебных задачах ответ почти всегда «красивый», и если вышло 159,87 — надо перепроверить умножение.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Задача «б» <em>моторная лодка — найти время</em></h3>
+    <div class="ex" style="--nc:var(--cyan)"><span class="n">б</span><div>
+      <p class="en">Моторная лодка прошла 46,68 км по течению реки и 49,7 км против течения. Сколько времени лодка была в пути, если её собственная скорость 37,2 км/ч, а скорость течения 1,7 км/ч?</p>
+      <p class="why" style="margin-top:12px"><b>Чем отличается от первой.</b> Здесь дана <b>собственная</b> скорость, а не скорость по течению, и ищут время, а не путь. То есть обе формулы применяются в другую сторону.</p>
+      <p class="why"><b>Шаг 1. Скорость по течению.</b> 37,2 + 1,7 = <b>38,9 км/ч</b>.</p>
+      <p class="why"><b>Шаг 2. Время по течению.</b> t = S : v = 46,68 : 38,9 = <b>1,2 ч</b>.<br><span style="color:var(--ink-2)">Проверка обратным действием: 38,9 · 1,2 = 46,68 — сходится.</span></p>
+      <p class="why"><b>Шаг 3. Скорость против течения.</b> 37,2 − 1,7 = <b>35,5 км/ч</b>.</p>
+      <p class="why"><b>Шаг 4. Время против течения.</b> 49,7 : 35,5 = <b>1,4 ч</b>.<br><span style="color:var(--ink-2)">Проверка: 35,5 · 1,4 = 49,7 — сходится.</span></p>
+      <p class="why"><b>Шаг 5. Всё время в пути.</b> 1,2 + 1,4 = <b>2,6 ч</b>.</p>
+      <p class="why"><b>Ответ: 2,6 ч.</b> Здравый смысл на месте: против течения путь чуть длиннее, а скорость меньше — значит, времени ушло больше. Если бы вышло наоборот, где-то ошибка.</p>
+    </div></div>
+    <div class="note" style="--nc2:var(--violet);margin-top:16px;max-width:74ch">
+      <b>Как делить на десятичную дробь</b>
+      <span>46,68 : 38,9 — запятую в делителе убирают, сдвигая её вправо на один знак, и ровно на столько же сдвигают запятую в делимом: получается 466,8 : 389. Дальше обычное деление уголком. Главное — сдвинуть <b>в обеих</b> частях одинаково, иначе ответ уедет в десять раз.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Задача «в» <em>найти число по его дроби</em></h3>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">в</span><div>
+      <p class="en">Найдите число, если <sup>3</sup>⁄<sub>8</sub> от <sup>4</sup>⁄<sub>9</sub> этого числа равны 30.</p>
+      <p class="why" style="margin-top:12px"><b>Шаг 1. Свернуть две дроби в одну.</b> «Три восьмых от четырёх девятых» — это умножение: <sup>3</sup>⁄<sub>8</sub> · <sup>4</sup>⁄<sub>9</sub>. Сокращаем крест-накрест: 3 и 9 делим на 3, 4 и 8 делим на 4 → <sup>1</sup>⁄<sub>2</sub> · <sup>1</sup>⁄<sub>3</sub> = <b><sup>1</sup>⁄<sub>6</sub></b>.</p>
+      <p class="why"><b>Шаг 2. Переписать условие короче.</b> Получилось: <b><sup>1</sup>⁄<sub>6</sub> числа равна 30</b>. Задача стала совсем простой.</p>
+      <p class="why"><b>Шаг 3. Найти целое.</b> Известна часть — ищем целое, значит <b>делим</b>: 30 : <sup>1</sup>⁄<sub>6</sub> = 30 · 6 = <b>180</b>.</p>
+      <p class="why"><b>Шаг 4. Проверка.</b> <sup>4</sup>⁄<sub>9</sub> от 180 = 180 : 9 · 4 = 80. Теперь <sup>3</sup>⁄<sub>8</sub> от 80 = 80 : 8 · 3 = 30. Совпало с условием.</p>
+      <p class="why"><b>Ответ: 180.</b></p>
+    </div></div>
+    <div class="note" style="--nc2:var(--red);margin-top:16px;max-width:74ch">
+      <b>Правило, которое здесь и проверяют</b>
+      <span>Чтобы найти <b>дробь от числа</b> — число <b>умножают</b> на дробь. Чтобы найти <b>число по его дроби</b> — <b>делят</b> на дробь. Отличить легко по вопросу: если число известно и ищут часть — умножение; если известна часть и ищут само число — деление. И проверка простая: ответ должен быть <b>больше</b> данной части, ведь <sup>1</sup>⁄<sub>6</sub> меньше целого.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Ловушки <em>на чём здесь чаще всего теряют баллы</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Дана скорость по течению, а её приняли за собственную</b><span>В задаче «а» 28,4 — это уже <b>с</b> течением. Если из неё вычесть течение один раз, получится собственная (27), и только вычитание ещё раз даёт скорость против (25,6).</span><span class="hint">Самая частая ошибка во всей теме: вычитают один раз вместо двух.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Течение считают разным туда и обратно</b><span>Река одна, скорость течения одна. Меняется только знак: прибавили или отняли.</span><span class="hint">Разница между «по» и «против» — всегда два течения.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Путают, что делить</b><span>Время ищут делением <b>пути на скорость</b>: t = S : v. Наоборот получится бессмыслица.</span><span class="hint">Проверяй по единицам: км : км/ч = часы.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>«Найти число» решают умножением</b><span>Если часть известна, а целое ищут — <b>делят</b>. Умножение даст 30 · <sup>1</sup>⁄<sub>6</sub> = 5, то есть меньше части, чего быть не может.</span><span class="hint">Целое всегда больше своей части — это и есть быстрая проверка.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>Забывают сложить два отрезка</b><span>В обеих задачах на реку спрашивают <b>весь</b> путь и <b>всё</b> время. Найти по течению и остановиться — половина решения.</span><span class="hint">Перечитать вопрос перед тем, как писать «Ответ».</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Теряют запятую при делении</b><span>При делении на десятичную дробь запятую сдвигают в делимом и делителе <b>одинаково</b>.</span><span class="hint">Прикинь ответ заранее: 46,68 : 38,9 — чуть больше единицы, значит 1,2 правдоподобно, а 12 нет.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Самое главное <em>три строчки, которые надо помнить наизусть</em></h3>
+    <div class="grid" style="gap:11px">
+      <div class="sent" style="--nc:var(--green)"><span class="sn">1</span><div><span class="st">Скорости на реке</span><span class="ss">v<sub>по теч</sub> = v<sub>собств</sub> + v<sub>теч</sub>, v<sub>против</sub> = v<sub>собств</sub> − v<sub>теч</sub>. Разница между ними — две скорости течения.</span></div></div>
+      <div class="sent" style="--nc:var(--blue)"><span class="sn">2</span><div><span class="st">Путь, скорость, время</span><span class="ss">S = v · t, v = S : t, t = S : v. Одна формула, три способа её прочитать.</span></div></div>
+      <div class="sent" style="--nc:var(--violet)"><span class="sn">3</span><div><span class="st">Дробь и число</span><span class="ss">Дробь от числа — умножаем. Число по его дроби — делим.</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Скорость лодки по течению 20 км/ч, течение 2 км/ч. Какая скорость против течения?</summary><div class="ans">Ответ: <b>16 км/ч</b>. Сначала собственная: 20 − 2 = 18. Потом против течения: 18 − 2 = 16. Вычитать надо дважды, а не один раз.</div></details>
+    <details><summary>Почему разница между скоростью по течению и против течения равна двум скоростям течения?</summary><div class="ans">Ответ: (v + v<sub>теч</sub>) − (v − v<sub>теч</sub>) = <b>2 · v<sub>теч</sub></b>. Один раз течение прибавили, другой раз отняли — вот и двойная разница.</div></details>
+    <details><summary>Как найти время, если известны путь и скорость?</summary><div class="ans">Ответ: <b>t = S : v</b>, путь разделить на скорость. Проверка по единицам: км делим на км/ч — получаются часы.</div></details>
+    <details><summary><sup>2</sup>⁄<sub>5</sub> числа равны 40. Чему равно число?</summary><div class="ans">Ответ: <b>100</b>. Известна часть, ищем целое — делим: 40 : <sup>2</sup>⁄<sub>5</sub> = 40 · <sup>5</sup>⁄<sub>2</sub> = 100. Проверка: <sup>2</sup>⁄<sub>5</sub> от 100 = 40.</div></details>
+    <details><summary>Чему равны <sup>3</sup>⁄<sub>8</sub> от <sup>4</sup>⁄<sub>9</sub> и почему это упрощает задачу «в»?</summary><div class="ans">Ответ: <b><sup>1</sup>⁄<sub>6</sub></b>. Две дроби сворачиваются в одну умножением с сокращением, и вместо двух шагов остаётся один: <sup>1</sup>⁄<sub>6</sub> числа равна 30.</div></details>
+    <details><summary>Лодка прошла 30 км по течению за 1,5 ч. Течение 2 км/ч. Какая у неё собственная скорость?</summary><div class="ans">Ответ: <b>18 км/ч</b>. Скорость по течению: 30 : 1,5 = 20 км/ч. Убираем течение: 20 − 2 = 18 км/ч.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Порядок работы <em>минут двадцать пять</em></h3>
+    <ol class="how" style="--hc2:var(--red)">
+      <li>Выписать в тетрадь четыре формулы скоростей на реке и три формулы S, v, t. Дальше не подглядывать.</li>
+      <li>Решить задачу «а» самому, закрыв разбор. Сверить не только ответ, но и ход: собственная скорость должна была появиться отдельной строкой.</li>
+      <li>Так же решить «б». Каждое деление проверить обратным умножением — это займёт секунды и спасёт от глупой ошибки.</li>
+      <li>В задаче «в» сначала перемножить и сократить дроби, а уже потом искать число. Если сокращать не сразу, всё равно получится, но считать придётся дольше.</li>
+      <li>Записать каждую задачу с пояснениями к действиям и словом «Ответ» в конце — за голые вычисления без пояснений снимают баллы.</li>
+      <li>Пройти тест на вкладке «Тесты». Ниже 80% — вернуться к ловушкам и пройти ещё раз.</li>
+    </ol>
+  </div>
+</article>
+
 <article id="L5">
   <div class="hero" style="--hc:var(--blue)">
     <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
@@ -3162,6 +3464,50 @@ const GTO = {
 };
 /* ====== ВОПРОСЫ ДЛЯ ТЕСТОВ. Ключ — id разбора. ====== */
 const QUIZ = {
+  L6:[
+    {q:"Кто такой Гомер?", o:["Древнегреческий философ","Древнегреческий поэт-сказитель","Царь Итаки","Полководец, взявший Трою"], c:1, w:"Поэт примерно VIII века до н. э., по преданию слепой певец. Одиссей — это герой поэмы, а не автор."},
+    {q:"О чём поэма «Илиада»?", o:["О возвращении Одиссея домой","О Троянской войне","О подвигах Геракла","О путешествии аргонавтов"], c:1, w:"Илион — второе имя Трои. «Илиада» про войну, «Одиссея» про дорогу домой."},
+    {q:"Сколько лет Одиссей возвращался домой?", o:["Три года","Пять лет","Десять лет","Двадцать лет"], c:2, w:"Десять лет длилась война и ещё десять — возвращение. Гнев Посейдона за ослеплённого сына и есть причина задержки."},
+    {q:"Что насторожило Одиссея в пещере?", o:["Запах дыма","Огромные размеры и камень у входа","Следы на песке","Тишина"], c:1, w:"Размеры выдали, что хозяин не человек. А хозяйство внутри — что здесь живут постоянно."},
+    {q:"Почему Одиссей не ушёл, забрав сыр, как просили спутники?", o:["Побоялся, что догонят","Хотел увидеть хозяина и получить подарок гостю","Заблудился в темноте","Ждал попутного ветра"], c:1, w:"Он рассчитывал на закон гостеприимства, за которым следит Зевс. У циклопов этот закон не работал — это ошибка героя."},
+    {q:"Сколько спутников Одиссея съел Полифем?", o:["Двоих","Четверых","Шестерых","Двенадцать"], c:2, w:"По двое три раза: вечером, утром и снова вечером. Гомер повторяет это трижды почти одними словами."},
+    {q:"Чем Полифем закрыл вход в пещеру?", o:["Деревянной дверью","Огромным камнем","Стадом овец","Завалом из веток"], c:1, w:"Камень такой, что его не сдвинуть и двадцати повозкам. Поэтому убивать циклопа было нельзя — они остались бы замурованными."},
+    {q:"Почему Одиссей не убил спящего циклопа?", o:["Пожалел его","Без циклопа не отодвинуть камень от входа","Боги запретили","Не хватило сил"], c:1, w:"Чистый расчёт, а не жалость. Ослепить — единственный способ выйти живыми."},
+    {q:"Каким именем назвался Одиссей?", o:["Никто","Гость","Марон","Телемак"], c:0, w:"Имя выбрано заранее и с расчётом: на крик «Никто меня губит!» соседи-циклопы решили, что Полифем бредит, и ушли."},
+    {q:"Как спутники выбрались из пещеры?", o:["Прорыли подкоп","Вышли, привязавшись под баранами","Перелезли через камень","Уплыли подземной рекой"], c:1, w:"Слепой Полифем ощупывал спины овец сверху, а люди были снизу."},
+    {q:"Какую ошибку Одиссей совершил, отплывая от острова?", o:["Забыл на берегу спутника","Крикнул своё настоящее имя","Не взял еды в дорогу","Разбудил циклопов"], c:1, w:"Из гордости. Проклясть можно только того, чьё имя знаешь, — и Полифем позвал отца, Посейдона."},
+    {q:"Кем приходится Полифем Посейдону?", o:["Братом","Сыном","Слугой","Никем"], c:1, w:"Именно поэтому месть оказалась такой долгой: обиженный великан пожаловался отцу — богу моря."},
+    {q:"Что общего у Одиссея с Гераклом?", o:["Оба полубоги","Оба смелы и выходят из безвыходных положений","Оба воевали под Троей","Оба ослепили великана"], c:1, w:"Общее — храбрость и умение выкрутиться. Полубог только Геракл, Одиссей — простой смертный."},
+    {q:"Чем Одиссей отличается от Геракла?", o:["Побеждает умом, а не силой","Он сильнее","Ему не помогают боги","Он не воевал"], c:0, w:"Ключевая мысль главы. Геракл душит льва, Одиссей поит циклопа вином."},
+    {q:"«Подобен скале необъятной был он» — что это?", o:["Эпитет","Сравнение","Гипербола","Олицетворение"], c:1, w:"Есть слово-связка «подобен» — значит, сравнение. Эпитет был бы просто определением, например «злой циклоп»."},
+    {q:"«Хитроумный Одиссей», «божественная Эос» — это…", o:["Сравнения","Эпитеты","Метафоры","Гиперболы"], c:1, w:"Красочные определения, которые передают отношение автора. Слова как, словно, подобен здесь нет."},
+    {q:"Зачем в поэме повторяющиеся строки?", o:["Автор не следил за текстом","Поэму пели наизусть: повторы держали ритм и память","Так требовал переводчик","Чтобы поэма была длиннее"], c:1, w:"Плюс повтор подчёркивает главное: трижды сказано про съеденных — значит, для Полифема это обыкновение."},
+    {q:"Каким размером написана «Одиссея»?", o:["Ямбом","Хореем","Гекзаметром","Верлибром"], c:2, w:"Длинная строка без рифмы с торжественным ритмом. Рифмы в античном стихе нет вообще."},
+    {q:"Кто перевёл «Одиссею» на русский язык?", o:["А. С. Пушкин","В. А. Жуковский","Н. И. Гнедич","М. В. Ломоносов"], c:1, w:"Жуковский перевёл «Одиссею», Гнедич — «Илиаду». Обе — гекзаметром."},
+    {q:"Миф или легенда — рассказ о приключениях Одиссея?", o:["Только миф","Только легенда","В нём соединились оба начала","Ни то ни другое"], c:2, w:"За миф — боги и циклопы. За легенду — смертный герой и Троянская война, которая, судя по раскопкам, была."}
+  ],
+  L7:[
+    {q:"Скорость по течению — это…", o:["v собственная − v течения","v собственная + v течения","v собственная · v течения","v течения − v собственная"], c:1, w:"Река подталкивает — скорости складываются."},
+    {q:"Скорость против течения — это…", o:["v собственная + v течения","v собственная − v течения","v течения − v собственная","v собственная : v течения"], c:1, w:"Река тормозит — течение вычитается."},
+    {q:"Скорость по течению 28,4 км/ч, течение 1,4 км/ч. Какая собственная скорость?", o:["29,8 км/ч","27 км/ч","25,6 км/ч","14,2 км/ч"], c:1, w:"Из скорости по течению вычитаем течение один раз: 28,4 − 1,4 = 27."},
+    {q:"Скорость по течению 28,4 км/ч, течение 1,4 км/ч. Какая скорость против течения?", o:["27 км/ч","25,6 км/ч","29,8 км/ч","26,4 км/ч"], c:1, w:"Вычесть надо дважды: 28,4 − 1,4 = 27 (собственная), 27 − 1,4 = 25,6. Ответ 27 — самая частая ошибка в теме."},
+    {q:"На сколько скорость по течению больше скорости против течения?", o:["На одну скорость течения","На две скорости течения","На собственную скорость","Зависит от длины пути"], c:1, w:"Один раз течение прибавили, другой отняли: (v+t)−(v−t) = 2t."},
+    {q:"Теплоход шёл 3,2 ч со скоростью 28,4 км/ч. Какой путь?", o:["90,88 км","88,9 км","31,6 км","8,875 км"], c:0, w:"S = v · t = 28,4 · 3,2 = 90,88 км."},
+    {q:"Какой путь всего прошёл теплоход в задаче «а»?", o:["90,88 км","69,12 км","160 км","152,4 км"], c:2, w:"90,88 по течению плюс 69,12 против = 160 км. Ровное число — признак, что решено верно."},
+    {q:"Собственная скорость лодки 37,2 км/ч, течение 1,7 км/ч. Скорость по течению?", o:["35,5 км/ч","38,9 км/ч","37,2 км/ч","40,6 км/ч"], c:1, w:"37,2 + 1,7 = 38,9 км/ч."},
+    {q:"Как найти время, зная путь и скорость?", o:["t = S · v","t = S : v","t = v : S","t = S + v"], c:1, w:"Путь разделить на скорость. Проверка по единицам: км : км/ч = часы."},
+    {q:"46,68 км со скоростью 38,9 км/ч — сколько времени?", o:["1,2 ч","1,4 ч","2,6 ч","12 ч"], c:0, w:"46,68 : 38,9 = 1,2 ч. Обратная проверка: 38,9 · 1,2 = 46,68."},
+    {q:"Сколько всего времени лодка была в пути в задаче «б»?", o:["1,2 ч","1,4 ч","2,6 ч","2,4 ч"], c:2, w:"1,2 ч по течению плюс 1,4 ч против = 2,6 ч. Против течения дольше — так и должно быть."},
+    {q:"Против течения путь длиннее, а скорость меньше. Времени уйдёт…", o:["Меньше","Больше","Столько же","Зависит от глубины реки"], c:1, w:"Это здравый смысл и заодно проверка ответа: если вышло наоборот — где-то ошибка."},
+    {q:"Чему равны 3/8 от 4/9?", o:["7/17","12/72 = 1/6","1/3","2/3"], c:1, w:"Дроби перемножают и сокращают: 3 и 9 на 3, 4 и 8 на 4 → 1/2 · 1/3 = 1/6."},
+    {q:"Как найти число, если известна его дробь?", o:["Умножить на дробь","Разделить на дробь","Вычесть дробь","Прибавить дробь"], c:1, w:"Известна часть, ищем целое — делим. Умножение здесь дало бы число меньше части."},
+    {q:"1/6 числа равна 30. Чему равно число?", o:["5","36","180","150"], c:2, w:"30 : 1/6 = 30 · 6 = 180. Проверка: 180 : 6 = 30."},
+    {q:"2/5 числа равны 40. Чему равно число?", o:["16","80","100","200"], c:2, w:"40 : 2/5 = 40 · 5/2 = 100. Проверка: 2/5 от 100 = 40."},
+    {q:"Как найти дробь от числа?", o:["Умножить число на дробь","Разделить число на дробь","Вычесть дробь из числа","Сложить"], c:0, w:"Число известно, ищем часть — умножаем. Обратная задача решается делением."},
+    {q:"Лодка прошла 30 км по течению за 1,5 ч, течение 2 км/ч. Собственная скорость?", o:["20 км/ч","18 км/ч","22 км/ч","15 км/ч"], c:1, w:"Скорость по течению 30 : 1,5 = 20, убираем течение: 20 − 2 = 18 км/ч."},
+    {q:"46,68 : 38,9 — как правильно поступить с запятыми?", o:["Сдвинуть только в делителе","Сдвинуть одинаково в обеих частях","Убрать запятые совсем","Сдвинуть только в делимом"], c:1, w:"Получится 466,8 : 389. Сдвинешь по-разному — ответ уедет в десять раз."},
+    {q:"В задачах «а» и «б» спрашивают весь путь и всё время. Что это значит?", o:["Достаточно посчитать по течению","Надо сложить оба отрезка","Надо взять большее из двух","Надо взять разность"], c:1, w:"Найти одну половину и остановиться — самая обидная потеря баллов. Перечитывать вопрос перед словом «Ответ»."}
+  ],
   L5:[
     {q:"selection — это…", o:["Селекция, выведение сортов","Выбор, подборка, ассортимент","Отбор в команду","Раздел магазина"], c:1, w:"Ложный друг переводчика. A wide selection of shops — большой выбор магазинов, а не «селекция магазинов»."},
     {q:"Как по-английски «скидка»?", o:["discount","reduction price","cheap","sale off"], c:0, w:"Discount, ударение на первый слог. There are discounts for students."},
@@ -3271,6 +3617,42 @@ const QUIZ = {
 
 /* ====== ШПАРГАЛКИ ПЕРЕД ТЕСТОМ. Ключ — id разбора. ====== */
 const RECAP = {
+  L6:{
+    title:"Одиссей и Полифем — что помнить",
+    pairs:[
+      ["Гомер","древнегреческий поэт-сказитель, VIII в. до н. э."],
+      ["«Илиада»","поэма о Троянской войне"],
+      ["«Одиссея»","поэма о возвращении домой"],
+      ["Полифем","одноглазый великан, сын Посейдона"],
+      ["Съел спутников","шестерых, по двое три раза"],
+      ["Спасение","вино, кол из оливы, имя Никто, выход под баранами"],
+      ["Ошибка Одиссея","крикнул настоящее имя — и Посейдон мстил десять лет"],
+      ["Эпитеты Одиссея","хитроумный, многострадальный, постоянный в бедах, богоравный"],
+      ["Сравнения о Полифеме","подобен скале, как бешеный зверь, как лев"],
+      ["Одиссей и Геракл","Геракл — полубог и сила, Одиссей — смертный и ум"],
+      ["Повторы в поэме","поэму пели наизусть: ритм, память, выделение главного"],
+      ["Гекзаметр","античный размер без рифмы, перевод В. А. Жуковского"]
+    ],
+    hint:"Главный вопрос главы — про Геракла: сила против ума. И помни, что Одиссей циклопа не убил, а ослепил — убить было нельзя из-за камня."
+  },
+  L7:{
+    title:"Река и дроби — формулы",
+    pairs:[
+      ["v по течению","v собственная + v течения"],
+      ["v против течения","v собственная − v течения"],
+      ["Дана v по течению, нужна v против","вычесть течение дважды"],
+      ["Разница «по» и «против»","две скорости течения"],
+      ["Путь","S = v · t"],
+      ["Время","t = S : v"],
+      ["Скорость","v = S : t"],
+      ["Дробь от числа","умножить"],
+      ["Число по его дроби","разделить"],
+      ["3/8 от 4/9","1/6"],
+      ["Проверка деления","умножить обратно"],
+      ["Проверка «числа по дроби»","целое больше своей части"]
+    ],
+    hint:"Самая частая ошибка: дана скорость по течению, а течение вычли один раз. Надо два — сначала получить собственную, потом против течения."
+  },
   L5:{
     title:"Hot spots — слова с карточки",
     pairs:[
@@ -3543,6 +3925,22 @@ const DIAG_RECS = {
 
 const LESSONS = [
   {
+    id:"L6", subject:"Литература", color:"violet", date:"2026-09-11",
+    title:"Гомер. «Одиссея». Одиссей на острове циклопов. Полифем",
+    source:"Коровина, Полухина, Журавлёв, Коровин · часть 1 · стр. 30, рубрика «Размышляем о прочитанном» · перевод В. А. Жуковского",
+    desc:"Восемь шагов эпизода для пересказа, ответы на все десять вопросов страницы 30, эпитеты и сравнения из текста, разница между Одиссеем и Гераклом, шесть терминов: эпос, поэма, эпитет, сравнение, гипербола, гекзаметр.",
+    tags:["Гомер","Одиссея","Полифем","циклоп","Никто","эпитет","сравнение","гекзаметр","эпос","Геракл","миф","легенда"],
+    checked:true
+  },
+  {
+    id:"L7", subject:"Математика", color:"red", date:"2026-09-11",
+    title:"Движение по реке и дробь от числа",
+    source:"Три задачи из задания в МЭШ · условия приведены полностью со скриншота · номер учебника в задании не указан",
+    desc:"Четыре скорости на реке и три формулы пути, полный разбор всех трёх задач по шагам с проверками, шесть типичных ловушек — от «вычли течение один раз вместо двух» до «число по его дроби решили умножением».",
+    tags:["движение по реке","скорость течения","собственная скорость","путь","время","десятичные дроби","дробь от числа","число по дроби"],
+    checked:true
+  },
+  {
     id:"L5", subject:"Английский язык", color:"blue", date:"2026-09-09",
     title:"Hot spots — слова и реклама места для развлечения",
     source:"Starlight 6, Module 1b «Hot spots» · учебник стр. 10 (фото) · упр. 1, 2a, 2b · карточка слов от учителя «hot spots 1b слова»",
@@ -3690,7 +4088,7 @@ function makeMonth(y, m, num){
 
 /* ================= СОСТОЯНИЕ ================= */
 const STORE_KEY = "bortovoy-journal-v2";
-const DEFAULT = {v:3, role:"cap", checks:{}, taken:[], done:[], gto:{}, gtoPick:{}, gtoOnly:"mine", gtoGoal:"s", gtoSnap:[], remind:{}, omonth:{}, myq:[], mych:[], feed:[], slips:[], stage:"3", tests:{}, bonus:0, qstats:{}, history:[], oral:{}, ostats:{}, manual:{}, verified:{}, todo:{}, pin:"", nav:"flat"};
+const DEFAULT = {v:3, role:"cap", checks:{}, taken:[], done:[], gto:{}, gtoPick:{}, gtoOnly:"mine", gtoGoal:"s", gtoSnap:[], remind:{}, omonth:{}, myq:[], mych:[], feed:[], slips:[], askPin:true, stage:"3", tests:{}, bonus:0, qstats:{}, history:[], oral:{}, ostats:{}, manual:{}, verified:{}, todo:{}, pin:"", nav:"flat"};
 let state = JSON.parse(JSON.stringify(DEFAULT));
 
 function load(){
@@ -3798,11 +4196,23 @@ function renderNav(){
   renderDecks();
   const cap = state.role === "cap";
   document.body.classList.toggle("capnav", cap);
+  const icons = document.getElementById("capIcons");
+  icons.hidden = !cap;
+  icons.innerHTML = cap ? CAP_MORE.map(m=>{
+      const t = TABS.find(x=>x.id===m.id);
+      return '<button data-go="'+m.id+'" title="'+esc(m.t)+'"'+(m.id===view?' aria-current="page"':'')
+        + ' style="--cic:'+(t?C[t.color]:"#8FA8DE")+'">'
+        + '<span class="ci" aria-hidden="true">'+m.ic+'</span>'+esc(m.t)+'</button>';
+    }).join("") : "";
+  if(cap) icons.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click", ()=>show(b.dataset.go)));
+
   const cb = document.getElementById("capBack");
   cb.hidden = !(cap && view !== "today");
   const vt = TABS.find(x=>x.id===view);
   document.getElementById("capBackTitle").textContent = vt ? vt.label : "";
   document.querySelectorAll("#roleSwitch button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.role === state.role)));
+  const nh = document.getElementById("navHint");
+  if(nh) nh.textContent = (state.askPin === false && hasPin()) ? "отец · код на паузе" : "отец · по коду";
   document.getElementById("mastSub").textContent = state.role === "cap"
     ? "Твой журнал. Отмечай вахту сам — за тебя этого никто не делает."
     : "Ребёнок — капитан. Взрослый — штурман: даёт карты и ресурсы, но не крутит штурвал.";
@@ -3839,7 +4249,7 @@ function setRole(r){
 }
 document.querySelectorAll("#roleSwitch button").forEach(b=>b.addEventListener("click", ()=>{
   const r = b.dataset.role;
-  if(r === "nav" && state.role !== "nav"){
+  if(r === "nav" && state.role !== "nav" && state.askPin !== false){
     if(!hasPin()){ openPin("new", ()=>{ navOk = true; setRole("nav"); }); return; }
     if(!navOk){ openPin("ask", ()=>{ navOk = true; setRole("nav"); }); return; }
   }
@@ -3943,7 +4353,13 @@ function renderRemind(){
 }
 
 /* ================= КАПИТАНСКИЙ ЭКРАН: ТРИ КНОПКИ ================= */
-const CAP_MORE = ["cal","chal","gto","mine","how"];
+const CAP_MORE = [
+  {id:"cal",  ic:"🗓",  t:"Календарь"},
+  {id:"chal", ic:"🎴",  t:"Вызовы"},
+  {id:"gto",  ic:"🏅",  t:"ГТО"},
+  {id:"mine", ic:"✍️", t:"Моё"},
+  {id:"how",  ic:"❓",  t:"Справка"}
+];
 function trainToday(){
   const dow = (new Date()).getDay(); /* 0=вс */
   if(dow===2) return {t:"Вт · сила и гибкость", on:true};
@@ -3956,7 +4372,6 @@ function renderCapBoard(){
   const view = document.getElementById("view-today");
   view.classList.toggle("capmode", cap);
   document.getElementById("capTiles").hidden = !cap;
-  document.getElementById("capMore").hidden = !cap;
   if(!cap) return;
 
   /* 1 — урок */
@@ -3979,26 +4394,26 @@ function renderCapBoard(){
 
   const T = [
     {v:"lessons", c:"cyan",   ic:"📖", t1:"Разобрать урок",  t2:lessonSub},
-    {v:"test",    c:"violet", ic:"✅", t1:"Пройти тест",     t2:testSub},
+    {v:"test",    c:"violet", ic:"📝", t1:"Пройти тест",     t2:testSub},
     {v:"gto",     c:"red",    ic:"⚡", t1:"Тренировка",      t2:trSub}
   ];
-  document.getElementById("capTiles").innerHTML = '<div class="tiles">' + T.map(x=>
+
+  /* план дня из календаря — у капитана он был скрыт вместе со второй колонкой */
+  let planHtml = "";
+  if(pl && pl.info && pl.info.i){
+    planHtml = '<div class="capplan"><div class="ph2">Сегодня по плану</div>'
+      + '<div class="pt2">'+esc(pl.info.i)+'</div>'
+      + (pl.week ? '<div class="pw">Неделя «'+esc(pl.week.th)+'» · '+esc(pl.week.go)+'</div>' : '')
+      + '</div>';
+  }
+
+  document.getElementById("capTiles").innerHTML = planHtml + '<div class="tiles">' + T.map(x=>
     '<button class="tile" data-go="'+x.v+'" style="--tc:'+C[x.c]+'"><span class="ic">'+x.ic+'</span>'
     + '<span class="tx"><b class="t1">'+x.t1+'</b><span class="t2">'+esc(x.t2)+'</span></span>'
     + '<span class="ar">→</span></button>').join("") + '</div>';
   document.querySelectorAll("#capTiles [data-go]").forEach(b=>b.addEventListener("click", ()=>show(b.dataset.go)));
 
-  document.getElementById("capMoreBox").innerHTML = CAP_MORE.map(id=>{
-    const t = TABS.find(x=>x.id===id); if(!t) return "";
-    return '<button data-go="'+id+'" style="--mc2:'+C[t.color]+'">'+t.label+'</button>';
-  }).join("");
-  document.querySelectorAll("#capMoreBox [data-go]").forEach(b=>b.addEventListener("click", ()=>show(b.dataset.go)));
 }
-document.getElementById("capMoreBtn").addEventListener("click", ()=>{
-  const b = document.getElementById("capMoreBox");
-  b.hidden = !b.hidden;
-  document.getElementById("capMoreBtn").textContent = b.hidden ? "ещё ▾" : "свернуть ▴";
-});
 document.getElementById("capBackBtn").addEventListener("click", ()=>show("today"));
 
 function toggleVahta(dateKey, id, on){
@@ -4921,6 +5336,34 @@ document.getElementById("iOpen").addEventListener("click", ()=>{
 const ORAL_CHUNK = 12;
 
 const CHECKS = {
+  L6:[
+    {ex:"Сюжет", s:"Что насторожило Одиссея в пещере?", h:"размеры", a:"Пещера огромная, вход завален неподъёмным камнем — значит, хозяин не человек. Внутри скот, сыр, молоко: тут живут постоянно.", w:"Ждём и наблюдение, и вывод из него."},
+    {ex:"Сюжет", s:"Почему Одиссей остался ждать циклопа?", h:"обычай", a:"Из любопытства и в расчёте на закон гостеприимства: хозяин обязан принять и одарить гостя. Спутники звали уходить — он не послушал.", w:"Важно назвать это ошибкой героя, а не удалью."},
+    {ex:"Сюжет", s:"Сколько спутников погибло и как Гомер об этом рассказывает?", h:"по двое", a:"Шестеро, по двое три раза. Гомер повторяет это почти одними словами — жестокость показана как привычка.", w:"Заодно проверяем, понял ли он роль повторов."},
+    {ex:"Сюжет", s:"Почему нельзя было убить спящего циклопа?", h:"вход", a:"Камень у входа мог сдвинуть только великан. Убей его — и все погибли бы в пещере. Поэтому ослепили.", w:"Ключевая проверка на понимание, а не на память."},
+    {ex:"Сюжет", s:"Зачем понадобилось имя Никто?", h:"соседи", a:"Чтобы соседи-циклопы не пришли на помощь: на крик «Никто меня губит» они решили, что Полифем бредит.", w:"Имя выбрано заранее — это часть плана."},
+    {ex:"Сюжет", s:"Как выбрались из пещеры?", h:"стадо", a:"Привязались под баранами. Слепой Полифем ощупывал спины сверху и людей не нашёл.", w:"Простой вопрос, но его любят на пересказе."},
+    {ex:"Герой", s:"Какую ошибку Одиссей совершил в конце и чем она обернулась?", h:"гордость", a:"Крикнул с корабля своё настоящее имя. Полифем позвал отца Посейдона — и бог моря преследовал его десять лет.", w:"Хитрость спасла, гордость едва не погубила."},
+    {ex:"Герой", s:"Как Одиссей оправдывает эпитет «хитроумный»?", h:"четыре хода", a:"Вино, ложное имя Никто, кол из оливы и выход под баранами — каждый ход готовит следующий.", w:"Просим перечислить именно ходы, а не общие слова."},
+    {ex:"Герой", s:"Что общего у Одиссея с Гераклом и чем они различаются?", h:"главный вопрос", a:"Общее — храбрость и умение выйти из безвыходного положения. Разное — Геракл полубог и побеждает силой, Одиссей смертный и побеждает умом.", w:"Самый вероятный вопрос урока. Должен отвечать без запинки."},
+    {ex:"Теория", s:"Чем эпитет отличается от сравнения? Приведи пример из текста.", h:"слово-связка", a:"Эпитет — красочное определение: «хитроумный Одиссей». Сравнение — сопоставление со словом как, словно, подобен: «подобен скале необъятной».", w:"Пример обязательно из текста, а не выдуманный."},
+    {ex:"Теория", s:"Зачем в поэме повторы?", h:"её пели", a:"Поэму пели наизусть: формулы держали ритм и помогали памяти. Плюс повтор выделяет главное и задаёт круговорот времени.", w:"Ответ «автор забыл» не засчитывается."},
+    {ex:"Теория", s:"Миф это или легенда?", h:"и то и то", a:"За миф — боги и циклопы. За легенду — смертный герой и Троянская война, которая действительно была. В «Одиссее» соединились оба начала.", w:"Здесь ценится рассуждение, а не одно слово."}
+  ],
+  L7:[
+    {ex:"Формулы", s:"Как найти скорость по течению и против течения?", h:"плюс и минус", a:"По течению — собственная плюс течение. Против — собственная минус течение.", w:"Основа всей темы, должно отскакивать."},
+    {ex:"Формулы", s:"Скорость по течению 28,4, течение 1,4. Какая против течения?", h:"дважды", a:"25,6 км/ч. Сначала собственная 28,4 − 1,4 = 27, потом против 27 − 1,4 = 25,6.", w:"Если ответил 27 — попал в главную ловушку темы."},
+    {ex:"Формулы", s:"На сколько скорость по течению больше, чем против?", h:"два", a:"На две скорости течения: одну прибавили, другую отняли.", w:"Хороший быстрый способ пересчитать."},
+    {ex:"Задача а", s:"Какой путь прошёл теплоход и как ты его считал?", h:"два отрезка", a:"160 км: 28,4 · 3,2 = 90,88 по течению и 25,6 · 2,7 = 69,12 против, вместе 160.", w:"Нужен ход, а не только число."},
+    {ex:"Задача б", s:"Сколько времени лодка была в пути?", h:"сложить", a:"2,6 ч: 46,68 : 38,9 = 1,2 ч и 49,7 : 35,5 = 1,4 ч.", w:"Спрашиваем, проверял ли он деление обратным умножением."},
+    {ex:"Задача б", s:"Почему против течения времени ушло больше?", h:"здравый смысл", a:"Путь длиннее, а скорость меньше — время неизбежно больше. Это заодно проверка ответа.", w:"Учим проверять правдоподобность, а не только арифметику."},
+    {ex:"Формулы", s:"Как найти время, зная путь и скорость?", h:"единицы", a:"t = S : v. Проверка по единицам: км : км/ч даёт часы.", w:"Проверка единицами спасает от перевёрнутой формулы."},
+    {ex:"Задача в", s:"Чему равны 3/8 от 4/9 и как ты это получил?", h:"сократить", a:"1/6. Дроби перемножают и сокращают: 3 и 9 на 3, 4 и 8 на 4.", w:"Сокращение до умножения — экономия времени."},
+    {ex:"Задача в", s:"Как найти число, если 1/6 его равна 30?", h:"делим", a:"180. Известна часть, ищем целое — делим: 30 : 1/6 = 30 · 6.", w:"Главное правило второй темы."},
+    {ex:"Задача в", s:"Как проверить ответ 180?", h:"обратный ход", a:"4/9 от 180 = 80, затем 3/8 от 80 = 30 — совпало с условием.", w:"Проверка обратным ходом должна стать привычкой."},
+    {ex:"Правило", s:"Когда умножают на дробь, а когда делят?", h:"что известно", a:"Дробь от числа — умножают. Число по его дроби — делят.", w:"Отличать по вопросу: известно целое или часть."},
+    {ex:"Деление", s:"46,68 : 38,9 — что делают с запятыми?", h:"одинаково", a:"Сдвигают вправо на один знак в обеих частях: 466,8 : 389.", w:"Сдвиг только в одной части — ответ в десять раз мимо."}
+  ],
   L5:[
     {ex:"Карточка · англ → рус", s:"selection", h:"не «селекция»", a:"выбор, подборка, ассортимент", w:"Ложный друг переводчика. A wide selection of shops."},
     {ex:"Карточка · англ → рус", s:"food outlet", h:"где едят", a:"кафе, ресторан быстрого питания", w:"Outlet — торговая точка, здесь точка питания."},
@@ -5022,6 +5465,14 @@ const CHECKS = {
 
 /* Задания, которые проверяются глазами взрослого, а не автоматически */
 const MANUAL = [
+  {id:"M5", lid:"L6", subject:"Литература", color:"violet", date:"2026-09-11",
+   title:"Одиссей и Полифем — ответы на вопросы стр. 30",
+   task:"Прочитать эпизод «Одиссей на острове циклопов. Полифем» и ответить на вопросы рубрики «Размышляем о прочитанном», стр. 30. Уметь прочитать вслух строки о встрече с циклопом.",
+   look:"Ответы своими словами, а не переписанные. В вопросе 3 названы отдельно эпитеты и отдельно сравнения, с цитатами из текста. В вопросе 7 ясно сказано главное: Геракл побеждает силой, Одиссей умом. В вопросе 10 есть рассуждение с двух сторон, а не одно слово."},
+  {id:"M6", lid:"L7", subject:"Математика", color:"red", date:"2026-09-11",
+   title:"Три задачи: движение по реке и дробь от числа",
+   task:"Решить в тетради три задачи: а) теплоход 3,2 ч по течению и 2,7 ч против, скорость по течению 28,4 км/ч, течение 1,4 км/ч — найти путь; б) лодка 46,68 км по течению и 49,7 км против, собственная скорость 37,2 км/ч, течение 1,7 км/ч — найти время; в) найти число, если 3/8 от 4/9 этого числа равны 30.",
+   look:"Ответы: 160 км, 2,6 ч, 180. В задаче «а» собственная скорость 27 км/ч должна стоять отдельным действием — без неё решение угадано. Каждое действие с пояснением, в конце слово «Ответ». Деления проверены обратным умножением."},
   {id:"M4", lid:"L5", subject:"Английский язык", color:"blue", date:"2026-09-09",
    title:"Реклама места для развлечения",
    task:"Учебник стр. 10: составить и записать в тетрадь рекламу места для развлечения по образцу упр. 2. Плюс подготовить отличное чтение и знать перевод, выучить слова на карточке.",
@@ -5066,12 +5517,15 @@ const TODO = [
    t:"Фото стр. 10 — раздел 1b",
    w:"Получено 10 сентября. Все пять объявлений разобраны с переводом, ответы на упр. 2a и 2b даны, рамка Check these words сверена с карточкой учителя: в книге одиннадцать слов, учитель добавил ещё пять."},
 
-  {id:"T5", g:"Информатика", color:"cyan", prio:"nice",
+  {id:"T5", g:"Информатика", color:"cyan", prio:"nice", closed:"10 сен",
    t:"Фото §10 учебника Босовой",
-   w:"Презентация учителя есть и разобрана целиком, но текст параграфа может добавить формулировки, которые спросят на опросе."},
-  {id:"T6", g:"Информатика", color:"cyan", prio:"nice",
+   w:"Снято с очереди 10 сентября: учебника информатики у ребёнка на руках нет. Учитель выкладывает материал презентациями в МЭШ, по ним и работаем. Если учебник когда-нибудь появится, пункт вернём."},
+  {id:"T6", g:"Информатика", color:"cyan", prio:"nice", closed:"10 сен",
    t:"Фото конспекта из тетради",
-   w:"Учитель мог что-то пропустить или, наоборот, дать сверх учебника. Разбор тогда встанет ровно под то, что записано на уроке."},
+   w:"Снято с очереди 10 сентября по той же причине: конспект пишется по презентации, а презентация у нас и так есть целиком. Отдельное фото тетради ничего не добавит."},
+  {id:"T20", g:"Информатика", color:"cyan", prio:"crit",
+   t:"Презентация учителя из МЭШ — по каждой новой теме",
+   w:"Учебника нет, поэтому презентация из МЭШ и есть единственный источник по информатике. Присылайте её сразу, как появляется новая тема: файл целиком, а не скриншоты отдельных слайдов. По ней собирается разбор, тест и устная проверка — так уже сделаны «Знаковые информационные модели»."},
 
   /* --- один раз, но польза на весь год --- */
   {id:"T7", g:"На весь год", color:"amber", prio:"year", closed:"9 сен",
@@ -5080,9 +5534,9 @@ const TODO = [
   {id:"T8", g:"На весь год", color:"amber", prio:"year", closed:"9 сен",
    t:"Оглавление учебника английского",
    w:"Получено и записано во вкладке «Курс»: шесть модулей со страницами, грамматикой и лексикой на весь год. Оглавление рабочей тетради отдельно не нужно — нумерация разделов у них общая."},
-  {id:"T9", g:"На весь год", color:"amber", prio:"year",
+  {id:"T9", g:"На весь год", color:"amber", prio:"year", closed:"10 сен",
    t:"Оглавление учебника информатики",
-   w:"Босова, 6 класс. Искал 10 сентября в сети — не нашлось: по этому учебнику выложены только решебники по упражнениям, самого оглавления нет. Нумерация параграфов сквозная, по номеру из имени файла учителя тема найдётся сразу."},
+   w:"Снято с очереди 10 сентября: учебника нет на руках, а в сети оглавление Босовой не выложено — искал. Вместо оглавления журнал ведёт свой перечень тем: каждая присланная презентация из МЭШ добавляет строку. К декабрю получится тот же список, только по факту, а не заранее."},
   {id:"T10", g:"На весь год", color:"amber", prio:"year", closed:"10 сен",
    t:"Обложки учебников по остальным предметам",
    w:"Получено 10 сентября: русский, литература, математика (две части), история, география. Все издания записаны во вкладке «Курс», оглавления пяти учебников расшифрованы и лежат там же."},
@@ -5896,6 +6350,9 @@ const SLIPS_SEED = [
   {d:"10 сен", w:"Та же ошибка с параграфом повторилась",
    y:"Правило было проговорено вслух накануне, но нигде не записано — и не сработало.",
    f:"Проговорить недостаточно. Правило живёт только записанным — отсюда и этот список.", rep:true},
+  {d:"10 сен", w:"Мокап показывал один вариант вместо нескольких",
+   y:"Экран шапки собрал в одном виде и предложил его как решение. Выбирать было не из чего, пришлось переделывать.",
+   f:"Мокап — это всегда минимум три рабочих варианта с «за» и «против». Один вариант — не выбор, а навязывание.", rep:false},
   {d:"10 сен", w:"Правка в ГТО сделана вместо показа",
    y:"Попросили показать варианты, а я сразу изменил журнал. Пришлось откатывать.",
    f:"«Покажи» ≠ «сделай». Вариант — это мокап отдельным файлом, журнал не трогать до слова «внедряй».", rep:false},
@@ -6202,7 +6659,15 @@ document.addEventListener("keydown", e=>{
 
 /* --- управление кодом во вкладке «Прогресс» --- */
 function renderPinBox(){
-  const on = hasPin();
+  const on = hasPin(), ask = state.askPin !== false;
+  const pp = document.getElementById("pinPause");
+  if(pp){
+    pp.textContent = ask ? "Не спрашивать пока" : "Спрашивать снова";
+    pp.style.background = ask ? "" : "var(--red)";
+    pp.style.color = ask ? "" : "#fff";
+    pp.hidden = !on;
+    document.getElementById("pinPauseNote").hidden = ask || !on;
+  }
   document.getElementById("pinState").innerHTML =
     '<span class="pinbadge" style="background:'+(on?"var(--green)":"var(--red)")+'">'
     + (on ? "код установлен" : "кода нет") + '</span>';
@@ -6211,7 +6676,19 @@ function renderPinBox(){
     : "Сейчас в режим штурмана можно войти одним нажатием. Поставьте код — и ответы, устная проверка и приёмка работ закроются от ребёнка.";
   document.getElementById("pinSet").textContent = on ? "Сменить код" : "Поставить код";
   document.getElementById("pinOff").hidden = !on;
+  if(on && !ask){
+    document.getElementById("pinState").innerHTML =
+      '<span class="pinbadge" style="background:var(--red)">код на паузе</span>';
+    document.getElementById("pinStateTxt").textContent =
+      "Код сохранён, но сейчас не спрашивается: в режим штурмана пускает одним нажатием. Так удобно, пока вы сами настраиваете журнал.";
+  }
 }
+document.getElementById("pinPause").addEventListener("click", ()=>{
+  state.askPin = state.askPin === false;
+  if(state.askPin) navOk = false;
+  save(); renderPinBox(); renderNav();
+  toast(state.askPin ? "Код снова спрашивается" : "Код на паузе — вход штурманом без кода");
+});
 document.getElementById("pinSet").addEventListener("click", ()=>{
   if(hasPin()) openPin("ask", ()=>openPin("new", renderPinBox));
   else openPin("new", renderPinBox);
