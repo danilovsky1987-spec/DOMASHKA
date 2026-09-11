@@ -1477,6 +1477,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Календарь переделан. Два вида: «Неделя» — как было, но открывается на текущей неделе, прошедшие приглушены; «Месяц» — компактный обзор, весь месяц на экране без прокрутки. Название месяца больше не дублируется, появилась кнопка «Сегодня» и полоска «вахта закрыта N дней из 30». Пять румбов под панелью стали фильтром со счётчиками: нажатие оставляет только дни этого румба. Повторяющиеся тренировки ушли в описание недели, точки вахты остались только у прошедших дней</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Новый разбор по литературе: Гомер, «Одиссея», Одиссей на острове циклопов. Восемь шагов эпизода для пересказа, ответы на все десять вопросов рубрики «Размышляем о прочитанном» со стр. 30, эпитеты и сравнения с цитатами, шесть терминов. 20 вопросов в тесте, 12 устных, карточка приёмки. Вопросы сверены по двум источникам</td></tr>
           <tr><td class="num" style="text-align:left">10 сен</td><td style="color:var(--ink-2)">Первый разбор по математике: движение по реке и дробь от числа. Четыре скорости, три формулы пути, все три задачи разобраны по шагам с проверками (160 км, 2,6 ч, 180), шесть ловушек — главная из них «вычли течение один раз вместо двух». 20 вопросов в тесте, 12 устных, карточка приёмки. Появились два новых предмета и два новых цвета: литература фиолетовая, математика красная</td></tr>
+          <tr><td class="num" style="text-align:left">11 сен</td><td style="color:var(--ink-2)">Починена вкладка «Уроки» у английской диагностики: семь карточек открывались пустыми. Тесты по ним были, а самих разборов не было — теперь написаны все семь. Времена глагола (три времени по сигналам, двадцать неправильных глаголов таблицей), артикли и предлоги (пятнадцать готовых сочетаний вместо правил), словарный запас (антонимы парами, устойчивые сочетания, магазины), чтение (оба текста целиком и четыре приёма поиска ответа), построение фразы (две схемы порядка слов), модальные и сравнение (can · must · have to, таблица степеней), будущее и количество (will против going to, much · many · some · any, часы и даты). В каждом — разбор всех заданий, ловушки, самопроверка и порядок отработки для слабой полки</td></tr>
         </tbody>
       </table>
     </div>
@@ -1933,6 +1934,36 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <button class="btn ghost" id="impBtn">Загрузить из файла</button>
       <input type="file" id="impFile" accept="application/json,.json" hidden>
       <button class="btn ghost" id="resetBtn">Начать заново</button>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Синхронизация <em>между вашим устройством и планшетом</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:84ch;margin:0 0 14px">
+      Файл в загрузки — это ручная страховка: сделал и забыл, а через месяц выяснилось, что последняя
+      копия была в сентябре. Со синхронизацией отметки уезжают на сервер сами, и журнал на планшете
+      и на компьютере показывает одно и то же.</p>
+    <div id="syncBox" style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+      <div id="syncStat" style="border-radius:12px;padding:10px 14px;font-size:14.5px;font-weight:700"></div>
+      <label style="display:flex;flex-direction:column;gap:5px;font-size:13.5px;font-weight:700;color:var(--ink-2)">
+        Адрес базы
+        <input type="url" id="syncUrl" placeholder="https://…firebasedatabase.app"
+          style="font:inherit;font-size:14.5px;font-weight:500;padding:11px 13px;border-radius:11px;
+          border:1.5px solid var(--line);background:var(--card);color:var(--ink)">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:5px;font-size:13.5px;font-weight:700;color:var(--ink-2)">
+        Код семьи
+        <input type="text" id="syncRoom" placeholder="длинный и непростой"
+          style="font:inherit;font-size:14.5px;font-weight:500;padding:11px 13px;border-radius:11px;
+          border:1.5px solid var(--line);background:var(--card);color:var(--ink)">
+        <span style="font-weight:500;font-size:12.5px;color:var(--ink-3)">
+          Одинаковый на обоих устройствах. Кто знает адрес и код — видит журнал.</span>
+      </label>
+      <div class="filebtns">
+        <button class="btn" id="syncOn">Подключить</button>
+        <button class="btn ghost" id="syncGen">Придумать код</button>
+        <button class="btn ghost" id="syncOff">Отключить</button>
+      </div>
     </div>
   </div>
   <div class="sec" style="--sc2:var(--red)">
@@ -2791,6 +2822,888 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <li>Ответить вслух на три вопроса рубрики «Проверьте себя», особенно на третий — он обведён.</li>
       <li>Написать пять предложений в тетради, выбрав пять разных направлений.</li>
       <li>«Моя лаборатория» стр. 9 — по желанию. Если делает, это закрывает пункт «Дело» в вахте.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D1">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 1 из 7 · 12 заданий</span>
+        <h2>Времена глагола</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Несущая стена всего английского. Три времени, которые должны различаться сами собой: <b>каждый день</b>, <b>прямо сейчас</b> и <b>вчера</b>. Если они путаются, всё, что даёт шестой класс, ставится на кривой фундамент. Здесь разобрано, как их отличать по словам-сигналам, и что делать с формами глагола.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Три времени по сигналам <em>не по правилу, а по слову в предложении</em></h3>
+    <div class="grid g3">
+      <div class="rumb" style="--rc:var(--green)"><div class="head"><span class="ic">🔁</span><span class="t">Present Simple</span></div><div class="body">
+        <span class="d">Обычно, всегда, по расписанию. Форма: <b>I / we / you / they work</b>, но <b>he / she / it works</b>.</span>
+        <span class="k">every day, usually, always, often, on Fridays</span></div></div>
+      <div class="rumb" style="--rc:var(--amber)"><div class="head"><span class="ic">⏳</span><span class="t">Present Continuous</span></div><div class="body">
+        <span class="d">Происходит в эту самую минуту. Форма: <b>am / is / are + глагол-ing</b>.</span>
+        <span class="k">now, at the moment, Look!, Listen!</span></div></div>
+      <div class="rumb" style="--rc:var(--red)"><div class="head"><span class="ic">⬅️</span><span class="t">Past Simple</span></div><div class="body">
+        <span class="d">Закончилось в прошлом. Форма: <b>глагол + -ed</b> или вторая форма неправильного глагола.</span>
+        <span class="k">yesterday, last summer, ago, in 2020</span></div></div>
+    </div>
+    <div class="note" style="--nc2:var(--cyan);margin-top:16px;max-width:74ch">
+      <b>Главное противопоставление пятого класса</b>
+      <span>«Tom <b>plays</b> football every Friday, but today he <b>is playing</b> tennis». Одно предложение, два времени: сначала привычка, потом сегодняшний случай. Если это различается без раздумий — время сдано.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Present Simple <em>четыре задания диагностики</em></h3>
+    <div class="ex" style="--nc:var(--green)"><span class="n">1</span><div>
+      <p class="en">My sister _____ TV every evening. → <b>watches</b></p>
+      <p class="why">«Every evening» — повторяется, значит Present Simple. Sister = she, поэтому к глаголу приклеивается <b>-s</b>. Правило коротко: <b>he, she, it — не забудь -s</b>.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--green)"><span class="n">4</span><div>
+      <p class="en">_____ you like pizza? → <b>Do</b></p>
+      <p class="why">Вопрос в Present Simple строится с do или does. <b>Do</b> — с I, we, you, they. <b>Does</b> — только с he, she, it. Are и Is здесь не подходят: like — обычный глагол, а не форма быть.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--green)"><span class="n">10</span><div>
+      <p class="en">Where _____ your father work? → <b>does</b></p>
+      <p class="why">Your father = he → does. И тут же вторая половина правила: <b>-s уходит к does, а глагол остаётся чистым</b>. «Does he works» — ошибка, буква -s в предложении только одна.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--green)"><span class="n">5</span><div>
+      <p class="en">She _____ got two brothers. → <b>has</b></p>
+      <p class="why">Have got означает «иметь». С he, she, it — всегда <b>has got</b>, со всеми остальными have got. Тот же закон -s, просто у have он выглядит по-особому.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Present Continuous <em>три задания</em></h3>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">2</span><div>
+      <p class="en">Look! The cat _____ on my bed. → <b>is sleeping</b></p>
+      <p class="why">Слово <b>Look!</b> — прямой сигнал: смотри, это происходит сейчас. Cat = it → is + sleeping.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">7</span><div>
+      <p class="en">I _____ my homework now. → <b>am doing</b></p>
+      <p class="why">Сигнал «now». С <b>I</b> всегда <b>am</b>, а не is. Табличка на всю жизнь: I → am, he/she/it → is, we/you/they → are.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">9</span><div>
+      <p class="en">Tom _____ football every Friday, but today he _____ tennis. → <b>plays / is playing</b></p>
+      <p class="why">Самое важное задание всей темы. «Every Friday» тянет Present Simple, «today» — Present Continuous. Два времени в одном предложении как раз и показывают, понял ли человек разницу или заучил формы.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Past Simple <em>пять заданий, и половина из них про неправильные глаголы</em></h3>
+    <div class="ex" style="--nc:var(--red)"><span class="n">3</span><div>
+      <p class="en">We _____ to the zoo last Sunday. → <b>went</b></p>
+      <p class="why">«Last Sunday» — прошлое. Go неправильный: <b>go → went → gone</b>. Формы «goed» не существует.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">6</span><div>
+      <p class="en">They _____ at school yesterday. → <b>were</b></p>
+      <p class="why">Прошедшее время глагола be: <b>was</b> для I, he, she, it и <b>were</b> для we, you, they. They — значит were.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">8</span><div>
+      <p class="en">He didn't _____ the film. → <b>like</b></p>
+      <p class="why">Ключевое правило: <b>после did и didn't глагол стоит в начальной форме</b>. Прошедшее время уже спрятано внутри слова didn't, второй раз его показывать не надо. «He didn't liked» — типичная ошибка.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">11</span><div>
+      <p class="en">Yesterday I _____ a letter to my friend. → <b>wrote</b></p>
+      <p class="why">Write → <b>wrote</b> → written. Окончание -ed к неправильным глаголам не приклеивается никогда: «writed» не бывает.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">12</span><div>
+      <p class="en">We _____ a lot of photos in London last summer. → <b>took</b></p>
+      <p class="why">Take → <b>took</b> → taken. Два задания подряд на неправильные глаголы стоят не случайно: проверяют, выучен ли список целиком, а не пара слов.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Двадцать неправильных глаголов <em>с них начинают — это самые частые</em></h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="text-align:left">Начальная</th><th style="text-align:left">Прошедшее</th><th style="text-align:left">Перевод</th></tr></thead>
+        <tbody>
+          <tr><td>be</td><td>was / were</td><td style="color:var(--ink-2)">быть</td></tr>
+          <tr><td>go</td><td>went</td><td style="color:var(--ink-2)">идти, ехать</td></tr>
+          <tr><td>have</td><td>had</td><td style="color:var(--ink-2)">иметь</td></tr>
+          <tr><td>do</td><td>did</td><td style="color:var(--ink-2)">делать</td></tr>
+          <tr><td>say</td><td>said</td><td style="color:var(--ink-2)">сказать</td></tr>
+          <tr><td>get</td><td>got</td><td style="color:var(--ink-2)">получать</td></tr>
+          <tr><td>make</td><td>made</td><td style="color:var(--ink-2)">делать, изготавливать</td></tr>
+          <tr><td>take</td><td>took</td><td style="color:var(--ink-2)">брать</td></tr>
+          <tr><td>see</td><td>saw</td><td style="color:var(--ink-2)">видеть</td></tr>
+          <tr><td>come</td><td>came</td><td style="color:var(--ink-2)">приходить</td></tr>
+          <tr><td>write</td><td>wrote</td><td style="color:var(--ink-2)">писать</td></tr>
+          <tr><td>read</td><td>read</td><td style="color:var(--ink-2)">читать (пишется так же, читается «рэд»)</td></tr>
+          <tr><td>eat</td><td>ate</td><td style="color:var(--ink-2)">есть</td></tr>
+          <tr><td>drink</td><td>drank</td><td style="color:var(--ink-2)">пить</td></tr>
+          <tr><td>give</td><td>gave</td><td style="color:var(--ink-2)">давать</td></tr>
+          <tr><td>find</td><td>found</td><td style="color:var(--ink-2)">находить</td></tr>
+          <tr><td>buy</td><td>bought</td><td style="color:var(--ink-2)">покупать</td></tr>
+          <tr><td>bring</td><td>brought</td><td style="color:var(--ink-2)">приносить</td></tr>
+          <tr><td>swim</td><td>swam</td><td style="color:var(--ink-2)">плавать</td></tr>
+          <tr><td>run</td><td>ran</td><td style="color:var(--ink-2)">бежать</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Ловушки <em>четыре места, где ошибаются почти все</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Двойное прошедшее</b><span>«He didn't liked», «Did you went?» — прошедшее время показано дважды.</span><span class="hint">После did и didn't глагол чистый: like, go, write.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Потерянная -s</b><span>«She watch TV», «My father go to work» — забыли окончание у he, she, it.</span><span class="hint">Проверка: если подлежащее можно заменить на he, she или it — нужна -s.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Лишняя -s после does</b><span>«Does he works?» — -s ушла к does, в глаголе её быть не должно.</span><span class="hint">Одна -s на предложение.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>-ed у неправильных</b><span>«writed», «taked», «goed» — попытка применить общее правило там, где действует список.</span><span class="hint">Неправильные глаголы учатся только наизусть, правила для них нет.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Как выбрать между Present Simple и Present Continuous?</summary><div class="ans">Ответ: по словам-сигналам. <b>Every day, usually, always</b> → Present Simple. <b>Now, at the moment, Look!, Listen!</b> → Present Continuous. Первое — про привычку, второе — про эту минуту.</div></details>
+    <details><summary>Почему «Does he works?» неправильно?</summary><div class="ans">Ответ: окончание -s уже перешло к вспомогательному does. Верно <b>Does he work?</b> — одна -s на всё предложение.</div></details>
+    <details><summary>Какую форму брать после didn't?</summary><div class="ans">Ответ: <b>начальную</b>. He didn't <b>like</b>, they didn't <b>go</b>. Прошедшее уже внутри didn't.</div></details>
+    <details><summary>Was или were с they?</summary><div class="ans">Ответ: <b>were</b>. Was — для I, he, she, it. Were — для we, you, they.</div></details>
+    <details><summary>Назови три формы: write, take, go.</summary><div class="ans">Ответ: write → <b>wrote</b> → written, take → <b>took</b> → taken, go → <b>went</b> → gone.</div></details>
+    <details><summary>Переведи: «Обычно он играет в футбол, но сегодня играет в теннис».</summary><div class="ans">Ответ: He usually <b>plays</b> football, but today he <b>is playing</b> tennis. Два времени в одном предложении — это и есть проверка темы.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Взять только <b>два</b> времени: Present Simple и Present Continuous. Past Simple пока не трогать, иначе смешается всё.</li>
+      <li>Каждый день десять минут устно: три предложения про «обычно» и три про «прямо сейчас» — про себя, не из учебника.</li>
+      <li>Когда эти два перестанут путаться, добавить Past Simple и слова-сигналы yesterday, last, ago.</li>
+      <li>Отдельно карточками — двадцать глаголов из таблицы выше. По пять в день с обязательным возвратом к старым.</li>
+      <li>Пройти тест по этой теме. Ниже 80% — вернуться к пункту 2, а не читать разбор ещё раз.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D2">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 2 из 7 · 8 заданий</span>
+        <h2>Артикли, предлоги, местоимения</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Самые маленькие слова и самые вредные. В русском языке артиклей нет вообще, а предлоги ставятся по другой логике — поэтому переводить их по одному бесполезно. <b>Служебные слова учатся кусками фраз, а не правилами:</b> не «in — это в», а сразу «in July», «on Monday», «at five o'clock».</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Артикли <em>три случая, больше пока не нужно</em></h3>
+    <div class="grid g3">
+      <div class="rumb" style="--rc:var(--green)"><div class="head"><span class="ic">1️⃣</span><span class="t">a / an</span></div><div class="body">
+        <span class="d">Один из многих, называем впервые. <b>an</b> — если слово начинается с гласного звука, <b>a</b> — если с согласного.</span>
+        <span class="k">a banana, a dog · an apple, an hour</span></div></div>
+      <div class="rumb" style="--rc:var(--amber)"><div class="head"><span class="ic">☝️</span><span class="t">the</span></div><div class="body">
+        <span class="d">Тот самый, уже известный — или единственный в мире.</span>
+        <span class="k">the sun, the moon, the sky, the table (эта самая)</span></div></div>
+      <div class="rumb" style="--rc:var(--ink-3)"><div class="head"><span class="ic">🚫</span><span class="t">без артикля</span></div><div class="body">
+        <span class="d">Имена, страны, школьные предметы, еда вообще, устойчивые сочетания.</span>
+        <span class="k">Max, Russia, Maths, have breakfast, go to school</span></div></div>
+    </div>
+    <div class="ex" style="--nc:var(--blue);margin-top:16px"><span class="n">1</span><div>
+      <p class="en">I have _____ apple and _____ banana. → <b>an / a</b></p>
+      <p class="why">Apple начинается с гласного звука — <b>an</b>. Banana с согласного — <b>a</b>. Важно: смотрят на <b>звук</b>, а не на букву. Поэтому «an hour» (h не произносится) и «a university» (звучит как «ю»).</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">2</span><div>
+      <p class="en">_____ sun is very bright today. → <b>The</b></p>
+      <p class="why">Солнце одно на всех, второго нет. Единственные в своём роде объекты всегда идут с <b>the</b>: the sun, the moon, the Earth, the sky.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Предлоги времени и места <em>две таблички, которые надо просто знать</em></h3>
+    <div class="grid g2">
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Время</span><span class="gn">от большого к малому</span></div><div class="gb">
+        <div class="row"><span><b>in</b> — месяцы, годы, времена года, части дня: in July, in 2026, in winter, in the morning</span></div>
+        <div class="row"><span><b>on</b> — дни недели и даты: on Monday, on the 5th of May, on Sunday morning</span></div>
+        <div class="row"><span><b>at</b> — точное время и несколько устойчивых: at 7 o'clock, at night, at the weekend</span></div>
+        <span class="exs">Чем точнее момент, тем «мельче» предлог</span></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">Место</span><span class="gn">по картинке</span></div><div class="gb">
+        <div class="row"><span><b>in</b> — внутри: in the box, in the room</span></div>
+        <div class="row"><span><b>on</b> — на поверхности: on the table, on the wall</span></div>
+        <div class="row"><span><b>under</b> — под: under the bed</span></div>
+        <div class="row"><span><b>at</b> — у, при, в точке: at school, at the door</span></div>
+        <span class="exs">Здесь помогает нарисовать, а не перевести</span></div></div>
+    </div>
+    <div class="ex" style="--nc:var(--amber);margin-top:16px"><span class="n">3</span><div>
+      <p class="en">My birthday is _____ July. → <b>in</b></p>
+      <p class="why">Месяц — значит in. Если бы стояла дата («on the 5th of July»), был бы on.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">4</span><div>
+      <p class="en">The book is _____ the table. → <b>on</b></p>
+      <p class="why">Книга лежит сверху, на поверхности — on. In значило бы «внутри стола», under — «под столом».</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Местоимения <em>две колонки, которые путают между собой</em></h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="text-align:left">Кто</th><th style="text-align:left">Перед существительным</th><th style="text-align:left">Без существительного</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td><b>my</b> bag</td><td>it's <b>mine</b></td></tr>
+          <tr><td>you</td><td><b>your</b> bag</td><td>it's <b>yours</b></td></tr>
+          <tr><td>he</td><td><b>his</b> bag</td><td>it's <b>his</b></td></tr>
+          <tr><td>she</td><td><b>her</b> bag</td><td>it's <b>hers</b></td></tr>
+          <tr><td>we</td><td><b>our</b> bag</td><td>it's <b>ours</b></td></tr>
+          <tr><td>they</td><td><b>their</b> bag</td><td>it's <b>theirs</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex" style="--nc:var(--violet);margin-top:16px"><span class="n">5</span><div>
+      <p class="en">This bag isn't yours, it's _____. → <b>mine</b></p>
+      <p class="why">Существительного после нет — значит длинная форма. «My bag», но «it's mine». Правило простое: <b>есть слово после — короткая форма, нет слова — длинная</b>.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">7</span><div>
+      <p class="en">This is Ann. _____ dog is white. → <b>Her</b></p>
+      <p class="why">Ann — она, дальше стоит существительное dog, значит нужна короткая форма женского рода: her. Hers было бы без слова после: «The dog is hers».</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Множественное число и there is <em>два отдельных задания</em></h3>
+    <div class="ex" style="--nc:var(--red)"><span class="n">6</span><div>
+      <p class="en">One child, three _____. → <b>children</b></p>
+      <p class="why">Исключение, окончание -s не работает. Весь короткий список: <b>man → men, woman → women, child → children, foot → feet, tooth → teeth, mouse → mice, goose → geese</b>. Отдельно: fish и sheep во множественном не меняются.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">8</span><div>
+      <p class="en">There _____ some milk in the fridge. → <b>is</b></p>
+      <p class="why">Milk нельзя посчитать («два молока» не говорят), а неисчисляемые всегда идут как единственное число. Поэтому <b>There is</b>. Было бы «There are apples» — яблоки считаются.</p>
+    </div></div>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:74ch">
+      <b>Быстрая проверка на исчисляемость</b>
+      <span>Попробуй поставить перед словом «два»: два яблока — можно, значит исчисляемое (are, many). Два молока — нельзя, значит неисчисляемое (is, much). Тот же приём пригодится в теме про much / many.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Пятнадцать готовых кусков <em>выучить целиком, не разбирая на слова</em></h3>
+    <div class="grid g3">
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Время</span></div><div class="gb">
+        <div class="row"><span>in July · in 2026 · in winter · in the morning</span></div>
+        <div class="row"><span>on Monday · on the 5th of May</span></div>
+        <div class="row"><span>at 7 o'clock · at night · at the weekend</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">Место</span></div><div class="gb">
+        <div class="row"><span>on the table · in the box · under the bed</span></div>
+        <div class="row"><span>at school · at home · in the park</span></div></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Артикли</span></div><div class="gb">
+        <div class="row"><span>an apple · an hour · a banana · a university</span></div>
+        <div class="row"><span>the sun · the moon · the sky</span></div>
+        <div class="row"><span>go to school · have breakfast — без артикля</span></div></div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Почему «an apple», но «a banana»?</summary><div class="ans">Ответ: <b>an</b> ставится перед гласным звуком, <b>a</b> — перед согласным. Смотрят именно на звук: an hour (h не читается), a university (звучит «ю»).</div></details>
+    <details><summary>in July или on July?</summary><div class="ans">Ответ: <b>in July</b>. In — с месяцами, годами, временами года. On — с днями недели и датами.</div></details>
+    <details><summary>Когда my, а когда mine?</summary><div class="ans">Ответ: если после идёт существительное — <b>my bag</b>. Если слова после нет — <b>it's mine</b>.</div></details>
+    <details><summary>Назови пять слов с особым множественным числом.</summary><div class="ans">Ответ: man → <b>men</b>, woman → <b>women</b>, child → <b>children</b>, foot → <b>feet</b>, mouse → <b>mice</b>. Ещё tooth → teeth, goose → geese.</div></details>
+    <details><summary>There is или there are с milk?</summary><div class="ans">Ответ: <b>There is</b>. Milk неисчисляемое, значит единственное число. Проверка: «два молока» сказать нельзя.</div></details>
+    <details><summary>Почему солнце с the?</summary><div class="ans">Ответ: оно <b>единственное в своём роде</b>. Так же the moon, the sky, the Earth.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Не учить правило. Учить <b>пять готовых сочетаний в неделю</b> из блока выше — целиком, как одно слово.</li>
+      <li>Выписать на один листок только те места, где он ошибся в тесте. Обычно их три-четыре, а не восемь.</li>
+      <li>Повесить листок на видное место и раз в день прочитать вслух. Служебные слова ставятся на слух, а не рассуждением.</li>
+      <li>Отдельно выучить семь слов с особым множественным числом — это закрытый список, его можно добить за два дня.</li>
+      <li>Пройти тест по теме. Ниже 80% — вернуться к своему листку.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D3">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 3 из 7 · 8 заданий</span>
+        <h2>Словарный запас</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Здесь проверяется не количество выученных слов, а <b>второй слой</b>: пары антонимов, устойчивые сочетания, вежливые формулы, умение сгруппировать слова по теме. Слово, выученное в столбик как перевод, на этих заданиях не срабатывает — нужно знать, <b>с чем оно ходит вместе</b>.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Антонимы <em>слова живут парами</em></h3>
+    <div class="ex" style="--nc:var(--green)"><span class="n">1</span><div>
+      <p class="en">Opposite of <b>expensive</b> → <b>cheap</b></p>
+      <p class="why">Дорогой — дешёвый. Учить прилагательные по одному невыгодно: пара запоминается почти так же легко, а знаний вдвое больше.</p>
+    </div></div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Размер и вид</span></div><div class="gb">
+        <div class="row"><span>big — small · long — short · tall — short</span></div>
+        <div class="row"><span>new — old · clean — dirty · beautiful — ugly</span></div></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Оценка</span></div><div class="gb">
+        <div class="row"><span>good — bad · easy — difficult · cheap — expensive</span></div>
+        <div class="row"><span>interesting — boring · happy — sad</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">Другое</span></div><div class="gb">
+        <div class="row"><span>hot — cold · fast — slow · early — late</span></div>
+        <div class="row"><span>open — closed · light — heavy · near — far</span></div></div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Месяцы и профессии <em>два закрытых списка</em></h3>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">2</span><div>
+      <p class="en">Which month comes after May? → <b>June</b></p>
+      <p class="why">Порядок: January, February, March, April, <b>May, June, July</b>, August, September, October, November, December. И правило письма: <b>месяцы и дни недели пишутся с большой буквы</b>, даже в середине предложения.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">3</span><div>
+      <p class="en">A person who works at school and teaches children is a… → <b>teacher</b></p>
+      <p class="why">Суффикс <b>-er</b> делает из действия того, кто его выполняет: teach → teacher, drive → driver, work → worker, sing → singer, play → player, write → writer. Зная суффикс, можно угадать десятки слов.</p>
+    </div></div>
+    <div class="note" style="--nc2:var(--violet);margin-top:14px;max-width:74ch">
+      <b>Профессии не на -er</b>
+      <span>doctor, actor, visitor — здесь <b>-or</b>. А ещё есть совсем отдельные: nurse (медсестра), cook (повар), vet (ветеринар), pilot, engineer, shop assistant (продавец).</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Устойчивые сочетания <em>слово важно не само по себе, а в компании</em></h3>
+    <div class="ex" style="--nc:var(--red)"><span class="n">4</span><div>
+      <p class="en">Мы обычно завтракаем в восемь. → We usually _____ at eight. → <b>have breakfast</b></p>
+      <p class="why">Не «do breakfast», не «eat the breakfast». По-английски еду <b>имеют</b>: have breakfast, have lunch, have dinner, have tea — и <b>без артикля</b>. Такие сочетания заучиваются целиком, разбирать их бессмысленно.</p>
+    </div></div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">have</span></div><div class="gb">
+        <div class="row"><span>have breakfast / lunch / dinner</span></div>
+        <div class="row"><span>have a shower · have a rest · have a good time</span></div></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">do и make</span></div><div class="gb">
+        <div class="row"><span>do homework · do sport · do the washing-up</span></div>
+        <div class="row"><span>make a cake · make a mistake · make friends</span></div>
+        <span class="exs">do — выполнять, make — создавать</span></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">go и take</span></div><div class="gb">
+        <div class="row"><span>go to school · go shopping · go home (без to!)</span></div>
+        <div class="row"><span>take a photo · take a bus · take a walk</span></div></div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Группировка и вежливость <em>два задания на понимание, а не на память</em></h3>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">5</span><div>
+      <p class="en">Which word is the odd one out: carrot, potato, <b>banana</b>, tomato?</p>
+      <p class="why">Banana — фрукт, остальные овощи. Проверяется умение видеть тему, а не переводить по отдельности. Полезно раскладывать новые слова по группам сразу: овощи, фрукты, одежда, транспорт, животные.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">6</span><div>
+      <p class="en">— Thank you very much! — _____ → <b>You're welcome.</b></p>
+      <p class="why">Русское «пожалуйста» — это два разных английских слова. <b>Please</b> — когда просишь («Give me the book, please»). <b>You're welcome</b> — когда отвечаешь на спасибо. Ещё подходит «Not at all» или «That's all right».</p>
+    </div></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="term" style="--tc2:var(--blue)"><b>Вежливые формулы</b><span>Excuse me — обратиться. Sorry — извиниться. Nice to meet you — при знакомстве. See you later — прощание.</span><span class="hint">Excuse me говорят до, sorry — после.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>Просьба</b><span>Can I…? / Could you…? / Here you are (вот, держи).</span><span class="hint">«Here you are» — когда что-то подаёшь.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Погода и магазины <em>темы, которые есть в каждом учебнике</em></h3>
+    <div class="ex" style="--nc:var(--cyan)"><span class="n">7</span><div>
+      <p class="en">It's _____. Take an umbrella! → <b>raining</b></p>
+      <p class="why">Зонт нужен в дождь. Про погоду говорят через it: <b>It's sunny / cloudy / windy / foggy / snowing / raining / hot / cold / warm / cool</b>. Обрати внимание: «It's raining» — с -ing, потому что идёт прямо сейчас.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--cyan)"><span class="n">8</span><div>
+      <p class="en">We buy bread and cakes at the… → <b>the baker's</b></p>
+      <p class="why">Название магазина в английском — это «у пекаря», с апострофом и -s. <b>baker's</b> — хлеб и выпечка, <b>butcher's</b> — мясо, <b>greengrocer's</b> — овощи и фрукты, <b>chemist's</b> — аптека. Можно и проще: bakery.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Ловушки <em>где перевод в столбик подводит</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Please вместо You're welcome</b><span>Русское «пожалуйста» переводится по-разному в зависимости от того, просишь ты или отвечаешь.</span><span class="hint">Спасибо → You're welcome. Просьба → please.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Do breakfast</b><span>Калька с русского «делать завтрак». По-английски еду have.</span><span class="hint">Сочетания учить целиком.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Маленькая буква в месяцах</b><span>«in july», «on monday» — по-русски так, по-английски нет.</span><span class="hint">Месяцы, дни недели и языки — всегда с большой.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Go to home</b><span>Home идёт без предлога: go home, come home, be at home.</span><span class="hint">Исключение, которое надо просто запомнить.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Назови антонимы: expensive, difficult, early, dirty.</summary><div class="ans">Ответ: expensive — <b>cheap</b>, difficult — <b>easy</b>, early — <b>late</b>, dirty — <b>clean</b>.</div></details>
+    <details><summary>Какой месяц идёт после May и как он пишется?</summary><div class="ans">Ответ: <b>June</b>, с большой буквы. Месяцы и дни недели в английском всегда пишутся с заглавной.</div></details>
+    <details><summary>Как сказать «завтракать»?</summary><div class="ans">Ответ: <b>have breakfast</b>, без артикля. Так же have lunch, have dinner.</div></details>
+    <details><summary>Чем отличается please от you're welcome?</summary><div class="ans">Ответ: <b>please</b> — в просьбе. <b>You're welcome</b> — в ответ на спасибо. По-русски и то и другое «пожалуйста».</div></details>
+    <details><summary>Где покупают хлеб, мясо и лекарства?</summary><div class="ans">Ответ: хлеб — at the <b>baker's</b>, мясо — at the <b>butcher's</b>, лекарства — at the <b>chemist's</b>. Овощи — at the greengrocer's.</div></details>
+    <details><summary>Как образовать профессию от teach, drive, sing?</summary><div class="ans">Ответ: суффикс <b>-er</b>: teacher, driver, singer. Но doctor и actor — на <b>-or</b>.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Не увеличивать объём, увеличить <b>частоту</b>: пять слов в день, но с обязательным возвратом к вчерашним и позавчерашним.</li>
+      <li>Слово записывать не переводом в столбик, а <b>с фразой</b>: не «cheap — дешёвый», а «cheap tickets — дешёвые билеты».</li>
+      <li>Прилагательные учить <b>парами</b> сразу: big — small, cheap — expensive.</li>
+      <li>Новые слова раскладывать по темам: еда, одежда, погода, магазины. Так они держатся друг за друга.</li>
+      <li>Читать адаптированные книжки уровня A1–A2 по главе в день, выписывая три-пять слов. Это даёт второй слой лучше любых карточек.</li>
+      <li>Пройти тест по теме. Ниже 80% — не читать разбор заново, а вернуться к карточкам.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D4">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 4 из 7 · 9 заданий · два текста</span>
+        <h2>Чтение и понимание</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Здесь проверяется не английский, а <b>стратегия</b>. Понять рассказ и найти строку в объявлении — два разных умения, поэтому текста два. Главная ошибка на этих заданиях одна: читать и пытаться перевести каждое слово. Правильный порядок обратный — <b>сначала вопрос, потом поиск ответа в тексте</b>.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Как читать, чтобы отвечать <em>четыре приёма</em></h3>
+    <div class="grid g2">
+      <div class="rumb" style="--rc:var(--green)"><div class="head"><span class="ic">1</span><span class="t">Сначала вопрос</span></div><div class="body">
+        <span class="d">Прочитать вопрос <b>до</b> текста. Тогда глаза сами цепляются за нужное место, а не скользят по всему подряд.</span></div></div>
+      <div class="rumb" style="--rc:var(--blue)"><div class="head"><span class="ic">2</span><span class="t">Не переводить всё</span></div><div class="body">
+        <span class="d">Незнакомое слово можно пропустить. Если оно не мешает ответить — оно не нужно. Смысл держится на знакомых словах вокруг.</span></div></div>
+      <div class="rumb" style="--rc:var(--amber)"><div class="head"><span class="ic">3</span><span class="t">Найти строку</span></div><div class="body">
+        <span class="d">У каждого правильного ответа есть <b>конкретная строка</b> в тексте. Не можешь показать пальцем — значит, ответ додуман.</span></div></div>
+      <div class="rumb" style="--rc:var(--red)"><div class="head"><span class="ic">4</span><span class="t">Не смешивать абзацы</span></div><div class="body">
+        <span class="d">В разных абзацах разные ситуации. Самая частая ошибка — взять факт из соседнего абзаца, потому что он тоже подходит по смыслу.</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Текст 1 — рассказ про Макса <em>задания 1–6</em></h3>
+    <div class="note" style="--nc2:var(--blue);max-width:76ch;margin-bottom:18px">
+      <b>About Max</b>
+      <span style="font-style:normal">Max is eleven. He lives in a small town near the sea with his mum, his dad and his little sister Kate. Max goes to school five days a week. His favourite subjects are History and PE, but he doesn't like Maths — he thinks it is very difficult.<br><br>After school Max usually plays football with his friends in the park. On Saturdays the family visits Max's grandparents. They have a big brown dog called Rex, and Max always takes him for a walk.<br><br>Last summer Max and his dad went fishing every morning. Max caught seven fish, but his dad caught only three! Next summer they don't want to go fishing — they want to go to the mountains.</span>
+    </div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">1</span><div>
+      <p class="en">How old is Max's sister Kate? → <b>She is younger than Max.</b></p>
+      <p class="why">В тексте сказано только «his <b>little</b> sister Kate». Точного возраста нет — ни одиннадцати, ни девяти. <b>Самое коварное задание всей темы:</b> три варианта из четырёх звучат правдоподобно, но в тексте их нет. Правило: если числа нет — его нельзя придумывать.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">2</span><div>
+      <p class="en">Which subject is difficult for Max? → <b>Maths</b></p>
+      <p class="why">Строка: «he doesn't like Maths — he thinks it is very <b>difficult</b>». History и PE — наоборот, любимые.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">3</span><div>
+      <p class="en">What does Max usually do after school? → <b>He plays football in the park.</b></p>
+      <p class="why">«After school Max <b>usually</b> plays football». Собаку он выгуливает по субботам у бабушки с дедушкой — это другой абзац и другая ситуация. Классический случай смешения абзацев.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">4</span><div>
+      <p class="en">Who has got a dog? → <b>Max's grandparents</b></p>
+      <p class="why">«<b>They</b> have a big brown dog called Rex» — а «they» в этом предложении это grandparents из предыдущей строки. Чтобы ответить, надо понять, на кого указывает местоимение.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">5</span><div>
+      <p class="en">Who caught more fish last summer? → <b>Max</b></p>
+      <p class="why">Семь против трёх: «Max caught <b>seven</b> fish, but his dad caught only <b>three</b>». Нужно и числа прочитать, и понять слово more.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--blue)"><span class="n">6</span><div>
+      <p class="en">What do Max and his dad want to do next summer? → <b>Go to the mountains</b></p>
+      <p class="why">«They <b>don't</b> want to go fishing — they want to go to the mountains». Отрицание здесь решает всё: пропустишь don't — и ответ будет ровно противоположный.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Текст 2 — объявление о лагере <em>задания 7–9</em></h3>
+    <div class="note" style="--nc2:var(--amber);max-width:76ch;margin-bottom:18px">
+      <b>SUMMER CAMP «GREEN HILL»</b>
+      <span style="font-style:normal">Open: 1 June – 20 August. For children 9–14.<br>Sports every morning. English lessons after lunch.<br>Price: 120 pounds a week. Closed on Sundays.<br>Phone: 020 7946 0123</span>
+    </div>
+    <p style="font-size:14.5px;color:var(--ink-2);margin:0 0 16px;max-width:74ch;font-weight:600">Объявление читается иначе, чем рассказ. Здесь не надо понимать целое — надо <b>найти одну строку</b>. Глазами пробегают по цифрам и ключевым словам: даты, возраст, цена, часы работы.</p>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">7</span><div>
+      <p class="en">Can a boy of eight go to this camp? → <b>No, he is too young.</b></p>
+      <p class="why">Строка: «For children <b>9–14</b>». Восемь меньше девяти, значит мальчик слишком мал. <b>Too young</b> — слишком юный, <b>too old</b> — слишком взрослый; их легко перепутать в спешке.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">8</span><div>
+      <p class="en">When is the camp closed? → <b>On Sundays</b></p>
+      <p class="why">Прямая строка: «<b>Closed on Sundays</b>». Здесь вообще не нужно понимать объявление — достаточно найти слово closed.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">9</span><div>
+      <p class="en">What do children do after lunch? → <b>They have English lessons.</b></p>
+      <p class="why">«English lessons <b>after lunch</b>». Спорт — every morning, то есть до обеда. Два занятия стоят рядом в одной строке, и перепутать их проще всего, если читать по диагонали.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Ловушки <em>чем отличается неверный ответ, который выглядит верным</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Додумать то, чего нет</b><span>«Little sister» — значит младше. А сколько ей лет, текст не говорит. Задание 1 построено именно на этом.</span><span class="hint">Ответ должен читаться в тексте, а не следовать из жизненного опыта.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Взять факт из другого абзаца</b><span>Выгул собаки и футбол после школы — разные дни и разные абзацы.</span><span class="hint">Проверить: тот ли это кусок текста, где стоит слово из вопроса.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Пропустить отрицание</b><span>«They don't want to go fishing» — без don't смысл переворачивается.</span><span class="hint">В текстах на понимание not, don't и never решают ответ чаще всего.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Переводить каждое слово</b><span>Уходит всё время, а на вопросы его не остаётся. Незнакомое слово чаще всего не нужно для ответа.</span><span class="hint">Читать ради ответа, а не ради перевода.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Сколько лет сестре Макса?</summary><div class="ans">Ответ: <b>в тексте не сказано</b>. Известно только, что она младше — «his little sister». Правильный вариант именно такой: she is younger than Max.</div></details>
+    <details><summary>Кто поймал больше рыбы и на сколько?</summary><div class="ans">Ответ: <b>Макс</b>, семь против трёх — на четыре рыбы больше.</div></details>
+    <details><summary>Чей Рекс?</summary><div class="ans">Ответ: <b>бабушки и дедушки</b>. «They have a big brown dog called Rex», где they — grandparents.</div></details>
+    <details><summary>Поедет ли в лагерь восьмилетний?</summary><div class="ans">Ответ: <b>нет, он слишком мал</b>. В объявлении «For children 9–14».</div></details>
+    <details><summary>Когда в лагере спорт, а когда английский?</summary><div class="ans">Ответ: спорт — <b>every morning</b>, английский — <b>after lunch</b>.</div></details>
+    <details><summary>Что делать, если в тексте попалось незнакомое слово?</summary><div class="ans">Ответ: <b>пропустить</b> и читать дальше. Если оно мешает ответить на вопрос — вернуться и догадаться по соседним словам. Переводить весь текст подряд не нужно.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Сменить порядок: <b>сначала прочитать вопросы</b>, потом текст. Это даёт больше, чем любое количество новых слов.</li>
+      <li>На каждый ответ требовать показать <b>строку в тексте</b> пальцем. Не нашёл строку — ответ не принят, даже если он верный.</li>
+      <li>Запретить себе переводить весь текст. Сначала быстрый проход ради общего смысла, потом точечный поиск.</li>
+      <li>Отдельно тренировать объявления и расписания: цена, часы, возраст, дни. Это отдельное умение, и оно нужнее в жизни.</li>
+      <li>Читать адаптированные книжки A1–A2 — по главе в день. Скорость чтения важнее словаря.</li>
+      <li>Пройти тест по теме. Ниже 80% — разбирать <b>каждый</b> неверный ответ: почему выбрал и что в тексте это опровергает.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D5">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 5 из 7 · 8 заданий</span>
+        <h2>Построение фразы</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">В русском языке слова можно переставлять почти как угодно, и смысл не ломается. В английском <b>порядок слов и есть грамматика</b>: он показывает, кто что делает и вопрос это или нет. Почти все ошибки в этой теме — попытка сказать английскую фразу русским порядком.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Две схемы, из которых растёт всё <em>выучить как формулу</em></h3>
+    <div class="grid g2">
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Утверждение</span><span class="gn">кто → что делает → что → где → когда</span></div><div class="gb">
+        <div class="row"><span>I &nbsp;|&nbsp; play &nbsp;|&nbsp; football &nbsp;|&nbsp; in the park &nbsp;|&nbsp; every day.</span></div>
+        <div class="row"><span>She &nbsp;|&nbsp; reads &nbsp;|&nbsp; books &nbsp;|&nbsp; at home &nbsp;|&nbsp; in the evening.</span></div>
+        <span class="exs">Подлежащее и сказуемое местами не меняются никогда</span></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Вопрос</span><span class="gn">слово-вопрос → do/does → кто → что делает</span></div><div class="gb">
+        <div class="row"><span>What &nbsp;|&nbsp; do &nbsp;|&nbsp; you &nbsp;|&nbsp; do at weekends?</span></div>
+        <div class="row"><span>Where &nbsp;|&nbsp; does &nbsp;|&nbsp; he &nbsp;|&nbsp; live?</span></div>
+        <span class="exs">Без do/does вопроса в Present Simple не бывает</span></div></div>
+    </div>
+    <div class="note" style="--nc2:var(--red);margin-top:16px;max-width:74ch">
+      <b>Одно исключение, которое всё упрощает</b>
+      <span>Если в предложении глагол <b>be</b> (am, is, are, was, were) или модальный <b>can</b> — do и does не нужны вовсе. Вопрос делается перестановкой: «He <b>is</b> twelve» → «<b>Is</b> he twelve?», «How old <b>is</b> he?». «She <b>can</b> swim» → «<b>Can</b> she swim?».</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Вопросы <em>четыре задания</em></h3>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">1</span><div>
+      <p class="en">Choose the correct question → <b>What do you usually do at weekends?</b></p>
+      <p class="why">Схема соблюдена целиком: <b>What → do → you → usually do</b>. Неверные варианты ломают её по-разному: «What you usually do» — потерян do; «What usually you do» — наречие влезло не туда; «What does you do» — does с you не сочетается.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">2</span><div>
+      <p class="en">— _____ — He is twelve. → <b>How old is he?</b></p>
+      <p class="why">Возраст спрашивают через <b>how old</b>, а не how many. И глагол is встаёт <b>перед</b> he — это тот самый случай с be. «How old he is?» — русский порядок, в вопросе он не работает.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">3</span><div>
+      <p class="en">_____ books have you got? → <b>How many</b></p>
+      <p class="why"><b>How many</b> — с тем, что можно посчитать (books, apples, friends). <b>How much</b> — с тем, что не считается (money, water, time), и ещё в вопросе о цене: «How much is it?».</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">7</span><div>
+      <p class="en">Ann plays the piano. → _____ Ann play the piano? → <b>Does</b></p>
+      <p class="why">Ann = she, значит <b>Does</b>. И сразу вторая половина: окончание -s ушло к does, поэтому дальше просто <b>play</b>, без -s.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Отрицание <em>одно задание, но правило важное</em></h3>
+    <div class="ex" style="--nc:var(--red)"><span class="n">6</span><div>
+      <p class="en">They live in Moscow. → <b>They don't live in Moscow.</b></p>
+      <p class="why">Отрицание в Present Simple делается через <b>don't / doesn't</b>. С I, we, you, they — don't. С he, she, it — doesn't. Глагол при этом в начальной форме.</p>
+      <p class="why">Почему неверны остальные: «They not live» — без вспомогательного глагола нельзя; «They doesn't live» — doesn't не с they; «They aren't live» — aren't идёт с -ing или с прилагательным, но не с обычным глаголом.</p>
+    </div></div>
+    <div class="tbl-wrap" style="margin-top:14px">
+      <table>
+        <thead><tr><th style="text-align:left">Кто</th><th style="text-align:left">Утверждение</th><th style="text-align:left">Отрицание</th><th style="text-align:left">Вопрос</th></tr></thead>
+        <tbody>
+          <tr><td>I / we / you / they</td><td>work</td><td><b>don't</b> work</td><td><b>Do</b> … work?</td></tr>
+          <tr><td>he / she / it</td><td>work<b>s</b></td><td><b>doesn't</b> work</td><td><b>Does</b> … work?</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Место слов и модальный can <em>ещё три задания</em></h3>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">4</span><div>
+      <p class="en">Choose the correct sentence → <b>I like football very much.</b></p>
+      <p class="why"><b>Very much</b> ставится в самый конец. По-русски естественно «я очень люблю футбол», и отсюда берутся «I very like football» и «I like very much football» — обе кальки. Место усилителя в английском жёстко фиксировано.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">5</span><div>
+      <p class="en">She can _____ very well. → <b>swim</b></p>
+      <p class="why">После модального <b>can</b> глагол идёт голым: без <b>to</b>, без <b>-s</b>, без <b>-ing</b>. «She can swims», «She can to swim» — самые частые ошибки.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">8</span><div>
+      <p class="en">There _____ a lot of books on the shelf. → <b>are</b></p>
+      <p class="why">Оборот <b>there is / there are</b> сообщает, что где-то что-то есть. Форма выбирается по слову, которое идёт <b>после</b>: books — множественное число, значит are. Было бы «There is a book» — одна книга.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Ловушки <em>русский порядок, надетый на английские слова</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Вопрос без do</b><span>«What you do?», «Where he lives?» — по-русски достаточно интонации, по-английски нужен do или does.</span><span class="hint">Исключение только для be и can.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Do там, где нужен be</b><span>«How old do you?» вместо «How old are you?».</span><span class="hint">Если в ответе есть am/is/are — в вопросе тоже они.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Very на русском месте</b><span>«I very like it» — прямая калька.</span><span class="hint">Very much — в конец фразы.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>to или -s после can</b><span>«can to swim», «can swims».</span><span class="hint">После can глагол всегда чистый.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>How much с книгами</b><span>Считаемое — many, несчитаемое — much.</span><span class="hint">Проверка: можно ли сказать «две книги»? Да — значит many.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>There is с множественным</b><span>«There is books» — форма выбирается по слову после оборота.</span><span class="hint">Смотреть вперёд, а не назад.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Построй вопрос: «Где твой брат живёт?»</summary><div class="ans">Ответ: <b>Where does your brother live?</b> Слово-вопрос → does → кто → глагол без -s.</div></details>
+    <details><summary>Почему «How old he is?» неправильно?</summary><div class="ans">Ответ: в вопросе глагол <b>is встаёт перед подлежащим</b>: How old <b>is he</b>? Русский порядок здесь не работает.</div></details>
+    <details><summary>How much или how many: books, water, friends, time?</summary><div class="ans">Ответ: <b>many</b> books, <b>much</b> water, <b>many</b> friends, <b>much</b> time. Считается — many, не считается — much.</div></details>
+    <details><summary>Сделай отрицание: «She works at school».</summary><div class="ans">Ответ: <b>She doesn't work at school.</b> С she — doesn't, и -s у глагола пропадает.</div></details>
+    <details><summary>Куда ставится very much?</summary><div class="ans">Ответ: <b>в конец</b>: I like football very much. Не «I very like».</div></details>
+    <details><summary>There is или there are: a lot of books, some milk, three cats?</summary><div class="ans">Ответ: there <b>are</b> a lot of books, there <b>is</b> some milk, there <b>are</b> three cats. Форма — по слову после оборота.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Выписать две схемы из первого блока на карточку и держать её перед глазами при любом письменном задании.</li>
+      <li>Каждый день строить <b>пять вопросов</b> к обычным предложениям: утверждение → вопрос → отрицание. Про себя, про семью, про школу.</li>
+      <li>Отдельно проговорить случай с be и can: там do не нужен. Это половина всех ошибок темы.</li>
+      <li>Три калькированные фразы — «I very like», «What you do», «can to swim» — записать как «так не говорят» и повторять до отвращения.</li>
+      <li>Пройти тест по теме. Ниже 80% — вернуться к пункту 2, разбор второй раз не читать.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D6">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 6 из 7 · 8 заданий</span>
+        <h2>Модальные глаголы и сравнение</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Две темы в одном умении. Модальные глаголы — <b>can, must, have to</b> — говорят не о действии, а об отношении к нему: умею, обязан, вынужден. Степени сравнения — как сказать «больше», «самый большой» и не ошибиться с выбором между окончанием и словом more.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>Три модальных глагола <em>разница в том, откуда идёт обязанность</em></h3>
+    <div class="grid g3">
+      <div class="rumb" style="--rc:var(--green)"><div class="head"><span class="ic">💪</span><span class="t">can</span></div><div class="body">
+        <span class="d"><b>Умею, могу.</b> Способность человека или разрешение.</span>
+        <span class="k">I can swim. Can I go out?</span></div></div>
+      <div class="rumb" style="--rc:var(--red)"><div class="head"><span class="ic">❗</span><span class="t">must</span></div><div class="body">
+        <span class="d"><b>Должен.</b> Правило, закон, важность — обязанность идёт изнутри или от закона.</span>
+        <span class="k">You must wear a helmet.</span></div></div>
+      <div class="rumb" style="--rc:var(--amber)"><div class="head"><span class="ic">⛓</span><span class="t">have to</span></div><div class="body">
+        <span class="d"><b>Приходится.</b> Вынуждают обстоятельства снаружи.</span>
+        <span class="k">We have to get up early tomorrow.</span></div></div>
+    </div>
+    <div class="note" style="--nc2:var(--cyan);margin-top:16px;max-width:74ch">
+      <b>Как устроены модальные</b>
+      <span>После can и must глагол идёт <b>без to и без -s</b>: can swim, must go. Отрицание делается прямо, без do и does: <b>can't</b>, <b>mustn't</b>. И только have to ведёт себя как обычный глагол: у него есть <b>to</b>, есть <b>has to</b> для he/she/it и отрицание через doesn't have to.</span>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Разбор заданий 1–4 <em>модальные</em></h3>
+    <div class="ex" style="--nc:var(--green)"><span class="n">1</span><div>
+      <p class="en">I _____ swim very well. → <b>can</b></p>
+      <p class="why">Речь об умении. После can глагол в чистом виде: swim, а не swims и не to swim.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--red)"><span class="n">2</span><div>
+      <p class="en">You _____ wear a helmet when you ride a bike. → <b>must</b></p>
+      <p class="why">Это правило безопасности, его нельзя нарушать — значит must. С can фраза получила бы смешной смысл: «ты <b>умеешь</b> надевать шлем».</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">3</span><div>
+      <p class="en">We _____ to get up early tomorrow. → <b>have</b></p>
+      <p class="why">В пропуске уже стоит <b>to</b> — а из всех модальных to есть только у have to. Это и подсказка, и суть: <b>must</b> — я считаю нужным, <b>have to</b> — так сложились обстоятельства.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">4</span><div>
+      <p class="en">She _____ speak French, but she speaks German well. → <b>can't</b></p>
+      <p class="why">Отрицание модального глагола делается <b>прямо</b>, без вспомогательных: can → can't. Формы «doesn't can», «not can», «isn't can» не существуют. Модальный глагол сам себе вспомогательный.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Степени сравнения <em>правило выбирается по длине слова</em></h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="text-align:left">Какое слово</th><th style="text-align:left">Сравнительная</th><th style="text-align:left">Превосходная</th><th style="text-align:left">Пример</th></tr></thead>
+        <tbody>
+          <tr><td>Короткое (1 слог)</td><td>+ <b>-er</b></td><td><b>the</b> + <b>-est</b></td><td>cold — colder — the coldest</td></tr>
+          <tr><td>На -y</td><td>y → i + <b>-er</b></td><td>the + i + <b>-est</b></td><td>heavy — heavier — the heaviest</td></tr>
+          <tr><td>Длинное (2+ слога)</td><td><b>more</b> + слово</td><td><b>the most</b> + слово</td><td>difficult — more difficult — the most difficult</td></tr>
+          <tr><td>Исключения</td><td colspan="2">меняются целиком</td><td>good — better — the best<br>bad — worse — the worst<br>many/much — more — the most</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex" style="--nc:var(--amber);margin-top:16px"><span class="n">5</span><div>
+      <p class="en">My bag is _____ than yours. → <b>heavier</b></p>
+      <p class="why">Heavy короткое и на -y: буква <b>y меняется на i</b>, добавляется -er. «More heavy» неверно — more берут только длинные слова.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">6</span><div>
+      <p class="en">Tom is a good pupil, but Ann is _____. → <b>better</b></p>
+      <p class="why">Good — исключение, оно меняется целиком: <b>good → better → the best</b>. «Gooder» и «more good» не существуют. Здесь нужна сравнительная, а не the best: сравниваются двое.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">7</span><div>
+      <p class="en">Winter is _____ season of the year. → <b>the coldest</b></p>
+      <p class="why">Самая холодная из всех — превосходная степень, и она <b>всегда с the</b>: такая одна на весь год. «Coldest» без артикля — распространённая потеря.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">8</span><div>
+      <p class="en">Maths is more difficult _____ History. → <b>than</b></p>
+      <p class="why"><b>Than</b> — это «чем» при сравнении. <b>Then</b> — «затем, потом», совсем другое слово. Различаются одной буквой, и путают их постоянно.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Ловушки <em>шесть мест</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>doesn't can</b><span>Модальный глагол отрицается сам: can't, mustn't.</span><span class="hint">Do и does рядом с can не ставятся никогда.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>can to swim / can swims</b><span>После can глагол голый.</span><span class="hint">Ни to, ни -s, ни -ing.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>more heavy</b><span>Короткое слово взяло more вместо окончания.</span><span class="hint">Один слог — только -er.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>gooder, badder</b><span>Попытка применить правило к исключению.</span><span class="hint">good → better, bad → worse. Учить наизусть.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>Превосходная без the</b><span>«Winter is coldest season» — потерян артикль.</span><span class="hint">Самый — значит единственный, значит the.</span></div>
+      <div class="term" style="--tc2:var(--cyan)"><b>than вместо then</b><span>«bigger then» — ошибка на одну букву.</span><span class="hint">Сравниваешь — than. Рассказываешь по порядку — then.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Чем must отличается от have to?</summary><div class="ans">Ответ: <b>must</b> — обязанность изнутри или по правилу (You must wear a helmet). <b>Have to</b> — вынуждают обстоятельства (We have to get up early). И у have to есть to, а у must нет.</div></details>
+    <details><summary>Как сделать отрицание с can?</summary><div class="ans">Ответ: <b>can't</b>, напрямую. «Doesn't can» не существует — модальный глагол сам себе вспомогательный.</div></details>
+    <details><summary>Три формы: good, bad, many.</summary><div class="ans">Ответ: good → <b>better</b> → the best; bad → <b>worse</b> → the worst; many → <b>more</b> → the most.</div></details>
+    <details><summary>Сравни: heavy, difficult, cold.</summary><div class="ans">Ответ: heavy → <b>heavier</b> → the heaviest; difficult → <b>more difficult</b> → the most difficult; cold → <b>colder</b> → the coldest.</div></details>
+    <details><summary>Почему в превосходной степени нужен the?</summary><div class="ans">Ответ: «самый» означает <b>единственный такой</b>, а единственные в своём роде идут с the: the coldest, the best, the most difficult.</div></details>
+    <details><summary>than или then: «My bag is heavier ___ yours»?</summary><div class="ans">Ответ: <b>than</b> — это «чем» при сравнении. Then значит «затем».</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Развести can и must на примерах из своей жизни: пять предложений «я умею» и пять «я должен». Разница поймётся на своих примерах быстрее, чем на учебных.</li>
+      <li>Запомнить одно: <b>у have to есть to, у can и must — нет</b>. Этого хватает, чтобы не путать их в тестах.</li>
+      <li>Степени сравнения тренировать на трёх словах разного типа сразу: cold (короткое), heavy (на -y), difficult (длинное). Один заход — три правила.</li>
+      <li>Четыре исключения — good, bad, many, little — выписать на карточку. Их всего четыре, и они встречаются чаще всех остальных.</li>
+      <li>Проверять себя на артикле: сказал «самый» — поставил the.</li>
+      <li>Пройти тест по теме. Ниже 80% — вернуться к пункту 3.</li>
+    </ol>
+  </div>
+</article>
+
+<article id="D7">
+  <div class="hero" style="--hc:var(--blue)">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Английский · диагностика · умение 7 из 7 · 8 заданий</span>
+        <h2>Будущее время и количество</h2>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
+    </div>
+    <p class="lede">Три сюжета в одном умении: два способа сказать о будущем и разница между ними; слова количества <b>much, many, some, any</b>; время на часах и даты. Объединяет их одно — все три темы стоят на границе пятого и шестого класса, и именно с них шестой класс начинает строить дальше.</p>
+  </div>
+
+  <div class="sec" style="--sc2:var(--blue)">
+    <h3>will или going to <em>разница в том, откуда взялась уверенность</em></h3>
+    <div class="grid g2">
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">will</span><span class="gn">решил в эту секунду</span></div><div class="gb">
+        <div class="row"><span>Мнение, предположение, догадка о будущем. Плана не было.</span></div>
+        <div class="row"><span>Сигналы: <b>I think, I hope, maybe, probably, I'm sure</b></span></div>
+        <span class="exs">I think it will rain tomorrow.</span></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">be going to</span><span class="gn">решил раньше или вижу признак</span></div><div class="gb">
+        <div class="row"><span>Заранее принятый план — или видимое доказательство прямо сейчас.</span></div>
+        <div class="row"><span>Сигналы: билеты куплены, чемодан собран, тучи на небе</span></div>
+        <span class="exs">Look at the clouds! It's going to rain.</span></div></div>
+    </div>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:74ch">
+      <b>Одна фраза, по которой различают</b>
+      <span><b>Подумал — will. Увидел или решил заранее — going to.</b> Именно на этом построены три задания диагностики, и другого различия на этом уровне знать не нужно.</span>
+    </div>
+    <div class="ex" style="--nc:var(--amber);margin-top:16px"><span class="n">1</span><div>
+      <p class="en">Tomorrow we _____ visit our grandmother. We have already bought the tickets. → <b>are going to</b></p>
+      <p class="why">Билеты уже куплены — значит решение принято заранее, это план. Вторая фраза в задании стоит не для красоты: она и есть подсказка.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--cyan)"><span class="n">2</span><div>
+      <p class="en">I think it _____ rain tomorrow. → <b>will</b></p>
+      <p class="why">«I think» — прямой сигнал, что это <b>догадка</b>, а не план и не наблюдение. Доказательств нет, есть мнение.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">3</span><div>
+      <p class="en">Look at the black clouds! It _____ rain. → <b>is going to</b></p>
+      <p class="why">Тучи видно прямо сейчас — это <b>видимый признак</b>. Сравни с предыдущим заданием: там «я думаю», здесь «я вижу». Два соседних задания специально поставлены рядом, чтобы разница стала очевидной.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--violet)">
+    <h3>Much, many, some, any <em>сначала посчитать, потом выбрать</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--blue)"><b>many / few — считаемое</b><span>Книги, яблоки, друзья, минуты. Можно сказать «две штуки».</span><span class="hint">many books, how many apples</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>much / little — несчитаемое</b><span>Вода, деньги, время, молоко, музыка. «Два времени» сказать нельзя.</span><span class="hint">much water, how much time</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>some — в утверждении</b><span>Немного, несколько, какое-то количество.</span><span class="hint">There is some milk. I have some friends.</span></div>
+      <div class="term" style="--tc2:var(--red)"><b>any — в вопросе и отрицании</b><span>То же самое, но фраза отрицательная или вопросительная.</span><span class="hint">There isn't any milk. Have you got any friends?</span></div>
+    </div>
+    <div class="ex" style="--nc:var(--violet);margin-top:16px"><span class="n">4</span><div>
+      <p class="en">How _____ apples do you want? → <b>many</b></p>
+      <p class="why">Яблоки считаются поштучно — many. Проверка простая: <b>можно ли сказать «два яблока»?</b> Да — значит many.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">5</span><div>
+      <p class="en">There isn't _____ milk in the bottle. → <b>any</b></p>
+      <p class="why">Фраза отрицательная (isn't), а в отрицании и вопросе <b>some превращается в any</b>. Это одно из самых частых мест ошибки во всём тесте.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--violet)"><span class="n">6</span><div>
+      <p class="en">We haven't got _____ time. → <b>much</b></p>
+      <p class="why">Время по штукам не считают, значит much, а не many. «Мало времени» — little time, «много времени» — much time.</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--amber)">
+    <h3>Время и даты <em>два задания, оба про порядок отсчёта</em></h3>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">7</span><div>
+      <p class="en">It's 7:30 → <b>half past seven</b></p>
+      <p class="why">Английский отсчитывает от <b>прошедшего</b> часа: «половина <b>после</b> семи». По-русски наоборот — «половина восьмого», от будущего. Отсюда и ошибка «half to eight».</p>
+      <p class="why"><b>Как читать часы:</b> до половины — <b>past</b> (прошло): 7:10 — ten past seven, 7:15 — a quarter past seven, 7:30 — half past seven. После половины — <b>to</b> (осталось до): 7:45 — a quarter to eight, 7:50 — ten to eight. Ровно: 7:00 — seven o'clock.</p>
+    </div></div>
+    <div class="ex" style="--nc:var(--amber)"><span class="n">8</span><div>
+      <p class="en">My birthday is on the _____ of May. (5-е мая) → <b>fifth</b></p>
+      <p class="why">В датах нужны <b>порядковые</b> числительные, а не количественные: не five, а fifth. И предлог <b>on</b>, потому что это дата.</p>
+      <p class="why"><b>Первые десять:</b> first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth. Первые три надо просто помнить, дальше работает окончание <b>-th</b>. Отдельно: twelfth (12-е), twentieth (20-е), thirty-first (31-е).</p>
+    </div></div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--red)">
+    <h3>Ловушки <em>пять мест</em></h3>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>will там, где есть доказательство</b><span>«Look at the clouds! It will rain» — признак виден, значит going to.</span><span class="hint">Увидел — going to, подумал — will.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>some в отрицании</b><span>«There isn't some milk» — в отрицании нужен any.</span><span class="hint">Утверждение — some, вопрос и отрицание — any.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>many с несчитаемым</b><span>«many time», «many money» — эти слова не считаются.</span><span class="hint">Проверка: можно ли сказать «две штуки»?</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>half to eight</b><span>Русский способ отсчёта, надетый на английские слова.</span><span class="hint">Половина считается от прошедшего часа: half past seven.</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>Количественное число в дате</b><span>«the five of May» вместо «the fifth of May».</span><span class="hint">Дата — всегда порядковое числительное.</span></div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--cyan)">
+    <h3>Проверь себя <em>нажми, чтобы увидеть ответ</em></h3>
+    <details><summary>Как выбрать между will и going to?</summary><div class="ans">Ответ: <b>подумал — will</b> (I think it will rain), <b>увидел или решил заранее — going to</b> (Look at the clouds! It's going to rain).</div></details>
+    <details><summary>Much или many: water, books, time, friends, money?</summary><div class="ans">Ответ: <b>much</b> water, <b>many</b> books, <b>much</b> time, <b>many</b> friends, <b>much</b> money. Money в английском не считается.</div></details>
+    <details><summary>Когда some, а когда any?</summary><div class="ans">Ответ: <b>some</b> — в утверждении (There is some milk). <b>Any</b> — в вопросе и отрицании (Is there any milk? There isn't any milk).</div></details>
+    <details><summary>Скажи по-английски: 7:30, 7:15, 7:45.</summary><div class="ans">Ответ: <b>half past seven</b>, <b>a quarter past seven</b>, <b>a quarter to eight</b>. До половины — past, после — to.</div></details>
+    <details><summary>Назови порядковые числительные от 1 до 5.</summary><div class="ans">Ответ: <b>first, second, third, fourth, fifth</b>. Первые три — исключения, дальше добавляется -th.</div></details>
+    <details><summary>Как сказать «5 мая»?</summary><div class="ans">Ответ: <b>on the fifth of May</b>. Предлог on, порядковое числительное, месяц с большой буквы.</div></details>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <ol class="how" style="--hc2:var(--blue)">
+      <li>Будущее время отработать на одной паре фраз: «I think it will rain» и «Look! It's going to rain». Сказать их вслух десять раз и понять разницу — дальше само.</li>
+      <li>Придумать пять своих планов на неделю с going to и пять предположений с will. Свои примеры работают лучше учебных.</li>
+      <li>Для much / many завести привычку проверять вопросом <b>«можно ли сказать две штуки?»</b> — это решает почти все случаи.</li>
+      <li>Пару some / any повторять только на отрицаниях и вопросах: именно там она ломается.</li>
+      <li>Часы тренировать по-настоящему: смотреть на время и называть вслух, несколько раз в день. Таблица здесь не помогает, помогает повторение.</li>
+      <li>Порядковые числительные до десяти выучить за один вечер — это закрытый список.</li>
+      <li>Пройти тест по теме. Ниже 80% — вернуться к пунктам 1 и 3.</li>
     </ol>
   </div>
 </article>
@@ -4094,7 +5007,7 @@ let state = JSON.parse(JSON.stringify(DEFAULT));
 function load(){
   try{ const r = localStorage.getItem(STORE_KEY); if(r) state = Object.assign(JSON.parse(JSON.stringify(DEFAULT)), JSON.parse(r)); }catch(e){}
 }
-function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} }
+function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} syncTouch(); }
 
 /* ================= УТИЛИТЫ ================= */
 const WD = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
@@ -6344,6 +7257,9 @@ document.getElementById("slipAdd").addEventListener("click", ()=>{
 /* ================= ЖУРНАЛ ПРОМАХОВ =================
    Ошибки сборщика повторяются, если их нигде не записывать. */
 const SLIPS_SEED = [
+  {d:"11 сен", w:"Диагностика английского открывалась пустой страницей",
+   y:"Завёл семь тем в списке уроков, тесты и устную проверку к ним, а сами разборы не написал. Проверял только тесты — там всё работало, поэтому дыру не заметил.",
+   f:"После добавления темы открывать её так, как откроет ребёнок: из вкладки «Уроки», а не только через тест. Автопроверка теперь считает символы в каждом разборе.", rep:false},
   {d:"9 сен", w:"Разбор биологии собран не по тому параграфу",
    y:"Взял страницы 6–9 из дневника и решил, что это §1. Оказалось Введение, а §1 начинается на стр. 10.",
    f:"Сначала оглавление, потом разбор. Проверять, что страницы из дневника — действительно тот параграф.", rep:false},
@@ -6471,6 +7387,149 @@ function importProgress(file){
   rd.onerror = () => toast("Не удалось открыть файл");
   rd.readAsText(file);
 }
+
+/* ================= СИНХРОНИЗАЦИЯ =================
+   Журнал по-прежнему живёт в localStorage этого устройства — без сети
+   всё работает как раньше. Сервер только разносит изменения: раз в
+   двадцать секунд забирает свежее и раскладывает по устройствам.
+
+   База общая с CashDo, но ветка своя: /bortovoy/{код}. Правила базы
+   запрещают читать список веток, поэтому попасть внутрь можно только
+   зная код. Ключ проекта не нужен — Realtime Database отвечает по
+   обычному REST.
+
+   Роль (капитан или штурман) не синхронизируется: на планшете ребёнка
+   всегда капитан, у взрослого свой выбор. Всё остальное, включая код
+   штурмана, едет вместе с данными — иначе на втором устройстве вход
+   был бы открыт. */
+const SKEY = "bortovoy_sync_v1";
+const SYNC = {cfg:null, rev:0, applying:false, timer:0, poll:0};
+
+function syncLoad(){
+  try{ SYNC.cfg = JSON.parse(localStorage.getItem(SKEY) || "null"); }catch(e){ SYNC.cfg = null; }
+  if(SYNC.cfg && typeof SYNC.cfg.rev === "number") SYNC.rev = SYNC.cfg.rev;
+}
+function syncStore(){
+  try{ localStorage.setItem(SKEY, JSON.stringify({...SYNC.cfg, rev:SYNC.rev})); }catch(e){}
+}
+function syncOn(){ return !!(SYNC.cfg && SYNC.cfg.url && SYNC.cfg.room); }
+function syncUrl(){
+  return SYNC.cfg.url.replace(/\/+$/,"") + "/bortovoy/" + encodeURIComponent(SYNC.cfg.room) + ".json";
+}
+function syncSay(kind, text){
+  const el = document.getElementById("syncStat");
+  if(!el) return;
+  const c = kind==="ok" ? ["#e8f7ee","#1a7a46"] : kind==="err" ? ["#fdecec","#c0392b"] : ["#f1efeb","#6b7280"];
+  el.style.background = c[0]; el.style.color = c[1];
+  el.textContent = text;
+}
+/* Роль — дело устройства, остальное общее. */
+function syncPack(){
+  const copy = JSON.parse(JSON.stringify(state));
+  delete copy.role;
+  return copy;
+}
+function syncApply(data){
+  if(!data || typeof data !== "object" || !("checks" in data)) return;
+  SYNC.applying = true;
+  try{
+    const role = state.role;
+    state = Object.assign(JSON.parse(JSON.stringify(DEFAULT)), data);
+    state.role = role;
+    save();
+    renderHeader();
+    if(typeof renderAll === "function") renderAll();
+    else show(state.view || "today");
+  } finally { SYNC.applying = false; }
+}
+async function syncPull(quiet){
+  if(!syncOn()) return null;
+  try{
+    const r = await fetch(syncUrl(), {cache:"no-store"});
+    if(!r.ok) throw new Error("сервер ответил " + r.status);
+    const row = await r.json();
+    if(!row){ if(!quiet) syncSay("ok","Подключено. На сервере пока пусто."); return null; }
+    if(typeof row.rev === "number" && row.rev > SYNC.rev){
+      SYNC.rev = row.rev; syncStore(); syncApply(row.data);
+      if(!quiet) toast("Журнал обновлён с другого устройства");
+    }
+    if(!quiet) syncSay("ok","Всё сходится. Обновление №" + SYNC.rev);
+    return row;
+  }catch(e){
+    syncSay("err","Нет связи: " + e.message + ". Журнал в устройстве цел.");
+    return null;
+  }
+}
+async function syncPush(){
+  if(!syncOn() || SYNC.applying) return;
+  syncSay("wait","Отправляю…");
+  try{
+    SYNC.rev++;
+    const body = {data: syncPack(), rev: SYNC.rev, updated_at: new Date().toISOString()};
+    const r = await fetch(syncUrl(), {method:"PUT", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(body)});
+    if(!r.ok) throw new Error("сервер ответил " + r.status);
+    syncStore();
+    syncSay("ok","Сохранено. Обновление №" + SYNC.rev);
+  }catch(e){
+    syncSay("err","Не отправилось: " + e.message + ". Попробую позже.");
+  }
+}
+/* Пока ребёнок щёлкает пункты вахты подряд, слать на каждый незачем. */
+function syncTouch(){
+  if(!syncOn() || SYNC.applying) return;
+  clearTimeout(SYNC.timer);
+  SYNC.timer = setTimeout(syncPush, 1500);
+}
+function syncStart(){
+  clearInterval(SYNC.poll);
+  const u = document.getElementById("syncUrl"), rm = document.getElementById("syncRoom");
+  if(u && SYNC.cfg) u.value = SYNC.cfg.url || "";
+  if(rm && SYNC.cfg) rm.value = SYNC.cfg.room || "";
+  if(!syncOn()){ syncSay("off","Синхронизация выключена — журнал только на этом устройстве"); return; }
+  syncPull(true);
+  SYNC.poll = setInterval(()=>{ if(!document.hidden) syncPull(true); }, 20000);
+}
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) syncPull(true); });
+
+(function wireSync(){
+  const g = id => document.getElementById(id);
+  if(!g("syncOn")) return;
+  g("syncGen").addEventListener("click", ()=>{
+    const r = n => Array.from({length:n}, ()=>"abcdefghijkmnpqrstuvwxyz23456789"[(Math.random()*32)|0]).join("");
+    g("syncRoom").value = "zhurnal-" + r(6) + "-" + r(6);
+  });
+  g("syncOff").addEventListener("click", ()=>{
+    SYNC.cfg = null; SYNC.rev = 0;
+    try{ localStorage.removeItem(SKEY); }catch(e){}
+    clearInterval(SYNC.poll);
+    syncSay("off","Синхронизация выключена — журнал только на этом устройстве");
+    toast("Обмен отключён");
+  });
+  g("syncOn").addEventListener("click", async ()=>{
+    const url = g("syncUrl").value.trim(), room = g("syncRoom").value.trim();
+    if(!url || !room){ syncSay("err","Заполните оба поля"); return; }
+    SYNC.cfg = {url, room}; SYNC.rev = 0; syncStore();
+    syncSay("wait","Проверяю связь…");
+    const row = await syncPull(true);
+    if(!SYNC.cfg) return;
+    if(row){
+      /* На сервере уже есть журнал — молча затирать нельзя ни ту, ни другую сторону. */
+      const ok = confirm("На сервере уже есть журнал (обновление №" + row.rev + ").\n\n" +
+        "ОК — взять серверный и заменить то, что на этом устройстве.\n" +
+        "Отмена — залить туда журнал этого устройства.");
+      if(ok){ SYNC.rev = row.rev; syncStore(); syncApply(row.data); syncSay("ok","Взяли журнал с сервера."); }
+      else { SYNC.rev = row.rev; await syncPush(); }
+    } else {
+      await syncPush();
+    }
+    syncStart();
+    toast("Синхронизация включена");
+  });
+  syncLoad();
+  syncStart();
+})();
+
 document.getElementById("expBtn").addEventListener("click", exportProgress);
 document.getElementById("impBtn").addEventListener("click", ()=>document.getElementById("impFile").click());
 document.getElementById("impFile").addEventListener("change", e=>{ if(e.target.files[0]) importProgress(e.target.files[0]); e.target.value=""; });
