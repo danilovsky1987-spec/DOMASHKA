@@ -1070,6 +1070,73 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 .dgtrack{border-left:3px solid color-mix(in srgb, var(--tc) 40%, transparent);
   padding-left:20px;margin-bottom:42px}
 .dgtrack:last-child{margin-bottom:0}
+/* ── диагностика: выбор предмета и года ── */
+.dgpick{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:12px}
+.dgp{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px 16px;
+  text-align:left;font:inherit;color:inherit;cursor:pointer;display:block;width:100%;transition:border-color .15s,box-shadow .15s}
+.dgp:hover{border-color:var(--ink-3)}
+.dgp.on{border-color:var(--pc);box-shadow:0 0 0 3px color-mix(in srgb, var(--pc) 18%, transparent)}
+.dgp.off{opacity:.6;cursor:default}
+.dgp.off:hover{border-color:var(--line)}
+.dgp .py{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;color:var(--ink-3)}
+.dgp .pn{font-family:"Russo One",sans-serif;font-weight:400;font-size:19px;text-transform:uppercase;
+  color:var(--pc);margin-top:3px}
+.dgp .pv2{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+.dgp .pv2 b{font-family:"Russo One",sans-serif;font-weight:400;font-size:32px;color:var(--ink);line-height:1}
+.dgp .pv2 span{font-size:12.5px;color:var(--ink-2);font-weight:600}
+.dgp .pbar{position:relative;height:8px;border-radius:4px;overflow:hidden;background:var(--line-2);margin-top:11px}
+.dgp .pbar i{display:block;height:100%;background:var(--green)}
+.dgp .ptags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+.dgp .pt{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;padding:3px 9px;
+  border-radius:20px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.dgp .pt.hot{background:color-mix(in srgb, var(--red) 12%, #fff);color:var(--red);
+  border-color:color-mix(in srgb, var(--red) 35%, transparent)}
+.dgsoon{margin-top:12px}
+.dgsoonbtn{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:1px dashed var(--line);
+  border-radius:12px;padding:10px 16px;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink-3);
+  cursor:pointer;text-align:left}
+.dgsoonbtn:hover{border-color:var(--ink-3);color:var(--ink-2)}
+.dgsoonbtn .ch{margin-left:auto;font-size:11px;font-family:"JetBrains Mono",monospace;letter-spacing:.1em}
+.dgsoonbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:12px;margin-top:12px}
+.dgsoonbox[hidden]{display:none}
+.dgsel{display:flex;align-items:center;gap:10px;margin:26px 0 14px;font-family:"JetBrains Mono",monospace;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
+.dgsel:after{content:"";flex:1;height:1px;background:var(--line)}
+.dgsel b{font-family:"Nunito","Segoe UI",system-ui,sans-serif;letter-spacing:0;text-transform:none;
+  font-size:15px;color:var(--ink)}
+
+/* ── одна шкала: длина = твёрдо, риска = 80%, цвет = срочность ── */
+.howread{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:14px 18px;margin:18px 0 4px}
+.howread h4{margin:0 0 9px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.howread .hl{display:flex;gap:24px;flex-wrap:wrap;font-size:13.5px;font-weight:600;color:var(--ink-2);align-items:center}
+.howread .hl b{color:var(--ink)}
+.demo{position:relative;height:12px;width:140px;background:var(--line-2);border-radius:6px;display:inline-block;
+  vertical-align:middle;margin-right:9px}
+.demo i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--ink-3)}
+.demo u{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);left:80%;opacity:.55;text-decoration:none}
+.skgrp{display:flex;align-items:center;gap:10px;margin:22px 0 10px}
+.skchip{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;padding:4px 11px;border-radius:20px;color:#fff;background:var(--gc)}
+.skgrp .gn2{font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.skgrp:after{content:"";flex:1;height:1px;background:var(--line)}
+.skrow{display:grid;grid-template-columns:236px 1fr 124px auto;gap:16px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--rc2);
+  border-radius:var(--r);padding:12px 16px;margin-bottom:7px}
+@media(max-width:920px){.skrow{grid-template-columns:1fr;gap:9px}}
+.skrow.mut{opacity:.72}
+.skrow .snm{font-weight:700;font-size:15.5px;line-height:1.25}
+.skrow .sdt{font-size:12px;color:var(--ink-3);font-weight:600;margin-top:2px}
+.skbar{position:relative;height:12px;background:var(--line-2);border-radius:6px}
+.skbar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--rc2)}
+.skbar u{position:absolute;left:80%;top:-5px;bottom:-5px;width:2px;background:var(--ink);opacity:.55;text-decoration:none}
+.skval{font-size:14.5px;font-weight:800;color:var(--ink);text-align:right;white-space:nowrap}
+.skval span{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;
+  color:var(--ink-3);letter-spacing:.06em}
+@media(max-width:920px){.skval,.skval span{text-align:left}}
+.skrow .dgacts{justify-content:flex-end}
+@media(max-width:920px){.skrow .dgacts{justify-content:flex-start}}
 .dgth{display:flex;gap:14px;align-items:flex-start;margin:0 0 16px}
 .dgy{flex:none;font-family:"Russo One",sans-serif;font-weight:400;font-size:13px;letter-spacing:.05em;
   background:var(--tc);color:#fff;padding:8px 14px;border-radius:9px;text-transform:uppercase;line-height:1}
@@ -1232,7 +1299,6 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   <div class="capicons noprint" id="capIcons" hidden></div>
   <div class="decks-wrap" id="decksWrap">
     <div class="decks" id="decks" role="tablist"></div>
-    <button class="navmode" id="navMode" type="button" title="Переключить вид вкладок"></button>
   </div>
   <nav class="subjects"><div class="inner" id="mainNav" role="tablist"></div></nav>
 </header>
@@ -1597,7 +1663,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   <div class="sec" style="--sc2:var(--green)">
     <h3>Если пошло не так <em>восемь частых ситуаций</em></h3>
     <div class="grid g2">
-      <div class="fix"><b>«Не вижу нужную вкладку»</b><span>Скорее всего включены палубы, и она на другой — верхний ряд в шапке. Уроки, Тесты, Проверка и Что нужно живут на «Учёбе»; Курс, Печать, Прогресс и Инструкция — в «Рубке». Кнопка «Показать одной строкой» справа вернёт все вкладки в один ряд.</span></div>
+      <div class="fix"><b>«Не вижу нужную вкладку»</b><span>Вкладки разложены по палубам — верхний ряд в шапке. Уроки, Тесты, Проверка и Что нужно живут на «Учёбе»; Курс, Печать, Прогресс и Инструкция — в «Рубке». Нажмите нужную палубу, и её вкладки появятся во втором ряду.</span></div>
       <div class="fix"><b>«Забыл код штурмана»</b><span>В окне ввода нажмите «Забыли код?» — там способ сброса. Прогресс при этом не теряется, снимается только замок; новый код ставится во вкладке «Прогресс».</span></div>
       <div class="fix"><b>«Пропустил три дня подряд»</b><span>Серия обнулилась, узлы остались — так и задумано. Ничего не говорите до воскресенья. На совете спросите одно: не завышен ли минимум.</span></div>
       <div class="fix"><b>«Не хочет отмечать вахту»</b><span>Заведите себе колонку в бумажном чек-листе и держите вахту сами. Взрослый, который делает то же самое, работает лучше уговоров.</span></div>
@@ -1647,10 +1713,10 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     <p class="lede" style="max-width:74ch">Английский вынесен из уроков в свой раздел: значок <b>🎯</b> в шапке у капитана и вкладка <b>«Диагностика»</b> у штурмана. Причина простая — пробелы за прошлый год и текущая домашка живут в разном темпе, и мешать их в одном списке неправильно.</p><p class="lede" style="max-width:74ch;margin-top:12px">Внутри <b>два блока с плашками года</b>. <b>5 класс</b> — семь умений, 61 задание: что осталось в голове после прошлого года. <b>6 класс</b> — темы, которые разбираем сейчас; они попадают сюда сами, как только появится разбор по английскому. У каждого блока своя полоса итога: прошлое и настоящее не складываются в одну цифру.</p>
     <div class="grid g3" style="margin-top:16px">
       <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Полоса итога</span></div><div class="gb">
-        <div class="row"><span><b>Эхолот</b> — разрез глубины под килем. Тема-промер: твёрдо знает — глубоко, отвечает наугад — мелко, провалил — мель. Пунктир показывает безопасную глубину, кораблик стоит над самым слабым местом.</span></div>
+        <div class="row"><span><b>Эхолот</b> — разрез глубины под килем. Глубина — доля заданий, которые держатся твёрдо. Пунктир показывает цель: 80%. Кораблик стоит над самым слабым местом.</span></div>
         <span class="exs">Видно за секунду, где можно сесть на мель</span></div></div>
       <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Семь умений</span></div><div class="gb">
-        <div class="row"><span>Один список под заголовками полок: «не сформировано», «держится на удаче», «держится само», «ещё не проверено». Слабое сверху, освоенное приглушено.</span></div>
+        <div class="row"><span>Один список под заголовками: <b>мель</b>, <b>шатко</b>, <b>держится</b>, <b>не проверяли</b>. Слабое сверху, освоенное приглушено. У каждой строки одна полоса: её длина — сколько заданий держится твёрдо, чёрная риска — цель 80%, цвет — насколько срочно. «Наугад» и «мимо» написаны словами под названием.</span></div>
         <span class="exs">Порядок подсказывает, с чего начинать</span></div></div>
       <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Две кнопки у каждого</span></div><div class="gb">
         <div class="row"><span><b>Разбор</b> — правила, ловушки, самопроверка, порядок отработки. Вторая кнопка меняется: «Пройти», «Отработать N» или «Пройти заново».</span></div>
@@ -1735,6 +1801,13 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">11 сен</td><td style="color:var(--ink-2)"><b>Вкладка «Уроки» перестроена на предметы.</b> Вместо ленты из огромных карточек — плитки предметов: иконка, число разборов и вопросов, последняя тема, полоска состояния и метка «новое» у свежих. Первый экран больше не растёт: предметов всегда шесть-семь, сколько бы тем ни добавилось за год. Нажатие открывает <b>экран предмета</b>, где собрано всё по нему сразу: цветная шапка с учебником, кнопки «Тест по предмету», «Слова вслух», «Диагностика за 5 класс» и «Устная проверка», а под ними компактные строки тем с датой, результатом теста и меткой сверки. Поиск работает как раньше: набрал слово — плитки уступают место плоскому списку. Причина переделки простая: восемь тем уже требовали прокрутки, а английский был разбросан по четырём вкладкам и тест за 5 класс приходилось искать</td></tr>
           <tr><td class="num" style="text-align:left">11 сен</td><td style="color:var(--ink-2)"><b>Информатика, §11 «Табличные информационные модели»</b> — собрано по презентации учителя из МЭШ, 31 слайд. Четыре типа таблиц (ОС, ООО, ООН, ОСО) с примерами со слайдов, четыре правила оформления и три знака для пустых клеток, устройство таблицы, вычислительные таблицы и полный разбор логической задачи про четырёх девочек с готовой таблицей ответа. 20 вопросов, 12 устных. В МЭШ задание стоит под предметом «Труд (технология)», но положено в информатику — это прямое продолжение §10</td></tr>
           <tr><td class="num" style="text-align:left">11 сен</td><td style="color:var(--ink-2)"><b>Английский: Present Simple и Present Continuous, глаголы состояния.</b> Таблица двух времён с сигналами и правописанием -ing, шесть групп stative verbs, четыре глагола с двойным смыслом (have, think, look, see) и порядок выбора времени за три вопроса — первый из них «это глагол состояния?», потому что тип глагола сильнее слова now. Помечен как <b>несверенный</b>: страницы 11 я не видел, правило собрано по общим источникам, а упражнение 6 без фото разобрать нельзя</td></tr>
+          <tr><td class="num" style="text-align:left">14 сен</td><td style="color:var(--ink-2)"><b>Переключатель вида вкладок убран.</b> Раньше шапку можно было показать двумя способами: все двенадцать вкладок одной строкой или разложенными по палубам. Одна строка не помещалась на экран и уезжала вбок — стало хуже, а не лучше. Теперь остались только палубы: верхний ряд — «Сегодня», «Учёба», «Тело и дух», «Рубка», под ним вкладки выбранной палубы. Кнопка справа над строкой исчезла</td></tr>
+          <tr><td class="num" style="text-align:left">14 сен</td><td style="color:var(--ink-2)"><b>Диагностика: сначала предмет и год, потом умения.</b> Наверху раздела карточки — «Английский · 5 класс» и «Английский · 6 класс» — с числом «держится твёрдо» и меткой, сколько мелей. Предметы, по которым диагностики ещё нет, свёрнуты в одну строку «Ещё не собрано» и не висят на экране, но счётчик про них напоминает. Открыт всегда один трек, а не два подряд. <b>Шкала переделана целиком:</b> вместо трёхцветной полосы, в которую были втиснуты «твёрдо», «наугад» и «мимо», — одна полоса (длина = сколько держится твёрдо), чёрная риска на 80% как цель и цвет только для срочности. Слова сведены к четырём и одинаковы везде — в строках, в заголовках и в легенде эхолота: <b>мель, шатко, держится, не проверяли</b>. Раньше группа считалась по «верно», а полоса рисовалась по «твёрдо», и умение с четвертью твёрдых попадало в «шатко» — теперь и то и другое считается по «твёрдо»</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Тест по английскому (Present Simple / Continuous) переписан целиком.</b> Старый спрашивал про грамматику: «что такое stative verb», «как образуется Present Continuous», «какие сигналы у времён» — восемь вопросов из двадцати проверяли, запомнил ли ребёнок разбор, а не умеет ли он говорить. Ещё три подряд были про одно и то же окончание -ing. Новый тест собран <b>по фотографии страницы 11</b>: тринадцать вопросов — поставить глагол в форму в живых предложениях упражнения 6, три перевода с русского, поиск ошибки, вопрос про stative из самого упражнения. Разбор дополнен ответами на упражнения 5, 6 и 7 с объяснением каждого, метка сменилась на «сверено с учебником»</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Английский: слова модуля 1c</b> — четырнадцать слов из файла учителя с транскрипцией и разбором: road trip, impressive, coast, steep, cable car, to miss, spectacular, cliff, sandy beach, elephant seal, breeding season, female, pup, fairytale mansion. Отдельно разобрано, почему шесть из них — сочетания из двух слов и переводятся целиком, чем coast отличается от cliff и где ошибаются в произношении female и mansion. 20 вопросов, 18 устных, все четырнадцать ушли в тренажёр слов. Упражнения 4 и 5 на стр. 5 рабочей тетради не разобраны: страницы не видел</td></tr>
+          <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Литература: былина «Вольга и Микула Селянинович»</b> — жанр и чем он отличается от сказки, сюжет по шести шагам, два героя как антитеза, пять признаков былинного стиха с примерами из текста и словарь старых слов: оратай, омешики, гужики, ракитов куст, соловая. 20 вопросов, 16 устных, карточка приёмки. Помечена как <b>несверенная</b>: страниц 45–50 вашего учебника я не видел, вопросы после текста могут отличаться</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Русский язык, упражнение 51</b> — первый разбор по этому предмету. Четыре стихотворных отрывка, восемь пропусков, и один приём на всё: задать вопрос от существительного. Разобрано, почему «в лесу зелёном», но «по клёнам стройным» — это разные падежи, а не варианты; почему «приносит», а не «приносет»; и три разбора под цифрами полностью: степью (6 букв, 6 звуков), приносит (морфологический), влажным (по составу). Отдельно сказано главное: учитель ждёт не букву, а объяснение — вопрос и падеж рядом со словом. 20 вопросов, 16 устных, карточка приёмки</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>История, § 4 «Европа в IX—XI вв.»</b> — тоже первый разбор по предмету, собран по фотографиям стр. 39–47. Ответ на заданный устно <b>вопрос 4</b> вынесен наверх и разложен на три части с примерами: Франция — раздробленность и Гуго Капет, Германия — Оттон I и империя 962 года, Срединное королевство — распалось первым. Дальше походы викингов и почему они начались, три названия одного народа, Винланд за 500 лет до Колумба, Альфред Великий и Гастингс 1066 года, Кирилл и Мефодий и разница между латинской и византийской традицией. Четыре даты, шесть имён. Для контурных карт — раскладка шести цветов и список того, за что снимают баллы. 20 вопросов, 18 устных, карточка приёмки</td></tr>
         </tbody>
       </table>
     </div>
@@ -1886,45 +1959,61 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 <section id="view-diag" hidden>
   <div id="diagMap">
     <div class="hero" style="--hc:var(--blue)">
-      <span class="eyebrow">Английский · карта двух лет</span>
-      <h2>Что усвоено за пятый и что идёт в шестом</h2>
-      <p class="lede">Два блока, и они про разное. <b>Пятый класс</b> — прошлое: проверка, что осталось в голове после года, и где придётся достраивать. <b>Шестой</b> — настоящее: темы, которые разбираем сейчас, по мере домашки. У каждой строки есть разбор, слабое стоит сверху.</p>
+      <span class="eyebrow">Диагностика</span>
+      <h2>Что осталось от прошлых лет и что идёт сейчас</h2>
+      <p class="lede">Сначала предмет и год, потом умения. На виду только то, что уже собрано; остальные предметы свёрнуты в одну строку. Шкала одна на весь раздел: <b>длина полосы</b> — сколько заданий держится твёрдо, <b>чёрная риска</b> — цель 80%, <b>цвет</b> — насколько срочно.</p>
     </div>
     <div class="dgwrap">
+      <div class="dgpick" id="dgPick"></div>
+      <div class="dgsoon">
+        <button class="dgsoonbtn" id="dgSoonBtn" type="button" aria-expanded="false"></button>
+        <div class="dgsoonbox" id="dgSoonBox" hidden></div>
+      </div>
+      <div class="dgsel" id="dgSel"></div>
 
-      <div class="dgtrack" style="--tc:var(--amber)">
+      <div class="dgtrack" id="dgTrack5" style="--tc:var(--amber)" hidden>
         <div class="dgth"><span class="dgy">5 класс</span>
           <div><b>Что усвоено за прошлый год <span id="dg5Count"></span></b>
             <i>Семь умений, 61 задание. Это не оценка и не домашка — карта пробелов, чтобы знать, что достраивать.</i></div></div>
         <div id="dg5Top" hidden>
         <div class="dgsound"><div id="dg5Snd"></div>
           <div class="dgsleg">
-            <span><i style="background:var(--green)"></i>глубоко — держится твёрдо</span>
-            <span><i style="background:var(--amber)"></i>мелко — отвечает наугад</span>
-            <span><i style="background:var(--red)"></i>мель — сюда в первую очередь</span>
-            <span><i style="background:#C7CEDC"></i>не промеряли</span>
+            <span><i style="background:var(--red)"></i>мель — держится меньше половины</span>
+            <span><i style="background:var(--amber)"></i>шатко — держится, но не дотягивает</span>
+            <span><i style="background:var(--green)"></i>держится — 80% и выше</span>
+            <span><i style="background:#C7CEDC"></i>не проверяли</span>
           </div>
         </div>
         </div>
+        <div class="howread"><h4>как читать</h4><div class="hl">
+            <span><span class="demo"><i style="width:25%"></i><u></u></span><b>Длина</b> — сколько держится твёрдо</span>
+            <span><b>Чёрная риска</b> — цель, 80%</span>
+            <span><b>Цвет</b> — насколько срочно</span>
+          </div></div>
         <div id="diag5Skills"></div>
         <div id="diagRec"></div>
         <div class="dgfoot" id="diag5Foot"></div>
       </div>
 
-      <div class="dgtrack" style="--tc:var(--green)">
+      <div class="dgtrack" id="dgTrack6" style="--tc:var(--green)" hidden>
         <div class="dgth"><span class="dgy">6 класс</span>
           <div><b>Идёт сейчас <span id="dg6Count"></span></b>
             <i>Темы этого года — те же разборы, что и в «Уроках», собранные здесь, чтобы видеть год целиком. Список пополняется с каждой новой домашкой.</i></div></div>
         <div id="dg6Top" hidden>
         <div class="dgsound"><div id="dg6Snd"></div>
           <div class="dgsleg">
-            <span><i style="background:var(--green)"></i>глубоко — держится твёрдо</span>
-            <span><i style="background:var(--amber)"></i>мелко — отвечает наугад</span>
-            <span><i style="background:var(--red)"></i>мель — сюда в первую очередь</span>
-            <span><i style="background:#C7CEDC"></i>не промеряли</span>
+            <span><i style="background:var(--red)"></i>мель — держится меньше половины</span>
+            <span><i style="background:var(--amber)"></i>шатко — держится, но не дотягивает</span>
+            <span><i style="background:var(--green)"></i>держится — 80% и выше</span>
+            <span><i style="background:#C7CEDC"></i>не проверяли</span>
           </div>
         </div>
         </div>
+        <div class="howread"><h4>как читать</h4><div class="hl">
+            <span><span class="demo"><i style="width:25%"></i><u></u></span><b>Длина</b> — сколько держится твёрдо</span>
+            <span><b>Чёрная риска</b> — цель, 80%</span>
+            <span><b>Цвет</b> — насколько срочно</span>
+          </div></div>
         <div id="diag6Skills"></div>
         <div class="dgfoot" id="diag6Foot"></div>
       </div>
@@ -3486,7 +3575,355 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 </article>
 
-<article id="L11">
+<article id="L15">
+    <div class="hero" style="--hc:var(--amber)">
+      <span class="eyebrow">История · 6-Я · 15 сентября · всеобщая история, § 4, стр. 39–47 · вопрос 4 устно + контурные карты</span>
+      <h2>§ 4 · Европа в IX—XI вв.</h2>
+      <p class="lede">Параграф про три века, но держится он на <b>одной мысли</b>: набеги викингов перевернули Европу — и в Англии подтолкнули к объединению, а во Франции, наоборот, к раздробленности. Одна причина, разные последствия. Спросят устно <b>вопрос 4</b> — про судьбу трёх государств после империи Карла Великого, и его разбор здесь отдельным блоком.</p>
+      <button class="btn print noprint" onclick="window.print()">Распечатать</button>
+    </div>
+
+    <div class="sec" style="--sc2:var(--red)">
+      <h3>Ответ на вопрос 4 <em>то, что спросят вслух</em></h3>
+      <div class="note" style="--nc2:var(--red);max-width:84ch"><b>Вопрос: как сложилась в IX—XI вв. судьба трёх государств, образовавшихся после распада империи Карла Великого?</b>
+        <span>Отвечать надо по трём частям, и к каждой нужен свой пример. Ответ «они все распались» — на тройку.</span></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Западно-Франкское</span><span class="gm">будущая Франция</span></div><div class="gb">
+        <div class="row"><span>Короли ослабели, знать перестала подчиняться. Набеги норманнов только ускорили распад: защиту давал не далёкий король, а ближний сеньор — и люди шли под его руку. В <b>987 году</b> королём избрали графа Парижского <b>Гуго Капета</b>, начало династии <b>Капетингов</b>. Но его настоящая власть почти не выходила за пределы собственных земель между Сеной и Луарой: король стал «первым среди равных».</span></div>
+        <span class="exs">итог: раздробленность</span></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Восточно-Франкское</span><span class="gm">будущая Германия</span></div><div class="gb">
+        <div class="row"><span>Здесь власть, наоборот, усилилась. Король <b>Оттон I</b> (936–973) разгромил венгров и остановил их набеги — после этого венгры перешли к оседлой жизни. В <b>962 году</b> Оттон короновался в Риме, и возникла <b>Священная Римская империя</b>. Император считал себя главой христианского мира, вмешивался в дела Церкви и назначал епископов — отсюда будущий конфликт с папами.</span></div>
+        <span class="exs">итог: империя</span></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Срединное королевство</span><span class="gm">Италия и Лотарингия</span></div><div class="gb">
+        <div class="row"><span>Распалось <b>раньше двух других</b>. Италия осталась раздробленной на множество владений, её северная часть вошла в Священную Римскую империю, а Лотарингию веками делили между собой Франция и Германия.</span></div>
+        <span class="exs">эту часть чаще всего забывают — а без неё ответ неполный</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--blue)">
+      <h3>1. Походы викингов <em>почему они начались</em></h3>
+      <div class="note" style="--nc2:var(--blue);max-width:82ch"><b>Причина в двух словах: дома тесно, рядом богато</b>
+        <span>Скандинавия — суровый климат, каменистая и мёрзлая земля, мало пригодных для пашни мест. Не растёт виноград, плохо с пшеницей. А рядом — богатая и плохо защищённая Европа. Как сказано в тексте параграфа, брать силой оказалось проще, чем производить.</span></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Три имени</span><span class="gm">одного народа</span></div><div class="gb">
+        <div class="row"><span>В Западной Европе — <b>норманны</b> («северные люди»). На Руси — <b>варяги</b>. Сами себя они называли <b>викингами</b>. Это любимый вопрос на проверке.</span></div></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Чем занимались</span><span class="gm">вопрос 2 параграфа</span></div><div class="gb">
+        <div class="row"><span>Земледелие · скотоводство · ремесло · торговля · мореплавание · военные походы. В вопросе просят <b>не менее трёх</b> — назвать лучше пять.</span></div></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Куда доплыли</span><span class="gm">и это поражает</span></div><div class="gb">
+        <div class="row"><span>На запад — Англия, Ирландия, Исландия (конец IX в.), Гренландия. Около <b>1000 года</b> <b>Лейф Счастливый</b> достиг Северной Америки и назвал её <b>Винланд</b> — «страна винограда». Это за <b>500 лет до Колумба</b>, но закрепиться не удалось, и в Европе об этом почти не узнали.</span></div>
+        <div class="row"><span>На юг — Франция, Испания, Сицилия и Южная Италия. На восток — по рекам в Русь и в Византию, путь <b>«из варяг в греки»</b>; в Константинополе викинги нередко нанимались на службу к императору.</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">Корабль из Осеберга</span><span class="gm">находка 1904 года</span></div><div class="gb">
+        <div class="row"><span>Курган в Южной Норвегии, внутри — корабль длиной <b>21,6 метра</b> с мачтой, вёслами, повозкой, санями и домашней утварью. Похоронены две женщины. Главный источник знаний о том, как выглядели корабли викингов.</span></div></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--violet)">
+      <h3>2. Норманны и Англия <em>от Альфреда до Гастингса</em></h3>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Альфред Великий</span><span class="gm">871–900</span></div><div class="gb">
+        <div class="row"><span>Король англосаксов, сумевший остановить датчан. Что именно сделал: <b>создал флот</b>, <b>построил крепости</b>, <b>реформировал ополчение</b> — теперь каждый второй воин служил, пока первый работал на земле, — и укрепил границу.</span></div>
+        <span class="exs">пример того, как внешняя угроза заставляет государство собраться</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">1066 · Гастингс</span><span class="gm">конец эпохи викингов</span></div><div class="gb">
+        <div class="row"><span>На английский трон претендовали трое. Норвежский король <b>Харальд III Суровый</b> — зять Ярослава Мудрого, женатый на его дочери Елизавете, — погиб в бою. Затем высадился герцог Нормандии <b>Вильгельм</b>. В битве при Гастингсе англосаксонский король <b>Гарольд</b> был убит, и Вильгельм стал королём <b>Вильгельмом I</b> (1066–1087), войдя в историю как <b>Вильгельм Завоеватель</b>. Битву изображает знаменитый <b>ковёр из Байё</b>.</span></div>
+        <span class="exs">и снова ниточка к Руси: Гита, дочь погибшего Гарольда, бежала из Англии и стала женой Владимира Мономаха</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--amber)">
+      <h3>3. Западнославянские государства <em>и славянская азбука</em></h3>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Великая Моравия</span><span class="gm">863 год</span></div><div class="gb">
+        <div class="row"><span>Князь <b>Ростислав</b>, чтобы не зависеть от немецких проповедников, попросил наставников в вере у Византии. Прибыли братья <b>Кирилл и Мефодий</b> из греческого города <b>Солунь</b> (Фессалоники). Они создали <b>славянскую азбуку</b> и начали перевод Библии на славянский язык. Позже их ученики составили <b>кириллицу</b>, названную в честь Кирилла.</span></div>
+        <span class="exs">частая ошибка: сказать, что кириллицу создал сам Кирилл — её создали ученики</span></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Чехия</span><span class="gm">X–XI вв.</span></div><div class="gb">
+        <div class="row"><span>После гибели Великой Моравии под ударами венгров усилились чехи. В начале X в. князь <b>Вацлав</b> принял крещение. Чехия вошла в состав Священной Римской империи, но сохранила самостоятельность, а в XI—XII вв. её князья закрепили за собой королевский титул.</span></div></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Польша</span><span class="gm">966 и 1025</span></div><div class="gb">
+        <div class="row"><span>Польское государство возникло в X в. В <b>966 году</b> приняло христианство <b>по римскому образцу</b>, а в <b>1025 году</b> князь <b>Болеслав I</b> получил королевский титул.</span></div>
+        <span class="exs">важный вывод: Польша и Чехия пошли за латинской традицией, а Русь — за византийской. Отсюда разные азбуки и разная культура</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--cyan)">
+      <h3>Четыре даты и шесть имён <em>минимум, который спросят</em></h3>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">863</span></div><div class="gb"><div class="row"><span>Кирилл и Мефодий в Великой Моравии, начало славянской письменности</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">962</span></div><div class="gb"><div class="row"><span>Коронация Оттона I в Риме — Священная Римская империя</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">965</span></div><div class="gb"><div class="row"><span>Разгром Хазарского каганата князем Святославом — из ленты «Россия»</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">1066</span></div><div class="gb"><div class="row"><span>Битва при Гастингсе, Нормандское завоевание Англии</span></div></div></div>
+      <div class="note" style="--nc2:var(--cyan);max-width:82ch"><b>Имена</b>
+        <span><b>Альфред Великий</b> — собрал Англию против датчан · <b>Вильгельм Завоеватель</b> — победил при Гастингсе ·
+        <b>Оттон I</b> — создал Священную Римскую империю · <b>Гуго Капет</b> — начало Капетингов во Франции ·
+        <b>Кирилл и Мефодий</b> — славянская азбука · <b>Лейф Счастливый</b> — Винланд.</span></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Контурная карта <em>что и каким цветом</em></h3>
+      <div class="note" style="--nc2:var(--green);max-width:82ch"><b>Шесть цветов просили не зря — их удобно разложить так</b>
+        <span><b>Три цвета на походы викингов:</b> на запад (Англия, Ирландия, Исландия, Гренландия, Винланд), на юг (Франция, Испания, Сицилия, Южная Италия), на восток (по рекам в Русь и Византию — путь «из варяг в греки»).
+        <b>Три цвета на государства:</b> Западно-Франкское, Восточно-Франкское и Срединное королевство после раздела империи Карла Великого.</span></div>
+      <div class="note" style="--nc2:var(--amber);max-width:82ch"><b>За что снимают баллы</b>
+        <span>Закрасили, но <b>не подписали</b> объекты. Не сделали <b>условные обозначения</b> сбоку — что значит каждый цвет. Рисовали стрелки на глаз, не сверяясь с картой в приложении учебника. Подписи делаются печатными буквами вдоль объекта, а не поперёк.</span></div>
+    </div>
+
+    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответ</em></summary>
+      <ol>
+        <li>Почему началась эпоха викингов? <b>Мало земли и суровый климат дома, рядом богатая и слабо защищённая Европа.</b></li>
+        <li>Три названия одного народа? <b>Норманны, варяги, викинги.</b></li>
+        <li>Чем знаменит Альфред Великий? <b>Флот, крепости, ополчение — остановил датчан.</b></li>
+        <li>Что случилось в 1066 году? <b>Битва при Гастингсе, Вильгельм стал королём Англии.</b></li>
+        <li>Что произошло в 962 году? <b>Оттон I короновался в Риме, возникла Священная Римская империя.</b></li>
+        <li>Кто создал кириллицу? <b>Ученики Кирилла и Мефодия, назвав её в честь Кирилла.</b></li>
+        <li>Судьба трёх государств? <b>Франция — раздробленность, Германия — империя, Срединное — распалось первым.</b></li>
+      </ol>
+    </details>
+
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Порядок работы <em>сорок минут вместе с картой</em></h3>
+      <ol class="how" style="--hc2:var(--amber)">
+        <li><b>Прочитать § 4</b> целиком, отмечая карандашом четыре даты из ленты в начале параграфа.</li>
+        <li><b>Проговорить вслух ответ на вопрос 4</b> — по трём частям, с примером к каждой. Именно его спросят.</li>
+        <li><b>Сделать контурную карту:</b> сначала подписи и границы простым карандашом, потом цвет и стрелки, в конце — условные обозначения сбоку.</li>
+        <li><b>Проверить себя</b> по блоку выше, не подглядывая.</li>
+        <li><b>Тест по теме</b> — двадцать вопросов, кнопка в конце разбора.</li>
+      </ol>
+    </div>
+  </article>
+
+  <article id="L14">
+    <div class="hero" style="--hc:var(--pink)">
+      <span class="eyebrow">Русский язык · 6-Я · 15 сентября · учебник, стр. 25–26, упражнение 51</span>
+      <h2>Упражнение 51 · безударные окончания прилагательных</h2>
+      <p class="lede">Четыре стихотворных отрывка, восемь пропусков. Вся тема держится на <b>одном приёме</b>: задать вопрос от существительного — гласная в вопросе и в окончании совпадёт. И помнить, что задание требует не только букву, а <b>объяснение</b>.</p>
+      <button class="btn print noprint" onclick="window.print()">Распечатать</button>
+    </div>
+
+    <div class="sec" style="--sc2:var(--pink)">
+      <h3>Правило в одну строку <em>работает всегда</em></h3>
+      <div class="note" style="--nc2:var(--pink);max-width:80ch"><b>Как проверить безударное окончание прилагательного</b>
+        <span>Задать от существительного вопрос: <b>какой? какого? каким? каком?</b> — и поставить ту же гласную.
+        Над землёй <b>какОЙ?</b> — туманн<b>ой</b>. Светом <b>какИМ?</b> — бледн<b>ым</b>. В лесу <b>какОМ?</b> — зелён<b>ом</b>.</span></div>
+      <div class="note" style="--nc2:var(--red);max-width:80ch"><b>Где путаются чаще всего</b>
+        <span><b>-ым и -ом</b> — это разные падежи, а не варианты одного. <b>Каким?</b> — творительный, <b>-ым</b>. <b>О каком?</b> — предложный, <b>-ом</b>. В упражнении они стоят рядом: «в лесу зелён<b>ом</b>» и «по клёнам стройн<b>ым</b>».</span></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--blue)">
+      <h3>Все восемь пропусков <em>с вопросом и падежом</em></h3>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">1</span><span class="gm">месяц над землёй</span></div><div class="gb">
+        <div class="row"><span>В небесах над <b>туманной</b> землёй — над землёй (как<b>ой</b>?), Т.п., ж.р., окончание <b>-ой</b></span></div>
+        <div class="row"><span><b>Бледным</b> светом луга серебрит — светом (как<b>им</b>?), Т.п., м.р., окончание <b>-ым</b></span></div>
+        <span class="exs">«Напоённые белою мглой» — пропуска нет, но слово стоит того, чтобы знать: это причастие, от глагола напоить</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">2</span><span class="gm">дождь в лесу</span></div><div class="gb">
+        <div class="row"><span>Крупный дождь в лесу <b>зелёном</b> — в лесу (как<b>ом</b>?), П.п., м.р., окончание <b>-ом</b></span></div>
+        <div class="row"><span>Прошумел по <b>стройным</b> клёнам — по клёнам (как<b>им</b>?), Д.п., мн.ч., окончание <b>-ым</b></span></div>
+        <span class="exs">две строки подряд — и два разных падежа; именно здесь и ставят ловушку</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">3</span><span class="gm">весенняя ночь</span></div><div class="gb">
+        <div class="row"><span>Туча растаяла. <b>Влажным</b>³ теплом — теплом (как<b>им</b>?), Т.п., ср.р., окончание <b>-ым</b></span></div>
+        <div class="row"><span>Ветер <b>приносит</b>² с полей аромат — глагол, а не прилагательное: <b>II спряжение</b>, окончание <b>-ит</b></span></div>
+        <span class="exs">«Слабо алеет за степью¹ закат» — слово степью помечено единицей, это фонетический разбор</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">4</span><span class="gm">хризантемы, Бунин</span></div><div class="gb">
+        <div class="row"><span>На окне, <b>серебряном</b> от инея — на окне (как<b>ом</b>?), П.п., ср.р., окончание <b>-ом</b></span></div>
+        <span class="exs">заодно стоит помнить: в самом слове серебряный — суффикс -ян- с одной н; исключения стеклянный, оловянный, деревянный</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--amber)">
+      <h3>Один глагол среди прилагательных <em>«приносит» — отдельное правило</em></h3>
+      <div class="note" style="--nc2:var(--amber);max-width:80ch"><b>Почему -ит, а не -ет</b>
+        <span>Начальная форма — <b>приносить</b>, оканчивается на <b>-ить</b>, значит <b>II спряжение</b>: -ишь, -ит, -им, -ите, -ат/-ят.
+        Исключения из этого правила — только <b>брить</b> и <b>стелить</b>. И ещё: подлежащее «ветер» в единственном числе, поэтому не «приносят».</span></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--cyan)">
+      <h3>Три разбора под цифрами <em>их спросят отдельно</em></h3>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">степью¹</span><span class="gm">фонетический</span></div><div class="gb">
+        <div class="row"><span><b>сте́-пью</b>, 2 слога, ударение на первый. <b>6 букв, 6 звуков:</b> [с’т’эп’йу]</span></div>
+        <div class="row"><span>с — [с’] согл., глух., мягк. · т — [т’] согл., глух., мягк. · е — [э] гласн., ударн. · п — [п’] согл., глух., мягк. · ь — звука не даёт · ю — [й’] и [у]</span></div>
+        <span class="exs">частая ошибка — насчитать пять звуков: забывают, что ю после мягкого знака даёт два</span></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">приносит²</span><span class="gm">морфологический</span></div><div class="gb">
+        <div class="row"><span>Ветер (что делает?) <b>приносит</b> — глагол.</span></div>
+        <div class="row"><span>Н. ф. — <b>приносить</b>. Постоянные: несовершенный вид, переходный, <b>II спряжение</b>. Непостоянные: изъявительное наклонение, настоящее время, 3-е лицо, единственное число.</span></div>
+        <div class="row"><span>В предложении — <b>сказуемое</b>.</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">влажным³</span><span class="gm">по составу</span></div><div class="gb">
+        <div class="row"><span><b>влаж</b> — корень · <b>н</b> — суффикс · <b>ым</b> — окончание</span></div>
+        <span class="exs">родственные слова: влага, влажность; в корне чередование г // ж</span></div></div>
+    </div>
+
+    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответ</em></summary>
+      <ol>
+        <li>Как проверить безударное окончание прилагательного? <b>Задать вопрос от существительного.</b></li>
+        <li>В лесу зелён..м — какая буква? <b>-ом, предложный падеж.</b></li>
+        <li>По клёнам стройн..м? <b>-ым, дательный падеж множественного числа.</b></li>
+        <li>Почему приносит, а не приносет? <b>Приносить на -ить, значит II спряжение.</b></li>
+        <li>Сколько звуков в слове степью? <b>Шесть: мягкий знак звука не даёт, ю даёт два.</b></li>
+        <li>Разбери влажным по составу. <b>влаж- / -н- / -ым.</b></li>
+        <li>Что нужно написать рядом с каждым словом? <b>Вопрос и падеж — это и есть объяснение.</b></li>
+      </ol>
+    </details>
+
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Порядок работы <em>двадцать минут</em></h3>
+      <ol class="how" style="--hc2:var(--pink)">
+        <li><b>Выписать восемь слов</b> с пропусками, оставляя место справа для объяснения.</li>
+        <li><b>К каждому задать вопрос</b> от существительного и записать его в скобках вместе с падежом: над землёй (какой?) туманной — Т.п.</li>
+        <li><b>Обозначить окончания</b> — выделить рамкой, как требует задание.</li>
+        <li><b>Сделать три разбора</b> под цифрами: степью, приносит, влажным. Их проверяют отдельно и почти всегда спрашивают у доски.</li>
+        <li><b>Тест по теме</b> — двадцать вопросов, кнопка в конце разбора.</li>
+      </ol>
+    </div>
+  </article>
+
+  <article id="L13">
+    <div class="hero" style="--hc:var(--violet)">
+      <span class="eyebrow">Литература · 6-Я · 16 сентября · стр. 45–50 · былина «Вольга и Микула Селянинович»</span>
+      <h2>Былина «Вольга и Микула Селянинович»</h2>
+      <p class="lede">Задание — читать стр. 45–50. Спрашивать будут не пересказ, а <b>идейно-тематическое содержание и особенности былины</b>: что за жанр, чем он отличается от сказки, какими приёмами сложен и в чём главная мысль. Разбор идёт ровно в этом порядке.</p>
+      <button class="btn print noprint" onclick="window.print()">Распечатать</button>
+    </div>
+
+    <div class="sec" style="--sc2:var(--violet)">
+      <h3>Что такое былина <em>и чем она не сказка</em></h3>
+      <div class="note" style="--nc2:var(--violet);max-width:80ch"><b>Определение, которое стоит знать наизусть</b>
+        <span><b>Былина</b> — русская народная героическая песня о богатырях и событиях Древней Руси. Автора нет: её складывал народ и веками передавал из уст в уста. Исполняли былину <b>сказители</b> — нараспев, часто под гусли.</span></div>
+      <div class="grp" style="--gc:var(--violet)"><div class="gh"><span class="gt">Былина</span><span class="gm">от слова «быль»</span></div><div class="gb">
+        <div class="row"><span>Слушали её как рассказ о том, что <b>было на самом деле</b>. Герои — богатыри, время — Древняя Русь, места настоящие: Киев, Новгород.</span></div></div></div>
+      <div class="grp" style="--gc:var(--ink-3)"><div class="gh"><span class="gt">Сказка</span><span class="gm">заведомая выдумка</span></div><div class="gb">
+        <div class="row"><span>Сказку слушали как вымысел и не спорили об этом. Отсюда и разный тон: у былины он торжественный, у сказки — свободный.</span></div></div></div>
+      <div class="note" style="--nc2:var(--amber);max-width:80ch"><b>Вопрос, который любят задавать</b>
+        <span>К какому роду литературы относится былина? <b>К эпосу</b> — есть сюжет, герои и действие. Лирика — про чувства, драма — для сцены.</span></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--blue)">
+      <h3>Сюжет по шагам <em>шесть ходов, и каждый работает на мысль</em></h3>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">1</span><span class="gm">выезд</span></div><div class="gb">
+        <div class="row"><span>Князь <b>Вольга Святославгович</b> с дружиной едет за данью в три города, пожалованные ему дядей, князем Владимиром: Гурчевец, Ореховец, Крестьяновец.</span></div></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">2</span><span class="gm">голос в поле</span></div><div class="gb">
+        <div class="row"><span>В чистом поле слышно, как <b>поскрипывает сошка и почиркивают омешики</b>. Дружина едет на звук <b>три дня</b> — и не может доехать.</span></div>
+        <span class="exs">здесь сразу два приёма: гипербола (звук слышен за три дня пути) и троекратность</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">3</span><span class="gm">встреча</span></div><div class="gb">
+        <div class="row"><span>Пахарь — <b>оратай</b> — работает так, что пни и коренья выворачивает, камни в борозду валит. Вольга зовёт его с собой, и тот соглашается.</span></div></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">4</span><span class="gm">предупреждение</span></div><div class="gb">
+        <div class="row"><span>Оратай предупреждает: в тех городах живут <b>разбойники-мужики</b>, они обманут. Так и выходит — мужики ломают мост, но пахарь с ними справляется.</span></div>
+        <span class="exs">пахарь оказывается не только сильнее, но и дальновиднее князя</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">5</span><span class="gm">сошка · кульминация</span></div><div class="gb">
+        <div class="row"><span>Оратай просит вынуть его сошку из земли и бросить за ракитов куст. <b>Пятеро не могут. Десять не могут. Вся дружина не может.</b> Пахарь подъезжает, берёт сошку <b>одной рукой</b>, вытряхивает землю и забрасывает за куст.</span></div>
+        <span class="exs">вот ради этой сцены и сложена вся былина</span></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">6</span><span class="gm">имя</span></div><div class="gb">
+        <div class="row"><span>Кобыла пахаря обгоняет княжеского коня. Вольга спрашивает имя — и слышит: <b>Микула Селянинович</b>. Его любит <b>матушка сыра земля</b>.</span></div>
+        <span class="exs">фамилия говорящая: селянин — крестьянин, житель села</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--amber)">
+      <h3>Два героя рядом <em>это и есть антитеза</em></h3>
+      <div class="grp" style="--gc:var(--ink-3)"><div class="gh"><span class="gt">Вольга</span><span class="gm">князь</span></div><div class="gb">
+        <div class="row"><span>Власть, дружина, право собирать дань. Сила даётся ему <b>по положению</b>: он племянник князя, за ним войско.</span></div></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Микула</span><span class="gm">пахарь</span></div><div class="gb">
+        <div class="row"><span>Ни войска, ни титула. Сила даётся ему <b>землёй и трудом</b>. И в каждом сравнении — сошка, лошадь, ум — он оказывается выше.</span></div></div></div>
+      <div class="note" style="--nc2:var(--green);max-width:80ch"><b>Главная мысль, её и спросят</b>
+        <span>Народ прославил не воина и не князя, а <b>того, кто кормит землю</b>. Труд пахаря в былине оказывается выше воинской силы и княжеской власти. Микула — богатырь-крестьянин, и таких в былинах больше нет ни одного.</span></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--red)">
+      <h3>Особенности былинного стиха <em>пять признаков с примерами</em></h3>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Гипербола</span><span class="gm">преувеличение</span></div><div class="gb">
+        <div class="row"><span>Вся дружина не может сдвинуть сошку — Микула поднимает одной рукой. Звук пахоты слышен за три дня пути.</span></div></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Постоянный эпитет</span><span class="gm">устойчивое определение</span></div><div class="gb">
+        <div class="row"><span><b>сошка кленовая · гужики шелковые · кобыла соловая · чисто поле · матушка сыра земля</b></span></div>
+        <span class="exs">определение всегда идёт за словом, а не перед ним — это тоже примета былины</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Троекратность</span><span class="gm">три шага</span></div><div class="gb">
+        <div class="row"><span>Три дня пути. Три города. Пятеро — десять — вся дружина.</span></div></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Ретардация</span><span class="gm">замедление</span></div><div class="gb">
+        <div class="row"><span>Повторы и подробности оттягивают развязку. Былину пели целый вечер, и напряжение надо было держать.</span></div></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Особый стих</span><span class="gm">без рифмы</span></div><div class="gb">
+        <div class="row"><span>Рифмы нет, строка держится на ударениях. Много уменьшительных слов — <b>сошка, ножки, кобылка</b> — и это не про размер, а про тёплое отношение.</span></div></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--cyan)">
+      <h3>Старые слова <em>без них текст не читается</em></h3>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">оратай</span></div><div class="gb"><div class="row"><span>пахарь, от слова «орать» — пахать</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">соха, сошка</span></div><div class="gb"><div class="row"><span>орудие для пахоты</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">омешики</span></div><div class="gb"><div class="row"><span>металлические наконечники сохи, которые режут землю</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">гужики</span></div><div class="gb"><div class="row"><span>ремни и петли в упряжи</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">ракитов куст</span></div><div class="gb"><div class="row"><span>куст ивы — за него и полетела сошка</span></div></div></div>
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">соловая</span></div><div class="gb"><div class="row"><span>масть лошади: желтоватая со светлыми гривой и хвостом</span></div></div></div>
+    </div>
+
+    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответ</em></summary>
+      <ol>
+        <li>Чем былина отличается от сказки? <b>Былину слушали как быль, сказку — как выдумку.</b></li>
+        <li>Зачем Вольга выехал в путь? <b>За данью в три города, подаренные князем Владимиром.</b></li>
+        <li>Что случилось с сошкой? <b>Вся дружина не смогла её вынуть, Микула вынул одной рукой.</b></li>
+        <li>Приведи пример гиперболы. <b>Звук пахоты слышен за три дня пути.</b></li>
+        <li>Назови два постоянных эпитета. <b>Сошка кленовая, гужики шелковые.</b></li>
+        <li>В чём главная мысль? <b>Труд пахаря выше воинской силы и княжеской власти.</b></li>
+        <li>Почему Микула так силён? <b>Его любит матушка сыра земля — сила от земли и труда.</b></li>
+      </ol>
+    </details>
+
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Порядок работы <em>тридцать минут</em></h3>
+      <ol class="how" style="--hc2:var(--violet)">
+        <li><b>Прочитать стр. 45–50 вслух</b> — хотя бы первую страницу. Былину складывали для слуха, и вслух она читается совсем иначе.</li>
+        <li><b>Выписать старые слова</b> с переводом: оратай, омешики, гужики, ракитов куст. Четыре-пять слов, не больше.</li>
+        <li><b>Найти в тексте по одному примеру</b> на гиперболу и на постоянный эпитет. Именно найти в книге, а не взять отсюда — за это и спрашивают.</li>
+        <li><b>Ответить вслух на один вопрос:</b> почему народ сложил былину про пахаря, а не про князя.</li>
+        <li><b>Тест по теме</b> — двадцать вопросов, кнопка в конце разбора.</li>
+      </ol>
+      <div class="note" style="--nc2:var(--amber);max-width:80ch;margin-top:16px"><b>Разбор не сверен со страницами</b>
+        <span>Я не видел стр. 45–50 вашего учебника: не знаю, какая там вступительная статья и какие вопросы стоят после текста. Сам текст былины известен и разобран верно, но <b>вопросы в конце параграфа могут отличаться</b>. Сфотографируйте разворот — сверю и уберу эту пометку.</span></div>
+    </div>
+  </article>
+
+  <article id="L12">
+    <div class="hero" style="--hc:var(--blue)">
+      <span class="eyebrow">Английский язык · 6-Я · 15 сентября · Starlight 6, модуль 1c · слова от учителя + Р.Т. стр. 5</span>
+      <h2>Слова модуля 1c · впечатляющие места и морские слоны</h2>
+      <p class="lede">Задание из двух частей: <b>отработать чтение и перевод четырнадцати слов</b> из файла учителя и сделать <b>упражнения 4 и 5 на стр. 5 рабочей тетради</b>. Слова здесь разобраны целиком — с транскрипцией и с объяснением, где прячется ошибка. Упражнения тетради разобрать не могу: страницу я не видел.</p>
+      <button class="btn print noprint" onclick="window.print()">Распечатать</button>
+    </div>
+
+    <div class="sec" style="--sc2:var(--blue)">
+      <h3>Четырнадцать слов <em>с транскрипцией и разбором</em></h3>
+      <div class="note" style="--nc2:var(--blue);max-width:80ch"><b>Как учить, чтобы осталось</b>
+        <span>Не списком сверху вниз — так запоминается только порядок. Возьмите вкладку <b>«Слова»</b>: журнал спросит вразнобой и вернёт те, что не дались. Четырнадцать слов — это два подхода по семь.</span></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">road trip</span><span class="gm">|ˈrəʊd trɪp|</span></div><div class="gb"><div class="row"><span><b>путешествие на автомобиле</b></span></div><span class="exs">Два слова — одно понятие. Не «дорожная поездка»: по-русски это именно «путешествие на машине», с ночёвками и остановками.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">impressive</span><span class="gm">|ɪmˈpresɪv|</span></div><div class="gb"><div class="row"><span><b>впечатляющий</b></span></div><span class="exs">От глагола to impress — производить впечатление. Ударение на второй слог: им-ПРЕ-сив.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">coast</span><span class="gm">|kəʊst|</span></div><div class="gb"><div class="row"><span><b>побережье</b></span></div><span class="exs">Вся береговая линия: the south coast of England. Читается как «коуст», буква -oa- даёт |əʊ|.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">steep</span><span class="gm">|stiːp|</span></div><div class="gb"><div class="row"><span><b>крутой, отвесный</b></span></div><span class="exs">Про склон, лестницу, тропу. Долгое и: «стиип».</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">cable car</span><span class="gm">|ˈkeɪbl kɑː|</span></div><div class="gb"><div class="row"><span><b>фуникулёр</b></span></div><span class="exs">Cable — трос. Вагончик, который едет по канату в гору. «Кабельная машина» — неверно.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">to miss</span><span class="gm">|mɪs|</span></div><div class="gb"><div class="row"><span><b>упускать, пропускать</b></span></div><span class="exs">Miss the bus — опоздать на автобус. Второе значение — «скучать»: I miss you.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">spectacular</span><span class="gm">|spekˈtækjələ|</span></div><div class="gb"><div class="row"><span><b>захватывающий, эффектный</b></span></div><span class="exs">В списке учителя стоит «красивый», но точнее — зрелищный, от которого дух захватывает. Родственное слово — spectacle, зрелище.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">cliff</span><span class="gm">|klɪf|</span></div><div class="gb"><div class="row"><span><b>утёс, отвесная скала у моря</b></span></div><span class="exs">Не путать с coast: побережье может быть песчаным и пологим, а cliff — это всегда обрыв.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">sandy beach</span><span class="gm">|ˈsændi biːtʃ|</span></div><div class="gb"><div class="row"><span><b>песчаный пляж</b></span></div><span class="exs">Sand — песок, sandy — песчаный. Суффикс -y превращает существительное в прилагательное: rain → rainy.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">elephant seal</span><span class="gm">|ˈelɪfənt siːl|</span></div><div class="gb"><div class="row"><span><b>морской слон</b></span></div><span class="exs">Дословно «слон-тюлень», но по-русски животное называется морской слон. Ещё одно сочетание, которое переводится целиком.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">breeding season</span><span class="gm">|ˈbriːdɪŋ ˈsiːzn|</span></div><div class="gb"><div class="row"><span><b>брачный сезон</b></span></div><span class="exs">To breed — размножаться, выводить потомство. Season — здесь не «время года», а «период».</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">female</span><span class="gm">|ˈfiːmeɪl|</span></div><div class="gb"><div class="row"><span><b>самка, женского пола</b></span></div><span class="exs">Ударение на первый слог, долгое и: ФИː-мейл. Частая ошибка — читать «фемале». Противоположное — male.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">pup</span><span class="gm">|pʌp|</span></div><div class="gb"><div class="row"><span><b>детёныш</b></span></div><span class="exs">Короткий звук |ʌ|, как в cup. Так называют детёнышей тюленей, морских слонов и собак.</span></div></div><div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">fairytale mansion</span><span class="gm">|ˈfeəriteɪl ˈmænʃn|</span></div><div class="gb"><div class="row"><span><b>сказочный дворец</b></span></div><span class="exs">Mansion — большой богатый дом, особняк. Буквы -si- читаются как «ш»: МЭН-шн.</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--red)">
+      <h3>Три ловушки <em>на них и попадаются</em></h3>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">1</span><span class="gm">слова из двух частей</span></div><div class="gb">
+        <div class="row"><span><b>road trip · cable car · elephant seal · sandy beach · breeding season · fairytale mansion</b> — шесть сочетаний из четырнадцати. Каждое переводится <b>целиком</b>.</span></div>
+        <span class="exs">«Слон-печать» вместо морского слона и «кабельная машина» вместо фуникулёра — самые частые ответы на контрольной</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">2</span><span class="gm">coast или cliff</span></div><div class="gb">
+        <div class="row"><span><b>Coast</b> — вся береговая линия, она может быть пологой и песчаной. <b>Cliff</b> — конкретный отвесный обрыв. Проверка: по coast можно идти, с cliff можно упасть.</span></div>
+        <span class="exs">Рядом ещё beach — пляж, то есть узкая полоса песка или гальки у самой воды</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">3</span><span class="gm">произношение female и mansion</span></div><div class="gb">
+        <div class="row"><span><b>female</b> — |ˈfiːmeɪl|, «ФИː-мейл», ударение на первый слог. <b>mansion</b> — |ˈmænʃn|, «МЭН-шн», буквы -si- дают «ш».</span></div>
+        <span class="exs">Читать «фемале» и «мансион» — то, что слышно чаще всего, и то, за что снимут балл при чтении вслух</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--amber)">
+      <h3>Рабочая тетрадь, стр. 5 <em>упражнения 4 и 5 — нужна фотография</em></h3>
+      <div class="note" style="--nc2:var(--amber);max-width:80ch"><b>Честно: этой страницы я не видел</b>
+        <span>В задании стоит «Р.Т. стр. 5, упр. 4 и 5». Что именно там — вставить слова, соединить половинки, написать предложения — по названию не угадать, а угадывать здесь нельзя. Сфотографируйте разворот, и я разберу оба упражнения с ответами и объяснением, как разбирал упражнение 6 на стр. 11.</span></div>
+      <div class="note" style="--nc2:var(--green);max-width:80ch"><b>Что можно сделать уже сейчас</b>
+        <span>Почти всегда упражнения после списка слов — это подстановка тех же слов в предложения. Если прогнать четырнадцать слов через тренажёр до состояния «держится твёрдо», тетрадь делается по памяти и за пять минут.</span></div>
+    </div>
+
+    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответ</em></summary>
+      <ol>
+        <li>Чем coast отличается от cliff? <b>Coast — всё побережье, cliff — отвесный утёс.</b></li>
+        <li>Как переводится to miss в двух значениях? <b>Упускать, пропускать — и скучать.</b></li>
+        <li>Какое слово прячется в spectacular? <b>Spectacle — зрелище. Поэтому не просто «красивый», а «зрелищный».</b></li>
+        <li>Где ударение в female? <b>На первом слоге: ˈfiːmeɪl.</b></li>
+        <li>Как называется детёныш морского слона? <b>Pup.</b></li>
+        <li>Переведите: a steep cliff above a sandy beach. <b>Отвесный утёс над песчаным пляжем.</b></li>
+        <li>Что такое breeding season? <b>Брачный сезон, период размножения.</b></li>
+      </ol>
+    </details>
+
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Порядок работы <em>двадцать минут</em></h3>
+      <ol class="how" style="--hc2:var(--blue)">
+        <li><b>Прочитать вслух все четырнадцать</b> по транскрипции. Особенно female, mansion, spectacular — три слова, где ошибаются чаще всего.</li>
+        <li><b>Закрыть перевод и пройти список сверху вниз</b>, называя по-русски. Отметить те, что не дались.</li>
+        <li><b>Вкладка «Слова»</b>, направление «англ → рус», потом «рус → англ» — второе труднее, и именно оно проверяется в диктанте.</li>
+        <li><b>Сделать упр. 4 и 5</b> в рабочей тетради. Если застрял — фото страницы сюда, разберём.</li>
+        <li><b>Тест по теме</b> — двадцать вопросов, в конце разбора кнопка.</li>
+      </ol>
+    </div>
+  </article>
+
+  <article id="L11">
   <div class="hero" style="--hc:var(--blue)">
     <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap">
       <div>
@@ -3565,6 +4002,67 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--amber)">
+    <div class="sec" style="--sc2:var(--blue)">
+      <h3>Страница 11 целиком <em>упражнения 5, 6 и 7 — то, что спросят</em></h3>
+
+      <div class="note" style="--nc2:var(--blue);max-width:80ch">
+        <b>Упражнение 5 — правописание -ing</b>
+        <span>make → <b>making</b> (немая -e уходит) · work → <b>working</b> (ничего не меняется) ·
+        travel → <b>travelling</b> (в британском варианте конечная -l удваивается) · play → <b>playing</b>
+        (после гласной -y не трогаем) · swim → <b>swimming</b> (короткий гласный + одна согласная → удвоение) ·
+        come → <b>coming</b> (снова уходит немая -e).</span>
+      </div>
+
+      <h3 style="margin-top:22px">Упражнение 6 <em>шесть диалогов · ответы с объяснением</em></h3>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">1</span></div><div class="gb">
+        <div class="row"><span><b>A: Do you walk</b> round the lake every Sunday? —
+        <b>B: Yes, but I’m not going</b> there now because <b>it’s raining</b>.</span></div>
+        <span class="exs">every Sunday — привычка; now — то, что происходит сию минуту</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">2</span></div><div class="gb">
+        <div class="row"><span><b>A: Is Boris doing</b> his homework at the moment? —
+        <b>B:</b> No, he’s in the cinema. <b>He’s watching</b> a film with his friends.</span></div>
+        <span class="exs">at the moment — сигнал Continuous в обеих репликах</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">3</span></div><div class="gb">
+        <div class="row"><span><b>A: Do your parents work</b> on Saturdays? —
+        <b>B:</b> No, we usually <b>visit</b> my grandma and then <b>have</b> lunch.</span></div>
+        <span class="exs">parents — множественное, поэтому do, а не does</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">4</span></div><div class="gb">
+        <div class="row"><span><b>A: Jenny looks</b> really tired. <b>Do you know</b> why? —
+        <b>B:</b> Yes, <b>she isn’t sleeping</b> well these days.</span></div>
+        <span class="exs">здесь два подвоха сразу: look = «выглядит» (состояние, не Continuous),
+        а these days = «в последнее время» — временно, поэтому isn’t sleeping</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">5</span></div><div class="gb">
+        <div class="row"><span><b>A: I’m waiting</b> for Ivan. <b>Do you know</b> where he is? —
+        <b>B:</b> Yes. <b>He’s studying</b> in the library.</span></div>
+        <span class="exs">where he is — косвенный вопрос, порядок слов прямой, без inversion</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">6</span></div><div class="gb">
+        <div class="row"><span><b>A: Do you want</b> to go swimming? —
+        <b>B:</b> I’m afraid I can’t. <b>I’m looking after</b> my little sister all day.</span></div>
+        <span class="exs">want — состояние; look after — обычное действие, и оно временное («весь день»)</span></div></div>
+
+      <div class="note" style="--nc2:var(--amber);max-width:80ch;margin-top:18px">
+        <b>Ответ на вопрос в конце упражнения: which verbs are stative?</b>
+        <span>Три: <b>know</b> (4A и 5A), <b>want</b> (6A) и <b>look</b> в значении «выглядеть» (4A).
+        Остальные — обычные глаголы действия. Если спросят устно, ответ нужен именно такой,
+        с оговоркой про look: в значении «смотреть» он спокойно идёт в Continuous.</span>
+      </div>
+
+      <h3 style="margin-top:22px">Упражнение 7 <em>слова-сигналы по двум столбикам</em></h3>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Present Simple</span></div><div class="gb">
+        <div class="row"><span>usually · never · often · always · sometimes · once a week</span></div>
+        <span class="exs">это и есть adverbs of frequency, о которых спрашивают вторым вопросом</span></div></div>
+      <div class="grp" style="--gc:var(--amber)"><div class="gh"><span class="gt">Present Continuous</span></div><div class="gb">
+        <div class="row"><span>now · at the moment · this morning · these days · this week</span></div>
+        <span class="exs">все они означают «сейчас или в этот отрезок времени»</span></div></div>
+      <div class="note" style="--nc2:var(--green);max-width:80ch">
+        <b>Написать 6–7 предложений</b>
+        <span>Образец в учебнике: <i>I usually go to the amusement park at the weekend.</i>
+        Возьмите слова из своей жизни — тренировка, школа, приставка. Наречия частоты
+        (usually, often, always, never, sometimes) ставятся <b>перед смысловым глаголом</b>,
+        но <b>после</b> to be: I often play — I am often late.</span>
+      </div>
+    </div>
+
     <h3>Ловушки <em>пять мест, и первое — главное</em></h3>
     <div class="grid g2">
       <div class="term" style="--tc2:var(--red)"><b>Stative verb в Continuous</b><span>«I am liking», «I am knowing», «She is wanting» — так не говорят.</span><span class="hint">Проверка: это можно снять на видео?</span></div>
@@ -3886,7 +4384,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Взять только <b>два</b> времени: Present Simple и Present Continuous. Past Simple пока не трогать, иначе смешается всё.</li>
       <li>Каждый день десять минут устно: три предложения про «обычно» и три про «прямо сейчас» — про себя, не из учебника.</li>
@@ -4026,7 +4524,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Не учить правило. Учить <b>пять готовых сочетаний в неделю</b> из блока выше — целиком, как одно слово.</li>
       <li>Выписать на один листок только те места, где он ошибся в тесте. Обычно их три-четыре, а не восемь.</li>
@@ -4153,7 +4651,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Не увеличивать объём, увеличить <b>частоту</b>: пять слов в день, но с обязательным возвратом к вчерашним и позавчерашним.</li>
       <li>Слово записывать не переводом в столбик, а <b>с фразой</b>: не «cheap — дешёвый», а «cheap tickets — дешёвые билеты».</li>
@@ -4265,7 +4763,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Сменить порядок: <b>сначала прочитать вопросы</b>, потом текст. Это даёт больше, чем любое количество новых слов.</li>
       <li>На каждый ответ требовать показать <b>строку в тексте</b> пальцем. Не нашёл строку — ответ не принят, даже если он верный.</li>
@@ -4384,7 +4882,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Выписать две схемы из первого блока на карточку и держать её перед глазами при любом письменном задании.</li>
       <li>Каждый день строить <b>пять вопросов</b> к обычным предложениям: утверждение → вопрос → отрицание. Про себя, про семью, про школу.</li>
@@ -4500,7 +4998,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Развести can и must на примерах из своей жизни: пять предложений «я умею» и пять «я должен». Разница поймётся на своих примерах быстрее, чем на учебных.</li>
       <li>Запомнить одно: <b>у have to есть to, у can и must — нет</b>. Этого хватает, чтобы не путать их в тестах.</li>
@@ -4612,7 +5110,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--green)">
-    <h3>Если полка «не сформировано» <em>порядок отработки</em></h3>
+    <h3>Если умение на мели <em>порядок отработки</em></h3>
     <ol class="how" style="--hc2:var(--blue)">
       <li>Будущее время отработать на одной паре фраз: «I think it will rain» и «Look! It's going to rain». Сказать их вслух десять раз и понять разницу — дальше само.</li>
       <li>Придумать пять своих планов на неделю с going to и пять предположений с will. Свои примеры работают лучше учебных.</li>
@@ -5316,27 +5814,115 @@ const QUIZ = {
     {q:"Каким языком владеет Маша?", o:["французский","немецкий","английский","итальянский"], c:2, w:"Француженка играет на скрипке — это Лена. Маша не знает итальянского, Оля не владеет английским, значит английский у Маши."},
     {q:"Какой пример таблицы ОС был на слайде?", o:["Оценки по информатике","Необычные вещи: изделие, год, страна, длина","Расписание уроков","Напитки коротышек"], c:1, w:"Джемпер, шарф, сандалии, саквояж — один класс объектов и четыре свойства."}
   ],
+  L15:[
+    {q:"Почему в Скандинавии началась «эпоха викингов»?", o:["суровый климат, мало пригодной земли, а рядом богатая и слабая Европа","их изгнали из Европы","они искали новую веру","их заставили короли франков"], c:0, w:"Каменистая мёрзлая земля, нет винограда и мало пшеницы. Взять силой оказалось проще, чем произвести — об этом и цитата в начале параграфа."},
+    {q:"Как называли скандинавов в разных землях?", o:["в Западной Европе норманны, на Руси варяги, сами себя — викинги","везде одинаково — викинги","в Европе варяги, на Руси норманны","их называли готами"], c:0, w:"Норманны — «северные люди». Это три имени одного народа, и вопрос об этом любят."},
+    {q:"Когда длилась эпоха викингов?", o:["с конца VIII до середины XI века","весь X век","с V по VII век","с XI по XIII век"], c:0, w:"Конечной датой считают 1066 год."},
+    {q:"Чем занимались викинги, кроме набегов?", o:["торговлей, ремеслом, земледелием и мореходством","только войной","только рыбной ловлей","строительством храмов"], c:0, w:"Вопрос 2 параграфа как раз про виды деятельности: земледелие, скотоводство, ремесло, торговля, мореплавание, военные походы."},
+    {q:"Чем знаменит корабль из Осеберга?", o:["его нашли в кургане в 1904 году, длина 21,6 метра","на нём плавал Колумб","он был военным флагманом Альфреда","его построили в Англии"], c:0, w:"Погребение двух женщин, сани, повозка, предметы быта — главный источник о кораблях викингов."},
+    {q:"Кто такой Лейф Счастливый?", o:["норманн, доплывший около 1000 г. до Северной Америки — Винланда","король Норвегии","епископ Исландии","вождь венгров"], c:0, w:"За 500 лет до Колумба. Закрепиться в Винланде не удалось, и в Европе об этом почти не узнали."},
+    {q:"Что такое путь «из варяг в греки»?", o:["речной путь от Балтики через Русь в Византию","дорога через Альпы","морской путь вокруг Испании","торговый путь в Багдад"], c:0, w:"По нему викинги попадали в Константинополь, где нередко нанимались на службу к императору."},
+    {q:"Кто такой Альфред Великий?", o:["король англосаксов (871–900), остановивший датчан","норманнский герцог","король Франции","император Германии"], c:0, w:"Создал флот, построил крепости, реформировал ополчение и укрепил границу."},
+    {q:"Что произошло в 1066 году при Гастингсе?", o:["Вильгельм Нормандский разбил англосаксов Гарольда","датчане захватили Лондон","умер Альфред Великий","Оттон короновался в Риме"], c:0, w:"Гарольд погиб в бою, Вильгельм стал королём Вильгельмом I. Событие изображено на ковре из Байё."},
+    {q:"Кто такой Харальд III Суровый?", o:["норвежский король, зять Ярослава Мудрого, погибший в Англии в 1066 г.","английский епископ","вождь венгров","брат Вильгельма"], c:0, w:"Он был женат на Елизавете, дочери Ярослава Мудрого. В том же 1066 году претендовал на английский трон и погиб."},
+    {q:"Кто такая Гита и при чём тут Русь?", o:["дочь Гарольда, бежала после Гастингса и стала женой Владимира Мономаха","жена Вильгельма","дочь Оттона","сестра Альфреда"], c:0, w:"Ещё одна нить, связывающая события 1066 года с русской историей."},
+    {q:"Почему во Франции наступила раздробленность?", o:["короли ослабели, знать перестала подчиняться, местная власть давала защиту от набегов","страну захватили венгры","король запретил армию","этого не было"], c:0, w:"Набеги норманнов усилили местную знать: защиту давал не далёкий король, а ближний сеньор."},
+    {q:"Что произошло в 987 году?", o:["графа Парижского Гуго Капета избрали королём — начало династии Капетингов","умер Карл Великий","Оттон стал императором","викинги взяли Париж"], c:0, w:"Реальная власть Капетингов сначала не выходила за пределы их собственных земель между Сеной и Луарой."},
+    {q:"Кто такой Оттон I?", o:["германский король (936–973), разгромивший венгров и ставший императором","король Франции","герцог Нормандии","папа римский"], c:0, w:"Венгры после поражения перешли к оседлой жизни — это тоже последствие набегов."},
+    {q:"Что произошло в 962 году?", o:["Оттон I короновался в Риме — возникла Священная Римская империя","битва при Гастингсе","крещение Польши","приход Кирилла и Мефодия в Моравию"], c:0, w:"Император считал своё государство продолжением Римской империи и главой христианского мира."},
+    {q:"Из-за чего возник конфликт императора и Церкви?", o:["император вмешивался в дела Церкви и назначал епископов","он отказался от христианства","он не платил налоги Риму","он запретил монастыри"], c:0, w:"Императоры считали себя вправе назначать и смещать пап, и столкновение стало неизбежным."},
+    {q:"Зачем князь Ростислав пригласил Кирилла и Мефодия?", o:["чтобы вести службу и книги на славянском языке, а не под влиянием немецких проповедников","чтобы построить крепость","чтобы обучить войско","чтобы заключить мир с венграми"], c:0, w:"863 год, Великая Моравия. Это спор не только о вере, но и о независимости."},
+    {q:"Что создали Кирилл и Мефодий и что сделали их ученики?", o:["братья создали славянскую азбуку, ученики составили кириллицу","братья создали кириллицу, ученики — латиницу","они перевели только Библию","они основали Прагу"], c:0, w:"Кириллица названа в честь Кирилла. Ею пользуются русские, украинцы, белорусы, болгары, сербы и другие народы."},
+    {q:"Что произошло в 966 и в 1025 годах в Польше?", o:["966 — крещение, 1025 — Болеслав I получил королевский титул","966 — распад, 1025 — крещение","966 — война с Чехией, 1025 — союз с Оттоном","обе даты про Моравию"], c:0, w:"Принятие христианства по римскому образцу определило, что Польша пошла за латинской традицией, а Русь — за византийской."},
+    {q:"Как сложилась судьба трёх государств, возникших после распада империи Карла Великого?", o:["Франция — раздробленность, Германия — Священная Римская империя, Срединное королевство распалось первым","все три объединились","все три захватили викинги","все три стали империями"], c:0, w:"Это вопрос 4, который задали устно. Ответ строится по трём частям, и каждой нужен свой пример."},
+  ],
+  L14:[
+    {q:"Главный приём этого упражнения — это…", o:["задать вопрос от существительного к прилагательному","подобрать проверочное слово","посмотреть на ударение в корне","запомнить наизусть"], c:0, w:"Окончание вопроса подсказывает окончание прилагательного: какИМ? — влажнЫМ, какОМ? — зелёнОМ."},
+    {q:"«В небесах над туманн..й землёй» — какая буква?", o:["туманной","туманнай","туманнэй","туманний"], c:0, w:"Над землёй (какой?) туманной. Творительный падеж, женский род, окончание -ой."},
+    {q:"«Бледн..м светом луга серебрит» — какая буква?", o:["бледным","бледнам","бледнем","бледним"], c:0, w:"Светом (каким?) бледным. Творительный падеж, мужской род, окончание -ым."},
+    {q:"«Крупный дождь в лесу зелён..м» — какая буква?", o:["зелёном","зелёнам","зелёным","зелёнем"], c:0, w:"В лесу (каком?) зелёном. Предложный падеж, мужской род, окончание -ом. Внимание: не -ым, это разные падежи."},
+    {q:"«Прошумел по стройн..м клёнам» — какая буква?", o:["стройным","стройном","стройнам","стройнем"], c:0, w:"По клёнам (каким?) стройным. Дательный падеж множественного числа, окончание -ым."},
+    {q:"«Влажн..м теплом веет весенняя ночь» — какая буква?", o:["влажным","влажном","влажнам","влажнем"], c:0, w:"Теплом (каким?) влажным. Творительный падеж, средний род, окончание -ым."},
+    {q:"«На окне, серебрян..м от инея» — какая буква?", o:["серебряном","серебряным","серебрянам","серебрянем"], c:0, w:"На окне (каком?) серебряном. Предложный падеж, средний род, окончание -ом."},
+    {q:"«Ветер принос..т с полей аромат» — какая буква?", o:["приносит","приносет","приносят","приносат"], c:0, w:"Приносить — глагол II спряжения, значит -ит. Подлежащее «ветер» в единственном числе, поэтому не -ят."},
+    {q:"Почему «приносить» — II спряжение?", o:["оканчивается на -ить и не входит в исключения","есть приставка при-","корень -нос-","это глагол движения"], c:0, w:"Все глаголы на -ить относятся ко II спряжению, кроме брить и стелить."},
+    {q:"Чем различаются окончания -ым и -ом у прилагательных?", o:["разные падежи: -ым в творительном, -ом в предложном","одно устаревшее","зависит от рода","зависит от ударения"], c:0, w:"Каким? — творительный, -ым. О каком? — предложный, -ом. Проверка вопросом снимает всю путаницу."},
+    {q:"Разбор под цифрой 1 — это разбор…", o:["фонетический","морфемный","морфологический","синтаксический"], c:0, w:"Единица — фонетический, звуко-буквенный. В упражнении так помечено слово «степью»."},
+    {q:"Сколько букв и звуков в слове «степью»?", o:["6 букв и 6 звуков","6 букв и 5 звуков","5 букв и 6 звуков","6 букв и 7 звуков"], c:0, w:"с-т-е-п-ь-ю: мягкий знак звука не даёт, зато ю после него даёт два звука — [й’у]. Итого шесть на шесть."},
+    {q:"Как записать транскрипцию слова «степью»?", o:["[с’т’эп’йу]","[стэпйу]","[с’тэп’ю]","[с’т’эпйу]"], c:0, w:"Ударение на первый слог, все согласные перед е и ь мягкие."},
+    {q:"Разбор под цифрой 2 — это разбор…", o:["морфологический","фонетический","морфемный","синтаксический"], c:0, w:"Двойка — морфологический: часть речи, начальная форма, признаки, роль в предложении. В упражнении помечен глагол «приносит»."},
+    {q:"Начальная форма для глагола «приносит» — это…", o:["приносить","приносил","принос","приношу"], c:0, w:"Начальная форма глагола — инфинитив, отвечает на вопрос что делать?"},
+    {q:"Разбор под цифрой 3 — это разбор…", o:["морфемный, по составу","фонетический","морфологический","синтаксический"], c:0, w:"Тройка — по составу. В упражнении помечено слово «влажным»."},
+    {q:"Каков состав слова «влажным»?", o:["корень влаж-, суффикс -н-, окончание -ым","корень влажн-, окончание -ым","корень влаж-, окончание -ным","приставка в-, корень -лаж-"], c:0, w:"Родственные слова: влага, влажность. В корне чередование г // ж."},
+    {q:"Какой частью речи является слово «напоённые» в первом отрывке?", o:["причастием","прилагательным","глаголом","наречием"], c:0, w:"Напоённые — от глагола напоить, признак по действию. В шестом классе это уже встречается, хотя тема впереди."},
+    {q:"Что нужно обозначить в тетради по заданию упражнения?", o:["окончания выписанных слов","корни","приставки","ударения"], c:0, w:"Задание звучит так: выпишите слова с пропущенными буквами, обозначьте окончания, объясните написание."},
+    {q:"Как правильно объяснить написание в тетради?", o:["вопрос от существительного и падеж: над землёй (какой?) туманной — Т.п.","просто написать «проверочное слово»","указать ударение","переписать строку целиком"], c:0, w:"Объяснение — это вопрос и падеж. Учитель ждёт именно такую запись, а не просто правильную букву."},
+  ],
+  L13:[
+    {q:"Былина — это…", o:["русская народная героическая песня о богатырях","авторская поэма XIX века","короткий рассказ о животных","летописная запись"], c:0, w:"Устное народное творчество: у былины нет автора, её веками передавали из уст в уста."},
+    {q:"Как исполняли былину?", o:["нараспев, часто под гусли","читали про себя","разыгрывали как пьесу","пели хором в церкви"], c:0, w:"Отсюда и особый напевный строй: повторы, замедления, отсутствие рифмы."},
+    {q:"Кто такой оратай?", o:["пахарь","воин","гонец","купец"], c:0, w:"От слова «орать» — пахать. В былине Вольга слышит в поле именно оратая."},
+    {q:"Зачем Вольга с дружиной выехал в путь?", o:["за данью в города, подаренные князем Владимиром","на войну с половцами","на охоту","искать невесту"], c:0, w:"Гурчевец, Ореховец и Крестьяновец — города, пожалованные ему дядей."},
+    {q:"Сколько дней дружина ехала до пахаря, которого слышала в поле?", o:["три дня","один час","полдня","неделю"], c:0, w:"Троекратность — обязательная черта былины. И заодно гипербола: голос слышен, а доехать не могут три дня."},
+    {q:"Что Вольга услышал раньше, чем увидел Микулу?", o:["как поскрипывает сошка и почиркивают омешики","звон колоколов","конский топот","песню"], c:0, w:"Звук работы разносится на три дня пути — это преувеличение и есть гипербола."},
+    {q:"Что такое омешики?", o:["металлические наконечники сохи","сапоги пахаря","части упряжи на груди коня","мешки для зерна"], c:0, w:"Они режут землю. Гужики — это уже упряжь, ремни."},
+    {q:"О чём Микула предупредил Вольгу?", o:["в тех городах живут разбойники-мужики, они его обманут","впереди половцы","скоро будет буря","дорога размыта"], c:0, w:"И предупреждение сбывается: мужики ломают мост, но Микула с ними справляется."},
+    {q:"Что Микула попросил сделать с сошкой?", o:["выдернуть из земли и бросить за ракитов куст","продать на торгу","починить","спрятать в амбар"], c:0, w:"Просьба звучит буднично — и именно на ней рушится сила дружины."},
+    {q:"Сколько человек не смогли поднять сошку?", o:["сначала пятеро, потом десять, потом вся дружина","один богатырь","сам Вольга","никто не пробовал"], c:0, w:"Снова три шага. Каждый следующий сильнее предыдущего — и всё равно мимо."},
+    {q:"Как Микула вынул сошку?", o:["одной рукой","вдвоём с Вольгой","при помощи лошадей","с разбега"], c:0, w:"Он ещё и вытряхнул из неё землю. Это вершина всей былины."},
+    {q:"Чья лошадь оказалась быстрее в пути?", o:["кобыла Микулы обогнала коня Вольги","конь Вольги","они шли вровень","обе отстали от дружины"], c:0, w:"Вольга признаёт: была бы та кобылка конём, ей бы цены не было. Крестьянское снова оказывается выше княжеского."},
+    {q:"Главная мысль былины?", o:["труд пахаря выше воинской силы и княжеской власти","князь всегда прав","сила в хитрости","надо слушаться старших"], c:0, w:"Народ прославляет не воина, а того, кто кормит землю и страну."},
+    {q:"Что такое гипербола?", o:["преувеличение","сравнение","повтор","старое слово"], c:0, w:"Пример из текста: дружина не может сдвинуть сошку, а пахарь поднимает её одной рукой."},
+    {q:"Что из этого — постоянный эпитет?", o:["сошка кленовая","бросил за куст","три дня","Микула Селянинович"], c:0, w:"Устойчивое определение, которое всегда идёт с этим словом: чисто поле, кобыла соловая, гужики шелковые."},
+    {q:"Зачем в былине столько повторов и подробностей?", o:["чтобы замедлить рассказ и удержать слушателя","чтобы текст был длиннее","это ошибки переписчиков","чтобы легче было петь хором"], c:0, w:"Это называется ретардация — замедление перед развязкой. Слушатель ждал развязки целый вечер."},
+    {q:"Чем былина отличается от сказки?", o:["в былине — герои и события, которые считались бывшими на самом деле","в былине есть волшебство, а в сказке нет","былина всегда короче","в сказке нет героев"], c:0, w:"Само слово «былина» от «быль». Сказку слушали как выдумку, былину — как быль."},
+    {q:"Как в былине противопоставлены два героя?", o:["князь с дружиной и пахарь — антитеза","старик и юноша","русский и чужеземец","брат и сестра"], c:0, w:"Антитеза — приём противопоставления. Вся былина построена на нём."},
+    {q:"Откуда у Микулы сила?", o:["от земли и труда, его любит матушка сыра земля","от волшебного меча","от княжеского слова","от богатырского коня"], c:0, w:"Эти слова — ответ на вопрос Вольги об имени, и в них вся мысль былины."},
+    {q:"К какому виду народного творчества относится былина?", o:["эпос — повествование о событиях и героях","лирика","драма","роман"], c:0, w:"Эпос: есть сюжет, герои, действие. Лирика — про чувства, драма — для сцены."},
+  ],
+  L12:[
+    {q:"road trip — это…", o:["путешествие на автомобиле","дорожный знак","поездка на поезде","ремонт дороги"], c:0, w:"Road + trip = поездка по дороге на машине. По частям не переводится: это устойчивое сочетание."},
+    {q:"Как по-английски «побережье»?", o:["coast","cliff","beach","shore trip"], c:0, w:"Coast — вся береговая линия страны или области."},
+    {q:"cliff — это…", o:["отвесный обрыв, утёс у моря","песчаная отмель","маяк","пирс"], c:0, w:"Coast — побережье вообще, cliff — конкретная отвесная скала. Их часто путают."},
+    {q:"steep означает…", o:["крутой, отвесный","мелкий","широкий","скользкий"], c:0, w:"Steep hill — крутой холм, steep steps — крутая лестница."},
+    {q:"cable car — это…", o:["фуникулёр, вагончик на тросе","машина с прицепом","кабель для зарядки","такси"], c:0, w:"Cable — трос. Вагончик едет по канату вверх по склону."},
+    {q:"Как сказать «упустить возможность»?", o:["to miss the chance","to lose the chance","to drop the chance","to skip the chance"], c:0, w:"To miss — упускать, пропускать. Miss the bus — опоздать на автобус."},
+    {q:"spectacular ближе всего к…", o:["захватывающий, эффектный","аккуратный","спокойный","дорогой"], c:0, w:"В списке учителя стоит перевод «красивый», но точнее — «зрелищный, от которого дух захватывает». Spectacle — зрелище."},
+    {q:"impressive — это…", o:["впечатляющий","невозможный","срочный","приблизительный"], c:0, w:"Impress — производить впечатление."},
+    {q:"sandy beach — это…", o:["песчаный пляж","каменистый берег","пляжный зонт","песочница"], c:0, w:"Sand — песок, sandy — песчаный. Суффикс -y делает из существительного прилагательное."},
+    {q:"elephant seal — кто это?", o:["морской слон","слон в цирке","печать со слоном","морж"], c:0, w:"Дословно «слон-тюлень», но по-русски это морской слон. Ещё один случай, когда по половинкам переводить нельзя."},
+    {q:"breeding season — это…", o:["брачный сезон","сезон дождей","время сбора урожая","отпуск"], c:0, w:"To breed — размножаться, выводить потомство."},
+    {q:"female означает…", o:["самка, женского пола","женщина-начальник","подруга","самец"], c:0, w:"Произносится |ˈfiːmeɪl| — «фИːмейл», с долгим и в первом слоге. Противоположное — male."},
+    {q:"pup — это…", o:["детёныш","щенок только у собак","взрослая особь","кличка"], c:0, w:"Произносится |pʌp|. У морских слонов, тюленей и собак детёныша называют pup."},
+    {q:"fairytale mansion — это…", o:["сказочный дворец","книга сказок","замок из песка","гостиница"], c:0, w:"Mansion |ˈmænʃn| — большой богатый дом, особняк. Fairytale — сказочный."},
+    {q:"На какой слог падает ударение в слове female?", o:["на первый: |ˈfiːmeɪl|","на второй","ударения нет","на оба"], c:0, w:"Значок ˈ в транскрипции стоит перед ударным слогом: ˈfiː-meɪl."},
+    {q:"Что общего у road trip, cable car и elephant seal?", o:["Это сочетания из двух слов, переводятся целиком","Все про море","Все про животных","Все пишутся через дефис"], c:0, w:"Главная мысль всего списка: такая пара — одно понятие. «Дорожная поездка» и «слон-печать» — неверные переводы."},
+    {q:"Как сказать «крутой утёс над морем»?", o:["a steep cliff","a steep coast","a sandy cliff","an impressive beach"], c:0, w:"Steep описывает наклон, cliff — сам утёс."},
+    {q:"Куда выходят морские слоны в breeding season?", o:["на песчаные пляжи побережья","в горы","в лес","в пустыню"], c:0, w:"Sandy beach — именно там их снимают в фильмах про дикую природу."},
+    {q:"Don’t miss it! — как перевести?", o:["Не пропусти это!","Не теряй это!","Не скучай!","Не промахнись!"], c:0, w:"Частая фраза в рекламе мест. У miss есть и второе значение — «скучать»: I miss you."},
+    {q:"Какое слово лишнее по смыслу: coast, cliff, sandy beach, cable car?", o:["cable car","coast","cliff","sandy beach"], c:0, w:"Три первых — про берег моря, а фуникулёр — про транспорт в горах."},
+  ],
   L11:[
-    {q:"Stative verbs — это глаголы…", o:["действия","состояния","движения","прошедшего времени"], c:1, w:"Состояния, а не действия. В Present Continuous не ставятся."},
-    {q:"Что из этого stative verb?", o:["run","know","play","write"], c:1, w:"Знать — это состояние. Проверка: это можно снять на видео? Знание — нет."},
-    {q:"Как правильно?", o:["I am knowing the answer now.","I know the answer now.","I am know the answer.","I knowing the answer."], c:1, w:"Know — состояние, слово now здесь ничего не решает. Тип глагола сильнее слова-сигнала."},
-    {q:"Как правильно?", o:["She is wanting an ice cream.","She wants an ice cream.","She want an ice cream.","She is want an ice cream."], c:1, w:"Want — состояние, плюс у she нужна -s."},
-    {q:"«I have a car» — можно ли сказать «I am having a car»?", o:["Да, если сейчас","Нет: have в значении «иметь» — состояние","Да, всегда","Только в вопросе"], c:1, w:"А вот «I am having breakfast» можно: завтракать — это занятие."},
-    {q:"«I ___ breakfast at the moment.»", o:["have","am having","having","has"], c:1, w:"Have breakfast — занятие, поэтому Continuous возможен. Сигнал at the moment."},
-    {q:"«I ___ you are right.» (считать)", o:["am thinking","think","thinking","thinks"], c:1, w:"Think в значении «считать, полагать» — состояние. «Обдумывать» было бы I am thinking about it."},
-    {q:"«You ___ tired today.» (выглядеть)", o:["are looking","look","looking","looks"], c:1, w:"Look в значении «выглядеть» — состояние. «Смотреть» было бы I am looking at it."},
-    {q:"Сигналы Present Continuous — это…", o:["usually, often, every day","now, at the moment, Look!","always, never, on Mondays","yesterday, ago"], c:1, w:"Но проверять надо после вопроса «это не stative verb?»."},
-    {q:"Сигналы Present Simple — это…", o:["now, right now","usually, always, every day","look, listen","at the moment"], c:1, w:"Повторяющееся действие, привычка, расписание."},
-    {q:"Как образуется Present Continuous?", o:["глагол + -s","am / is / are + глагол-ing","do / does + глагол","глагол + -ed"], c:1, w:"Обе части обязательны: «He playing football» — ошибка."},
-    {q:"Какая форма -ing у run?", o:["runing","running","runnning","runeing"], c:1, w:"Короткое слово с одной гласной удваивает согласную: run → running, sit → sitting."},
-    {q:"Какая форма -ing у write?", o:["writeing","writing","writting","writying"], c:1, w:"Немая e на конце уходит: write → writing, make → making."},
-    {q:"Какая форма -ing у lie?", o:["lieing","lying","liing","lieying"], c:1, w:"ie меняется на y: lie → lying, die → dying."},
-    {q:"Какой вопрос задать себе ПЕРВЫМ при выборе времени?", o:["Есть ли слово now?","Это глагол состояния?","Кто подлежащее?","Какое окончание?"], c:1, w:"Если stative — сразу Present Simple, и дальше думать не надо."},
-    {q:"«Обычно он ходит пешком, но сегодня едет на автобусе.»", o:["He usually walks, but today he goes","He usually is walking, but today he is going","He usually walks, but today he is going","He usually walk, but today he go"], c:2, w:"Привычка — Simple, сегодняшний случай — Continuous. Два времени в одном предложении и есть проверка темы."},
-    {q:"Что из этого НЕ stative verb?", o:["belong","cost","swim","understand"], c:2, w:"Плавать — это действие, его видно. Остальные три — состояния."},
-    {q:"«This book ___ to me.»", o:["is belonging","belongs","belong","are belonging"], c:1, w:"Belong — состояние, и у it нужна -s."},
-    {q:"«It ___ ten pounds.»", o:["is costing","costs","cost","are costing"], c:1, w:"Cost — состояние. Цена не «происходит сейчас»."},
-    {q:"Как проще всего проверить, stative глагол или нет?", o:["Посмотреть в словаре","Спросить: это можно снять на видео?","Посчитать буквы","Поставить now"], c:1, w:"Занятие видно со стороны, состояние — нет. Бег видно, знание нет."}
+    {q:"«..... you walk round the lake every Sunday?» — что в пропуске?", o:["Do","Are","Does","Is"], c:0, w:"Регулярное действие, every Sunday → Present Simple. Вопрос с you строится через do."},
+    {q:"B: «Yes, but I ..... there now because it ..... .» (not go / rain)", o:["am not going … is raining","do not go … rains","am not go … is rain","not going … raining"], c:0, w:"Now → прямо сейчас, оба глагола в Present Continuous: am not going, it is raining."},
+    {q:"«..... Boris ..... his homework at the moment?» (do)", o:["Is Boris doing","Does Boris do","Is Boris do","Do Boris does"], c:0, w:"At the moment → Present Continuous: is + doing. Обратите внимание: сам глагол тоже do, но это не мешает."},
+    {q:"«He ..... a film with his friends.» (watch)", o:["is watching","watches","watch","does watch"], c:0, w:"Он сейчас в кино — действие идёт в момент речи."},
+    {q:"«..... your parents ..... on Saturdays?» (work)", o:["Do your parents work","Are your parents working","Does your parents work","Do your parents working"], c:0, w:"On Saturdays — повторяющееся, Present Simple. Parents множественное → do, а не does."},
+    {q:"B: «No, we usually ..... my grandma and then ..... lunch.» (visit / have)", o:["visit … have","are visiting … are having","visits … has","visit … are having"], c:0, w:"Usually → привычка, Present Simple. Have здесь = «обедаем», но форма всё равно простая, потому что это регулярно."},
+    {q:"«Jenny ..... really tired.» (look)", o:["looks","is looking","look","are looking"], c:0, w:"Look здесь = «выглядит», это состояние. Сравните: She is looking at me — смотрит, это действие."},
+    {q:"«..... you ..... why?» (know)", o:["Do you know","Are you knowing","Does you know","Do you knowing"], c:0, w:"Know — глагол состояния, в Continuous не ставится никогда."},
+    {q:"B: «Yes, she ..... well these days.» (not sleep)", o:["isn't sleeping","doesn't sleep","not sleeping","isn't sleep"], c:0, w:"These days = «в последнее время», временный период → Present Continuous. Ловушка: кажется, что это привычка."},
+    {q:"«I ..... for Ivan.» (wait)", o:["am waiting","wait","waits","do wait"], c:0, w:"Говорящий ждёт прямо сейчас."},
+    {q:"B: «Yes. He ..... in the library.» (study)", o:["is studying","studies","study","does study"], c:0, w:"Он в библиотеке в эту минуту — действие в процессе."},
+    {q:"«..... you ..... to go swimming?» (want)", o:["Do you want","Are you wanting","Does you want","Do you wanting"], c:0, w:"Want — состояние. «Are you wanting» звучит неправильно даже там, где очень хочется сказать «сейчас»."},
+    {q:"B: «I’m afraid I can’t. I ..... my little sister all day.» (look after)", o:["am looking after","look after","looks after","am look after"], c:0, w:"Весь сегодняшний день — временно, значит Continuous. Look after — это действие, в отличие от look = выглядеть."},
+    {q:"В упражнении 6 три глагола оказались stative. Какие?", o:["know, want, look (выглядеть)","walk, go, rain","visit, have, watch","study, wait, sleep"], c:0, w:"Именно про них вопрос в конце упражнения: Which verbs are stative? Know и want — всегда, look — в значении «выглядеть»."},
+    {q:"Почему «Jenny looks tired», а не «Jenny is looking tired»?", o:["Look в значении «выглядеть» — состояние","Потому что нет слова now","Потому что Jenny — имя","Потому что tired — прилагательное"], c:0, w:"Тип глагола сильнее слова-сигнала. Если бы look значило «смотреть», Continuous был бы можно: She is looking at the photo."},
+    {q:"Переведите: «Ты гуляешь вокруг озера каждое воскресенье?»", o:["Do you walk round the lake every Sunday?","Are you walking round the lake every Sunday?","Do you walking round the lake every Sunday?","Are you walk round the lake every Sunday?"], c:0, w:"Every Sunday — регулярность, значит простое время."},
+    {q:"Переведите: «Она плохо спит в последнее время.»", o:["She isn't sleeping well these days.","She doesn't sleep well these days.","She not sleeping well these days.","She isn't sleep well these days."], c:0, w:"These days — временно, а не всегда. Поэтому Continuous, хотя по смыслу похоже на привычку."},
+    {q:"Переведите: «Я жду Ивана. Не знаешь, где он?»", o:["I'm waiting for Ivan. Do you know where he is?","I wait for Ivan. Are you knowing where he is?","I'm waiting for Ivan. Are you knowing where is he?","I wait Ivan. Do you know where is he?"], c:0, w:"Два времени в одной паре фраз: жду — сейчас, знаешь — состояние. И порядок слов в косвенном вопросе: where he is, без инверсии."},
+    {q:"Найдите ошибку: «I am knowing where he is.»", o:["Знать — состояние, нужно I know","Нужно I am know","Нужно where is he","Ошибки нет"], c:0, w:"Самая частая ошибка на эту тему. Know не бывает в Continuous ни при каких обстоятельствах."},
+    {q:"Упражнение 5: какая -ing форма у travel?", o:["travelling","traveling","travelling — и так, и так неверно","travelng"], c:0, w:"В британском варианте, по которому идёт Starlight, конечная -l удваивается: travel → travelling. Сравните: make → making, swim → swimming, play → playing, come → coming."},
   ],
   L9:[
     {q:"Сколько чудес Древнего мира сохранилось до наших дней?", o:["Ни одного","Одно","Три","Все семь"], c:1, w:"Только пирамида Хеопса. Остальные шесть известны по описаниям."},
@@ -5592,6 +6178,82 @@ const RECAP = {
       ["Байкал","самое глубокое озеро планеты"],
       ["Маньпупунёр","столбы выветривания, Коми"]
     ]
+  },
+  L15:{
+    title:"Европа в IX—XI вв. — даты, имена, понятия",
+    pairs:[
+      ["норманны","«северные люди» — скандинавы; в Западной Европе их звали норманнами, на Руси — варягами, себя они называли викингами"],
+      ["862 … 1066","две опоры параграфа: эпоха викингов длится с конца VIII в. до 1066 г."],
+      ["962 г.","Оттон I коронован в Риме — образование Священной Римской империи"],
+      ["1066 г.","битва при Гастингсе, Нормандское завоевание Англии Вильгельмом"],
+      ["965 г.","разгром Хазарского каганата князем Святославом (лента «Россия»)"],
+      ["863 г.","Кирилл и Мефодий прибыли в Великую Моравию, создание славянской азбуки"],
+      ["Альфред Великий","871–900, король англосаксов: флот, крепости, ополчение, остановил датчан"],
+      ["Вильгельм Завоеватель","герцог Нормандии, победил при Гастингсе, стал королём Вильгельмом I (1066–1087)"],
+      ["Оттон I","936–973, разгромил венгров, короновался в Риме в 962 г."],
+      ["Гуго Капет","987 г., граф Парижский, избран королём; начало династии Капетингов"],
+      ["Кирилл и Мефодий","братья из Солуни, создали славянскую азбуку; их ученики — кириллицу"],
+      ["путь «из варяг в греки»","речной путь от Балтики к Византии через земли Руси"],
+      ["раздробленность","распад единого государства на владения знати, которая не подчиняется королю"],
+      ["Винланд","земля в Северной Америке, куда около 1000 г. доплыл Лейф Счастливый — за 500 лет до Колумба"]
+    ],
+    hint:"Если спросят одну мысль на весь параграф: набеги викингов ускорили и объединение Англии, и раздробленность Франции — одна причина, разные последствия."
+  },
+  L14:{
+    title:"Окончания прилагательных — что помнить",
+    pairs:[
+      ["главный приём","задать вопрос от существительного: какИМ? — влажнЫМ"],
+      ["туманной","над землёй (какой?) — Т.п., ж.р., окончание -ой"],
+      ["бледным","светом (каким?) — Т.п., м.р., окончание -ым"],
+      ["зелёном","в лесу (каком?) — П.п., м.р., окончание -ом"],
+      ["стройным","по клёнам (каким?) — Д.п., мн.ч., окончание -ым"],
+      ["влажным","теплом (каким?) — Т.п., ср.р., окончание -ым"],
+      ["серебряном","на окне (каком?) — П.п., ср.р., окончание -ом"],
+      ["приносит","глагол II спряжения: приносить → носить, окончание -ит"],
+      ["степью","6 букв, 6 звуков: [с’т’эп’йу]"],
+      ["влажным — разбор","корень влаж-, суффикс -н-, окончание -ым"]
+    ],
+    hint:"Если окончание безударное — не гадать, а спросить. Какой? какого? каким? каком? Гласная в вопросе и в окончании совпадает."
+  },
+  L13:{
+    title:"Былина — что помнить",
+    pairs:[
+      ["былина","русская народная героическая песня о богатырях, сложенная в Древней Руси"],
+      ["сказитель","человек, который исполнял былину нараспев, часто под гусли"],
+      ["оратай (ратай)","пахарь, тот, кто пашет землю"],
+      ["соха","орудие для пахоты; в былине — сошка кленовая"],
+      ["омешики","металлические наконечники сохи, которые режут землю"],
+      ["гужики","ремни и петли в упряжи, в былине — шелковые"],
+      ["гипербола","преувеличение: дружина не может поднять сошку, а Микула — одной рукой"],
+      ["постоянный эпитет","устойчивое определение: сошка кленовая, кобыла соловая, чисто поле"],
+      ["зачин","начало былины, где говорится о времени и месте"],
+      ["антитеза","противопоставление: князь Вольга и пахарь Микула"],
+      ["ретардация","замедление: повторы и подробности, которые оттягивают развязку"],
+      ["Вольга Святославгович","князь, племянник Владимира, едет за данью с дружиной"],
+      ["Микула Селянинович","пахарь-богатырь, его сила от земли и труда"],
+      ["главная мысль","труд пахаря выше воинской силы и княжеской власти"]
+    ],
+    hint:"Самое спрашиваемое — три признака былинного стиха с примерами: гипербола, постоянный эпитет, троекратный повтор."
+  },
+  L12:{
+    title:"Модуль 1c — четырнадцать слов",
+    pairs:[
+      ["road trip","путешествие на автомобиле"],
+      ["impressive","впечатляющий"],
+      ["coast","побережье"],
+      ["steep","крутой, отвесный"],
+      ["cable car","фуникулёр"],
+      ["to miss","упускать, пропускать"],
+      ["spectacular","захватывающий, эффектный"],
+      ["cliff","утёс, скала у моря"],
+      ["sandy beach","песчаный пляж"],
+      ["elephant seal","морской слон"],
+      ["breeding season","брачный сезон"],
+      ["female","самка, женского пола"],
+      ["pup","детёныш"],
+      ["fairytale mansion","сказочный дворец"]
+    ],
+    hint:"Три слова из двух частей — road trip, cable car, elephant seal — переводятся целиком, а не по половинкам. И помните разницу: coast — вся береговая линия, cliff — конкретный отвесный обрыв."
   },
   L8:{
     title:"Рабочая тетрадь 1b — сочетания",
@@ -5919,12 +6581,44 @@ const DIAG_RECS = {
 
 const LESSONS = [
   {
+    id:"L15", subject:"История", color:"amber", date:"2026-09-15",
+    title:"§ 4 · Европа в IX—XI вв. Викинги, Англия, империя Оттона",
+    source:"Учебник всеобщей истории, 6 класс, § 4, стр. 39–47 · сверено по фотографиям страниц",
+    desc:"Пять пунктов параграфа: походы викингов и почему они начались, норманны в Англии от Альфреда Великого до Гастингса, раздробленность во Франции и Гуго Капет, Священная Римская империя Оттона I, западнославянские государства и Кирилл с Мефодием. Развёрнутый ответ на вопрос 4 устно, четыре даты наизусть и список того, что отметить на контурной карте.",
+    tags:["викинги","норманны","Оттон I","Кирилл и Мефодий","контурные карты"],
+    checked:true
+  },
+  {
+    id:"L14", subject:"Русский язык", color:"pink", date:"2026-09-15",
+    title:"Упражнение 51 · безударные окончания прилагательных",
+    source:"Учебник, стр. 25–26, упр. 51 · сверено по фотографии страниц",
+    desc:"Четыре стихотворных отрывка, в них восемь пропущенных букв. Один приём решает всё: задать вопрос от существительного — окончание вопроса подсказывает окончание прилагательного. Плюс глагол «приносит» и три разбора под цифрами: степью, приносит, влажным.",
+    tags:["окончания прилагательных","разборы","упр. 51"],
+    checked:true
+  },
+  {
+    id:"L13", subject:"Литература", color:"violet", date:"2026-09-16",
+    title:"Былина «Вольга и Микула Селянинович»",
+    source:"Учебник литературы, стр. 45–50. Страницы не видел — разбор собран по тексту былины и общим источникам",
+    desc:"Что такое былина и чем она отличается от сказки, разбор сюжета по шагам, два героя рядом — князь и пахарь, признаки былинного стиха с примерами из текста и главная мысль: чья сила оказалась больше. Плюс словарь старых слов: оратай, омешики, гужики, сошка.",
+    tags:["былина","устное народное творчество","Вольга","Микула"],
+    checked:false
+  },
+  {
+    id:"L12", subject:"Английский язык", color:"blue", date:"2026-09-15",
+    title:"Слова модуля 1c · впечатляющие места и морские слоны",
+    source:"Список слов от учителя (файл «слова 1c») · Р.Т. стр. 5, упр. 4 и 5 — страницу тетради не видел",
+    desc:"Четырнадцать слов модуля 1c с транскрипцией: road trip, cable car, elephant seal, breeding season и остальные. Разобрано, где слово из двух частей и почему его нельзя переводить по половинкам, чем cliff отличается от coast и почему spectacular — это не просто «красивый».",
+    tags:["слова","модуль 1c","рабочая тетрадь"],
+    checked:false
+  },
+  {
     id:"L11", subject:"Английский язык", color:"blue", date:"2026-09-14",
     title:"Present Simple и Present Continuous · глаголы состояния",
-    source:"Starlight 6 · стр. 11, правило · упр. 6 · диктант по словам. Страницу не видел, разбор правила собран по общим источникам",
+    source:"Starlight 6 · стр. 11 — упр. 5, 6, 7 · сверено по фотографии страницы",
     desc:"Таблица двух времён с сигналами и правописанием -ing, шесть групп stative verbs с примерами, четыре глагола с двойным смыслом (have, think, look, see), порядок выбора времени за три вопроса и шесть ловушек.",
     tags:["Present Simple","Present Continuous","stative verbs","глаголы состояния","-ing","диктант","времена"],
-    checked:false
+    checked:true
   },
   {
     id:"L10", subject:"Информатика", color:"cyan", date:"2026-09-15",
@@ -6205,7 +6899,7 @@ const TABS = [
 ];
 let view = "today";
 
-function navFlat(){ return (state.nav || "flat") !== "decks"; }
+function navFlat(){ return false; } /* вкладки всегда по палубам: режим «одной строкой» убран 14 сентября */
 
 function renderNav(){
   const D = decks();
@@ -7252,17 +7946,20 @@ function renderTestScope(){
   }));
 }
 const DIAG_IDS = ["D1","D2","D3","D4","D5","D6","D7"];
+/* Уровень считается по тому же числу, которое видно в полосе, — по «твёрдо».
+   Раньше группа бралась по «верно», и умение с полосой в четверть попадало
+   в «шатко»: полоса говорила одно, заголовок другое. */
 function diagLvl(rec){
   if(!rec || !rec.total) return null;
-  const solid = rec.bestSolid || 0, right = rec.best || 0, t = rec.total;
-  return solid/t >= 0.8 ? "good" : right/t >= 0.5 ? "mid" : "low";
+  const solid = rec.bestSolid || 0, t = rec.total;
+  return solid/t >= 0.8 ? "good" : solid/t >= 0.5 ? "mid" : "low";
 }
 const DIAG_SUBJ = "Английский · диагностика";
 const DIAG_SHELF = [
-  {k:"low",  c:"red",   t:"Не сформировано",    s:"здесь сначала, иначе дальше будет хуже"},
-  {k:"mid",  c:"amber", t:"Держится на удаче",  s:"отвечает верно, но наугад или медленно"},
-  {k:"good", c:"green", t:"Держится само",      s:"твёрдо не меньше 80%, можно опираться"},
-  {k:"new",  c:"ink-3", t:"Ещё не проверено",   s:"тест по этому умению пока не проходили"}
+  {k:"low",  c:"red",   t:"Мель",         s:"держится меньше половины — сюда в первую очередь"},
+  {k:"mid",  c:"amber", t:"Шатко",        s:"держится, но до цели 80% не дотягивает"},
+  {k:"good", c:"green", t:"Держится",     s:"80% и выше — на это можно опираться"},
+  {k:"new",  c:"ink-3", t:"Не проверяли", s:"тест по этому умению ещё не проходили"}
 ];
 function diagTotal(){ return DIAG_IDS.reduce((n,id)=>n+(QUIZ[id]?QUIZ[id].length:0),0); }
 function diagStats(){
@@ -7402,37 +8099,114 @@ function shelfOf(ids){
   }));
   return B;
 }
+/* Одна шкала на весь раздел: длина полосы — сколько держится твёрдо,
+   чёрная риска — цель 80%, цвет — насколько срочно.
+   «Наугад» и «мимо» идут словами в подписи, а не третьим цветом в полосе. */
 function trackHtml(B, sub){
   let html = "";
   DIAG_SHELF.forEach(sh=>{
     if(!B[sh.k].length) return;
-    html += '<div class="dghead" style="--hc3:var(--'+sh.c+')">'+sh.t+' · '+B[sh.k].length
-          + ' <span class="dgnote">— '+sh.s+'</span></div>';
+    html += '<div class="skgrp"><span class="skchip" style="--gc:var(--'+sh.c+')">'
+          + sh.t + ' · ' + B[sh.k].length + '</span><span class="gn2">' + sh.s + '</span></div>';
     B[sh.k].forEach(id=>{
       const l = LESSONS.find(x=>x.id===id), r = state.tests[id], n = QUIZ[id].length;
-      let bar = "", meta = "", acts = '<button class="dgbtn" data-open="'+id+'">Разбор</button>';
+      let pct = 0, val = n + ' заданий', sub2 = 'не проверяли', det = n + ' заданий в тесте';
+      let acts = '<button class="dgbtn" data-open="'+id+'">Разбор</button>';
       if(r && r.total){
         const sd = r.bestSolid||0, rt = r.best||0, t = r.total, shaky = rt - sd, wr = (r.wrong||[]).length;
-        bar = '<div class="tr"><i style="background:var(--green);width:'+(sd/t*100)+'%"></i>'
-            + '<i style="background:var(--amber);width:'+(shaky/t*100)+'%"></i>'
-            + '<i style="background:var(--red);width:'+((t-rt)/t*100)+'%"></i></div>';
-        meta = sd + ' твёрдо из ' + t + (shaky ? ' · ' + shaky + ' наугад или медленно' : "")
-             + ((t-rt) ? ' · ' + (t-rt) + ' мимо' : "");
+        pct = Math.round(sd / t * 100);
+        val = sd + ' из ' + t;
+        sub2 = 'держится твёрдо';
+        const d = [];
+        if(shaky) d.push(shaky + ' ответил верно, но наугад');
+        if(t - rt) d.push((t - rt) + ' мимо');
+        det = d.length ? d.join(' · ') : 'ни одного наугад, ни одного мимо';
         acts += (sh.k !== "good" && wr)
-          ? '<button class="dgbtn pri" data-drill="'+id+'">Отработать '+wr+' →</button>'
+          ? '<button class="dgbtn pri" style="--rc:var(--'+sh.c+')" data-drill="'+id+'">Отработать '+wr+' →</button>'
           : '<button class="dgbtn" data-start="'+id+'">Пройти заново</button>';
       } else {
-        meta = n + ' заданий · ещё не проходили';
-        acts += '<button class="dgbtn pri" data-start="'+id+'">Пройти →</button>';
+        acts += '<button class="dgbtn pri" style="--rc:var(--'+sh.c+')" data-start="'+id+'">Пройти →</button>';
       }
-      if(sub) meta = esc(sub(l)) + ' · ' + meta;
-      html += '<div class="dgrow'+(sh.k==="good"?" mut":"")+'" style="--rc:var(--'+sh.c+')">'
-            + '<div><div class="nm">'+esc(l.title)+'</div><div class="mt">'+meta+'</div>'+bar+'</div>'
+      if(sub) det = esc(sub(l)) + ' · ' + det;
+      html += '<div class="skrow'+(sh.k==="good"?" mut":"")+'" style="--rc2:var(--'+sh.c+')">'
+            + '<div><div class="snm">'+esc(l.title)+'</div><div class="sdt">'+det+'</div></div>'
+            + '<div class="skbar"><i style="width:'+pct+'%"></i><u></u></div>'
+            + '<div class="skval">'+val+'<span>'+sub2+'</span></div>'
             + '<div class="dgacts">'+acts+'</div></div>';
     });
   });
   return html;
 }
+/* Предметы и годы для диагностики. Собранное — карточками наверху,
+   несобранное — свёрнутой строкой, чтобы не висело, но и не забылось. */
+const DIAG_SOON = [
+  {n:"Математика",   y:"за 5 класс", t:"дроби · проценты"},
+  {n:"Русский язык", y:"за 5 класс", t:"орфограммы · разборы"},
+  {n:"История",      y:"за 5 класс", t:"даты · термины"}
+];
+let diagPick = "eng5";
+let diagSoonOpen = false;
+
+function plu(n, a, b, c){ const d = n % 100, e = n % 10;
+  return (d > 4 && d < 21) ? c : e === 1 ? a : (e > 1 && e < 5) ? b : c; }
+function nMel(n){ const d = n % 100, e = n % 10;
+  return n + " " + ((d > 4 && d < 21) ? "мелей" : e === 1 ? "мель" : (e > 1 && e < 5) ? "мели" : "мелей"); }
+
+function diagCard(o){
+  const tags = (o.tags || []).map(t =>
+    '<span class="pt' + (t[1] ? " hot" : "") + '">' + t[0] + '</span>').join("");
+  return '<button class="dgp' + (o.off ? " off" : (o.on ? " on" : "")) + '" type="button"'
+    + (o.off ? ' disabled' : ' data-pick="' + o.k + '"')
+    + ' style="--pc:var(--' + o.c + ')">'
+    + '<div class="py">' + o.y + '</div><div class="pn">' + o.n + '</div>'
+    + '<div class="pv2"><b>' + o.v + '</b><span>' + o.s + '</span></div>'
+    + '<div class="pbar"><i style="width:' + (o.pct || 0) + '%"></i></div>'
+    + '<div class="ptags">' + tags + '</div></button>';
+}
+
+function renderDiagPick(){
+  const st5 = trackStats(DIAG_IDS), B5 = shelfOf(DIAG_IDS), done5 = st5.tot - st5.unchecked;
+  const ids6 = eng6Ids(), st6 = trackStats(ids6), B6 = shelfOf(ids6), done6 = st6.tot - st6.unchecked;
+
+  const c5 = {k:"eng5", c:"blue", n:"Английский", on:diagPick === "eng5",
+    y:"за 5 класс · " + st5.tot + " " + plu(st5.tot, "задание", "задания", "заданий"),
+    v: done5 ? String(st5.solid) : String(st5.tot),
+    s: done5 ? "из " + st5.tot + " держится твёрдо"
+         : plu(st5.tot, "задание", "задания", "заданий") + " · тестов ещё не было",
+    pct: done5 ? st5.solid / st5.tot * 100 : 0,
+    tags: done5
+      ? [[nMel(B5.low.length), B5.low.length > 0], [DIAG_IDS.length + " умений", 0]]
+      : [[DIAG_IDS.length + " умений", 0]]};
+
+  const c6 = {k:"eng6", c:"green", n:"Английский", on:diagPick === "eng6",
+    y:"6 класс · идёт сейчас",
+    v: String(ids6.length),
+    s: ids6.length ? plu(ids6.length, "тема", "темы", "тем") + " · " + st6.tot + " "
+         + plu(st6.tot, "вопрос", "вопроса", "вопросов") : "тем пока нет",
+    pct: done6 ? st6.solid / st6.tot * 100 : 0,
+    tags: done6 ? [[nMel(B6.low.length), B6.low.length > 0]] : [["тестов ещё не было", 0]]};
+
+  document.getElementById("dgPick").innerHTML = diagCard(c5) + diagCard(c6);
+
+  const btn = document.getElementById("dgSoonBtn");
+  btn.innerHTML = "Ещё не собрано · " + DIAG_SOON.length + " предмета "
+    + '<span style="font-weight:600">— ' + DIAG_SOON.map(x => x.n.toLowerCase()).join(", ") + '</span>'
+    + '<span class="ch">' + (diagSoonOpen ? "свернуть ▴" : "развернуть ▾") + '</span>';
+  btn.setAttribute("aria-expanded", String(diagSoonOpen));
+  document.getElementById("dgSoonBox").hidden = !diagSoonOpen;
+  document.getElementById("dgSoonBox").innerHTML = DIAG_SOON.map(x => diagCard({
+    off:1, c:"ink-3", n:x.n, y:x.y, v:"—", s:"диагностика ещё не собрана", pct:0, tags:[[x.t, 0]]
+  })).join("");
+
+  document.getElementById("dgSel").innerHTML = "открыто: <b>Английский · "
+    + (diagPick === "eng5" ? "5 класс" : "6 класс") + "</b>";
+  document.getElementById("dgTrack5").hidden = diagPick !== "eng5";
+  document.getElementById("dgTrack6").hidden = diagPick !== "eng6";
+
+  document.querySelectorAll("#dgPick [data-pick]").forEach(b =>
+    b.addEventListener("click", ()=>{ diagPick = b.dataset.pick; renderDiag(); }));
+}
+
 function renderDiag(){
   document.getElementById("diagOne").hidden = true;
   document.getElementById("diagMap").hidden = false;
@@ -7444,7 +8218,8 @@ function renderDiag(){
   const B5 = shelfOf(DIAG_IDS);
   document.getElementById("diag5Skills").innerHTML = trackHtml(B5, null);
   document.getElementById("dg5Count").textContent =
-    "· проверено " + (st5.tot - st5.unchecked) + " из " + st5.tot + " заданий";
+    "· проверено " + (st5.tot - st5.unchecked) + " из " + st5.tot + " "
+    + plu(st5.tot, "задания", "заданий", "заданий");
 
   const rec = document.getElementById("diagRec");
   const weak = B5.low[0] || B5.mid[0] || B5.good[0] || "";
@@ -7472,7 +8247,8 @@ function renderDiag(){
     : '<div class="note" style="--nc2:var(--green);max-width:74ch"><b>Пока пусто</b>'
       + '<span>Здесь появятся темы шестого класса — каждая после того, как её разберём по домашке.</span></div>';
   document.getElementById("dg6Count").textContent = ids6.length
-    ? "· " + ids6.length + (ids6.length===1?" тема":ids6.length<5?" темы":" тем") + " · " + st6.tot + " вопросов"
+    ? "· " + ids6.length + " " + plu(ids6.length, "тема", "темы", "тем") + " · " + st6.tot + " "
+      + plu(st6.tot, "вопрос", "вопроса", "вопросов")
     : "";
 
   const next6 = B6.new[0] || B6.low[0] || "";
@@ -7485,6 +8261,8 @@ function renderDiag(){
       : '<span style="font-size:13px;color:var(--ink-3)">Все темы этого года держатся. Новые добавятся с домашкой.</span>')
     : "";
 
+  renderDiagPick();
+
   document.querySelectorAll("#view-diag [data-open]").forEach(b=>
     b.addEventListener("click", ()=>openDiagLesson(b.dataset.open)));
   document.querySelectorAll("#view-diag [data-start]").forEach(b=>
@@ -7492,6 +8270,12 @@ function renderDiag(){
   document.querySelectorAll("#view-diag [data-drill]").forEach(b=>
     b.addEventListener("click", ()=>diagDrill(b.dataset.drill)));
 }
+
+document.getElementById("dgSoonBtn").addEventListener("click", ()=>{
+  diagSoonOpen = !diagSoonOpen;
+  renderDiagPick();
+});
+
 function openDiagLesson(id){
   const src = document.getElementById(id), box = document.getElementById("diagContent");
   box.innerHTML = "";
@@ -7831,6 +8615,82 @@ const CHECKS = {
     {ex:"Слова", s:"Откуда слова «мавзолей» и «фара»?", h:"оба из древнего списка", a:"«Мавзолей» — от гробницы царя Мавсола в Галикарнасе, «фара» — от маяка на острове Фарос", w:""},
     {ex:"Счёт", s:"Сколько всего названий в трёх списках?", h:"по семь", a:"21", w:"Проверка, что ни один список не потерял строку."}
   ],
+  L15:[
+    {ex:"Вопрос 4 · главное", s:"Как сложилась судьба трёх государств после распада империи Карла Великого?", h:"три части", a:"Западно-Франкское стало Францией и распалось на владения знати; Восточно-Франкское усилилось и стало Священной Римской империей; Срединное королевство распалось первым, его земли делили соседи", w:"Это и есть домашний вопрос, спросить обязательно."},
+    {ex:"Вопрос 4 · Франция", s:"Что происходило в Западно-Франкском королевстве?", h:"слабость", a:"Короли ослабели, знать перестала подчиняться, набеги норманнов усилили местных сеньоров; в 987 г. королём избрали Гуго Капета, но его власть была почти только в собственных землях", w:"Пример обязателен — Гуго Капет."},
+    {ex:"Вопрос 4 · Германия", s:"Что происходило в Восточно-Франкском королевстве?", h:"Оттон", a:"Власть усилилась: Оттон I разгромил венгров, в 962 г. короновался в Риме — возникла Священная Римская империя", w:"Дата 962 — наизусть."},
+    {ex:"Вопрос 4 · Италия", s:"Что стало со Срединным королевством?", h:"первым", a:"Распалось раньше остальных; Италия осталась раздробленной, север вошёл в Священную Римскую империю, Лотарингию делили соседи", w:"Самая забываемая часть ответа."},
+    {ex:"Даты", s:"962 год", h:"Рим", a:"Коронация Оттона I — образование Священной Римской империи", w:"Из ленты дат в начале параграфа."},
+    {ex:"Даты", s:"1066 год", h:"Англия", a:"Битва при Гастингсе, Нормандское завоевание Англии", w:"Конец эпохи викингов."},
+    {ex:"Даты", s:"965 год", h:"Русь", a:"Разгром Хазарского каганата князем Святославом", w:"Из ленты «Россия»."},
+    {ex:"Даты", s:"863 год", h:"азбука", a:"Кирилл и Мефодий прибыли в Великую Моравию", w:"Начало славянской письменности."},
+    {ex:"Викинги", s:"Почему началась эпоха викингов?", h:"климат и земля", a:"Суровый климат и мало пригодной земли, а рядом богатая и плохо защищённая Европа", w:"Ответ на вопрос 1."},
+    {ex:"Викинги", s:"Назови не менее трёх видов деятельности викингов", h:"не только война", a:"Земледелие, скотоводство, ремесло, торговля, мореплавание, военные походы", w:"Ответ на вопрос 2, нужно минимум три."},
+    {ex:"Викинги", s:"Кто такой Лейф Счастливый?", h:"Америка", a:"Норманн, доплывший около 1000 г. до Винланда в Северной Америке — за 500 лет до Колумба", w:"Любимый факт учителей."},
+    {ex:"Англия", s:"Чем знаменит Альфред Великий?", h:"оборона", a:"Король англосаксов 871–900: создал флот, построил крепости, реформировал ополчение и остановил датчан", w:"Пример успешного сопротивления."},
+    {ex:"Англия", s:"Что случилось в 1066 году?", h:"Гастингс", a:"Вильгельм Нормандский разбил Гарольда при Гастингсе и стал королём Вильгельмом I", w:"Изображено на ковре из Байё."},
+    {ex:"Слава́не", s:"Зачем Ростислав позвал Кирилла и Мефодия?", h:"язык", a:"Чтобы служба и книги были на славянском языке, без немецкого влияния", w:"Вопрос о независимости, а не только о вере."},
+    {ex:"Слава́не", s:"Кто создал кириллицу?", h:"ученики", a:"Братья создали славянскую азбуку, а кириллицу составили их ученики и назвали в честь Кирилла", w:"Частая ошибка — сказать, что кириллицу создал сам Кирилл."},
+    {ex:"Понятия", s:"Что такое раздробленность?", h:"власть", a:"Распад единого государства на владения знати, которая фактически не подчиняется королю", w:"Ключевое понятие параграфа."},
+    {ex:"Понятия", s:"Что такое путь «из варяг в греки»?", h:"реки", a:"Речной путь от Балтики через земли Руси в Византию", w:"Связывает параграф с историей России."},
+    {ex:"Контурная карта", s:"Что отметить в первую очередь?", h:"три направления", a:"Скандинавию, направления походов викингов, Нормандию, Англию, Исландию и Гренландию, границы трёх государств после раздела империи Карла Великого", w:"Цветные карандаши — по направлениям походов."},
+  ],
+  L14:[
+    {ex:"Вставь букву", s:"над туманн..й землёй", h:"какой?", a:"туманной — Т.п., ж.р., окончание -ой", w:"Вопрос задаём от существительного."},
+    {ex:"Вставь букву", s:"бледн..м светом", h:"каким?", a:"бледным — Т.п., м.р., окончание -ым", w:"Совпадает гласная вопроса и окончания."},
+    {ex:"Вставь букву", s:"в лесу зелён..м", h:"каком?", a:"зелёном — П.п., м.р., окончание -ом", w:"Не -ым: это предложный падеж."},
+    {ex:"Вставь букву", s:"по стройн..м клёнам", h:"каким?", a:"стройным — Д.п., мн.ч., окончание -ым", w:"Множественное число, но принцип тот же."},
+    {ex:"Вставь букву", s:"влажн..м теплом", h:"каким?", a:"влажным — Т.п., ср.р., окончание -ым", w:"Средний род на окончание не влияет."},
+    {ex:"Вставь букву", s:"на окне серебрян..м", h:"каком?", a:"серебряном — П.п., ср.р., окончание -ом", w:"Последний отрывок, Бунин."},
+    {ex:"Вставь букву", s:"ветер принос..т", h:"что делает?", a:"приносит — II спряжение, окончание -ит", w:"Приносить оканчивается на -ить."},
+    {ex:"Правило", s:"Как проверить безударное окончание прилагательного?", h:"вопрос", a:"Задать вопрос от существительного: гласная в вопросе и в окончании совпадает", w:"Главное правило всей темы."},
+    {ex:"Правило", s:"Почему приносить — II спряжение?", h:"-ить", a:"Все глаголы на -ить относятся ко II спряжению, кроме брить и стелить", w:"Исключения надо назвать."},
+    {ex:"Разборы", s:"Что значит цифра 1 над словом?", h:"звуки", a:"Фонетический разбор: буквы, звуки, слоги, ударение", w:"В упражнении помечено слово степью."},
+    {ex:"Разборы", s:"Что значит цифра 2?", h:"части речи", a:"Морфологический разбор: часть речи, начальная форма, признаки, роль в предложении", w:"Помечен глагол приносит."},
+    {ex:"Разборы", s:"Что значит цифра 3?", h:"состав", a:"Морфемный разбор, по составу: корень, суффикс, окончание", w:"Помечено слово влажным."},
+    {ex:"Разборы", s:"Разбери по составу слово «влажным»", h:"влага", a:"Корень влаж-, суффикс -н-, окончание -ым", w:"Чередование г // ж в корне."},
+    {ex:"Разборы", s:"Сколько букв и звуков в слове «степью»?", h:"ь и ю", a:"Шесть букв и шесть звуков: [с’т’эп’йу]", w:"Мягкий знак звука не даёт, ю даёт два."},
+    {ex:"Разборы", s:"Разбери как часть речи слово «приносит»", h:"глагол", a:"Глагол, н.ф. приносить, несов. вид, II спр., изъявит. накл., наст. вр., 3 л., ед.ч.; в предложении — сказуемое", w:"Полный морфологический разбор."},
+    {ex:"Смысл", s:"Как записать объяснение в тетради?", h:"вопрос и падеж", a:"Например: над землёй (какой?) туманной — Т.п., ж.р.", w:"Учитель ждёт объяснение, а не только букву."},
+  ],
+  L13:[
+    {ex:"Термины", s:"Что такое былина?", h:"от слова «быль»", a:"Русская народная героическая песня о богатырях, которую считали рассказом о том, что было на самом деле", w:"Главное отличие от сказки."},
+    {ex:"Термины", s:"Кто такой сказитель?", h:"исполнитель", a:"Человек, который исполнял былину нараспев, часто под гусли", w:"Былину не читали, а пели."},
+    {ex:"Старые слова", s:"Оратай — это кто?", h:"от «орать» — пахать", a:"Пахарь", w:"В былине так назван Микула."},
+    {ex:"Старые слова", s:"Что такое омешики?", h:"часть сохи", a:"Металлические наконечники сохи, которые режут землю", w:"Не путать с гужиками — это упряжь."},
+    {ex:"Старые слова", s:"Что такое гужики?", h:"упряжь", a:"Ремни и петли в упряжи; в былине они шелковые", w:"Постоянный эпитет заодно."},
+    {ex:"Сюжет", s:"Куда и зачем ехал Вольга?", h:"дань", a:"За данью в три города, подаренные князем Владимиром: Гурчевец, Ореховец, Крестьяновец", w:"Начало былины."},
+    {ex:"Сюжет", s:"Сколько дружина добиралась до пахаря?", h:"три", a:"Три дня, хотя слышала его работу с самого начала", w:"Гипербола и троекратность сразу."},
+    {ex:"Сюжет", s:"О чём Микула предупредил князя?", h:"мужики", a:"Что в тех городах живут разбойники-мужики и они обманут", w:"Предупреждение потом сбывается."},
+    {ex:"Сюжет", s:"Что случилось с сошкой?", h:"дружина", a:"Пятеро, потом десять, потом вся дружина не смогли её вынуть, а Микула вынул одной рукой", w:"Кульминация."},
+    {ex:"Сюжет", s:"Чья лошадь оказалась быстрее?", h:"крестьянская", a:"Кобыла Микулы обогнала княжеского коня", w:"Ещё одно противопоставление."},
+    {ex:"Смысл", s:"В чём главная мысль былины?", h:"труд", a:"Труд пахаря оказывается выше воинской силы и княжеской власти", w:"Ради этого былина и сложена."},
+    {ex:"Смысл", s:"Откуда у Микулы сила?", h:"земля", a:"От земли и труда: его любит матушка сыра земля", w:"Ответ на вопрос Вольги об имени."},
+    {ex:"Приёмы", s:"Приведи пример гиперболы из былины", h:"сошка", a:"Вся дружина не может поднять сошку, а один пахарь поднимает её одной рукой", w:"Проси именно пример, а не определение."},
+    {ex:"Приёмы", s:"Приведи два постоянных эпитета", h:"кленовая…", a:"Сошка кленовая, кобыла соловая, чисто поле, гужики шелковые", w:"Любые два из этих."},
+    {ex:"Приёмы", s:"Что такое антитеза и где она здесь?", h:"противопоставление", a:"Противопоставление; здесь — князь с дружиной против пахаря", w:"Вся былина построена на этом."},
+    {ex:"Приёмы", s:"Зачем в былине повторы?", h:"замедление", a:"Чтобы замедлить рассказ перед развязкой — это ретардация", w:"Слушали былину долго, напряжение нужно было держать."},
+  ],
+  L12:[
+    {ex:"Слова · рус → англ", s:"путешествие на автомобиле", h:"два слова", a:"road trip", w:"Не по половинкам: это одно понятие."},
+    {ex:"Слова · рус → англ", s:"побережье", h:"c…", a:"coast", w:"Вся береговая линия."},
+    {ex:"Слова · рус → англ", s:"утёс, отвесная скала", h:"cl…", a:"cliff", w:"Не путать с coast."},
+    {ex:"Слова · рус → англ", s:"крутой, отвесный", h:"st…", a:"steep", w:"Steep hill, steep steps."},
+    {ex:"Слова · рус → англ", s:"фуникулёр", h:"два слова, первое — трос", a:"cable car", w:"Вагончик на канате."},
+    {ex:"Слова · рус → англ", s:"упускать, пропускать", h:"to m…", a:"to miss", w:"Ещё значит «скучать»."},
+    {ex:"Слова · рус → англ", s:"захватывающий, эффектный", h:"sp…", a:"spectacular", w:"От spectacle — зрелище."},
+    {ex:"Слова · рус → англ", s:"впечатляющий", h:"im…", a:"impressive", w:"От impress."},
+    {ex:"Слова · рус → англ", s:"песчаный пляж", h:"два слова", a:"sandy beach", w:"Sand → sandy."},
+    {ex:"Слова · рус → англ", s:"морской слон", h:"два слова, первое — слон", a:"elephant seal", w:"Дословный перевод «слон-тюлень» неверен."},
+    {ex:"Слова · рус → англ", s:"брачный сезон", h:"два слова", a:"breeding season", w:"To breed — размножаться."},
+    {ex:"Слова · рус → англ", s:"самка, женского пола", h:"f…", a:"female", w:"|ˈfiːmeɪl|, ударение на первый слог."},
+    {ex:"Слова · рус → англ", s:"детёныш", h:"три буквы", a:"pup", w:"|pʌp|."},
+    {ex:"Слова · рус → англ", s:"сказочный дворец", h:"два слова", a:"fairytale mansion", w:"Mansion |ˈmænʃn| — особняк."},
+    {ex:"Произношение", s:"Прочитай вслух: female", h:"долгое и в начале", a:"|ˈfiːmeɪl| — фИːмейл", w:"Частая ошибка — «фемале»."},
+    {ex:"Произношение", s:"Прочитай вслух: mansion", h:"шн на конце", a:"|ˈmænʃn| — мЭншн", w:"Буквы -si- читаются как ш."},
+    {ex:"Смысл", s:"Чем coast отличается от cliff?", h:"одно шире другого", a:"coast — всё побережье, cliff — конкретный отвесный утёс", w:"Проверка понимания, а не зубрёжки."},
+    {ex:"Смысл", s:"Почему elephant seal нельзя перевести по словам?", h:"устойчивое сочетание", a:"Это одно название животного — морской слон, а не «слон» и «тюлень» по отдельности", w:"Главная мысль списка."},
+  ],
   L8:[
     {ex:"Сочетания · рус → англ", s:"модные магазины", h:"trendy", a:"trendy shops", w:"Из объявления Teanlowe Centre."},
     {ex:"Сочетания · рус → англ", s:"последняя мода", h:"latest", a:"the latest fashions", w:"Fashions во множественном числе."},
@@ -8002,6 +8862,18 @@ const MANUAL = [
    title:"Реклама места для развлечения",
    task:"Учебник стр. 10: составить и записать в тетрадь рекламу места для развлечения по образцу упр. 2. Плюс подготовить отличное чтение и знать перевод, выучить слова на карточке.",
    look:"Пять-семь предложений, а не список через запятую. Не меньше шести слов с карточки, вставленных по смыслу. Место своё, а не переписанное из учебника. Проверить три ловушки: except (не accept), fancy + -ing, cater for."},
+  {id:"M14", lid:"L15", subject:"История", color:"amber", date:"2026-09-15",
+   title:"Контурные карты по § 4",
+   task:"Контурные карты, простой карандаш и цветные карандаши шести цветов. Отметить материал § 4: Скандинавия, направления походов викингов, Нормандия, Англия, Исландия и Гренландия, границы трёх государств после распада империи Карла Великого.",
+   look:"Проверять не красоту, а три вещи: подписаны ли объекты (а не просто закрашены), есть ли условные обозначения сбоку — что значит каждый цвет, и совпадают ли границы с картой в приложении учебника. Направления походов рисуются стрелками от Скандинавии: на запад — Англия и Ирландия, на юг — Франция и Средиземноморье, на восток — по рекам в Русь и Византию. Три цвета — три направления, остальные три на границы государств."},
+  {id:"M13", lid:"L14", subject:"Русский язык", color:"pink", date:"2026-09-15",
+   title:"Упражнение 51 — выписать слова и обозначить окончания",
+   task:"Выписать слова с пропущенными буквами, обозначить окончания, объяснить написание. Плюс три разбора под цифрами: степью (1), приносит (2), влажным (3).",
+   look:"Восемь слов: туманной, бледным, зелёном, стройным, влажным, приносит, серебряном (и напоённые — без пропуска). Главное — не буквы, а объяснение рядом: вопрос и падеж. Если в тетради стоят только правильные буквы без вопросов — задание сделано наполовину. В разборе «степью» частая ошибка — посчитать пять звуков, забыв, что ю после мягкого знака даёт два."},
+  {id:"M12", lid:"L13", subject:"Литература", color:"violet", date:"2026-09-16",
+   title:"Былина: примеры приёмов из текста",
+   task:"Читать стр. 45–50. Найти в тексте по одному примеру гиперболы и постоянного эпитета, выписать старые слова с объяснением.",
+   look:"Примеры должны быть найдены в книге, а не взяты из разбора — спросите номер страницы, где нашёл. Старых слов достаточно четырёх-пяти: оратай, омешики, гужики, ракитов куст. И один вопрос вслух: почему народ сложил былину про пахаря, а не про князя. Ответ своими словами, пусть коротко."},
   {id:"M11", lid:"L4", subject:"Биология", color:"green", date:"2026-09-16",
    title:"Значение растений в природе · 5 предложений",
    task:"Задание на 16 сентября: составить 5 предложений на тему «Значение растений в природе», письменно в тетради. Плюс термины рубрики «Запомните» стр. 8 наизусть, повторить стр. 6–9 и выполнить ЦДЗ.",
@@ -9357,14 +10229,8 @@ function attn(){
 }
 
 function renderDecks(){
-  const A = attn(), D = decks(), flat = navFlat();
-  const btn = document.getElementById("navMode");
-  btn.innerHTML = flat
-    ? '<i><b class="w"></b><b class="w"></b></i> Разложить по палубам'
-    : '<i><b></b><b></b><b></b></i> Показать одной строкой';
-  btn.setAttribute("aria-pressed", String(!flat));
-  document.getElementById("decksWrap").classList.toggle("flat", flat);
-  if(flat){ document.getElementById("decks").innerHTML = ""; return; }
+  const A = attn(), D = decks();
+  document.getElementById("decksWrap").classList.remove("flat");
   document.getElementById("decks").innerHTML = D.map(d=>{
     const hit = d.ids.filter(id=>A[id]);
     const fc = (d.id !== deck && hit.length) ? C[A[hit[0]]] : null;
@@ -9378,15 +10244,6 @@ function renderDecks(){
     show(d.ids.includes(view) ? view : d.ids[0]);
   }));
 }
-
-/* переключатель вида: одной строкой ↔ по палубам, выбор запоминается */
-document.getElementById("navMode").addEventListener("click", ()=>{
-  state.nav = navFlat() ? "decks" : "flat";
-  save();
-  deck = deckOf(view).id;
-  renderNav();
-  toast(navFlat() ? "Все вкладки одной строкой" : "Вкладки разложены по палубам");
-});
 
 /* ================= КОД ШТУРМАНА ================= */
 /* Это защита от ребёнка, а не настоящая криптография: код лежит в браузере
