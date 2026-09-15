@@ -828,6 +828,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 .qwhy{margin-top:16px;padding:14px 17px;border-radius:12px;background:var(--surface-2);border-left:5px solid var(--blue);font-size:14.5px;color:var(--ink-2);font-weight:600;line-height:1.45}
 .qwhy b{color:var(--ink);font-weight:800}
 .qnav{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+#testRun .qnav{position:sticky;bottom:0;z-index:5;margin-top:14px;padding:12px 0 6px;background:linear-gradient(to top,var(--surface) 68%,rgba(255,255,255,0))}
 .btn{appearance:none;border:none;background:var(--violet);color:#fff;font-family:"Russo One",sans-serif;font-size:14px;letter-spacing:.04em;text-transform:uppercase;padding:12px 24px;border-radius:99px;cursor:pointer}
 .btn:hover{filter:brightness(1.08)}
 .btn.ghost{background:transparent;color:var(--ink-2);border:2px solid var(--line)}
@@ -1015,8 +1016,20 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 @media (prefers-reduced-motion:reduce){.pinbox.shake{animation:none}}
 .filebtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .bigstat{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120%);background:var(--navy);color:#fff;padding:14px 22px;border-radius:99px;font-family:"Russo One",sans-serif;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:99;transition:transform .28s;max-width:92vw;text-align:center}
-.toast.on{transform:translateX(-50%) translateY(0)}
+.stepbar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--navy);color:#fff;border-radius:var(--r);padding:17px 19px;margin-bottom:16px}
+.stepbar[hidden]{display:none}
+.stepbar.calm{background:var(--green)}
+.sbtxt{flex:1 1 300px;min-width:0}
+.sblbl{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8FA6D8;display:block;margin-bottom:6px}
+.stepbar.calm .sblbl{color:rgba(255,255,255,.8)}
+.sbbig{font-family:"Russo One",sans-serif;font-size:clamp(19px,3vw,24px);line-height:1.2;margin-bottom:6px}
+.sbwhy{font-size:13.5px;color:#BDCBEA;line-height:1.45}
+.stepbar.calm .sbwhy{color:rgba(255,255,255,.92)}
+.sbgo{font-family:"Russo One",sans-serif;font-size:15px;letter-spacing:.04em;background:var(--green);color:#fff;border:0;border-radius:11px;padding:14px 22px;cursor:pointer;white-space:nowrap;flex:none}
+.sbgo:hover{filter:brightness(1.08)}
+.stepbar.calm .sbgo{background:#fff;color:var(--green)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(calc(100% + 40px));opacity:0;pointer-events:none;background:var(--navy);color:#fff;padding:14px 22px;border-radius:99px;font-family:"Russo One",sans-serif;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:99;transition:transform .28s,opacity .28s;max-width:92vw;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
 
 /* ===== Диагностика — отдельный раздел ===== */
@@ -1309,6 +1322,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 
 <!-- ================= СЕГОДНЯ ================= -->
 <section id="view-today" hidden>
+  <div class="stepbar" id="stepBar" hidden></div>
   <div class="hero" style="--hc:var(--green);margin-bottom:16px">
     <span class="eyebrow" id="todayDate"></span>
     <h2 id="todayTitle">Вахта</h2>
@@ -1429,6 +1443,31 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
         <div class="ri" style="--ic:var(--blue)"><span class="ih">Неделя · 15 минут</span><span class="id">В воскресенье совет: три вопроса и выбор двух новых вызовов. Это единственное место, где можно менять правила.</span></div>
         <div class="ri" style="--ic:var(--amber)"><span class="ih">Месяц · два замера</span><span class="id">Первая неделя — снимаем цифры по ГТО. Последняя — повторяем те же испытания. В конце месяца переход закрывается наградой, и открывается следующий.</span></div>
       </div>
+    </div>
+  </div>
+
+  <div class="sec" style="--sc2:var(--green)">
+    <h3>Следующий шаг <em>одна строка над вахтой</em></h3>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
+      На экране «Сегодня» шесть панелей. Пока замера нет, четыре из них пустые — не потому что сломались,
+      а потому что им неоткуда взять данные. Ребёнок открывал журнал и видел отчёт о работе, которая ещё
+      не начиналась. Теперь над вахтой стоит одна тёмная строка: что сделать прямо сейчас и почему.
+    </p>
+    <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
+      Строка считается сама, по лесенке сверху вниз. Берётся первое, что подходит:
+    </p>
+    <div class="grid g2">
+      <div class="term" style="--tc2:var(--red)"><b>Замер не сдан</b><span>Ни одно из семи умений диагностики не проверено — зовёт на замер. Пятнадцать минут, без оценок.</span></div>
+      <div class="term" style="--tc2:var(--amber)"><b>Замер не дозакрыт</b><span>Часть умений сдана, часть нет — предлагает доделать и говорит, сколько осталось.</span></div>
+      <div class="term" style="--tc2:var(--red)"><b>Самое слабое умение</b><span>Из проверенных берётся то, где «держится твёрдо» меньше всего, и показывается процент.</span></div>
+      <div class="term" style="--tc2:var(--violet)"><b>Работа над ошибками</b><span>Если накопилось пять и больше вопросов с ошибками — зовёт на них.</span></div>
+      <div class="term" style="--tc2:var(--blue)"><b>Пора повторить</b><span>Первая тема из очереди повторения — та же, что в панели «Пора повторить».</span></div>
+      <div class="term" style="--tc2:var(--green)"><b>Вахта</b><span>Тестов на сегодня не осталось — значит, последнее дело дня это вахта.</span></div>
+    </div>
+    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:80ch">
+      <b>Когда всё закрыто</b>
+      <span>Строка зеленеет и говорит «Всё закрыто. Можно идти жить». Кнопки у неё в этом случае нет —
+      это единственное состояние, где журнал ничего не просит.</span>
     </div>
   </div>
 
@@ -1712,6 +1751,10 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     <h3>Диагностика <em>отдельный раздел, два блока по годам</em></h3>
     <p class="lede" style="max-width:74ch">Английский вынесен из уроков в свой раздел: значок <b>🎯</b> в шапке у капитана и вкладка <b>«Диагностика»</b> у штурмана. Причина простая — пробелы за прошлый год и текущая домашка живут в разном темпе, и мешать их в одном списке неправильно.</p><p class="lede" style="max-width:74ch;margin-top:12px">Внутри <b>два блока с плашками года</b>. <b>5 класс</b> — семь умений, 61 задание: что осталось в голове после прошлого года. <b>6 класс</b> — темы, которые разбираем сейчас; они попадают сюда сами, как только появится разбор по английскому. У каждого блока своя полоса итога: прошлое и настоящее не складываются в одну цифру.</p>
     <div class="grid g3" style="margin-top:16px">
+      <div class="grp" style="--gc:var(--cyan)"><div class="gh"><span class="gt">Учебники и указатели</span><span class="gm">появилось 15 сентября</span></div><div class="gb">
+        <div class="row"><span>В папке журнала есть каталог <b>«Учебники»</b> — девять папок по предметам. Туда складываются сканы или фотографии страниц. Если в имени файла стоит номер страницы (<b>стр-025.jpg</b>), нужная страница открывается сразу, без перелистывания всей книги.</span></div>
+        <div class="row"><span>По сфотографированным книгам собраны <b>указатели</b>: страница → что в каждом упражнении. Готовы три — рабочая тетрадь по английскому (стр. 4–45), учебник Starlight 6 (модуль 1, стр. 8–25) и история (§ 4 и выходные данные).</span></div>
+        <span class="exs">Смысл: домашка сводится к одной строке — «англ. Р. Т. стр. 15, упр. 4», и разбор собирается без фотографий и ожидания</span></div></div>
       <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">Полоса итога</span></div><div class="gb">
         <div class="row"><span><b>Эхолот</b> — разрез глубины под килем. Глубина — доля заданий, которые держатся твёрдо. Пунктир показывает цель: 80%. Кораблик стоит над самым слабым местом.</span></div>
         <span class="exs">Видно за секунду, где можно сесть на мель</span></div></div>
@@ -1805,10 +1848,14 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">14 сен</td><td style="color:var(--ink-2)"><b>Диагностика: сначала предмет и год, потом умения.</b> Наверху раздела карточки — «Английский · 5 класс» и «Английский · 6 класс» — с числом «держится твёрдо» и меткой, сколько мелей. Предметы, по которым диагностики ещё нет, свёрнуты в одну строку «Ещё не собрано» и не висят на экране, но счётчик про них напоминает. Открыт всегда один трек, а не два подряд. <b>Шкала переделана целиком:</b> вместо трёхцветной полосы, в которую были втиснуты «твёрдо», «наугад» и «мимо», — одна полоса (длина = сколько держится твёрдо), чёрная риска на 80% как цель и цвет только для срочности. Слова сведены к четырём и одинаковы везде — в строках, в заголовках и в легенде эхолота: <b>мель, шатко, держится, не проверяли</b>. Раньше группа считалась по «верно», а полоса рисовалась по «твёрдо», и умение с четвертью твёрдых попадало в «шатко» — теперь и то и другое считается по «твёрдо»</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Тест по английскому (Present Simple / Continuous) переписан целиком.</b> Старый спрашивал про грамматику: «что такое stative verb», «как образуется Present Continuous», «какие сигналы у времён» — восемь вопросов из двадцати проверяли, запомнил ли ребёнок разбор, а не умеет ли он говорить. Ещё три подряд были про одно и то же окончание -ing. Новый тест собран <b>по фотографии страницы 11</b>: тринадцать вопросов — поставить глагол в форму в живых предложениях упражнения 6, три перевода с русского, поиск ошибки, вопрос про stative из самого упражнения. Разбор дополнен ответами на упражнения 5, 6 и 7 с объяснением каждого, метка сменилась на «сверено с учебником»</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Английский: слова модуля 1c</b> — четырнадцать слов из файла учителя с транскрипцией и разбором: road trip, impressive, coast, steep, cable car, to miss, spectacular, cliff, sandy beach, elephant seal, breeding season, female, pup, fairytale mansion. Отдельно разобрано, почему шесть из них — сочетания из двух слов и переводятся целиком, чем coast отличается от cliff и где ошибаются в произношении female и mansion. 20 вопросов, 18 устных, все четырнадцать ушли в тренажёр слов. Упражнения 4 и 5 на стр. 5 рабочей тетради не разобраны: страницы не видел</td></tr>
-          <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Литература: былина «Вольга и Микула Селянинович»</b> — жанр и чем он отличается от сказки, сюжет по шести шагам, два героя как антитеза, пять признаков былинного стиха с примерами из текста и словарь старых слов: оратай, омешики, гужики, ракитов куст, соловая. 20 вопросов, 16 устных, карточка приёмки. Помечена как <b>несверенная</b>: страниц 45–50 вашего учебника я не видел, вопросы после текста могут отличаться</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Литература: былина «Вольга и Микула Селянинович»</b> — жанр и чем он отличается от сказки, сюжет по шести шагам, два героя как антитеза, пять признаков былинного стиха с примерами из текста и словарь старых слов: оратай, омешики, гужики, ракитов куст, соловая. 20 вопросов, 16 устных, карточка приёмки. Помечена как <b>несверенная</b>: страниц 45–50 вашего учебника я не видел, вопросы после текста могут отличаться</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Русский язык, упражнение 51</b> — первый разбор по этому предмету. Четыре стихотворных отрывка, восемь пропусков, и один приём на всё: задать вопрос от существительного. Разобрано, почему «в лесу зелёном», но «по клёнам стройным» — это разные падежи, а не варианты; почему «приносит», а не «приносет»; и три разбора под цифрами полностью: степью (6 букв, 6 звуков), приносит (морфологический), влажным (по составу). Отдельно сказано главное: учитель ждёт не букву, а объяснение — вопрос и падеж рядом со словом. 20 вопросов, 16 устных, карточка приёмки</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>История, § 4 «Европа в IX—XI вв.»</b> — тоже первый разбор по предмету, собран по фотографиям стр. 39–47. Ответ на заданный устно <b>вопрос 4</b> вынесен наверх и разложен на три части с примерами: Франция — раздробленность и Гуго Капет, Германия — Оттон I и империя 962 года, Срединное королевство — распалось первым. Дальше походы викингов и почему они начались, три названия одного народа, Винланд за 500 лет до Колумба, Альфред Великий и Гастингс 1066 года, Кирилл и Мефодий и разница между латинской и византийской традицией. Четыре даты, шесть имён. Для контурных карт — раскладка шести цветов и список того, за что снимают баллы. 20 вопросов, 18 устных, карточка приёмки</td></tr>
-        </tbody>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Английский: рабочая тетрадь, стр. 5, упражнения 4 и 5.</b> Двадцать три пропуска на Present Simple и Present Continuous: семь диалогов и открытка из Диснейленда, каждый разобран с объяснением. Отдельно вынесена ловушка, ради которой страница и составлена: глагол <b>have встречается дважды и в разных временах</b> — «every morning we have a big breakfast», но «we are having a great time». Have запрещён в Continuous только в значении «иметь»; have breakfast и have a great time — действия. Плюс правило порядка: сначала спросить, не глагол ли это состояния, и лишь потом смотреть на слово-сигнал. 20 вопросов, 14 устных, карточка приёмки</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Слова модуля 1c сверены по учебнику.</b> Пришла фотография стр. 12 — Culture Corner «Pacific Coast Highway 1», откуда учитель взял список. Метка сменилась на «сверено с учебником». Теперь видно, откуда каждое слово: cable car — подъём по крутым улицам Сан-Франциско, cliffs и sandy beaches — побережье Big Sur, elephant seals и breeding season — пляж Пьедрас-Бланкас, fairytale mansion — замок Хёрста со 165 комнатами</td></tr>
+                  <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Два бага на планшете и телефоне.</b> Первый: внизу по центру постоянно торчала тёмная скруглённая плашка — её принимали за «островок как у айфона». Это окно уведомлений: оно пряталось сдвигом на 120% своей высоты, а стояло на 26 пикселей выше края, и 20 пикселей всегда оставались на виду. Теперь уходит целиком. Второй: при ответе на вопрос раскрывалось объяснение, страница вырастала, и кнопка «Дальше» оказывалась за нижним краем — на планшете на 49 пикселей, на телефоне на 468. Ребёнку приходилось скроллить вниз за кнопкой, а после нажатия экран рывком уезжал наверх. Теперь «Дальше» прилипает к низу экрана и видна всегда, а между вопросами страница встаёт на начало вопроса без рывка</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Экран «Сегодня»: строка «следующий шаг».</b> Над вахтой появилась одна тёмная строка — что делать прямо сейчас и почему, с кнопкой. Считается сама по лесенке: замер не сдан → замер не дозакрыт → самое слабое умение → работа над ошибками → пора повторить → вахта → всё закрыто. Сделано потому, что из шести панелей экрана четыре пустуют, пока нет замера, и ребёнку было не за что зацепиться. Остальной экран не тронут. Разобрано в разделе инструкции «Следующий шаг»</td></tr>
+</tbody>
       </table>
     </div>
   </div>
@@ -3575,7 +3622,89 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 </article>
 
-<article id="L15">
+<article id="L16">
+    <div class="hero" style="--hc:var(--blue)">
+      <span class="eyebrow">Английский язык · 6-Я · 15 сентября · Workbook Starlight 6, стр. 5 · упражнения 4 и 5</span>
+      <h2>Рабочая тетрадь 1b · два времени на практике</h2>
+      <p class="lede">Двадцать три пропуска подряд. Ничего нового после страницы 11 учебника здесь нет — есть <b>тренировка одного решения</b>: сначала спросить, не глагол ли это состояния, и только потом смотреть на слово-сигнал. И одна ловушка, ради которой страница и составлена: <b>have встречается дважды и в двух разных временах</b>.</p>
+      <button class="btn print noprint" onclick="window.print()">Распечатать</button>
+    </div>
+
+    <div class="sec" style="--sc2:var(--blue)">
+      <h3>Упражнение 4 <em>семь диалогов · ответы с объяснением</em></h3>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">1</span></div><div class="gb">
+        <div class="row"><span><b>A: Is Steven playing</b> tennis right now? — <b>B:</b> No, <b>he’s studying</b> at the library.</span></div>
+        <span class="exs">right now — оба действия происходят в эту минуту</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">2</span></div><div class="gb">
+        <div class="row"><span><b>A:</b> How often <b>do you go</b> to the gym? — <b>B: I exercise</b> twice a week.</span></div>
+        <span class="exs">how often — вопрос о частоте; частота бывает только у привычек</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">3</span><span class="gm">ловушка</span></div><div class="gb">
+        <div class="row"><span><b>A:</b> Carol <b>needs</b> new shoes. — <b>B:</b> OK. <b>Does she want</b> to go shopping now?</span></div>
+        <span class="exs">в предложении стоит now, и рука сама тянется к Continuous. Но need и want — состояния, им Continuous запрещён</span></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">4</span><span class="gm">look в двух смыслах</span></div><div class="gb">
+        <div class="row"><span><b>A: I’m looking</b> for Marsha. <b>Do you know</b> where she is? — <b>B: I think</b> she is at the games arcade.</span></div>
+        <span class="exs">look for — искать, это действие, поэтому Continuous. Сравните с учебником: «Jenny looks tired» — там look значит «выглядит», и это состояние. Know и think — состояния</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">5</span></div><div class="gb">
+        <div class="row"><span><b>A: Do you play</b> basketball at the sports centre on Saturdays? — <b>B:</b> Yes, <b>I’m going</b> there right now.</span></div>
+        <span class="exs">две реплики — два разных времени: вопрос о привычке, ответ о сию минуту</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">6</span></div><div class="gb">
+        <div class="row"><span><b>A:</b> George never <b>cleans</b> his room. — <b>B:</b> OK, now <b>I understand</b> why it’s so messy!</span></div>
+        <span class="exs">never — сигнал Simple; слово now во второй реплике снова ничего не решает</span></div></div>
+      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">7</span></div><div class="gb">
+        <div class="row"><span><b>A:</b> Tonya always <b>cooks</b> dinner for us in the evenings. — <b>B:</b> Yes, but today <b>she’s visiting</b> a friend.</span></div>
+        <span class="exs">always … but today — самая частая пара в учебниках: правило и исключение из него в одном диалоге</span></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--amber)">
+      <h3>Упражнение 5 <em>открытка из Диснейленда · десять пропусков</em></h3>
+      <div class="note" style="--nc2:var(--amber);max-width:82ch"><b>Dear Emma,</b>
+        <span>I <b>1) am writing</b> from Walt Disney World in Orlando, Florida. My family and I <b>2) are staying</b> in a nice hotel in the Disney resort.
+        Every morning we <b>3) have</b> a big breakfast at the hotel’s restaurant. Then, we <b>4) spend</b> the rest of the day at different attractions in the resort.
+        Right now I <b>5) am sitting</b> in a café at the amusement park with my parents. My sister <b>6) is standing</b> in a queue to go on a ride.
+        My brother, Joe <b>7) is sliding</b> down huge slides at the water park. We <b>8) are having</b> a great time. I <b>9) love</b> it here and I <b>10) don’t want</b> to leave.<br>Love, Angie</span></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Главная ловушка</span><span class="gm">have дважды</span></div><div class="gb">
+        <div class="row"><span><b>3) Every morning we have a big breakfast</b> — каждое утро, привычка, Simple.</span></div>
+        <div class="row"><span><b>8) We are having a great time</b> — прямо сейчас, Continuous.</span></div>
+        <span class="exs">have запрещён в Continuous только в значении «иметь, владеть»: I have a car. А have breakfast, have a shower, have a great time — это действия, и они спокойно идут в Continuous</span></div></div>
+      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Правописание</span><span class="gm">три случая в одной открытке</span></div><div class="gb">
+        <div class="row"><span>sit → <b>sitting</b> (короткий гласный + согласная удваивается) · slide → <b>sliding</b> (немая -e уходит) · stand → <b>standing</b> (ничего не меняется)</span></div></div></div>
+      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Конец открытки</span><span class="gm">проверка на инерцию</span></div><div class="gb">
+        <div class="row"><span><b>I love it here and I don’t want to leave.</b> После восьми предложений в Continuous рука дописывает «am loving», «am not wanting». Оба глагола — состояния, оба в Simple.</span></div></div></div>
+    </div>
+
+    <div class="sec" style="--sc2:var(--violet)">
+      <h3>Порядок решения <em>два вопроса, всегда в этом порядке</em></h3>
+      <div class="grp" style="--gc:var(--violet)"><div class="gh"><span class="gt">1</span><span class="gm">сначала</span></div><div class="gb">
+        <div class="row"><span><b>Это глагол состояния?</b> need · want · know · think (полагать) · understand · love · like · believe · belong · cost · seem · look (выглядеть) · have (иметь). Если да — <b>только Present Simple</b>, и на слова now, right now можно не смотреть.</span></div></div></div>
+      <div class="grp" style="--gc:var(--violet)"><div class="gh"><span class="gt">2</span><span class="gm">и только потом</span></div><div class="gb">
+        <div class="row"><span><b>Сейчас или вообще?</b> now, right now, at the moment, today, these days → Continuous. Always, never, usually, often, every morning, twice a week, on Saturdays, how often → Simple.</span></div></div></div>
+    </div>
+
+    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответ</em></summary>
+      <ol>
+        <li>Does she want или Is she wanting? <b>Does she want — want это состояние.</b></li>
+        <li>I ... for Marsha (look). <b>I’m looking — искать это действие.</b></li>
+        <li>Jenny ... tired (look). <b>Jenny looks — выглядеть это состояние.</b></li>
+        <li>Every morning we ... breakfast. <b>have.</b></li>
+        <li>We ... a great time. <b>are having.</b></li>
+        <li>Почему по-разному? <b>Have «иметь» — состояние, have breakfast и have a great time — действия.</b></li>
+        <li>Какой вопрос задаём себе первым? <b>Это глагол состояния?</b></li>
+      </ol>
+    </details>
+
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Порядок работы <em>двадцать минут</em></h3>
+      <ol class="how" style="--hc2:var(--blue)">
+        <li><b>Сделать упражнение 4 карандашом</b>, не подглядывая. Семь диалогов — семь маленьких решений.</li>
+        <li><b>Сверить</b> с разбором выше. Ошибки будут в третьем и четвёртом диалогах — там стативы.</li>
+        <li><b>Прочитать открытку целиком вслух</b> прежде, чем заполнять: так видно, где рассказ о распорядке, а где — о том, что происходит в эту минуту.</li>
+        <li><b>Заполнить упражнение 5</b> и отдельно проверить два have.</li>
+        <li><b>Тест по теме</b> — двадцать вопросов, кнопка в конце разбора.</li>
+      </ol>
+    </div>
+  </article>
+
+  <article id="L15">
     <div class="hero" style="--hc:var(--amber)">
       <span class="eyebrow">История · 6-Я · 15 сентября · всеобщая история, § 4, стр. 39–47 · вопрос 4 устно + контурные карты</span>
       <h2>§ 4 · Европа в IX—XI вв.</h2>
@@ -5814,6 +5943,28 @@ const QUIZ = {
     {q:"Каким языком владеет Маша?", o:["французский","немецкий","английский","итальянский"], c:2, w:"Француженка играет на скрипке — это Лена. Маша не знает итальянского, Оля не владеет английским, значит английский у Маши."},
     {q:"Какой пример таблицы ОС был на слайде?", o:["Оценки по информатике","Необычные вещи: изделие, год, страна, длина","Расписание уроков","Напитки коротышек"], c:1, w:"Джемпер, шарф, сандалии, саквояж — один класс объектов и четыре свойства."}
   ],
+  L16:[
+    {q:"«..... (Steven/play) tennis right now?»", o:["Is Steven playing","Does Steven play","Is Steven play","Do Steven play"], c:0, w:"Right now — прямо сейчас. Вопрос строится так: is + подлежащее + глагол с -ing."},
+    {q:"«No, he ..... (study) at the library.»", o:["is studying","studies","study","does study"], c:0, w:"Он в библиотеке в эту минуту — значит действие идёт сейчас."},
+    {q:"«How often ..... (you/go) to the gym?»", o:["do you go","are you going","does you go","are you go"], c:0, w:"How often — вопрос о частоте. Частота бывает только у привычек, поэтому Present Simple."},
+    {q:"«I ..... (exercise) twice a week.»", o:["exercise","am exercising","exercises","am exercise"], c:0, w:"Twice a week — регулярность."},
+    {q:"«Carol ..... (need) new shoes.»", o:["needs","is needing","need","are needing"], c:0, w:"Need — глагол состояния. В Continuous он не ставится никогда, даже когда очень хочется сказать «сейчас нужны»."},
+    {q:"«..... (she/want) to go shopping now?»", o:["Does she want","Is she wanting","Do she want","Is she want"], c:0, w:"Слово now в этом предложении стоит, а Continuous всё равно нельзя: want — состояние. Тип глагола сильнее сигнала."},
+    {q:"«I ..... (look) for Marsha.»", o:["am looking","look","looks","do look"], c:0, w:"Look for — искать, это действие. Сравните с «Jenny looks tired» — там look значит «выглядит», и это состояние."},
+    {q:"«..... (you/know) where she is?»", o:["Do you know","Are you knowing","Does you know","Are you know"], c:0, w:"Know — состояние. И порядок слов в косвенном вопросе прямой: where she is."},
+    {q:"«I ..... (think) she is at the games arcade.»", o:["think","am thinking","thinks","am think"], c:0, w:"Think здесь = «полагаю», это мнение, то есть состояние. А вот «I am thinking about it» — размышляю — уже действие."},
+    {q:"«..... (you/play) basketball at the sports centre on Saturdays?»", o:["Do you play","Are you playing","Does you play","Are you play"], c:0, w:"On Saturdays — по субботам, регулярно."},
+    {q:"«Yes, I ..... (go) there right now.»", o:["am going","go","goes","do go"], c:0, w:"Две реплики подряд и два разных времени: вопрос про привычку, ответ про этот самый момент."},
+    {q:"«George never ..... (clean) his room.»", o:["cleans","is cleaning","clean","does clean"], c:0, w:"Never — наречие частоты, сигнал Present Simple. И не забыть -s в третьем лице."},
+    {q:"«OK, now I ..... (understand) why it’s so messy!»", o:["understand","am understanding","understands","am understand"], c:0, w:"Слово now снова стоит, и снова не решает: understand — состояние."},
+    {q:"«Tonya always ..... (cook) dinner for us in the evenings.»", o:["cooks","is cooking","cook","does cook"], c:0, w:"Always + in the evenings — привычка."},
+    {q:"«Yes, but today she ..... (visit) a friend.»", o:["is visiting","visits","visit","does visit"], c:0, w:"Today — сегодня, в виде исключения из обычного. Классическая пара: always … but today …"},
+    {q:"Открытка: «I ..... (write) from Walt Disney World.»", o:["am writing","write","writes","am write"], c:0, w:"Пишет прямо сейчас, в этот момент — так всегда начинаются открытки."},
+    {q:"«My family and I ..... (stay) in a nice hotel.»", o:["are staying","stay","stays","are stay"], c:0, w:"Живут в отеле временно, только на время отпуска. Если бы жили постоянно — было бы we stay."},
+    {q:"«Every morning we ..... (have) a big breakfast.» и «We ..... (have) a great time.» Одинаковые ли формы?", o:["Нет: have — но are having","Да, оба have","Да, оба are having","Нет: are having — но have"], c:0, w:"Главная ловушка страницы. Every morning — привычка, значит have. Have a great time — это не «иметь», а «проводить время», действие, и оно идёт сейчас: are having."},
+    {q:"«Right now I ..... (sit) in a café.»", o:["am sitting","sit","sits","am sit"], c:0, w:"Right now — и удвоение согласной: sit → sitting."},
+    {q:"«I ..... (love) it here and I ..... (not want) to leave.»", o:["love … don’t want","am loving … am not wanting","love … am not wanting","am loving … don’t want"], c:0, w:"Оба глагола — состояния. Конец открытки специально собран из стативов, чтобы проверить, не поставите ли вы Continuous по инерции."},
+  ],
   L15:[
     {q:"Почему в Скандинавии началась «эпоха викингов»?", o:["суровый климат, мало пригодной земли, а рядом богатая и слабая Европа","их изгнали из Европы","они искали новую веру","их заставили короли франков"], c:0, w:"Каменистая мёрзлая земля, нет винограда и мало пшеницы. Взять силой оказалось проще, чем произвести — об этом и цитата в начале параграфа."},
     {q:"Как называли скандинавов в разных землях?", o:["в Западной Европе норманны, на Руси варяги, сами себя — викинги","везде одинаково — викинги","в Европе варяги, на Руси норманны","их называли готами"], c:0, w:"Норманны — «северные люди». Это три имени одного народа, и вопрос об этом любят."},
@@ -6178,6 +6329,22 @@ const RECAP = {
       ["Байкал","самое глубокое озеро планеты"],
       ["Маньпупунёр","столбы выветривания, Коми"]
     ]
+  },
+  L16:{
+    title:"Рабочая тетрадь 1b — на что смотреть",
+    pairs:[
+      ["правило выбора","сначала спроси: это глагол состояния? потом — сейчас или вообще?"],
+      ["need, want, know, think, understand","глаголы состояния, в Continuous не ставятся"],
+      ["have = иметь","состояние: I have a car"],
+      ["have a great time / have breakfast","действие: можно и в Continuous — We are having a great time"],
+      ["look for","искать — действие: I am looking for Marsha"],
+      ["look tired","выглядеть — состояние: Jenny looks tired"],
+      ["How often …?","вопрос о частоте, значит Present Simple"],
+      ["right now, at the moment","сигналы Present Continuous"],
+      ["never, always, usually, every morning","сигналы Present Simple"],
+      ["Does she want …?","вопрос со стативом: только Simple, даже если добавили now"]
+    ],
+    hint:"Вся страница — про один порядок действий: сначала проверь тип глагола, и только потом смотри на слово-сигнал."
   },
   L15:{
     title:"Европа в IX—XI вв. — даты, имена, понятия",
@@ -6581,6 +6748,14 @@ const DIAG_RECS = {
 
 const LESSONS = [
   {
+    id:"L16", subject:"Английский язык", color:"blue", date:"2026-09-15",
+    title:"Рабочая тетрадь 1b · упражнения 4 и 5 — два времени на практике",
+    source:"Workbook Starlight 6, стр. 5, упр. 4 и 5 · сверено по фотографии страницы",
+    desc:"Двадцать три пропуска подряд на Present Simple и Present Continuous: тринадцать в диалогах упражнения 4 и десять в открытке из Диснейленда. Разобран каждый, и отдельно — главная ловушка страницы: глагол have встречается дважды и в двух разных временах.",
+    tags:["рабочая тетрадь","Present Simple","Present Continuous","stative"],
+    checked:true
+  },
+  {
     id:"L15", subject:"История", color:"amber", date:"2026-09-15",
     title:"§ 4 · Европа в IX—XI вв. Викинги, Англия, империя Оттона",
     source:"Учебник всеобщей истории, 6 класс, § 4, стр. 39–47 · сверено по фотографиям страниц",
@@ -6607,10 +6782,10 @@ const LESSONS = [
   {
     id:"L12", subject:"Английский язык", color:"blue", date:"2026-09-15",
     title:"Слова модуля 1c · впечатляющие места и морские слоны",
-    source:"Список слов от учителя (файл «слова 1c») · Р.Т. стр. 5, упр. 4 и 5 — страницу тетради не видел",
+    source:"Список слов от учителя (файл «слова 1c») + Starlight 6, стр. 12, Culture Corner «Pacific Coast Highway 1» · сверено по фотографии страницы",
     desc:"Четырнадцать слов модуля 1c с транскрипцией: road trip, cable car, elephant seal, breeding season и остальные. Разобрано, где слово из двух частей и почему его нельзя переводить по половинкам, чем cliff отличается от coast и почему spectacular — это не просто «красивый».",
     tags:["слова","модуль 1c","рабочая тетрадь"],
-    checked:false
+    checked:true
   },
   {
     id:"L11", subject:"Английский язык", color:"blue", date:"2026-09-14",
@@ -6998,6 +7173,78 @@ function dayPlanFor(dateKey){
   return {info: dayInfo(mo, d), week: mo.weeks.find(w=>d>=w.from && d<=w.to), mo, d};
 }
 
+/* ================= СЛЕДУЮЩИЙ ШАГ =================
+   Одна строка над вахтой: что делать прямо сейчас. Считается сама по лесенке:
+   замер не сдан -> замер не дозакрыт -> самое слабое умение -> работа над
+   ошибками -> пора повторить -> вахта -> всё закрыто.
+   Смысл строки: на экране «Сегодня» шесть панелей, и пока замера нет, четыре
+   из них пустые. Строка даёт ребёнку одно действие вместо шести пустых мест. */
+function nextStep(){
+  const undone = DIAG_IDS.filter(id => QUIZ[id] && !(state.tests[id] && state.tests[id].total));
+
+  if(undone.length === DIAG_IDS.length){
+    return {lbl:"Следующий шаг", big:"Пройти замер по английскому",
+      why:"15 минут. Маленький тест, чтобы понять, что уже держится само, а что подзабылось за лето. Оценок не будет — это чтобы не тратить время на то, что ты и так знаешь.",
+      btn:"Начать", go:()=>diagStartOne(undone[0])};
+  }
+  if(undone.length){
+    return {lbl:"Следующий шаг", big:"Доделать замер",
+      why:"Осталось " + plu(undone.length, "умение", "умения", "умений") + ". Каждое — несколько минут.",
+      btn:"Продолжить", go:()=>diagStartOne(undone[0])};
+  }
+
+  let weak = null;
+  DIAG_IDS.forEach(id=>{
+    const r = state.tests[id];
+    if(!r || !r.total || diagLvl(r) === "good") return;
+    const share = (r.bestSolid || 0) / r.total;
+    if(!weak || share < weak.share) weak = {id:id, share:share};
+  });
+  if(weak){
+    const l = LESSONS.find(x=>x.id===weak.id);
+    return {lbl:"Слабое место", big:(l ? l.title : "Подтянуть умение"),
+      why:"Держится " + Math.round(weak.share*100) + "% — до цели 80% не дотягивает. Пройди ещё раз, чтобы закрепить.",
+      btn:"Отработать", go:()=>diagStartOne(weak.id)};
+  }
+
+  const wrongN = wrongPool().length;
+  if(wrongN >= 5){
+    return {lbl:"Следующий шаг", big:"Работа над ошибками",
+      why:plu(wrongN, "вопрос", "вопроса", "вопросов") + ", где ты ошибался. Самый быстрый способ добрать узлов.",
+      btn:"Начать", go:()=>{ show("test"); startWrongTest(); }};
+  }
+
+  const rev = reviewList();
+  if(rev.length){
+    const r = rev[0], l = r.l;
+    return {lbl:"Пора повторить", big:l.title, why:l.subject + " · " + r.why,
+      btn:"Повторить",
+      go:()=>{ show("test"); showIntro(QUIZ[l.id].map((x,i)=>Object.assign({lid:l.id, qi:i}, x)), l.id, l.title, [l], l.subject); }};
+  }
+
+  const left = VAHTA.length - (state.checks[todayKey()] || []).length;
+  if(left){
+    return {lbl:"Следующий шаг", big:"Отметить вахту",
+      why:"Осталось " + plu(left, "пункт", "пункта", "пунктов") + ". Тесты на сегодня закрыты — вахта последнее."};
+  }
+  return {lbl:"Сегодня", big:"Всё закрыто", calm:true,
+    why:"Вахта отмечена, тесты пройдены, повторять нечего. Можно идти жить."};
+}
+function renderStep(){
+  const bar = document.getElementById("stepBar");
+  if(!bar) return;
+  let st = null;
+  try{ st = nextStep(); }catch(e){ bar.hidden = true; return; }
+  if(!st){ bar.hidden = true; return; }
+  bar.hidden = false;
+  bar.classList.toggle("calm", !!st.calm);
+  bar.innerHTML = '<div class="sbtxt"><span class="sblbl">' + esc(st.lbl) + '</span>'
+    + '<div class="sbbig">' + esc(st.big) + '</div>'
+    + '<div class="sbwhy">' + esc(st.why) + '</div></div>'
+    + (st.btn ? '<button class="sbgo" type="button" id="stepGo">' + esc(st.btn) + '</button>' : "");
+  const b = document.getElementById("stepGo");
+  if(b && st.go) b.addEventListener("click", st.go);
+}
 function renderToday(){
   const tk = todayKey();
   const set = state.checks[tk] || [];
@@ -7034,6 +7281,9 @@ function renderToday(){
 
   /* пора повторить */
   renderReview();
+
+  /* следующий шаг — одна строка над вахтой */
+  renderStep();
 
   /* вызовы */
   const taken = (state.taken||[]).map(id=>CHALLENGES.find(c=>c.id===id)).filter(Boolean);
@@ -8462,8 +8712,14 @@ function answer(i){
   nx.hidden = false;
   nx.textContent = (quizIdx === quizItems.length-1) ? "Показать результат" : "Дальше";
 }
+function scrollToQuestion(){
+  const box = document.getElementById("testRun");
+  if(!box){ window.scrollTo({top:0}); return; }
+  const y = box.getBoundingClientRect().top + window.pageYOffset - 12;
+  window.scrollTo({top: Math.max(0, y)});
+}
 function nextQuestion(){
-  if(quizIdx < quizItems.length-1){ quizIdx++; renderQuestion(); window.scrollTo({top:0,behavior:"smooth"}); }
+  if(quizIdx < quizItems.length-1){ quizIdx++; renderQuestion(); scrollToQuestion(); }
   else finishQuiz();
 }
 function finishQuiz(){
@@ -8614,6 +8870,22 @@ const CHECKS = {
     {ex:"Путаница", s:"Колизей и Великая Китайская стена — в каком списке?", h:"не в древнем", a:"В новом, 2007 года", w:"Самая частая ошибка темы."},
     {ex:"Слова", s:"Откуда слова «мавзолей» и «фара»?", h:"оба из древнего списка", a:"«Мавзолей» — от гробницы царя Мавсола в Галикарнасе, «фара» — от маяка на острове Фарос", w:""},
     {ex:"Счёт", s:"Сколько всего названий в трёх списках?", h:"по семь", a:"21", w:"Проверка, что ни один список не потерял строку."}
+  ],
+  L16:[
+    {ex:"Упр. 4 · диалог 1", s:"..... (Steven/play) tennis right now? — No, he ..... (study) at the library.", h:"сейчас", a:"Is Steven playing … he is studying", w:"Оба про этот момент."},
+    {ex:"Упр. 4 · диалог 2", s:"How often ..... (you/go) to the gym? — I ..... (exercise) twice a week.", h:"частота", a:"do you go … exercise", w:"How often — всегда Simple."},
+    {ex:"Упр. 4 · диалог 3", s:"Carol ..... (need) new shoes. — ..... (she/want) to go shopping now?", h:"стативы", a:"needs … Does she want", w:"Слово now не помогает: need и want — состояния."},
+    {ex:"Упр. 4 · диалог 4", s:"I ..... (look) for Marsha. ..... (you/know) where she is? — I ..... (think) she is at the arcade.", h:"искать", a:"am looking … Do you know … think", w:"Look for — действие, know и think — состояния."},
+    {ex:"Упр. 4 · диалог 5", s:"..... (you/play) basketball on Saturdays? — Yes, I ..... (go) there right now.", h:"два времени", a:"Do you play … am going", w:"Вопрос про привычку, ответ про сейчас."},
+    {ex:"Упр. 4 · диалог 6", s:"George never ..... (clean) his room. — Now I ..... (understand) why.", h:"never", a:"cleans … understand", w:"Never — Simple; understand — статив."},
+    {ex:"Упр. 4 · диалог 7", s:"Tonya always ..... (cook) dinner. — But today she ..... (visit) a friend.", h:"исключение", a:"cooks … is visiting", w:"Always … but today — любимая пара учебника."},
+    {ex:"Упр. 5 · открытка", s:"I ..... (write) from Walt Disney World. My family and I ..... (stay) in a nice hotel.", h:"начало", a:"am writing … are staying", w:"Пишет сейчас, живёт временно."},
+    {ex:"Упр. 5 · открытка", s:"Every morning we ..... (have) a big breakfast. Then, we ..... (spend) the rest of the day.", h:"каждое утро", a:"have … spend", w:"Распорядок каждого дня поездки."},
+    {ex:"Упр. 5 · открытка", s:"Right now I ..... (sit) in a café. My sister ..... (stand) in a queue.", h:"прямо сейчас", a:"am sitting … is standing", w:"Удвоение согласной: sit → sitting."},
+    {ex:"Упр. 5 · открытка", s:"My brother, Joe ..... (slide) down huge slides.", h:"сейчас", a:"is sliding", w:"Немая -e уходит: slide → sliding."},
+    {ex:"Упр. 5 · открытка", s:"We ..... (have) a great time. I ..... (love) it here and I ..... (not want) to leave.", h:"ловушка", a:"are having … love … don’t want", w:"Have a great time — действие; love и want — состояния."},
+    {ex:"Главное правило", s:"В каком порядке решать, какое время ставить?", h:"сначала глагол", a:"Сначала спросить: это глагол состояния? Если да — только Simple. И лишь потом смотреть на слово-сигнал", w:"Тип глагола сильнее сигнала."},
+    {ex:"Ловушка", s:"Почему have в одном упражнении дважды в разных временах?", h:"значение", a:"Have = «иметь» — состояние; have breakfast, have a great time = действие, его можно поставить в Continuous", w:"Смысл решает, а не сам глагол."},
   ],
   L15:[
     {ex:"Вопрос 4 · главное", s:"Как сложилась судьба трёх государств после распада империи Карла Великого?", h:"три части", a:"Западно-Франкское стало Францией и распалось на владения знати; Восточно-Франкское усилилось и стало Священной Римской империей; Срединное королевство распалось первым, его земли делили соседи", w:"Это и есть домашний вопрос, спросить обязательно."},
@@ -8862,6 +9134,10 @@ const MANUAL = [
    title:"Реклама места для развлечения",
    task:"Учебник стр. 10: составить и записать в тетрадь рекламу места для развлечения по образцу упр. 2. Плюс подготовить отличное чтение и знать перевод, выучить слова на карточке.",
    look:"Пять-семь предложений, а не список через запятую. Не меньше шести слов с карточки, вставленных по смыслу. Место своё, а не переписанное из учебника. Проверить три ловушки: except (не accept), fancy + -ing, cater for."},
+  {id:"M15", lid:"L16", subject:"Английский язык", color:"blue", date:"2026-09-15",
+   title:"Рабочая тетрадь, стр. 5, упр. 4 и 5",
+   task:"Заполнить пропуски в семи диалогах упражнения 4 и в открытке упражнения 5: Present Simple или Present Continuous.",
+   look:"Двадцать три пропуска. Проверять не все подряд, а шесть опасных мест: does she want (не is she wanting), understand (не am understanding), think (не am thinking), am looking for (тут как раз Continuous), и две формы have — have a big breakfast, но are having a great time. Если эти шесть верны, остальное почти наверняка тоже."},
   {id:"M14", lid:"L15", subject:"История", color:"amber", date:"2026-09-15",
    title:"Контурные карты по § 4",
    task:"Контурные карты, простой карандаш и цветные карандаши шести цветов. Отметить материал § 4: Скандинавия, направления походов викингов, Нормандия, Англия, Исландия и Гренландия, границы трёх государств после распада империи Карла Великого.",
@@ -8957,6 +9233,45 @@ const TODO = [
   {id:"T12", g:"Действия", color:"violet", prio:"nice", closed:"10 сен",
    t:"Опубликовать журнал на GitHub Pages",
    w:"Сделано 10 сентября. Адрес: danilovsky1987-spec.github.io/DOMASHKA/ — открывается на планшете и телефоне без пересылки файлов. Обновление: Add file → Upload files → перетащить index.html из папки domashka-github → Commit changes."},
+  {id:"T21", g:"Учебники", color:"cyan", prio:"crit",
+   t:"Математика — полный текст задачи",
+   w:"Единственная тема, которую до сих пор нельзя собрать: на скриншоте из МЭШ условие обрезано. Нужна фотография страницы учебника или условия целиком."},
+  {id:"T22", g:"Учебники", color:"cyan", prio:"crit", closed:"15 сен",
+   t:"Английский — страница 11 учебника",
+   w:"Получена 15 сентября. По ней переписан весь тест Present Simple / Continuous и разобраны упражнения 5, 6 и 7. Старый тест спрашивал определения и был бесполезен."},
+  {id:"T23", g:"Учебники", color:"cyan", prio:"crit", closed:"15 сен",
+   t:"Английский — рабочая тетрадь, стр. 5",
+   w:"Получена 15 сентября. Упражнения 4 и 5 разобраны полностью, все двадцать три пропуска."},
+  {id:"T24", g:"Учебники", color:"cyan", prio:"nice", closed:"15 сен",
+   t:"Рабочая тетрадь целиком, стр. 4–45",
+   w:"Получена 15 сентября. Составлен указатель по страницам: модули 1–5, что в каждом упражнении. Теперь «Р.Т. стр. 15 упр. 4» понятно без листания. Файл: Учебники → Английский рабочая тетрадь → указатель.md"},
+  {id:"T25", g:"Учебники", color:"cyan", prio:"nice", closed:"15 сен",
+   t:"Учебник английского, модуль 1 целиком",
+   w:"Получены страницы 8–25. Указатель составлен, видно и то, что впереди: модуль 2 про еду, исчисляемые и неисчисляемые, some/any, заказ в ресторане."},
+  {id:"T26", g:"Учебники", color:"cyan", prio:"nice",
+   t:"Английский — страница 8 рабочей тетради",
+   w:"Единственная пропущенная страница в первом модуле. Раздел 1f: типы жилья и сравнительная степень."},
+  {id:"T27", g:"Учебники", color:"cyan", prio:"crit", closed:"15 сен",
+   t:"История — какой учебник",
+   w:"Выяснено 15 сентября по титульному листу: Мединский, Чубарьян. История Средних веков, 6 класс. Просвещение, 2025, ISBN 978-5-09-123943-0. Это новое издание, не Агибалова — формулировки и нумерация другие."},
+  {id:"T28", g:"Учебники", color:"cyan", prio:"crit",
+   t:"История — оглавление",
+   w:"Нужна фотография оглавления. Тогда «п. 7 стр. 62» сразу превращается в тему, и разбор собирается без вопросов."},
+  {id:"T29", g:"Учебники", color:"cyan", prio:"nice",
+   t:"Литература — стр. 45–50",
+   w:"Разбор былины «Вольга и Микула Селянинович» готов, но собран по тексту былины, а не по вашему учебнику. Вопросы после текста могут отличаться — тема помечена как несверенная."},
+  {id:"T30", g:"Учебники", color:"cyan", prio:"nice",
+   t:"География — стр. по теме «Три списка чудес»",
+   w:"Единственная оставшаяся несверенная тема кроме литературы."},
+  {id:"T31", g:"Английский", color:"blue", prio:"nice",
+   t:"Аудирование для диагностики",
+   w:"В диагностике за 5 класс семь умений, но нет раздела на слух — нужны звуковые файлы. Отдельная работа."},
+  {id:"T32", g:"Действия", color:"violet", prio:"crit",
+   t:"Выложить на GitHub то, что сделано с 11 по 15 сентября",
+   w:"Сверено с репозиторием 15 сентября: на сайте коммит от 14 сентября, а не от 10-го. Диагностика с разборами, словарный тренажёр, новая шкала и темы L12–L15 там уже есть. Не доехало последнее: тема L16 (рабочая тетрадь 1b), карточка приёмки M15, раздел инструкции про учебники и правка двух багов — торчащая внизу плашка и уезжающая кнопка «Дальше» в тесте. Грузить четыре файла из папки domashka-github: index.html, sw.js (кэш bortovoy-2026-09-15e), icon.svg и icon-192.png. Файлы icon-512.png и manifest.webmanifest на сайте уже совпадают. После заливки удалить ярлык с телефона, добавить заново и один раз перезагрузить страницу."},
+  {id:"T33", g:"Действия", color:"violet", prio:"crit",
+   t:"Первый замер — диагностика английского",
+   w:"Сорок минут, 61 задание. Пока он не сдан, в журнале ноль результатов: все шкалы, эхолот и карта умений показывают пустоту. Это единственный шаг, после которого журнал начнёт что-то показывать."},
   {id:"T13", g:"Действия", color:"violet", prio:"nice",
    t:"Первый раз сохранить прогресс в файл",
    w:"Вкладка «Прогресс» → «Сохранить в файл». Проверим, что выгрузка и загрузка работают, до того как накопятся отметки за месяц."},
