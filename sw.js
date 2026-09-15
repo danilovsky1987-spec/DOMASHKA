@@ -4,7 +4,7 @@
    Меняете index.html — поднимите номер версии ниже, иначе старые файлы
    останутся в памяти у тех, кто уже открывал сайт. */
 
-const VERSION = "bortovoy-2026-09-15h";
+const VERSION = "bortovoy-2026-09-15i";
 
 const CORE = [
   "./",
@@ -34,6 +34,18 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
+
+  /* Мимо кэша — всё, что не наш сайт и не шрифты.
+     Прежде всего обмен с сервером синхронизации: ниже стоит «сначала память,
+     потом сеть», и первый же ответ сервера осел бы в кэше навсегда. Журнал
+     перестал бы получать отметки с другого устройства и молча показывал бы
+     старое. Отправка (PUT) сюда не доходит, а вот чтение (GET) доходило бы. */
+  let host = "";
+  try { host = new URL(req.url).origin; } catch (err) { host = ""; }
+  const ours = host === self.location.origin
+    || req.url.indexOf("https://fonts.googleapis.com") === 0
+    || req.url.indexOf("https://fonts.gstatic.com") === 0;
+  if (!ours) return;
 
   /* сама страница: сначала сеть (чтобы приходили обновления), при отказе — память */
   if (req.mode === "navigate") {
