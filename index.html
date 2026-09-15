@@ -828,6 +828,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 .qwhy{margin-top:16px;padding:14px 17px;border-radius:12px;background:var(--surface-2);border-left:5px solid var(--blue);font-size:14.5px;color:var(--ink-2);font-weight:600;line-height:1.45}
 .qwhy b{color:var(--ink);font-weight:800}
 .qnav{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+#testRun{padding-bottom:88px}
 #testRun .qnav{position:sticky;bottom:0;z-index:5;margin-top:14px;padding:12px 0 6px;background:linear-gradient(to top,var(--surface) 68%,rgba(255,255,255,0))}
 .btn{appearance:none;border:none;background:var(--violet);color:#fff;font-family:"Russo One",sans-serif;font-size:14px;letter-spacing:.04em;text-transform:uppercase;padding:12px 24px;border-radius:99px;cursor:pointer}
 .btn:hover{filter:brightness(1.08)}
@@ -1855,6 +1856,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Слова модуля 1c сверены по учебнику.</b> Пришла фотография стр. 12 — Culture Corner «Pacific Coast Highway 1», откуда учитель взял список. Метка сменилась на «сверено с учебником». Теперь видно, откуда каждое слово: cable car — подъём по крутым улицам Сан-Франциско, cliffs и sandy beaches — побережье Big Sur, elephant seals и breeding season — пляж Пьедрас-Бланкас, fairytale mansion — замок Хёрста со 165 комнатами</td></tr>
                   <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Два бага на планшете и телефоне.</b> Первый: внизу по центру постоянно торчала тёмная скруглённая плашка — её принимали за «островок как у айфона». Это окно уведомлений: оно пряталось сдвигом на 120% своей высоты, а стояло на 26 пикселей выше края, и 20 пикселей всегда оставались на виду. Теперь уходит целиком. Второй: при ответе на вопрос раскрывалось объяснение, страница вырастала, и кнопка «Дальше» оказывалась за нижним краем — на планшете на 49 пикселей, на телефоне на 468. Ребёнку приходилось скроллить вниз за кнопкой, а после нажатия экран рывком уезжал наверх. Теперь «Дальше» прилипает к низу экрана и видна всегда, а между вопросами страница встаёт на начало вопроса без рывка</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Экран «Сегодня»: строка «следующий шаг».</b> Над вахтой появилась одна тёмная строка — что делать прямо сейчас и почему, с кнопкой. Считается сама по лесенке: замер не сдан → замер не дозакрыт → самое слабое умение → работа над ошибками → пора повторить → вахта → всё закрыто. Сделано потому, что из шести панелей экрана четыре пустуют, пока нет замера, и ребёнку было не за что зацепиться. Остальной экран не тронут. Разобрано в разделе инструкции «Следующий шаг»</td></tr>
+          <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Объяснение больше не прячется под кнопкой.</b> После того как «Дальше» прилипла к низу экрана, она стала перекрывать разбор ответа: на планшете объяснение начиналось на 24 пикселя ниже панели и уходило за край. Теперь после ответа страница подвигается ровно настолько, чтобы объяснение вышло из-под панели, — на планшете это 103 пикселя, рывка не видно. Проверено на живом сайте</td></tr>
 </tbody>
       </table>
     </div>
@@ -8711,6 +8713,20 @@ function answer(i){
   const nx = document.getElementById("qNext");
   nx.hidden = false;
   nx.textContent = (quizIdx === quizItems.length-1) ? "Показать результат" : "Дальше";
+  revealWhy();
+}
+/* Панель с кнопкой «Дальше» липнет к низу экрана, и объяснение может оказаться
+   под ней. Подталкиваем страницу ровно настолько, чтобы объяснение вышло
+   из-под панели, — без рывка наверх и без лишнего движения. */
+function revealWhy(){
+  const why = document.getElementById("qWhy");
+  const nav = document.querySelector("#testRun .qnav");
+  if(!why || !nav || why.hidden) return;
+  requestAnimationFrame(()=>{
+    const navH = nav.getBoundingClientRect().height;
+    const over = why.getBoundingClientRect().bottom - (window.innerHeight - navH - 10);
+    if(over > 0) window.scrollTo({top: Math.round(window.pageYOffset + over)});
+  });
 }
 function scrollToQuestion(){
   const box = document.getElementById("testRun");
