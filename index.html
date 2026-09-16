@@ -765,6 +765,17 @@ main{max-width:var(--maxw);margin:0 auto;padding:24px 20px 90px}
 .term span{font-size:14.5px;color:var(--ink-2);font-weight:600;line-height:1.45}
 .term .hint{font-size:13px;color:var(--ink-3);font-weight:700;font-style:italic}
 
+/* Лесенка приоритетов — сверху вниз проверяется по одному условию,
+   первое подошедшее и берётся. Ступени соединены проводом, чтобы
+   было видно: это не список на выбор, а порядок проверки. */
+.ladder{display:flex;flex-direction:column;max-width:80ch}
+.rung{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:13px 18px;display:flex;gap:14px;align-items:flex-start}
+.rung.done{background:color-mix(in srgb, var(--rc,var(--green)) 10%, var(--surface))}
+.rung .num{flex:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Russo One",sans-serif;font-size:14px;color:#fff;background:var(--rc,var(--green))}
+.rung .rt b{display:block;font-family:"Russo One",sans-serif;font-weight:400;font-size:15.5px;margin-bottom:3px;color:var(--ink)}
+.rung .rt span{font-size:14px;color:var(--ink-2);font-weight:600;line-height:1.45}
+.wire{width:3px;height:14px;border-radius:99px;background:color-mix(in srgb, var(--ink-3) 35%, transparent);margin-left:31px}
+
 .sent{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 17px;display:flex;gap:13px;align-items:flex-start}
 .sent .sn{flex:none;width:30px;height:30px;border-radius:9px;background:var(--nc,var(--green));color:#fff;font-family:"Russo One",sans-serif;font-size:15px;display:grid;place-items:center}
 .sent .st{font-family:"Russo One",sans-serif;font-size:15px;text-transform:uppercase;color:var(--nc,var(--green));display:block;margin-bottom:4px}
@@ -1457,18 +1468,20 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
     <p style="font-size:15.5px;color:var(--ink-2);font-weight:600;line-height:1.6;max-width:80ch;margin:0 0 14px">
       Строка считается сама, по лесенке сверху вниз. Берётся первое, что подходит:
     </p>
-    <div class="grid g2">
-      <div class="term" style="--tc2:var(--red)"><b>Замер не сдан</b><span>Ни одно из семи умений диагностики не проверено — зовёт на замер. Пятнадцать минут, без оценок.</span></div>
-      <div class="term" style="--tc2:var(--amber)"><b>Замер не дозакрыт</b><span>Часть умений сдана, часть нет — предлагает доделать и говорит, сколько осталось.</span></div>
-      <div class="term" style="--tc2:var(--red)"><b>Самое слабое умение</b><span>Из проверенных берётся то, где «держится твёрдо» меньше всего, и показывается процент.</span></div>
-      <div class="term" style="--tc2:var(--violet)"><b>Работа над ошибками</b><span>Если накопилось пять и больше вопросов с ошибками — зовёт на них.</span></div>
-      <div class="term" style="--tc2:var(--blue)"><b>Пора повторить</b><span>Первая тема из очереди повторения — та же, что в панели «Пора повторить».</span></div>
-      <div class="term" style="--tc2:var(--green)"><b>Вахта</b><span>Тестов на сегодня не осталось — значит, последнее дело дня это вахта.</span></div>
-    </div>
-    <div class="note" style="--nc2:var(--green);margin-top:16px;max-width:80ch">
-      <b>Когда всё закрыто</b>
-      <span>Строка зеленеет и говорит «Всё закрыто. Можно идти жить». Кнопки у неё в этом случае нет —
-      это единственное состояние, где журнал ничего не просит.</span>
+    <div class="ladder">
+      <div class="rung" style="--rc:var(--red)"><span class="num">1</span><div class="rt"><b>🎯 Замер не сдан</b><span>Ни одно из семи умений диагностики не проверено — зовёт на замер. Пятнадцать минут, без оценок.</span></div></div>
+      <div class="wire"></div>
+      <div class="rung" style="--rc:var(--amber)"><span class="num">2</span><div class="rt"><b>⏳ Замер не дозакрыт</b><span>Часть умений сдана, часть нет — предлагает доделать и говорит, сколько осталось.</span></div></div>
+      <div class="wire"></div>
+      <div class="rung" style="--rc:var(--red)"><span class="num">3</span><div class="rt"><b>📉 Самое слабое умение</b><span>Из проверенных берётся то, где «держится твёрдо» меньше всего, и показывается процент.</span></div></div>
+      <div class="wire"></div>
+      <div class="rung" style="--rc:var(--violet)"><span class="num">4</span><div class="rt"><b>✏️ Работа над ошибками</b><span>Если накопилось пять и больше вопросов с ошибками — зовёт на них.</span></div></div>
+      <div class="wire"></div>
+      <div class="rung" style="--rc:var(--blue)"><span class="num">5</span><div class="rt"><b>🔁 Пора повторить</b><span>Первая тема из очереди повторения — та же, что в панели «Пора повторить».</span></div></div>
+      <div class="wire"></div>
+      <div class="rung" style="--rc:var(--green)"><span class="num">6</span><div class="rt"><b>⚓ Вахта</b><span>Тестов на сегодня не осталось — значит, последнее дело дня это вахта.</span></div></div>
+      <div class="wire"></div>
+      <div class="rung done" style="--rc:var(--green)"><span class="num">✓</span><div class="rt"><b>Всё закрыто</b><span>Строка зеленеет и говорит «Всё закрыто. Можно идти жить». Кнопки у неё в этом случае нет — это единственное состояние, где журнал ничего не просит.</span></div></div>
     </div>
   </div>
 
@@ -1912,6 +1925,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Решено идти на первый замер без синхронизации.</b> Обмен написан и работает, но заменяет состояние целиком, а не сливает, и при подключении спрашивает вслепую, чью версию оставить. В соседнем проекте эта же схема уже приводила к потере половины данных. Опасный сценарий прямой: планшет офлайн, ребёнок сдаёт замер сорок минут, со второго устройства уходит обновление — планшет возвращается в сеть и стирает замер. Пока обмен выключен, замер будет виден только на планшете, зато точно не пропадёт. Переделка на слияние — пункт T36 на завтра</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Выгрузка и загрузка прогресса проверены кругом.</b> Раз обмен между устройствами выключен до переделки, файл остался единственной страховкой — а его ни разу не пробовали. Проверка на подложных данных: выгрузка отдаёт «журнал-прогресс-ДАТА.json», внутри все тридцать один раздел состояния; после обнуления журнала загрузка восстанавливает вахту, результаты тестов, слова, приёмку и узлы точь-в-точь. Обе кнопки во вкладке «Прогресс» подключены правильно. Пункт T13 поднят до срочного: сохранять файл сразу после замера</td></tr>
           <tr><td class="num" style="text-align:left">15 сен</td><td style="color:var(--ink-2)"><b>Журнал сам напоминает сохранить файл.</b> Раз обмен выключен, файл — единственная страховка, но помнить о нём приходилось человеку. Теперь строка «следующий шаг» первым делом говорит «Сохранить прогресс в файл», если после последней выгрузки что-то накопилось. Видит это <b>только штурман</b> — ребёнку такое напоминание ни к чему. Если синхронизацию включат, напоминание само замолчит. Сравнивается короткая подпись: сколько тем сдано, сколько дней вахты, сколько узлов, сколько карточек приёмки</td></tr>
+          <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>«Следующий шаг» — теперь лесенка, а не список.</b> В разделе инструкции шесть ступеней приоритета соединены проводом сверху вниз, каждая со своим цветом и номером, а «Всё закрыто» — зелёная ступень-финал. Раньше это были шесть карточек вперемешку по сетке — теперь видно порядок проверки, а не просто перечень. Идея — из макета клиентского воркфлоу, который прислали на разбор: цветные кружки-шаги, соединённые линией</td></tr>
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Синхронизация теперь сливает, а не заменяет — закрыт T36.</b> Раньше подключение второго устройства грозило стереть замер, сделанный офлайн: журнал брал чужую копию целиком или отдавал свою — любой ответ на вопрос при подключении уничтожал одну из сторон. Теперь <b>mergeState</b> сводит тринадцать разделов состояния по отдельности: вахта, вызовы и попытки ГТО объединяются, лучшие результаты и узлы берутся по максимуму, а текущая попытка и приёмка — из более свежей записи целиком. Вопрос при подключении убран. Проверено на подложных конфликтующих данных по каждому разделу. T35 (включить) больше не заблокирован — можно после первого замера</td></tr>
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Английский, стр. 8 рабочей тетради — закрыт T26.</b> Фотография нашлась в сегодняшней же пачке, просто была принята за страницу учебника. Раздел 1f: кроссворд с типами жилья, выбор слова, much/very, сравнительная и превосходная степень. Указатель тетради теперь покрывает страницы 4–45 без единого разрыва</td></tr>
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Песенки для процентов.</b> В разделе инструкции — четыре рифмовки на три задачи пункта «Проценты» (стр. 19–20): что такое процент и перевод туда-обратно, часть от целого, целое по части, сколько процентов одно от другого. Каждая привязана к своей задаче из учебника</td></tr>
