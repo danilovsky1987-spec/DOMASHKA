@@ -2002,6 +2002,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Английский L16 переверстан — обкатка нового шаблона подачи материала.</b> Причина: три скриншота разбора показали, что все семь ответов упражнения 4 видны сразу, без попытки решить самому, а инструкция «как делать» стояла последней строкой — уже после всех ответов. Теперь порядок другой: «Вспомним» (30 секунд без тетради) → «Что делать» (сразу после героя) → «Если забылось — разберём» (ход мысли на двух придуманных примерах, не из сегодняшнего задания) → схема по шагам → «Проверь себя» (тоже на придуманных примерах) → и только потом «Ответы» к упражнениям 4 и 5. Плюс наглядная схема-таймлайн в шапке: повторяющиеся точки для привычки против одной точки для «сейчас». Роль учителя и роль дома теперь разделены явно: учитель уже научил в классе, дома — объяснить, если забылось, помочь и проверить, не переучивать заново</td></tr>
           <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Ответы к упражнениям — под замком на дату и роль.</b> Штурману видно всегда. Капитану — только когда дата темы уже в прошлом: пока тема «на сегодня» или ещё впереди, видно задание и способ рассуждать, но не сами ответы — сначала тетрадь и карандаш. Технически: свой блок открытия-закрытия на div, не родной <code>&lt;details&gt;</code> — у закрытого <code>&lt;details&gt;</code> браузер прячет всё содержимое, кроме заголовка, и стилями поверх это не обойти (поймано и проверено на мокапе headless-браузером — блок с замком физически не рисовался). Пока применено только к L16, остальные темы — как решим дальше</td></tr>
           <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Презентации учителя открываются прямо в разборе — закрыт L10.</b> В теме «Табличные информационные модели» у обеих презентаций от 16 сентября появилась кнопка «Смотреть презентацию»: слайды открываются во весь экран, вперёд-назад стрелками или клавишами, без скачивания файла. Картинки — 19 отдельных jpg-файлов в <code>slides/L10/</code> (по 7 и 12 на презентацию, ~1,3 МБ суммарно), не base64 внутри HTML: так основной файл журнала не растёт, а слайды подгружаются только когда их реально открыли. Заодно поправлена неточность: подпись «шесть новых задач» раньше соседствовала с «пятью новыми задачами» в шапке темы — было не считано после того, как добавилась бонусная задача 6</td></tr>
+          <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Устная проверка — исправлен показ чужих предметов.</b> Кнопка «Устная проверка» открывается со страницы конкретного предмета (рядом с «Тест по предмету»), но список тем и карточки «Приёмка работ» за ней собирались вообще по всему журналу — по русскому языку показывались вперемешку темы математики, информатики, английского, истории и литературы. Экран теперь фильтруется по тому предмету, с которого его открыли (как уже работает «Тест по предмету»), заголовок стал «Проверка · [Предмет]», а раздел «Слова вслух» (он только для английского) скрывается на всех остальных предметах. Проверено в jsdom на нескольких предметах по очереди</td></tr>
 </tbody>
       </table>
     </div>
@@ -2051,14 +2052,14 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   <div id="oralPick">
     <div class="hero" style="--hc:var(--cyan)">
       <span class="eyebrow">Экран для взрослого</span>
-      <h2>Проверка</h2>
+      <h2 id="oralH2">Проверка</h2>
       <p class="lede">Ребёнок сидит рядом и отвечает вслух, вы отмечаете одним нажатием: ответил сам, ответил с подсказкой или не смог. Правильный ответ и объяснение под рукой — закрыты, пока не нажмёте, чтобы не подсказать взглядом. Порции по 12 вопросов: одна часть за вечер.</p>
     </div>
     <div class="sec" style="--sc2:var(--cyan)">
       <h3>Устная проверка <em>отмечайте клавишами 1, 2, 3</em></h3>
       <div class="tgrid" id="oralList"></div>
     </div>
-    <div class="sec" style="--sc2:var(--blue)">
+    <div class="sec" style="--sc2:var(--blue)" id="oralWordsSec">
       <h3>Слова вслух <em>отдельный раздел</em></h3>
       <div class="note" style="--nc2:var(--blue);max-width:74ch"><b>Карточки со словами английского</b>
         <span>Ребёнок отвечает вслух, вы нажимаете «Верно» или «Ещё нет». Неверные возвращаются в конец очереди. Раздел открыт и капитану — там он может проверить себя сам.</span></div>
@@ -10516,12 +10517,17 @@ function backToWordList(){
 function showOral(){
   ["oralRun","oralDone"].forEach(i=>document.getElementById(i).hidden = true);
   document.getElementById("oralPick").hidden = false;
+  const h2 = document.getElementById("oralH2");
+  if(h2) h2.textContent = curSubject ? "Проверка · " + curSubject : "Проверка";
+  const wordsSec = document.getElementById("oralWordsSec");
+  if(wordsSec) wordsSec.hidden = curSubject && curSubject !== "Английский язык";
   renderOralList();
 }
 
 function renderOralList(){
   let html = "";
-  Object.keys(CHECKS).forEach(lid=>{
+  /* только темы текущего предмета — экран открывают с кнопки на странице предмета */
+  Object.keys(CHECKS).filter(lid=>!curSubject || oralLesson(lid).subject === curSubject).forEach(lid=>{
     const l = oralLesson(lid), parts = oralParts(lid);
     parts.forEach((p,pi)=>{
       const r = (state.oral||{})[oralKey(lid,pi)];
@@ -10534,11 +10540,12 @@ function renderOralList(){
         + '</span></button>';
     });
   });
-  document.getElementById("oralList").innerHTML = html || '<div class="empty">Пока нет тем для устной проверки.</div>';
+  document.getElementById("oralList").innerHTML = html || '<div class="empty">По этому предмету пока нет тем для устной проверки.</div>';
   document.querySelectorAll("#oralList .tcard").forEach(b=>b.addEventListener("click", ()=>startOral(b.dataset.lid, +b.dataset.p)));
 
-  /* карточки ручной приёмки */
-  document.getElementById("manList").innerHTML = MANUAL.map(m=>{
+  /* карточки ручной приёмки — тоже только по текущему предмету */
+  const manItems = MANUAL.filter(m=>!curSubject || m.subject === curSubject);
+  document.getElementById("manList").innerHTML = manItems.map(m=>{
     const st = (state.manual||{})[m.id] || {status:"wait", note:""};
     const pill = st.status==="ok" ? '<span class="pill ok">зачтено</span>'
       : st.status==="back" ? '<span class="pill b">на переделке</span>'
@@ -10553,7 +10560,7 @@ function renderOralList(){
       + '<button class="btn" style="background:var(--red)" data-act="back">Вернуть на переделку</button>'
       + (st.at ? '<span class="hintline">отмечено '+fmtDate(st.at)+'</span>' : '')
       + '</div></div></div>';
-  }).join("");
+  }).join("") || '<div class="empty">По этому предмету пока нет работ на приёмку.</div>';
   document.querySelectorAll("#manList .man button").forEach(b=>b.addEventListener("click", ()=>{
     const card = b.closest(".man"), id = card.dataset.id, act = b.dataset.act;
     const note = card.querySelector("textarea").value.trim();
