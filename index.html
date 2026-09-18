@@ -818,6 +818,38 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 .printbtn{appearance:none;border:none;background:var(--surface);color:var(--ink-2);box-shadow:var(--shadow);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:9px 16px;border-radius:99px;cursor:pointer;margin-left:auto}
 .printbtn:hover{color:var(--blue)}
 
+/* ---------- наглядная схема внутри разбора ---------- */
+.viz{margin-top:16px}
+.viz svg{width:100%;height:auto;display:block}
+.viz-label{font-family:"Russo One",sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+
+/* ---------- «если забылось — разберём»: ход мысли на примере ---------- */
+.model{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:15px 17px;margin-bottom:10px;border-left:5px solid var(--violet)}
+.model .q{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:9px}
+.model .think{font-size:13.5px;color:var(--ink-2);font-weight:600;line-height:1.55;background:var(--surface-2);border-radius:9px;padding:11px 13px}
+.model .think b{color:var(--violet)}
+.model .think .step{display:block;margin-bottom:4px}
+.model .think .step:last-child{margin-bottom:0}
+
+/* ---------- ответы под замком: дата и роль решают, видно или нет ----------
+   Замок вешаем не на родной <details> — закрытый <details> прячет от браузера
+   вообще всё, кроме заголовка, и никакими стилями это не обойти (проверено
+   на мокапе: блок с 🔒 физически не рисовался). Свой аккордеон на div + JS. */
+.acc{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:2px 18px;margin-bottom:10px}
+.acc-h{cursor:pointer;font-size:16px;font-weight:700;padding:14px 0;color:var(--ink);display:flex;align-items:center;gap:10px}
+.acc-h .car{flex:none;width:26px;height:26px;border-radius:8px;background:var(--violet);color:#fff;font-family:"Russo One",sans-serif;font-size:13px;display:grid;place-items:center;transition:transform .15s}
+.acc.acc-open .acc-h .car{transform:rotate(90deg);background:var(--green)}
+.acc .inner{padding-bottom:16px}
+.acc .inner[hidden]{display:none}
+.acc-hint{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3);text-transform:none;font-weight:600;margin-left:2px}
+.gate-locked{background:var(--surface-2);border-radius:var(--r);padding:18px;margin:0 0 16px;text-align:center;border:2px dashed var(--ink-3)}
+.gate-locked .lock{font-size:22px;margin-bottom:6px}
+.gate-locked .msg{font-size:13px;color:var(--ink-2);font-weight:700;max-width:46ch;margin:0 auto;line-height:1.5}
+.acc .gate-locked{display:none}
+.acc.gate-closed .inner{display:none !important}
+.acc.gate-closed .gate-locked{display:block}
+.acc.gate-closed .acc-h{opacity:.55;pointer-events:none}
+
 /* ---------- фильтр полугодий ---------- */
 .chips{display:flex;gap:7px;flex-wrap:wrap}
 .chip{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:9px 15px;border-radius:99px;cursor:pointer}
@@ -1952,6 +1984,8 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>«Два режима» — сжаты в один тёмный блок «Кто решает».</b> Те же пункты про капитана и штурмана, что и были, только без двух отдельных белых карточек — компактный список в две колонки. Тот же приём из клиентского воркфлоу, что и лесенка</td></tr>
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>На карточках «Что нужно» появился бейдж «кто делает».</b> ⚓ Капитан, 🧭 Штурман или 📷 Фото — рядом со статусом, у всех девяти открытых пунктов. Показывается, только пока пункт не закрыт. Роль расставлена вручную по каждому из 35 пунктов при добавлении поля</td></tr>
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Информатика: две новые презентации дополнили L10, не завели отдельную тему.</b> Задание на 17 сентября («Повторить конспект по теме «Табличные информационные модели», ознакомиться с презентацией») — та же тема, что уже разобрана, просто с новым материалом от учителя. Добавлено: пять задач на практику (две — без готового ответа, решать самому) и полный пошаговый разбор задачи «кто есть кто» (Алик, Володя, Миша, Юра) — как решать, когда факты приходят не все сразу, а по одному. Плюс пять вопросов в тест, пара в шпаргалку, два в устную проверку. В дневнике снова стоит под предметом «Труд» — как и первая презентация по этой теме</td></tr>
+          <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Английский L16 переверстан — обкатка нового шаблона подачи материала.</b> Причина: три скриншота разбора показали, что все семь ответов упражнения 4 видны сразу, без попытки решить самому, а инструкция «как делать» стояла последней строкой — уже после всех ответов. Теперь порядок другой: «Вспомним» (30 секунд без тетради) → «Что делать» (сразу после героя) → «Если забылось — разберём» (ход мысли на двух придуманных примерах, не из сегодняшнего задания) → схема по шагам → «Проверь себя» (тоже на придуманных примерах) → и только потом «Ответы» к упражнениям 4 и 5. Плюс наглядная схема-таймлайн в шапке: повторяющиеся точки для привычки против одной точки для «сейчас». Роль учителя и роль дома теперь разделены явно: учитель уже научил в классе, дома — объяснить, если забылось, помочь и проверить, не переучивать заново</td></tr>
+          <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Ответы к упражнениям — под замком на дату и роль.</b> Штурману видно всегда. Капитану — только когда дата темы уже в прошлом: пока тема «на сегодня» или ещё впереди, видно задание и способ рассуждать, но не сами ответы — сначала тетрадь и карандаш. Технически: свой блок открытия-закрытия на div, не родной <code>&lt;details&gt;</code> — у закрытого <code>&lt;details&gt;</code> браузер прячет всё содержимое, кроме заголовка, и стилями поверх это не обойти (поймано и проверено на мокапе headless-браузером — блок с замком физически не рисовался). Пока применено только к L16, остальные темы — как решим дальше</td></tr>
 </tbody>
       </table>
     </div>
@@ -3921,80 +3955,182 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       <span class="eyebrow">Английский язык · 6-Я · 15 сентября · Workbook Starlight 6, стр. 5 · упражнения 4 и 5</span>
       <h2>Рабочая тетрадь 1b · два времени на практике</h2>
       <p class="lede">Двадцать три пропуска подряд. Ничего нового после страницы 11 учебника здесь нет — есть <b>тренировка одного решения</b>: сначала спросить, не глагол ли это состояния, и только потом смотреть на слово-сигнал. И одна ловушка, ради которой страница и составлена: <b>have встречается дважды и в двух разных временах</b>.</p>
-      <button class="btn print noprint" onclick="window.print()">Распечатать</button>
+      <div class="viz">
+        <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg">
+          <text x="20" y="22" class="viz-label" fill="#12A05E">ПРОСТОЕ ВРЕМЯ — ПРИВЫЧКА, МНОГО РАЗ</text>
+          <line x1="20" y1="60" x2="600" y2="60" stroke="#12A05E" stroke-width="3" stroke-dasharray="1 10" stroke-linecap="round"/>
+          <g font-size="20">
+            <text x="70" y="50" text-anchor="middle">☕</text>
+            <text x="220" y="50" text-anchor="middle">☕</text>
+            <text x="370" y="50" text-anchor="middle">☕</text>
+            <text x="520" y="50" text-anchor="middle">☕</text>
+          </g>
+          <g fill="#12A05E">
+            <circle cx="70" cy="60" r="5"/><circle cx="220" cy="60" r="5"/><circle cx="370" cy="60" r="5"/><circle cx="520" cy="60" r="5"/>
+          </g>
+          <text x="70" y="80" text-anchor="middle" font-size="11" fill="#4E5B78" font-weight="700">every morning</text>
+          <text x="370" y="80" text-anchor="middle" font-size="11" fill="#4E5B78" font-weight="700">every day, снова и снова</text>
+          <path d="M600 60 L618 60 M610 52 L620 60 L610 68" stroke="#12A05E" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <text x="20" y="125" class="viz-label" fill="#1B6FE0">ПРОДОЛЖЕННОЕ ВРЕМЯ — СЕЙЧАС, В ЭТУ МИНУТУ</text>
+          <line x1="20" y1="163" x2="600" y2="163" stroke="#8892AB" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.4"/>
+          <circle cx="310" cy="163" r="18" fill="#1B6FE0" opacity="0.18"/>
+          <circle cx="310" cy="163" r="7" fill="#1B6FE0"/>
+          <text x="310" y="150" text-anchor="middle" font-size="20">🎉</text>
+          <text x="310" y="185" text-anchor="middle" font-size="11" fill="#1B6FE0" font-weight="700">right now — одна точка, не привычка</text>
+        </svg>
+      </div>
+      <button class="printbtn" onclick="window.print()">Печать</button>
     </div>
 
-    <div class="sec" style="--sc2:var(--blue)">
-      <h3>Упражнение 4 <em>семь диалогов · ответы с объяснением</em></h3>
-      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">1</span></div><div class="gb">
-        <div class="row"><span><b>A: Is Steven playing</b> tennis right now? — <b>B:</b> No, <b>he’s studying</b> at the library.</span></div>
-        <span class="exs">right now — оба действия происходят в эту минуту</span></div></div>
-      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">2</span></div><div class="gb">
-        <div class="row"><span><b>A:</b> How often <b>do you go</b> to the gym? — <b>B: I exercise</b> twice a week.</span></div>
-        <span class="exs">how often — вопрос о частоте; частота бывает только у привычек</span></div></div>
-      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">3</span><span class="gm">ловушка</span></div><div class="gb">
-        <div class="row"><span><b>A:</b> Carol <b>needs</b> new shoes. — <b>B:</b> OK. <b>Does she want</b> to go shopping now?</span></div>
-        <span class="exs">в предложении стоит now, и рука сама тянется к Continuous. Но need и want — состояния, им Continuous запрещён</span></div></div>
-      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">4</span><span class="gm">look в двух смыслах</span></div><div class="gb">
-        <div class="row"><span><b>A: I’m looking</b> for Marsha. <b>Do you know</b> where she is? — <b>B: I think</b> she is at the games arcade.</span></div>
-        <span class="exs">look for — искать, это действие, поэтому Continuous. Сравните с учебником: «Jenny looks tired» — там look значит «выглядит», и это состояние. Know и think — состояния</span></div></div>
-      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">5</span></div><div class="gb">
-        <div class="row"><span><b>A: Do you play</b> basketball at the sports centre on Saturdays? — <b>B:</b> Yes, <b>I’m going</b> there right now.</span></div>
-        <span class="exs">две реплики — два разных времени: вопрос о привычке, ответ о сию минуту</span></div></div>
-      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">6</span></div><div class="gb">
-        <div class="row"><span><b>A:</b> George never <b>cleans</b> his room. — <b>B:</b> OK, now <b>I understand</b> why it’s so messy!</span></div>
-        <span class="exs">never — сигнал Simple; слово now во второй реплике снова ничего не решает</span></div></div>
-      <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">7</span></div><div class="gb">
-        <div class="row"><span><b>A:</b> Tonya always <b>cooks</b> dinner for us in the evenings. — <b>B:</b> Yes, but today <b>she’s visiting</b> a friend.</span></div>
-        <span class="exs">always … but today — самая частая пара в учебниках: правило и исключение из него в одном диалоге</span></div></div>
+    <div class="sec" style="--sc2:var(--ink-3)">
+      <h3>Вспомним <em>30 секунд, вслух, без тетради</em></h3>
+      <div class="note" style="--nc2:var(--ink-3)"><b>Прежде чем начинать</b><span>Ответь не глядя: «need», «want», «know», «have» — это глаголы состояния или действия? И: что нельзя ставить в Continuous, даже если в предложении есть слово now? Если оба ответа дались легко — переходи дальше. Если нет — сначала посмотри на схему выше ещё раз.</span></div>
     </div>
 
-    <div class="sec" style="--sc2:var(--amber)">
-      <h3>Упражнение 5 <em>открытка из Диснейленда · десять пропусков</em></h3>
-      <div class="note" style="--nc2:var(--amber);max-width:82ch"><b>Dear Emma,</b>
-        <span>I <b>1) am writing</b> from Walt Disney World in Orlando, Florida. My family and I <b>2) are staying</b> in a nice hotel in the Disney resort.
-        Every morning we <b>3) have</b> a big breakfast at the hotel’s restaurant. Then, we <b>4) spend</b> the rest of the day at different attractions in the resort.
-        Right now I <b>5) am sitting</b> in a café at the amusement park with my parents. My sister <b>6) is standing</b> in a queue to go on a ride.
-        My brother, Joe <b>7) is sliding</b> down huge slides at the water park. We <b>8) are having</b> a great time. I <b>9) love</b> it here and I <b>10) don’t want</b> to leave.<br>Love, Angie</span></div>
-      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Главная ловушка</span><span class="gm">have дважды</span></div><div class="gb">
-        <div class="row"><span><b>3) Every morning we have a big breakfast</b> — каждое утро, привычка, Simple.</span></div>
-        <div class="row"><span><b>8) We are having a great time</b> — прямо сейчас, Continuous.</span></div>
-        <span class="exs">have запрещён в Continuous только в значении «иметь, владеть»: I have a car. А have breakfast, have a shower, have a great time — это действия, и они спокойно идут в Continuous</span></div></div>
-      <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Правописание</span><span class="gm">три случая в одной открытке</span></div><div class="gb">
-        <div class="row"><span>sit → <b>sitting</b> (короткий гласный + согласная удваивается) · slide → <b>sliding</b> (немая -e уходит) · stand → <b>standing</b> (ничего не меняется)</span></div></div></div>
-      <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Конец открытки</span><span class="gm">проверка на инерцию</span></div><div class="gb">
-        <div class="row"><span><b>I love it here and I don’t want to leave.</b> После восьми предложений в Continuous рука дописывает «am loving», «am not wanting». Оба глагола — состояния, оба в Simple.</span></div></div></div>
+    <div class="sec" style="--sc2:var(--green)">
+      <h3>Что делать <em>двадцать минут · по порядку</em></h3>
+      <ol class="how" style="--hc2:var(--green)">
+        <li><b>Если правило не вспоминается сразу</b> — открыть «Если забылось» ниже и посмотреть на двух примерах.</li>
+        <li><b>Сделать упражнение 4 в тетради самому</b>, карандашом, не подглядывая. Семь диалогов — семь маленьких решений.</li>
+        <li><b>Открыть «Ответы» и сверить</b> — если не сошлось, понять, на каком диалоге свернул не туда, а не просто исправить.</li>
+        <li><b>Прочитать открытку целиком вслух</b>, потом заполнить упражнение 5.</li>
+        <li><b>Открыть «Ответы» ко второй части</b> и отдельно проверить два have.</li>
+        <li><b>Тест по теме</b> — двадцать вопросов, кнопка в конце разбора.</li>
+      </ol>
     </div>
 
     <div class="sec" style="--sc2:var(--violet)">
-      <h3>Порядок решения <em>два вопроса, всегда в этом порядке</em></h3>
-      <div class="grp" style="--gc:var(--violet)"><div class="gh"><span class="gt">1</span><span class="gm">сначала</span></div><div class="gb">
-        <div class="row"><span><b>Это глагол состояния?</b> need · want · know · think (полагать) · understand · love · like · believe · belong · cost · seem · look (выглядеть) · have (иметь). Если да — <b>только Present Simple</b>, и на слова now, right now можно не смотреть.</span></div></div></div>
-      <div class="grp" style="--gc:var(--violet)"><div class="gh"><span class="gt">2</span><span class="gm">и только потом</span></div><div class="gb">
-        <div class="row"><span><b>Сейчас или вообще?</b> now, right now, at the moment, today, these days → Continuous. Always, never, usually, often, every morning, twice a week, on Saturdays, how often → Simple.</span></div></div></div>
+      <h3>Если забылось — разберём <em>этому уже учили в классе, тут только напоминание</em></h3>
+      <div class="note" style="--nc2:var(--ink-3)"><b>Примеры ниже — не из сегодняшнего задания</b><span>Похожие, просто чтобы вспомнить способ рассуждать. Ответы к настоящим диалогам — отдельно, ниже, и до срока их не видно.</span></div>
+      <div class="model">
+        <div class="q">Look! Tom <b>is running</b> to the bus stop right now!</div>
+        <div class="think">
+          <span class="step"><b>Шаг 1.</b> Смотрю на глагол run. Это состояние? Нет — бежать можно снять на видео, значит действие.</span>
+          <span class="step"><b>Шаг 2.</b> Раз не состояние — смотрю на слово-сигнал. Вижу right now. Это «сейчас», не «вообще».</span>
+          <span class="step"><b>Вывод:</b> действие + сейчас → Continuous. Is running.</span>
+        </div>
+      </div>
+      <div class="model" style="border-left-color:var(--red)">
+        <div class="q">I <b>know</b> the answer now, thanks!</div>
+        <div class="think">
+          <span class="step"><b>Шаг 1.</b> Смотрю на глагол know. Это состояние? Да — знать нельзя снять на видео.</span>
+          <span class="step"><b>Шаг 2.</b> Раз это состояние — слово-сигнал я вообще не смотрю. Не важно, что рядом стоит now.</span>
+          <span class="step"><b>Вывод:</b> состояние → всегда Simple, даже с now. I know.</span>
+        </div>
+      </div>
+      <div class="note" style="--nc2:var(--violet)"><b>Заметили порядок?</b><span>Сначала всегда вопрос про глагол, и только если ответ «нет» — вопрос про слово-сигнал. Не наоборот.</span></div>
     </div>
 
-    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответ</em></summary>
+    <details>
+      <summary>Всё ещё не сходится — схема по шагам</summary>
+      <div class="viz">
+        <svg viewBox="0 0 400 540" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ah16" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8892AB"/></marker>
+          </defs>
+
+          <rect x="90" y="14" width="220" height="42" rx="21" fill="#101B33"/>
+          <text x="200" y="40" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Слово из предложения</text>
+          <line x1="200" y1="56" x2="200" y2="84" stroke="#8892AB" stroke-width="2" marker-end="url(#ah16)"/>
+
+          <rect x="40" y="88" width="320" height="94" rx="16" fill="#7A4FD1"/>
+          <text x="200" y="114" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Это глагол состояния?</text>
+          <text x="200" y="138" text-anchor="middle" fill="#EADFFB" font-size="11">need · want · know · love · have (иметь)</text>
+          <text x="200" y="156" text-anchor="middle" fill="#EADFFB" font-size="11">think (полагать) · understand · look (выглядеть)</text>
+
+          <path d="M280,182 Q307,190 308,198" stroke="#8892AB" stroke-width="2" fill="none" marker-end="url(#ah16)"/>
+          <text x="238" y="193" font-size="11" fill="#12A05E" font-weight="700">ДА</text>
+
+          <line x1="200" y1="182" x2="200" y2="288" stroke="#8892AB" stroke-width="2" marker-end="url(#ah16)"/>
+          <text x="216" y="240" font-size="11" fill="#E8402A" font-weight="700">НЕТ</text>
+
+          <rect x="255" y="200" width="105" height="72" rx="12" fill="#12A05E"/>
+          <text x="307" y="228" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Present</text>
+          <text x="307" y="245" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Simple</text>
+          <text x="307" y="262" text-anchor="middle" fill="#DFF6EA" font-size="9.5">всегда, даже с now</text>
+
+          <rect x="40" y="298" width="320" height="94" rx="16" fill="#7A4FD1"/>
+          <text x="200" y="324" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Сейчас или вообще?</text>
+          <text x="200" y="348" text-anchor="middle" fill="#EADFFB" font-size="11">now · right now · at the moment</text>
+          <text x="200" y="366" text-anchor="middle" fill="#EADFFB" font-size="11">always · every day · on Saturdays</text>
+
+          <path d="M140,392 Q120,405 112,420" stroke="#8892AB" stroke-width="2" fill="none" marker-end="url(#ah16)"/>
+          <text x="90" y="412" font-size="11" fill="#1B6FE0" font-weight="700">СЕЙЧАС</text>
+          <path d="M260,392 Q280,405 288,420" stroke="#8892AB" stroke-width="2" fill="none" marker-end="url(#ah16)"/>
+          <text x="272" y="412" font-size="11" fill="#12A05E" font-weight="700">ВООБЩЕ</text>
+
+          <rect x="40" y="424" width="150" height="80" rx="12" fill="#1B6FE0"/>
+          <text x="115" y="454" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Present</text>
+          <text x="115" y="471" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Continuous</text>
+          <text x="115" y="490" text-anchor="middle" fill="#DCE9FF" font-size="9.5">right now, at the moment</text>
+
+          <rect x="210" y="424" width="150" height="80" rx="12" fill="#12A05E"/>
+          <text x="285" y="454" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Present</text>
+          <text x="285" y="471" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Simple</text>
+          <text x="285" y="490" text-anchor="middle" fill="#DFF6EA" font-size="9.5">always, every day</text>
+        </svg>
+      </div>
+    </details>
+
+    <details class="self"><summary>Проверь себя <em>нажми, чтобы увидеть ответы — примеры не из сегодняшнего задания</em></summary>
       <ol>
-        <li>Does she want или Is she wanting? <b>Does she want — want это состояние.</b></li>
-        <li>I ... for Marsha (look). <b>I’m looking — искать это действие.</b></li>
-        <li>Jenny ... tired (look). <b>Jenny looks — выглядеть это состояние.</b></li>
-        <li>Every morning we ... breakfast. <b>have.</b></li>
-        <li>We ... a great time. <b>are having.</b></li>
-        <li>Почему по-разному? <b>Have «иметь» — состояние, have breakfast и have a great time — действия.</b></li>
-        <li>Какой вопрос задаём себе первым? <b>Это глагол состояния?</b></li>
+        <li>Does he need help, или Is he needing help? <b>Does he need — need это состояние.</b></li>
+        <li>Kate ... for her keys right now (look). <b>Kate is looking — искать это действие, и есть right now.</b></li>
+        <li>Peter ... tired today (look). <b>Peter looks — выглядеть это состояние, Continuous нельзя.</b></li>
+        <li>Every Sunday the dog ... in the park (run). <b>runs — привычка, Simple.</b></li>
+        <li>Right now the dog ... in the park (run). <b>is running — сейчас, Continuous.</b></li>
+        <li>Почему одно и то же слово run то Simple, то Continuous? <b>Дело не в слове, а в сигнале: every Sunday — привычка, right now — сейчас.</b></li>
+        <li>Какой вопрос задаём себе первым, до всех остальных? <b>Это глагол состояния?</b></li>
       </ol>
     </details>
 
-    <div class="sec" style="--sc2:var(--green)">
-      <h3>Порядок работы <em>двадцать минут</em></h3>
-      <ol class="how" style="--hc2:var(--blue)">
-        <li><b>Сделать упражнение 4 карандашом</b>, не подглядывая. Семь диалогов — семь маленьких решений.</li>
-        <li><b>Сверить</b> с разбором выше. Ошибки будут в третьем и четвёртом диалогах — там стативы.</li>
-        <li><b>Прочитать открытку целиком вслух</b> прежде, чем заполнять: так видно, где рассказ о распорядке, а где — о том, что происходит в эту минуту.</li>
-        <li><b>Заполнить упражнение 5</b> и отдельно проверить два have.</li>
-        <li><b>Тест по теме</b> — двадцать вопросов, кнопка в конце разбора.</li>
-      </ol>
+    <div class="acc" data-gate="answers">
+      <div class="acc-h" onclick="toggleAcc(this)"><span class="car">▸</span>Ответы к упражнению 4 — семь диалогов <span class="acc-hint">открой после того, как сделал сам</span></div>
+      <div class="gate-locked"><div class="lock">🔒</div><div class="msg">Ответы открываются штурману в любое время, а капитану — на следующий день после того, как задание задано. Сначала — тетрадь и карандаш.</div></div>
+      <div class="inner" hidden>
+        <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">1</span></div><div class="gb">
+          <div class="row"><span><b>A: Is Steven playing</b> tennis right now? — <b>B:</b> No, <b>he’s studying</b> at the library.</span></div>
+          <span class="exs">right now — оба действия происходят в эту минуту</span></div></div>
+        <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">2</span></div><div class="gb">
+          <div class="row"><span><b>A:</b> How often <b>do you go</b> to the gym? — <b>B: I exercise</b> twice a week.</span></div>
+          <span class="exs">how often — вопрос о частоте; частота бывает только у привычек</span></div></div>
+        <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">3</span><span class="gm">ловушка</span></div><div class="gb">
+          <div class="row"><span><b>A:</b> Carol <b>needs</b> new shoes. — <b>B:</b> OK. <b>Does she want</b> to go shopping now?</span></div>
+          <span class="exs">в предложении стоит now, и рука сама тянется к Continuous. Но need и want — состояния, им Continuous запрещён</span></div></div>
+        <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">4</span><span class="gm">look в двух смыслах</span></div><div class="gb">
+          <div class="row"><span><b>A: I’m looking</b> for Marsha. <b>Do you know</b> where she is? — <b>B: I think</b> she is at the games arcade.</span></div>
+          <span class="exs">look for — искать, это действие, поэтому Continuous. Сравните с учебником: «Jenny looks tired» — там look значит «выглядит», и это состояние. Know и think — состояния</span></div></div>
+        <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">5</span></div><div class="gb">
+          <div class="row"><span><b>A: Do you play</b> basketball at the sports centre on Saturdays? — <b>B:</b> Yes, <b>I’m going</b> there right now.</span></div>
+          <span class="exs">две реплики — два разных времени: вопрос о привычке, ответ о сию минуту</span></div></div>
+        <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">6</span></div><div class="gb">
+          <div class="row"><span><b>A:</b> George never <b>cleans</b> his room. — <b>B:</b> OK, now <b>I understand</b> why it’s so messy!</span></div>
+          <span class="exs">never — сигнал Simple; слово now во второй реплике снова ничего не решает</span></div></div>
+        <div class="grp" style="--gc:var(--blue)"><div class="gh"><span class="gt">7</span></div><div class="gb">
+          <div class="row"><span><b>A:</b> Tonya always <b>cooks</b> dinner for us in the evenings. — <b>B:</b> Yes, but today <b>she’s visiting</b> a friend.</span></div>
+          <span class="exs">always … but today — самая частая пара в учебниках: правило и исключение из него в одном диалоге</span></div></div>
+      </div>
+    </div>
+
+    <div class="acc" data-gate="answers">
+      <div class="acc-h" onclick="toggleAcc(this)"><span class="car">▸</span>Ответы к упражнению 5 — открытка <span class="acc-hint">открой после того, как сделал сам</span></div>
+      <div class="gate-locked"><div class="lock">🔒</div><div class="msg">Так же — доступно штурману всегда, капитану со следующего дня.</div></div>
+      <div class="inner" hidden>
+        <div class="note" style="--nc2:var(--amber);max-width:82ch"><b>Dear Emma,</b>
+          <span>I <b>1) am writing</b> from Walt Disney World in Orlando, Florida. My family and I <b>2) are staying</b> in a nice hotel in the Disney resort.
+          Every morning we <b>3) have</b> a big breakfast at the hotel’s restaurant. Then, we <b>4) spend</b> the rest of the day at different attractions in the resort.
+          Right now I <b>5) am sitting</b> in a café at the amusement park with my parents. My sister <b>6) is standing</b> in a queue to go on a ride.
+          My brother, Joe <b>7) is sliding</b> down huge slides at the water park. We <b>8) are having</b> a great time. I <b>9) love</b> it here and I <b>10) don’t want</b> to leave.<br>Love, Angie</span></div>
+        <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Главная ловушка</span><span class="gm">have дважды</span></div><div class="gb">
+          <div class="row"><span><b>3) Every morning we have a big breakfast</b> — каждое утро, привычка, Simple.</span></div>
+          <div class="row"><span><b>8) We are having a great time</b> — прямо сейчас, Continuous.</span></div>
+          <span class="exs">have запрещён в Continuous только в значении «иметь, владеть»: I have a car. А have breakfast, have a shower, have a great time — это действия, и они спокойно идут в Continuous</span></div></div>
+        <div class="grp" style="--gc:var(--green)"><div class="gh"><span class="gt">Правописание</span><span class="gm">три случая в одной открытке</span></div><div class="gb">
+          <div class="row"><span>sit → <b>sitting</b> (короткий гласный + согласная удваивается) · slide → <b>sliding</b> (немая -e уходит) · stand → <b>standing</b> (ничего не меняется)</span></div></div></div>
+        <div class="grp" style="--gc:var(--red)"><div class="gh"><span class="gt">Конец открытки</span><span class="gm">проверка на инерцию</span></div><div class="gb">
+          <div class="row"><span><b>I love it here and I don’t want to leave.</b> После восьми предложений в Continuous рука дописывает «am loving», «am not wanting». Оба глагола — состояния, оба в Simple.</span></div></div></div>
+      </div>
     </div>
   </article>
 
@@ -8278,6 +8414,29 @@ function renderSubject(){
     window.scrollTo({top:0,behavior:"smooth"});
   }));
 }
+/* Ответы под замком (.acc[data-gate="answers"] внутри разбора темы).
+   Штурману видно всегда. Капитану — только для тем, чья дата уже в прошлом:
+   пока тема «на сегодня» или ещё впереди, видно задание и объяснение
+   способа, но не сами ответы — сначала тетрадь и карандаш. */
+function applyAnswerGates(node, lesson){
+  const open = !lesson || state.role !== "cap" || lesson.date < todayKey();
+  node.querySelectorAll('[data-gate="answers"]').forEach(el=>{
+    el.classList.toggle("gate-closed", !open);
+    if(!open){
+      const inner = el.querySelector(".inner");
+      if(inner) inner.setAttribute("hidden","");
+      el.classList.remove("acc-open");
+    }
+  });
+}
+function toggleAcc(h){
+  const acc = h.closest(".acc");
+  if(acc.classList.contains("gate-closed")) return;
+  const inner = acc.querySelector(".inner");
+  const willOpen = inner.hasAttribute("hidden");
+  if(willOpen) inner.removeAttribute("hidden"); else inner.setAttribute("hidden","");
+  acc.classList.toggle("acc-open", willOpen);
+}
 function renderContent(){
   const src = document.getElementById(curLesson);
   const box = document.getElementById("content");
@@ -8286,6 +8445,7 @@ function renderContent(){
   const node = src.cloneNode(true);
   node.removeAttribute("id");
   box.appendChild(node);
+  applyAnswerGates(node, LESSONS.find(x=>x.id===curLesson));
 
   /* кнопка «Пройти тест по теме» рядом с «Печать» */
   const l = LESSONS.find(x=>x.id===curLesson);
