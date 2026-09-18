@@ -850,6 +850,21 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 .acc.gate-closed .gate-locked{display:block}
 .acc.gate-closed .acc-h{opacity:.55;pointer-events:none}
 
+/* ---------- презентации учителя прямо в разборе ---------- */
+.slide-link{appearance:none;border:none;background:var(--surface-2);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 14px;border-radius:99px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-top:8px}
+.slide-link:hover{color:var(--blue)}
+.slidewrap{position:fixed;inset:0;z-index:210;background:rgba(17,30,66,.86);backdrop-filter:blur(3px);display:grid;place-items:center;padding:18px}
+.slidebox{background:var(--surface);border-radius:var(--r);box-shadow:0 24px 60px rgba(0,0,0,.4);width:min(760px,100%);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.slidebox .sb-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.slidebox .sb-title{font-family:"Russo One",sans-serif;font-size:13px;text-transform:uppercase;color:var(--ink);flex:1;line-height:1.3}
+.slidebox .sb-close{appearance:none;border:none;background:var(--surface-2);color:var(--ink-2);width:32px;height:32px;border-radius:9px;font-size:18px;cursor:pointer;flex:none}
+.slidebox .sb-body{flex:1;overflow:auto;background:var(--surface-2);display:grid;place-items:center;padding:14px;min-height:200px}
+.slidebox .sb-body img{max-width:100%;max-height:72vh;border-radius:8px;box-shadow:var(--shadow)}
+.slidebox .sb-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px}
+.slidebox .sb-nav{appearance:none;border:none;background:var(--ink);color:#fff;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;padding:10px 18px;border-radius:99px;cursor:pointer}
+.slidebox .sb-nav:disabled{opacity:.35;cursor:default}
+.slidebox .sb-count{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;color:var(--ink-3)}
+
 /* ---------- фильтр полугодий ---------- */
 .chips{display:flex;gap:7px;flex-wrap:wrap}
 .chip{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:9px 15px;border-radius:99px;cursor:pointer}
@@ -1986,6 +2001,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
           <tr><td class="num" style="text-align:left">16 сен</td><td style="color:var(--ink-2)"><b>Информатика: две новые презентации дополнили L10, не завели отдельную тему.</b> Задание на 17 сентября («Повторить конспект по теме «Табличные информационные модели», ознакомиться с презентацией») — та же тема, что уже разобрана, просто с новым материалом от учителя. Добавлено: пять задач на практику (две — без готового ответа, решать самому) и полный пошаговый разбор задачи «кто есть кто» (Алик, Володя, Миша, Юра) — как решать, когда факты приходят не все сразу, а по одному. Плюс пять вопросов в тест, пара в шпаргалку, два в устную проверку. В дневнике снова стоит под предметом «Труд» — как и первая презентация по этой теме</td></tr>
           <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Английский L16 переверстан — обкатка нового шаблона подачи материала.</b> Причина: три скриншота разбора показали, что все семь ответов упражнения 4 видны сразу, без попытки решить самому, а инструкция «как делать» стояла последней строкой — уже после всех ответов. Теперь порядок другой: «Вспомним» (30 секунд без тетради) → «Что делать» (сразу после героя) → «Если забылось — разберём» (ход мысли на двух придуманных примерах, не из сегодняшнего задания) → схема по шагам → «Проверь себя» (тоже на придуманных примерах) → и только потом «Ответы» к упражнениям 4 и 5. Плюс наглядная схема-таймлайн в шапке: повторяющиеся точки для привычки против одной точки для «сейчас». Роль учителя и роль дома теперь разделены явно: учитель уже научил в классе, дома — объяснить, если забылось, помочь и проверить, не переучивать заново</td></tr>
           <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Ответы к упражнениям — под замком на дату и роль.</b> Штурману видно всегда. Капитану — только когда дата темы уже в прошлом: пока тема «на сегодня» или ещё впереди, видно задание и способ рассуждать, но не сами ответы — сначала тетрадь и карандаш. Технически: свой блок открытия-закрытия на div, не родной <code>&lt;details&gt;</code> — у закрытого <code>&lt;details&gt;</code> браузер прячет всё содержимое, кроме заголовка, и стилями поверх это не обойти (поймано и проверено на мокапе headless-браузером — блок с замком физически не рисовался). Пока применено только к L16, остальные темы — как решим дальше</td></tr>
+          <tr><td class="num" style="text-align:left">18 сен</td><td style="color:var(--ink-2)"><b>Презентации учителя открываются прямо в разборе — закрыт L10.</b> В теме «Табличные информационные модели» у обеих презентаций от 16 сентября появилась кнопка «Смотреть презентацию»: слайды открываются во весь экран, вперёд-назад стрелками или клавишами, без скачивания файла. Картинки — 19 отдельных jpg-файлов в <code>slides/L10/</code> (по 7 и 12 на презентацию, ~1,3 МБ суммарно), не base64 внутри HTML: так основной файл журнала не растёт, а слайды подгружаются только когда их реально открыли. Заодно поправлена неточность: подпись «шесть новых задач» раньше соседствовала с «пятью новыми задачами» в шапке темы — было не считано после того, как добавилась бонусная задача 6</td></tr>
 </tbody>
       </table>
     </div>
@@ -2705,6 +2721,21 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="slidewrap" id="slideWrap" hidden onclick="if(event.target===this) closeSlides()">
+  <div class="slidebox" role="dialog" aria-modal="true" aria-labelledby="slideTitle">
+    <div class="sb-head">
+      <span class="sb-title" id="slideTitle"></span>
+      <button class="sb-close" onclick="closeSlides()" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="sb-body"><img id="slideImg" alt="слайд презентации"></div>
+    <div class="sb-foot">
+      <button class="sb-nav" id="slidePrev" onclick="slideNav(-1)">← Назад</button>
+      <span class="sb-count" id="slideCount"></span>
+      <button class="sb-nav" id="slideNext" onclick="slideNav(1)">Дальше →</button>
+    </div>
+  </div>
+</div>
 
 <svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
 <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--red)"></path></marker>
@@ -3726,7 +3757,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
       </div>
       <button class="printbtn" onclick="window.print()">Печать</button>
     </div>
-    <p class="lede">Продолжение §10. Там мы разбирали знаковые модели вообще, здесь — один их вид: <b>таблицу</b>. Главное этой темы не в том, как таблицу нарисовать, а в том, чтобы <b>различать четыре её типа по сокращениям ОС, ООО, ООН, ОСО</b> и уметь решить логическую задачу с помощью таблицы. Разбор собран по презентации учителя, 31 слайд, и дополнен 16 сентября ещё двумя презентациями: пятью новыми задачами на практику и полным пошаговым разбором задачи «кто есть кто» — как решать, когда факты приходят не все сразу, а по одному.</p>
+    <p class="lede">Продолжение §10. Там мы разбирали знаковые модели вообще, здесь — один их вид: <b>таблицу</b>. Главное этой темы не в том, как таблицу нарисовать, а в том, чтобы <b>различать четыре её типа по сокращениям ОС, ООО, ООН, ОСО</b> и уметь решить логическую задачу с помощью таблицы. Разбор собран по презентации учителя, 31 слайд, и дополнен 16 сентября ещё двумя презентациями: шестью новыми задачами на практику и полным пошаговым разбором задачи «кто есть кто» — как решать, когда факты приходят не все сразу, а по одному. Обе новые презентации можно открыть прямо здесь, слайд за слайдом — кнопки в нужных местах разбора ниже.</p>
   </div>
 
   <div class="sec" style="--sc2:var(--cyan)">
@@ -3865,6 +3896,7 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   <div class="sec" style="--sc2:var(--pink)">
     <h3>Как решать, если факты даются по одному <em>презентация «Табличный способ решения логических задач», 16 сентября — разобрано полностью</em></h3>
     <p class="lede" style="max-width:78ch;margin:0 0 14px">Раньше в этой теме была только готовая таблица с уже расставленными единицами (задача про девочек выше). Здесь то же самое, но <b>по шагам</b>: факты приходят по одному, и после каждого таблица меняется. Четверо друзей — <b>Алик, Володя, Миша, Юра</b> — и четыре фамилии: <b>Балашов, Петров, Лунин, Симонов</b>. Нужно понять, кто есть кто.</p>
+    <button class="slide-link" onclick="openSlides('L10',1)">📽 Смотреть презентацию · 12 слайдов</button>
     <div class="ex" style="--nc:var(--pink)"><span class="n">1</span><div>
       <p class="en">Факт: «Балашов не Володя!»</p>
       <p class="why">Ставим минус на пересечении строки «Володя» и столбца «Балашов». Больше пока ничего не известно — рано делать выводы.</p>
@@ -3899,8 +3931,9 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
   </div>
 
   <div class="sec" style="--sc2:var(--amber)">
-    <h3>Ещё практика <em>из той же презентации, 16 сентября — шесть новых задач</em></h3>
+    <h3>Ещё практика <em>вторая презентация, 16 сентября — шесть новых задач</em></h3>
     <p class="lede" style="max-width:78ch;margin:0 0 14px">Решать самому, закрыв ответ. Задачи 1–3 и 6 разобраны с готовым ответом, задачи 4 и 5 — без ответа в презентации, решить самостоятельно.</p>
+    <button class="slide-link" onclick="openSlides('L10',0)">📽 Смотреть презентацию · 7 слайдов</button>
     <details><summary>Задача 1. Ягоды: Вера, Оля, Таня — корзинка, лукошко, ведёрко. Оля была не с корзинкой и не с лукошком, Вера не с лукошком. Кто с чем?</summary><div class="ans">Ответ: <b>Вера — корзинка, Оля — ведёрко, Таня — лукошко.</b> Ход: у Оли исключены корзинка и лукошко — значит ведёрко. У Веры исключено лукошко и занято ведёрко Оли — значит корзинка. Тане остаётся лукошко.</div></details>
     <details><summary>Задача 2. Транспорт: Алёша, Боря, Витя — автобус, трамвай, троллейбус. Третий друг крикнул из окна: «Боря, ты забыл тетрадку!» — значит Боря ехал не на том виде транспорта, что кричавший, и был снаружи, у троллейбуса, когда кричавший ехал на трамвае.</summary><div class="ans">Ответ по презентации: <b>Алёша — трамвай, Боря — троллейбус, Витя — автобус.</b> Эта задача сложнее двух других: часть условия скрыта в рассказе, а не сказана прямо — если объяснение хода непонятно, это нормально, годится просто запомнить приём на задачах 1 и 4.</div></details>
     <details><summary>Задача 3. Спорт: Соня, Тоня, Женя — гимнастика, лыжи, плавание. Соня плаванием не увлекается, Тоня в лыжную секцию никогда не ходила, Женя — победитель по лыжам.</summary><div class="ans">Ответ: <b>Женя — лыжи, Соня — гимнастика, Тоня — плавание.</b> Ход: «Женя — победитель по лыжам» сразу даёт плюс. У Тони лыжи и так исключены фактом — из оставшихся гимнастики и плавания у Сони исключено плавание, значит Соня — гимнастика, а Тоне достаётся плавание.</div></details>
@@ -8414,6 +8447,49 @@ function renderSubject(){
     window.scrollTo({top:0,behavior:"smooth"});
   }));
 }
+/* Презентации учителя — просмотр прямо в журнале, без скачивания.
+   Картинки слайдов лежат отдельными файлами в slides/<id>/pN/, не base64
+   в HTML: так основной файл журнала не раздувается, а слайды подгружаются,
+   только когда их реально открыли. */
+const SLIDES = {
+  L10: [
+    { title:"Табличный способ решения логических задач · практика", dir:"slides/L10/p1", count:7 },
+    { title:"Табличный способ решения логических задач · «кто есть кто»", dir:"slides/L10/p2", count:12 }
+  ]
+};
+let slideState = null;
+function openSlides(lid, idx){
+  const deck = SLIDES[lid] && SLIDES[lid][idx];
+  if(!deck) return;
+  slideState = { deck, i: 0 };
+  renderSlideBox();
+  document.getElementById("slideWrap").hidden = false;
+}
+function closeSlides(){
+  document.getElementById("slideWrap").hidden = true;
+  slideState = null;
+}
+function slideNav(d){
+  if(!slideState) return;
+  slideState.i = Math.max(0, Math.min(slideState.deck.count-1, slideState.i+d));
+  renderSlideBox();
+}
+function renderSlideBox(){
+  const {deck,i} = slideState;
+  const num = String(i+1).padStart(2,"0");
+  document.getElementById("slideImg").src = deck.dir+"/slide-"+num+".jpg";
+  document.getElementById("slideTitle").textContent = deck.title;
+  document.getElementById("slideCount").textContent = (i+1)+" / "+deck.count;
+  document.getElementById("slidePrev").disabled = i===0;
+  document.getElementById("slideNext").disabled = i===deck.count-1;
+}
+document.addEventListener("keydown", e=>{
+  if(!slideState) return;
+  if(e.key==="Escape") closeSlides();
+  if(e.key==="ArrowLeft") slideNav(-1);
+  if(e.key==="ArrowRight") slideNav(1);
+});
+
 /* Ответы под замком (.acc[data-gate="answers"] внутри разбора темы).
    Штурману видно всегда. Капитану — только для тем, чья дата уже в прошлом:
    пока тема «на сегодня» или ещё впереди, видно задание и объяснение
