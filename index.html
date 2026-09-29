@@ -1171,17 +1171,17 @@ ol.how li::before{content:counter(h);counter-increment:h;position:absolute;left:
 /* ---------- презентации учителя прямо в разборе ---------- */
 .slide-link{appearance:none;border:none;background:var(--surface-2);color:var(--ink-2);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 14px;border-radius:99px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-top:8px}
 .slide-link:hover{color:var(--blue)}
-.slidewrap{position:fixed;inset:0;z-index:210;background:rgba(17,30,66,.86);backdrop-filter:blur(3px);display:grid;place-items:center;padding:18px}
-.slidebox{background:var(--surface);border-radius:var(--r);box-shadow:0 24px 60px rgba(0,0,0,.4);width:min(760px,100%);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
-.slidebox .sb-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.slidewrap{position:fixed;inset:0;z-index:210;background:rgba(17,30,66,.86);backdrop-filter:blur(3px);display:grid;place-items:center;padding:8px}
+.slidebox{background:var(--surface);border-radius:var(--r);box-shadow:0 24px 60px rgba(0,0,0,.4);width:min(1200px,100%);max-height:96vh;display:flex;flex-direction:column;overflow:hidden}
+.slidebox .sb-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
 .slidebox .sb-title{font-family:"Russo One",sans-serif;font-size:13px;text-transform:uppercase;color:var(--ink);flex:1;line-height:1.3}
 .slidebox .sb-close{appearance:none;border:none;background:var(--surface-2);color:var(--ink-2);width:32px;height:32px;border-radius:9px;font-size:18px;cursor:pointer;flex:none}
-.slidebox .sb-body{flex:1;overflow:auto;background:var(--surface-2);display:grid;place-items:center;padding:14px;min-height:200px}
-.slidebox .sb-body img{max-width:100%;max-height:72vh;border-radius:8px;box-shadow:var(--shadow)}
-.slidebox .sb-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px}
-.slidebox .sb-nav{appearance:none;border:none;background:var(--ink);color:#fff;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;padding:10px 18px;border-radius:99px;cursor:pointer}
-.slidebox .sb-nav:disabled{opacity:.35;cursor:default}
-.slidebox .sb-count{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;color:var(--ink-3)}
+.slidebox .sb-body{flex:1;min-height:0;overflow:hidden;background:#0B1430;display:flex;align-items:center;justify-content:center;padding:6px}
+.slidebox .sb-body img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(96vh - 130px);object-fit:contain;border-radius:6px}
+.slidebox .sb-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px}
+.slidebox .sb-nav{appearance:none;border:none;background:#1B6FE0;color:#fff;min-width:120px;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;padding:10px 18px;border-radius:99px;cursor:pointer}
+.slidebox .sb-nav:disabled{background:#8A93A8;color:#fff;opacity:.55;cursor:default}
+.slidebox .sb-count{font-family:"JetBrains Mono",monospace;font-size:15px;font-weight:700;color:var(--ink)}
 
 /* ---------- фильтр полугодий ---------- */
 .chips{display:flex;gap:7px;flex-wrap:wrap}
@@ -15030,8 +15030,10 @@ function renderQuestion(){
   hon.hidden = !(it.lid && DIAG_QUIZ[it.lid]);
   document.getElementById("qUnsure").setAttribute("aria-pressed","false");
   const L = ["А","Б","В","Г","Д"];
-  document.getElementById("qOpts").innerHTML = it.o.map((o,i)=>
-    '<button class="qopt" data-i="'+i+'"><span class="ol">'+L[i]+'</span><span>'+esc(o)+'</span></button>').join("");
+  /* 29 сентября: варианты перемешиваются — раньше верный почти всегда стоял под А или Б */
+  if(!it._ord || it._ord.length !== it.o.length) it._ord = shuffle(it.o.map((o,k)=>k));
+  document.getElementById("qOpts").innerHTML = it._ord.map((i,pos)=>
+    '<button class="qopt" data-i="'+i+'"><span class="ol">'+L[pos]+'</span><span>'+esc(it.o[i])+'</span></button>').join("");
   document.querySelectorAll("#qOpts .qopt").forEach(b=>b.addEventListener("click", ()=>answer(+b.dataset.i)));
 }
 function qid(it){ return (it.lid||"?")+":"+(typeof it.qi==="number"?it.qi:"?"); }
@@ -15054,7 +15056,8 @@ function answer(i){
   save();                       /* 21 сентября: без этого незаконченный тест пропадал целиком */
   if(ok) quizRight++; else quizMissed.push(it);
   document.getElementById("qHonest").hidden = true;
-  document.querySelectorAll("#qOpts .qopt").forEach((b,idx)=>{
+  document.querySelectorAll("#qOpts .qopt").forEach(b=>{
+    const idx = +b.dataset.i;
     b.disabled = true;
     if(idx === it.c) b.classList.add("right"); else if(i>=0 && idx === i) b.classList.add("wrong");
   });
