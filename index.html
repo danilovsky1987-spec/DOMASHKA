@@ -11571,6 +11571,7 @@ function load(){
      раньше, в памяти лежит старое "en" — переводим один раз и больше не трогаем. */
   if((state.v || 0) < 5){ if(state.stepView !== "path" || !state.steps || !Object.keys(state.steps).length) state.stepView = "strip"; state.v = 5; try{ save(); }catch(e){} }
   if((state.v || 0) < 4){ state.wdir = "ru"; state.wmode = state.wmode || "say"; state.v = 4; try{ save(); }catch(e){} }
+  if(jdStepsDates()){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} }
 }
 function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} syncTouch(); }
 
@@ -12684,7 +12685,29 @@ function jdInit(root){
 function jdStepState(lid){
   state.steps = state.steps || {};
   if(!Array.isArray(state.steps[lid])) state.steps[lid] = [];
+  state.stepsAt = state.stepsAt || {};
+  if(!state.stepsAt[lid]){ const d = jdLessonDate(lid); if(d) state.stepsAt[lid] = d; }
   return state.steps[lid];
+}
+/* 29 сентября, решение 3 В (Мокап 119): шаги «Что делать» начинаются заново только тогда,
+   когда разбор переехал на новую дату (как L21: 21 → 25 → 28.09). state.stepsAt[lid] — дата
+   из LESSONS, к которой относятся отметки. При переезде старые отметки уходят в историю
+   state.stepsOld[lid][старая дата], текущие обнуляются. Всё остальное (тест, путь, сверка) не трогается.
+   Отметки, поставленные до этой починки, считаются относящимися к нынешней дате. */
+function jdLessonDate(lid){ const l = LESSONS.find(x => x.id === lid); return l ? (l.date || "") : ""; }
+function jdStepsDates(){
+  state.steps = state.steps || {}; state.stepsAt = state.stepsAt || {};
+  let ch = false;
+  for(const lid in state.steps){
+    const d = jdLessonDate(lid); if(!d) continue;
+    const at = state.stepsAt[lid];
+    if(!at){ state.stepsAt[lid] = d; ch = true; continue; }
+    if(at === d) continue;
+    const old = state.steps[lid] || [];
+    if(old.some(Boolean)){ state.stepsOld = state.stepsOld || {}; (state.stepsOld[lid] = state.stepsOld[lid] || {})[at] = old.slice(); }
+    state.steps[lid] = []; state.stepsAt[lid] = d; ch = true;
+  }
+  return ch;
 }
 function jdStepTag(html){
   const t = html.toLowerCase();
@@ -13658,7 +13681,7 @@ function plu(n, a, b, c){
 
 /* Полоса предметов (Мокапы 107, 109): «Уроки» — над разбором и дорожкой, «Проверка» — над карточками.
    Предмет общий (curSubject). Жёлтая точка — у предмета есть несделанная домашка на будущие дни. */
-const JD_LOOSE=["steps","path","learned","bio","tt","hwErr","nb","rem","lx","fb","fbMark"];
+const JD_LOOSE=["steps","path","learned","bio","tt","hwErr","nb","rem","lx","fb","fbMark","stepsOld"];
 function jdMergeLoose(a,b){
   if(a==null) return b; if(b==null) return a;
   if(Array.isArray(a)&&Array.isArray(b)){ const n=Math.max(a.length,b.length), o=[]; for(let i=0;i<n;i++) o[i]=(a[i]!=null&&a[i]!==false)?a[i]:b[i]; return o; }
@@ -16957,6 +16980,14 @@ function mergeState(mine, theirs){
   /* 25 сентября: разделы, появившиеся после 16.09, раньше не сливались — прогресс сына
      (шаги, подготовка, тренажёр, сверка тетради) до штурмана не доезжал. */
   JD_LOOSE.forEach(k=>{ const v=jdMergeLoose(mine[k], theirs[k]); if(v!==undefined) out[k]=v; });
+  /* 29 сентября (3 В): шаги с разных устройств сливаются, только если относятся к одной дате разбора;
+     иначе берутся с той стороны, где дата новее — старые отметки не воскресают после переезда. */
+  const sa = mine.stepsAt || {}, sb = theirs.stepsAt || {};
+  out.stepsAt = Object.assign({}, sa);
+  for(const k in sb) if(!sa[k] || sb[k] > sa[k]) out.stepsAt[k] = sb[k];
+  const mS = Object.assign({}, mine.steps || {}), tS = Object.assign({}, theirs.steps || {});
+  for(const k in out.stepsAt){ if(sa[k] && sb[k] && sa[k] !== sb[k]){ if(sa[k] < sb[k]) delete mS[k]; else delete tS[k]; } }
+  const st = jdMergeLoose(mS, tS); if(st !== undefined) out.steps = st;
   return out;
 }
 
@@ -16971,6 +17002,7 @@ function syncApply(data){
     state = mergeState(state, theirs);
     state.role = role; state.pin = pin; state.askPin = askPin;
     state.nav = nav; state.wdir = wdir; state.gtoOnly = gtoOnly; state.slips = slips;
+    jdStepsDates();
     save();
     renderHeader();
     if(typeof renderAll === "function") renderAll();
