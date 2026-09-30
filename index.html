@@ -13714,9 +13714,11 @@ function jdhAcc(w){ return w==="среда"?"среду":w==="пятница"?"�
    стрелки ‹ › и кнопки дней ведут только вперёд; прошедшие дни живут в «Уроках». */
 function jdDue(keep){
   const box=document.getElementById("jdhDue"); if(!box) return;
-  if(!keep) jdhIdx=0;
-  const tk=todayKey(), les=LESSONS.filter(l=>/^L\d/.test(l.id)&&l.date>tk);
+  /* 30.09 (Мокап 148, вариант A): стрелки листают и назад — неделя прошлых дней, открывается ближайший будущий */
+  const tk=todayKey(), pd=new Date(tk+"T12:00:00"); pd.setDate(pd.getDate()-7); const pk=pd.toISOString().slice(0,10);
+  const les=LESSONS.filter(l=>/^L\d/.test(l.id)&&l.date>pk);
   const dates=[...new Set(les.map(l=>l.date))].sort();
+  if(!keep){ const f=dates.findIndex(x=>x>tk); jdhIdx=f<0?dates.length-1:f; }
   const d0=new Date(tk+"T12:00:00"); d0.setDate(d0.getDate()+1); const tom=d0.getFullYear()+"-"+String(d0.getMonth()+1).padStart(2,"0")+"-"+String(d0.getDate()).padStart(2,"0");
   if(!dates.length){
     box.innerHTML='<div class="jdh"><div class="jdh-h"><div><span class="jdh-e">задано на завтра</span><h3>'+jdhDayName(tom)+'</h3></div></div><div class="jdh-nx" style="padding-top:8px">На завтра заданий пока нет — появятся, когда папа пришлёт задания из дневника.</div></div>';
@@ -14324,7 +14326,7 @@ function jdrMin(lid){
 function jdRoute(box,les,dates,tom){
   const day=dates[jdhIdx], list=les.filter(l=>l.date===day);
   const wd=JDH_WD[new Date(day+"T12:00:00").getDay()];
-  const fbList=(jdhIdx===0&&state.role==="cap")?jdfbWorks().filter(l=>{const k=jdfbDays(l.date);return k>=0&&k<=7&&!(state.fb||{})[l.id];}):[];
+  const fbList=(day===dates.find(x=>x>todayKey())&&state.role==="cap")?jdfbWorks().filter(l=>{const k=jdfbDays(l.date);return k>=0&&k<=7&&!(state.fb||{})[l.id];}):[];
   const pts=[];
   if(fbList.length) pts.push({k:"fb",c:"violet",b:"Как прошло в школе?",t:fbList.length+" "+(fbList.length===1?"работа":fbList.length<5?"работы":"работ"),m:1,done:false});
   list.forEach(l=>{ const tot=jdStepsTotal(l.id), n=((state.steps||{})[l.id]||[]).slice(0,tot).filter(Boolean).length;
@@ -14333,7 +14335,7 @@ function jdRoute(box,les,dates,tom){
   const nd=pts.filter(p=>p.done).length, left=pts.reduce((a,p)=>a+(p.done?0:p.m),0);
   if(!pts.some(p=>p.k===jdrOpen)) jdrOpen=null;
   const cur=jdrOpen || (pts.find(p=>!p.done)||{}).k;
-  const lab=jdhIdx===0 ? (day===tom?'задано на завтра':'ближайшая домашка') : 'задано на '+jdhAcc(wd);
+  const tk2=todayKey(); const lab=day<tk2?'было задано · прошло':day===tk2?'задано на сегодня':day===tom?'задано на завтра':'задано на '+jdhAcc(wd);
   const body=p=>{
     if(p.k==="fb") return fbList.map(l=>'<div class="jdr-fb" data-id="'+l.id+'"><span><b>'+esc(jdfbName(l))+'</b> <small>'+esc(JDH_SH[l.subject]||l.subject)+' · '+jdfbD(l.date)+'</small></span><span class="jdfb-b">'
       +Object.keys(JDFB_F).map(k=>'<button type="button" class="jdfb-k'+k+'" data-f="'+k+'">'+JDFB_F[k][0]+'</button>').join("")+'</span></div>').join("")+'<div class="jdr-note">узлов не даёт</div>';
@@ -14345,7 +14347,7 @@ function jdRoute(box,les,dates,tom){
     +(dates.length>1?'<button type="button" class="jdh-ar" data-d="1"'+(jdhIdx===dates.length-1?' disabled':'')+' aria-label="дальше">›</button>':'')
     +'</div><div class="jdr-c"><b>'+nd+'</b> из '+pts.length+(left?'<small>≈ '+left+' мин</small>':'')+'</div></div>'
     +'<div class="jdr-bar"><i style="width:'+(pts.length?nd/pts.length*100:0)+'%"></i></div>'
-    +(jdhIdx>0?'<div class="jdh-early">Не на завтра — можно начать заранее, если ближайшее уже сделано.</div>':'')
+    +(day<tk2?'<div class="jdh-early">Этот день прошёл — можно открыть разбор и повторить.</div>':'')+(day>tom?'<div class="jdh-early">Не на завтра — можно начать заранее, если ближайшее уже сделано.</div>':'')
     +'<div class="jdr-route">'+pts.map((p,i)=>'<div class="jdr-p'+(p.done?' ok':'')+(p.k===cur?' open':'')+'" style="--c:var(--'+p.c+')" data-k="'+p.k+'">'
       +'<span class="jdr-dot">'+(p.done?'✓':i+1)+'</span><div class="jdr-bd"><div class="jdr-hd"><b>'+esc(p.b)+'</b><span class="jdr-t">'+esc(p.t)+'</span>'
       +(p.m>1&&!p.done?'<span class="jdr-m">≈ '+p.m+' мин</span>':'')+'</div><div class="jdr-in">'+body(p)+'</div></div></div>').join("")+'</div></div>';
