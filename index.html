@@ -2461,7 +2461,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdx-tag{display:inline-block;font:800 10px "JetBrains Mono",monospace;letter-spacing:.07em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-bottom:3px;color:#fff}
 .jdx-tag.v{background:var(--violet)}.jdx-tag.r{background:var(--red)}
 .jdx-ch .x-ok{margin-left:auto;font-size:22px;color:var(--green);visibility:hidden}
-.jdx-c.done .x-n{background:var(--green);color:#fff}.jdx-c.done .x-ok{visibility:visible}
+.jdx-c.x-done .x-n{background:var(--green);color:#fff}.jdx-c.x-done .x-ok{visibility:visible}
 .jdx-do{margin:0 12px 10px;font-size:14px;color:var(--ink-2)}
 .jdx-fig{position:relative;background:#fff;max-width:100%}.jdx-fig img{display:block;width:100%;max-width:100%;height:auto}
 .jdx-ov{position:absolute;inset:0;width:100%;height:auto}
@@ -13011,7 +13011,7 @@ function jdTabs(){
 /* Домашка карточками: вырезка учебника + ответ поверх (Мокап 125, 30 сентября) */
 const JDX_W=[["do the washing-up", "мыть посуду", "ду зэ уОшинг Ап"], ["mop the floor", "мыть пол шваброй", "моп зэ флОо"], ["dust the furniture", "вытирать пыль с мебели", "даст зэ фЁничэ"], ["make the bed", "заправлять кровать", "мэйк зэ бЭд"], ["take out the rubbish", "выносить мусор", "тэйк Аут зэ рАбиш"], ["hoover the carpets", "пылесосить ковры", "хУува зэ кАапитс"], ["lay the table", "накрывать на стол", "лэй зэ тЭйбл"], ["iron the clothes", "гладить одежду", "Айэн зэ клОузз"]];
 function jdxStep(c){const lid=curLesson,k=+c.dataset.step,row=document.querySelector('#content .jd-steps .jd-row[data-i="'+k+'"]');
- c.classList.add('done'); const arr=(state.steps&&state.steps[lid])||[]; if(row&&!arr[k]) row.click();}
+ c.classList.add('x-done'); const arr=(state.steps&&state.steps[lid])||[]; if(row&&!arr[k]) row.click();}
 function jdxInit(box){
  box.querySelectorAll('.jdx-c.learn').forEach(c=>{ if(c.dataset.ready) return; c.dataset.ready=1;
   const strip=c.querySelector('.jdx-strip'),qbar=c.querySelector('.jdx-qbar'),sc=c.querySelector('.x-sc'),fg=c.querySelector('.jdx-fig');
