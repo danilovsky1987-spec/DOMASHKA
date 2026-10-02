@@ -2669,6 +2669,35 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdg-o{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border-radius:10px;border:2px solid var(--line,#d9d4c7);background:var(--card,#fff);color:var(--ink,#1d2a33);font-size:15px;cursor:pointer}
 .jdg-o.ok{border-color:var(--green,#2f8f5b);background:color-mix(in srgb,var(--green,#2f8f5b) 18%,transparent)}.jdg-o.no{border-color:var(--red,#c0483a);background:color-mix(in srgb,var(--red,#c0483a) 15%,transparent)}
 .jdg-fb{margin-top:10px;font-size:14px;line-height:1.45}.jdg-x,.jdg-gh{border:1px solid var(--line,#d9d4c7);background:transparent;color:var(--ink,#1d2a33);border-radius:10px;padding:5px 10px;cursor:pointer;font-size:12px}.jdg-gh{font-size:13px;padding:7px 14px;font-weight:700}
+
+/* ===== Грамматика как морская карта (Мокап 160) ===== */
+.jdg-sea{position:relative;height:470px;border-radius:18px;overflow:hidden;background:linear-gradient(color-mix(in srgb,var(--blue,#1f5f9e) 14%,var(--surface,#fff)),color-mix(in srgb,var(--blue,#1f5f9e) 30%,var(--surface,#fff)))}
+.jdg-rt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.jdg-hdr{position:absolute;left:16px;top:12px;font-weight:700;font-size:18px}.jdg-hdr span{display:block;font-weight:400;font-size:12px;color:var(--ink-2,#5b6b78)}
+.jdg-isl{position:absolute;transform:translate(-50%,-50%);width:150px;text-align:center;border:0;background:none;padding:0;cursor:pointer;color:var(--ink,#1d2a33);font:inherit}
+.jdg-ph{position:relative;display:grid;place-items:center;width:92px;height:92px;border-radius:50%;margin:0 auto;border:6px solid #F3E3B5;box-shadow:0 0 0 4px rgba(255,255,255,.55),0 6px 14px rgba(16,27,51,.18);background:#fff;transition:transform .2s}
+.jdg-ph svg{width:46px;height:46px}.jdg-isl.now .jdg-ph{border-color:var(--amber,#F2A104);transform:scale(1.12)}.jdg-isl.done .jdg-ph{border-color:var(--green,#12A05E)}
+.jdg-ok{position:absolute;top:-4px;right:-4px;width:26px;height:26px;border-radius:50%;background:var(--green,#12A05E);color:#fff;font-weight:900;display:grid;place-items:center;font-size:14px}
+.jdg-tx{display:block}.jdg-tx b{display:inline-block;font-size:13px;margin-top:7px;background:var(--surface,#fff);border-radius:8px;padding:1px 8px;box-shadow:0 2px 6px rgba(16,27,51,.1)}
+.jdg-tx small{display:block;font-size:12px;color:var(--ink-2,#5b6b78);margin-top:2px}.jdg-tx .score{font-size:10px;margin-top:3px;display:inline-block}
+.jdg-ship{position:absolute;transform:translate(-50%,-125%);text-align:center;font:900 12px monospace;pointer-events:none}.jdg-ship svg{width:48px;height:42px;display:block;margin:0 auto}.jdg-ship span{background:#111E42;color:#fff;border-radius:99px;padding:1px 8px}
+.jdg-storm{position:absolute;left:16px;bottom:14px;background:#111E42;color:#fff;border-radius:14px;padding:10px 14px;max-width:290px;box-shadow:0 4px 14px rgba(16,27,51,.3)}
+.jdg-storm b{display:block;font-size:14px}.jdg-storm span{display:block;font-size:12px;opacity:.85}.jdg-storm .jdg-sl{margin-top:4px;color:#F2A104;opacity:1}
+.jdg-am{margin-top:8px;border:0;border-radius:10px;background:var(--amber,#F2A104);color:#111E42;font-weight:800;padding:7px 14px;font-size:13px;cursor:pointer}
+.jdg-port{position:absolute;right:16px;bottom:14px;background:var(--surface,#fff);color:var(--ink,#1d2a33);border:0;text-align:left;border-radius:12px;padding:8px 12px;font:inherit;font-size:12.5px;box-shadow:0 2px 8px rgba(16,27,51,.15);cursor:pointer}.jdg-port b{display:block;font-size:13px}.jdg-port small{display:block;color:var(--ink-2,#5b6b78)}
+.jdg-k7{margin-top:12px;background:var(--surface,#fff);border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(16,27,51,.1)}
+.jdg-kb{flex:1}.jdg-kb b{display:block;font-size:15px}.jdg-kb span{font-size:12px;color:var(--ink-2,#5b6b78)}
+.jdg-y,.jdg-nn{border:0;border-radius:12px;font-weight:800;padding:9px 16px;font-size:14px;cursor:pointer}.jdg-y{background:var(--green,#12A05E);color:#fff}.jdg-nn{background:color-mix(in srgb,var(--ink,#1d2a33) 10%,transparent);color:var(--ink,#1d2a33)}
+@media(max-width:760px){
+ .jdg-sea{height:auto;padding:10px}.jdg-rt,.jdg-ship{display:none}
+ .jdg-hdr{position:static;margin:2px 4px 8px}
+ .jdg-isl{position:static!important;transform:none;width:100%;display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;text-align:left;margin:6px 0;padding:6px;border-radius:14px;background:color-mix(in srgb,var(--surface,#fff) 65%,transparent)}
+ .jdg-isl .jdg-ph{width:68px;height:68px;margin:0;border-width:4px}.jdg-isl.now .jdg-ph{transform:none}.jdg-isl .jdg-ph svg{width:34px;height:34px}
+ .jdg-ok{width:22px;height:22px;font-size:12px}.jdg-isl.now{background:var(--surface,#fff);box-shadow:0 0 0 3px var(--amber,#F2A104)}
+ .jdg-tx b{margin:0;box-shadow:none;padding:0;background:none;font-size:15px}
+ .jdg-storm,.jdg-port{position:static;max-width:none;margin:10px 0 6px;display:block;width:100%}.jdg-am{width:100%;padding:9px 14px;font-size:14px}
+ .jdg-k7{flex-wrap:wrap}.jdg-kb{flex-basis:100%}.jdg-y,.jdg-nn{flex:1}
+}
 </style>
 </head>
 <body>
@@ -14052,37 +14081,24 @@ function gramOpen(lid){
   const l = LESSONS.find(x=>x.id===lid); if(!l) return;
   curSubject = l.subject; show("lessons"); jdlOpen(lid);
 }
-function gramCard(lid, f){
-  const D = JDO[lid], s = jdoState(lid), n = s.done.filter(Boolean).length;
-  const title = D.title.replace(/^Тема:\s*/,"");
-  const cur = s.done.findIndex(x=>!x);
-  const isl = D.steps.map((x,i)=>'<span class="'+(s.done[i]?"d":(i===cur?"c":""))+'">'+esc(x.n)+'</span>').join("");
-  let st = "ещё не начато";
-  if(n===5) st = "маршрут пройден";
-  else if(n>0) st = "дальше: «"+D.steps[cur].n+"»";
-  if(s.score!=null) st += " · тест "+s.score+" из "+D.test.length;
-  const lbl = n===0 ? "Начать" : (n===5 ? "Открыть" : "Продолжить");
-  return '<div class="jdg-c" data-lid="'+lid+'">'
-    + '<div class="jdg-t"><b>'+esc(title)+'</b><span class="jdg-s">'+esc(D.sub)+'</span></div>'
-    + (f ? '<span class="jdg-f">'+esc(f)+'</span>' : '')
-    + '<div class="jdg-i">'+isl+'</div>'
-    + '<div class="jdg-b"><i style="width:'+(n*20)+'%"></i></div>'
-    + '<div class="jdg-r"><span>'+esc(st)+'</span>'+jdModChip(lid)+'<button type="button" class="jdg-go" data-open="'+lid+'">'+lbl+' →</button></div>'
-    + '</div>';
-}
+const GRAM_ICO={
+L63:'<circle cx="24" cy="24" r="18" fill="#E5484D"/><path d="M24 12v15" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="24" cy="35" r="3" fill="#fff"/>',
+L64:'<circle cx="24" cy="24" r="17" fill="#fff" stroke="#1f5f9e" stroke-width="4"/><path d="M24 13v11l7 5" stroke="#1f5f9e" stroke-width="4" fill="none" stroke-linecap="round"/>',
+L65:'<path d="M8 24h28M28 14l10 10-10 10" stroke="#0F9FB5" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+L66:'<rect x="8" y="28" width="9" height="12" fill="#6a4fb3"/><rect x="20" y="20" width="9" height="20" fill="#6a4fb3"/><rect x="32" y="10" width="9" height="30" fill="#6a4fb3"/>',
+L67:'<path d="M24 6a12 12 0 0 0-7 22v5h14v-5a12 12 0 0 0-7-22z" fill="#F2A104"/><rect x="18" y="36" width="12" height="4" rx="2" fill="#7a5410"/>'};
+const GRAM_POS=[[11,52],[31,44],[50,62],[70,44],[88,58]];
+const GRAM_SHORT={L63:"can / must",L64:"Simple / Continuous",L65:"Предлоги движения",L66:"Степени сравнения",L67:"should / ought to"};
+let gramLater = false;
 /* ---- Общий тренажёр модуля 1 (02.10): по 3 вопроса из тестов L63–L67, вперемешку; итог по темам. state.gtr ---- */
 function gtrShuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 function gtrName(lid){ return JDO[lid].title.replace(/^Тема:\s*/,""); }
 function gtrBlock(){
-  const g = state.gtr || {}, L = g.last;
-  let h = '<div class="jdg-tr"><div class="jdg-t"><b>Тренировка по всему модулю</b><span class="jdg-s">15 вопросов · по 3 из каждой темы · вперемешку</span></div>';
-  if(L){
-    h += '<div class="jdg-lr">'+GRAM_MOD.topics.filter(t=>L.res[t.id]).map(t=>{
-      const r = L.res[t.id], p = Math.round(100*r[0]/r[1]);
-      return '<div class="jdg-lb"><span>'+esc(gtrName(t.id))+'</span><i><u style="width:'+p+'%;background:var(--'+(p>=80?"green":(p>=50?"amber":"red"))+')"></u></i><b>'+r[0]+'/'+r[1]+'</b></div>';
-    }).join("")+'</div><div class="jdg-s">прошлый раз: '+jdoDay(L.at)+' · '+Object.values(L.res).reduce((a,r)=>a+r[0],0)+' из '+Object.values(L.res).reduce((a,r)=>a+r[1],0)+'</div>';
-  }
-  return h+'<button type="button" class="jdg-go" id="gtrGo">'+(L?"Ещё раз":"Начать")+' →</button></div>';
+  const L = (state.gtr||{}).last;
+  const tot = L ? Object.values(L.res).reduce((s,r)=>s+r[0],0) : 0, n = L ? Object.values(L.res).reduce((s,r)=>s+r[1],0) : 0;
+  return '<div class="jdg-storm"><b>Шторм · тренировка модуля</b><span>15 вопросов из всех тем вперемешку. Выдержишь?</span>'
+    + (L ? '<span class="jdg-sl">прошлый шторм: '+tot+' из '+n+' · '+jdoDay(L.at)+'</span>' : '')
+    + '<button type="button" class="jdg-am" id="gtrGo">'+(L?"Ещё раз в шторм":"Выйти в шторм")+' →</button></div>';
 }
 function gtrRun(box){
   const T = GRAM_MOD.topics.filter(t=>JDO[t.id]);
@@ -14130,22 +14146,36 @@ function gtrRun(box){
 function renderGram(){
   const box = document.getElementById("gramBox"); if(!box) return;
   const T = GRAM_MOD.topics.filter(t=>JDO[t.id]);
-  const done = T.filter(t=>jdoState(t.id).done.filter(Boolean).length===5).length;
-  let h = '<div class="jdg-hd"><div><b>Грамматика</b><span>'+GRAM_MOD.title+' · '+T.length+' тем и проба</span></div>'
-    + '<span class="jdg-cnt">пройдено '+done+' из '+T.length+'</span></div>';
+  const info = T.map(t=>{ const s=jdoState(t.id); return {id:t.id, s:s, n:s.done.filter(Boolean).length}; });
+  const ci = info.findIndex(x=>x.n<5);
+  const done = info.filter(x=>x.n===5).length;
+  let h = '<div class="jdg-sea"><div class="jdg-hdr">Грамматика · модуль 1<span>пройдено '+done+' из '+T.length+' · и порт «Проверочная»</span></div>'
+    + '<svg class="jdg-rt" viewBox="0 0 1000 470" preserveAspectRatio="none"><path d="M110 270 C 190 130, 250 120, 310 170 S 430 330, 500 270 S 620 120, 700 170 S 820 310, 890 250" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/></svg>';
+  info.forEach((x,i)=>{
+    const D = JDO[x.id], cur = (i===ci);
+    let st = "впереди";
+    if(x.n===5) st = x.s.score!=null ? "тест "+x.s.score+" из "+D.test.length : "пройдено";
+    else if(x.n>0 || cur) st = "дальше: «"+D.steps[x.s.done.findIndex(v=>!v)].n+"»";
+    { const R = jdoRepDates(x.s), ri = x.s.rep[0] ? (x.s.rep[1] ? -1 : 1) : 0; if(R && ri>=0) st += " · повтор "+(R[ri]<=todayKey()?"сегодня":jdoDay(R[ri])); }
+    h += '<button type="button" class="jdg-isl'+(x.n===5?" done":"")+(cur?" now":"")+'" data-open="'+x.id+'" style="left:'+GRAM_POS[i][0]+'%;top:'+GRAM_POS[i][1]+'%">'
+      + '<span class="jdg-ph"><svg viewBox="0 0 48 48">'+GRAM_ICO[x.id]+'</svg>'+(x.n===5?'<span class="jdg-ok">✓</span>':'')+'</span>'
+      + '<span class="jdg-tx"><b>'+esc(GRAM_SHORT[x.id])+'</b><small>'+esc(st)+'</small></span></button>';
+  });
+  if(ci>=0) h += '<div class="jdg-ship" style="left:'+GRAM_POS[ci][0]+'%;top:'+(GRAM_POS[ci][1]-14)+'%"><svg viewBox="0 0 46 40"><path d="M4 26h38l-6 10H10z" fill="#111E42"/><path d="M23 4v22M23 6l14 14H23z" fill="#fff" stroke="#111E42" stroke-width="2"/></svg><span>Даниил</span></div>';
   h += gtrBlock();
-  h += T.map(t=>gramCard(t.id, t.f)).join("");
   const P = GRAM_MOD.port;
-  if(JDO[P]){
-    const s = jdoState(P), n = s.done.filter(Boolean).length;
-    h += '<div class="jdg-p"><div><b>⚓ Порт «Проверочная» · Revision 1 · стр. 115</b>'
-      + '<span>'+(done<T.length ? "Лучше после всех тем: пройдено "+done+" из "+T.length+". Но открыть можно в любой момент." : "Все темы пройдены — можно пробовать.")+'</span></div>'
-      + '<button type="button" class="jdg-go" data-open="'+P+'">'+(n===0?"Начать":(n===5?"Открыть":"Продолжить"))+' →</button></div>';
+  if(JDO[P]) h += '<button type="button" class="jdg-port" data-open="'+P+'"><b>⚓ Порт «Проверочная»</b>Revision 1 · стр. 115'+(done<T.length?'<small>лучше после всех тем</small>':'')+'</button>';
+  h += '</div>';
+  if(ci>=0 && !gramLater){
+    const D = JDO[info[ci].id], si = info[ci].s.done.findIndex(v=>!v);
+    h += '<div class="jdg-k7"><div class="jdg-kb"><b>Готов к следующему острову?</b><span>'+esc(GRAM_SHORT[info[ci].id])+' · «'+esc(D.steps[si].n)+'» · '+esc(D.steps[si].min)+'</span></div>'
+      + '<button type="button" class="jdg-y" data-yes="'+info[ci].id+'">Да!</button><button type="button" class="jdg-nn" id="gramLater">Потом</button></div>';
   }
   box.innerHTML = h;
   const gb = box.querySelector("#gtrGo"); if(gb) gb.addEventListener("click", ()=>gtrRun(box));
   box.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click", e=>{ e.stopPropagation(); gramOpen(b.dataset.open); }));
-  box.querySelectorAll(".jdg-c").forEach(c=>c.addEventListener("click", ()=>gramOpen(c.dataset.lid)));
+  const yb = box.querySelector("[data-yes]"); if(yb) yb.addEventListener("click", ()=>gramOpen(yb.dataset.yes));
+  const lb = box.querySelector("#gramLater"); if(lb) lb.addEventListener("click", ()=>{ gramLater = true; renderGram(); });
 }
 
 /* ================= РОЛИ И НАВИГАЦИЯ ================= */
