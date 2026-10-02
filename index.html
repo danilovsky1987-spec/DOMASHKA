@@ -2640,6 +2640,25 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdo-fl .m-flp.m-op .m-fa{display:none}.jdo-fl .m-flp.m-op .m-ba{display:flex}
 .jdo-par{background:color-mix(in srgb,var(--amber) 12%,var(--surface));border-left:5px solid var(--amber);border-radius:10px;padding:10px 12px;font-size:14.5px}
 @media print{.jdo{display:none}}
+
+/* ===== Грамматика отдельным разделом (Мокап 159) ===== */
+.jdg{max-width:760px;margin:0 auto}
+.jdg-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:4px 0 12px}
+.jdg-hd b{display:block;font-size:20px}.jdg-hd span{color:var(--muted,#6b7780);font-size:13px}
+.jdg-cnt{background:var(--violet,#6a4fb3);color:#fff!important;border-radius:12px;padding:3px 10px;white-space:nowrap}
+.jdg-c{border:1px solid var(--line,#d9d4c7);border-radius:14px;padding:12px;margin-bottom:10px;background:var(--card,#fff);cursor:pointer}
+.jdg-t{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}.jdg-t b{font-size:16px}.jdg-s{font-size:12px;color:var(--muted,#6b7780)}
+.jdg-f{display:inline-block;font-family:monospace;font-size:12px;background:color-mix(in srgb,var(--blue,#1f5f9e) 10%,transparent);border-radius:6px;padding:3px 7px;margin:6px 0}
+.jdg-i{display:flex;gap:4px;margin-top:4px}.jdg-i span{flex:1;min-width:0;overflow:hidden;text-align:center;font-size:11px;padding:4px 2px;border-radius:7px;background:color-mix(in srgb,var(--ink,#1d2a33) 8%,transparent);color:var(--muted,#6b7780)}
+.jdg-i span.d{background:color-mix(in srgb,var(--green,#2f8f5b) 22%,transparent);color:var(--green,#2f8f5b);font-weight:700}
+.jdg-i span.c{background:color-mix(in srgb,var(--amber,#d9962b) 25%,transparent);color:var(--ink,#1d2a33);font-weight:700}
+.jdg-b{height:7px;border-radius:5px;background:color-mix(in srgb,var(--ink,#1d2a33) 10%,transparent);overflow:hidden;margin:8px 0}
+.jdg-b i{display:block;height:100%;background:var(--green,#2f8f5b)}
+.jdg-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:13px}.jdg-r>span:first-child{flex:1;min-width:140px}
+.jdg-go{border:0;border-radius:10px;background:var(--blue,#1f5f9e);color:#fff;font-weight:700;padding:7px 14px;cursor:pointer;font-size:13px}
+.jdg-p{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:14px;padding:12px;color:#fff;background:linear-gradient(90deg,#1f5f9e,#6a4fb3)}
+.jdg-p b{display:block;font-size:14px}.jdg-p span{font-size:12px;opacity:.9}.jdg-p .jdg-go{background:#fff;color:#1f3f6e}
+@media print{#view-gram{display:none!important}}
 </style>
 </head>
 <body>
@@ -2901,6 +2920,8 @@ details.jd-rl>div .jd-fm{margin-top:0}
     </div>
   </div>
 </section>
+
+<section id="view-gram" hidden><div id="gramBox" class="jdg"></div></section>
 
 <!-- ================= ИНСТРУКЦИЯ ================= -->
 <section id="view-how" hidden>
@@ -14004,11 +14025,66 @@ function renderHeader(){
   } else { bar.style.width = "100%"; document.getElementById("rankNext").textContent = "высшее звание достигнуто"; }
 }
 
+/* ======== Грамматика модуля 1 — отдельный раздел (Мокап 159, вариант А, 02.10) ========
+   Карточки тем L63–L67 + порт «Проверочная» (L68). Данные берутся из JDO и state.mod — ничего не дублируется. */
+const GRAM_MOD = {
+  title:"Модуль 1 · Starlight 6",
+  topics:[
+    {id:"L63", f:"must + глагол · have to · mustn't · can / can't"},
+    {id:"L64", f:"always → V(s) · now → am / is / are + V-ing"},
+    {id:"L65", f:"go + предлог: into · out of · across · through · past"},
+    {id:"L66", f:"-er than · more … than · the -est · the most …"},
+    {id:"L67", f:"should / ought to + глагол · shouldn't"}
+  ],
+  port:"L68"
+};
+function gramOpen(lid){
+  const l = LESSONS.find(x=>x.id===lid); if(!l) return;
+  curSubject = l.subject; show("lessons"); jdlOpen(lid);
+}
+function gramCard(lid, f){
+  const D = JDO[lid], s = jdoState(lid), n = s.done.filter(Boolean).length;
+  const title = D.title.replace(/^Тема:\s*/,"");
+  const cur = s.done.findIndex(x=>!x);
+  const isl = D.steps.map((x,i)=>'<span class="'+(s.done[i]?"d":(i===cur?"c":""))+'">'+esc(x.n)+'</span>').join("");
+  let st = "ещё не начато";
+  if(n===5) st = "маршрут пройден";
+  else if(n>0) st = "дальше: «"+D.steps[cur].n+"»";
+  if(s.score!=null) st += " · тест "+s.score+" из "+D.test.length;
+  const lbl = n===0 ? "Начать" : (n===5 ? "Открыть" : "Продолжить");
+  return '<div class="jdg-c" data-lid="'+lid+'">'
+    + '<div class="jdg-t"><b>'+esc(title)+'</b><span class="jdg-s">'+esc(D.sub)+'</span></div>'
+    + (f ? '<span class="jdg-f">'+esc(f)+'</span>' : '')
+    + '<div class="jdg-i">'+isl+'</div>'
+    + '<div class="jdg-b"><i style="width:'+(n*20)+'%"></i></div>'
+    + '<div class="jdg-r"><span>'+esc(st)+'</span>'+jdModChip(lid)+'<button type="button" class="jdg-go" data-open="'+lid+'">'+lbl+' →</button></div>'
+    + '</div>';
+}
+function renderGram(){
+  const box = document.getElementById("gramBox"); if(!box) return;
+  const T = GRAM_MOD.topics.filter(t=>JDO[t.id]);
+  const done = T.filter(t=>jdoState(t.id).done.filter(Boolean).length===5).length;
+  let h = '<div class="jdg-hd"><div><b>Грамматика</b><span>'+GRAM_MOD.title+' · '+T.length+' тем и проба</span></div>'
+    + '<span class="jdg-cnt">пройдено '+done+' из '+T.length+'</span></div>';
+  h += T.map(t=>gramCard(t.id, t.f)).join("");
+  const P = GRAM_MOD.port;
+  if(JDO[P]){
+    const s = jdoState(P), n = s.done.filter(Boolean).length;
+    h += '<div class="jdg-p"><div><b>⚓ Порт «Проверочная» · Revision 1 · стр. 115</b>'
+      + '<span>'+(done<T.length ? "Лучше после всех тем: пройдено "+done+" из "+T.length+". Но открыть можно в любой момент." : "Все темы пройдены — можно пробовать.")+'</span></div>'
+      + '<button type="button" class="jdg-go" data-open="'+P+'">'+(n===0?"Начать":(n===5?"Открыть":"Продолжить"))+' →</button></div>';
+  }
+  box.innerHTML = h;
+  box.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click", e=>{ e.stopPropagation(); gramOpen(b.dataset.open); }));
+  box.querySelectorAll(".jdg-c").forEach(c=>c.addEventListener("click", ()=>gramOpen(c.dataset.lid)));
+}
+
 /* ================= РОЛИ И НАВИГАЦИЯ ================= */
 const TABS = [
   {id:"today",   label:"Сегодня",   color:"green",  role:"all"},
   {id:"cal",     label:"Календарь", color:"blue",   role:"all"},
   {id:"lessons", label:"Уроки",     color:"cyan",   role:"all"},
+  {id:"gram",    label:"Грамматика",color:"violet", role:"all"},
   {id:"oral",    label:"Проверка",  color:"cyan",   role:"nav"},
   {id:"need",    label:"Что нужно", color:"amber",  role:"nav"},
   {id:"test",    label:"Тесты",     color:"violet", role:"all"},
@@ -14100,6 +14176,7 @@ function show(v){
   if(v==="today") renderToday();
   if(v==="cal") renderCalendar();
   if(v==="lessons") renderLessonsView();
+  if(v==="gram") renderGram();
   if(v==="oral") showOral();
   if(v==="need") renderNeed();
   if(v==="test") showTests();
@@ -18481,7 +18558,7 @@ function bookHint(sub){
 
 const DECKS = [
   {id:"day", n:"Сегодня",    c:"green", ids:["today","cal"]},
-  {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","test","diag","words","oral","need"]},
+  {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","gram","test","diag","words","oral","need"]},
   {id:"bod", n:"Тело и дух", c:"red",   ids:["gto","chal","mine"]},
   {id:"br",  n:"Рубка",      c:"amber", ids:["books","kurs","print","prog","how","why"], capN:"Справка"}
 ];
