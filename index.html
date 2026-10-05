@@ -16271,13 +16271,17 @@ function jdrStrip(l){
   const how = d.querySelector(".jdr-how");
   d.querySelectorAll(".jdr-st").forEach(b=>b.addEventListener("click", ()=>{ const x = st[+b.dataset.i];
     d.querySelectorAll(".jdr-st").forEach(y=>y.classList.toggle("on", y === b));
-    const act = {sl:"📔 Открыть слова в словарике", dk:"📝 Тренироваться как в диктанте", ts:"📔 Начать контрольную", te:"🎯 Пройти тест", pr:"🏝 Открыть «Грамматику»"}[x[0]];
+    const rd = ((state.rd||{})[l.id]||{})[x[0]];
+    const act = {sl:"📔 Открыть слова в словарике", dk:"📝 Тренироваться как в диктанте", ts:"📔 Начать контрольную", te:"🎯 Пройти тест", pr:"🏝 Открыть «Грамматику»",
+      ch:rd ? "✓ Прочитал вслух — "+rd : "✓ Прочитал вслух папе", di:rd ? "✓ Рассказал по ролям — "+rd : "✓ Рассказал по ролям", up:"↓ К упражнениям", li:"↓ К заданию", pi:"↓ К письму"}[x[0]];
     how.hidden = false; how.innerHTML = '<span>'+x[1]+' <b>'+x[2]+':</b> '+esc(x[5])+'</span>'+(act ? '<button type="button">'+act+'</button>' : '');
     const bb = how.querySelector("button"); if(bb) bb.addEventListener("click", ()=>{
       if(x[0] === "sl"){ jdvTopic = l.id; jdvMode = "topic"; jdvQ = ""; jdvK = null; show("dict"); }
       else if(x[0] === "dk"){ show("words"); startWords("DICT:"+l.id); }
       else if(x[0] === "ts"){ jdvK = null; jdvKStart(jdvLessons().filter(y=>y.date >= jdvAddDays(l.date, -28) && y.date <= l.date).map(y=>y.id).slice(0, 6)); }
       else if(x[0] === "pr") show("gram");
+      else if(x[0] === "ch" || x[0] === "di"){ state.rd = state.rd || {}; state.rd[l.id] = state.rd[l.id] || {}; state.rd[l.id][x[0]] = fmtDate(todayKey()); save(); bb.textContent = "✓ Отмечено — "+fmtDate(todayKey()); toast("Отмечено: "+x[2].toLowerCase()); }
+      else if(x[0] === "up" || x[0] === "li" || x[0] === "pi"){ const box = document.getElementById("content"); const t = box.querySelector(x[0] === "pi" ? ".jdx-let, .jdx-c.write" : ".jdx-c.write, .jdx-c, .x-sec, details"); if(t) t.scrollIntoView({behavior:"smooth", block:"start"}); else toast("Упражнения — ниже в разборе"); }
       else if(x[0] === "te"){ show("test"); showIntro(QUIZ[l.id].map((q,i)=>Object.assign({lid:l.id,qi:i},q)), l.id, l.title, [l], l.subject+" · "+fmtDate(l.date)); } }); }));
   return d;
 }
