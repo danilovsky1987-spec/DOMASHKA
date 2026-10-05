@@ -16107,7 +16107,7 @@ function renderSubjGrid(){
       h += '</div>'; } }
   h += jdhHtml();
   const first = left[0];
-  if(first && jduLater !== jduDay)
+  if(false && first && jduLater !== jduDay) /* 05.10: «Начнём?» убрана — повторяла первую строку «Обязательно» */
     h += '<div class="jdu-k7"><div class="bub"><b>Начнём? Первым — '+esc(JDH_SH[first.subject] || first.subject)+'</b><span>'+esc(jduShort(first))+(jdrMin(first.id) ? ' · ≈ '+jdrMin(first.id)+' мин' : '')+'</span></div>'
       + '<button type="button" class="y" data-id="'+first.id+'">Да!</button><button type="button" class="n">Потом</button></div>';
   const jduDadH = jduDadHtml(L);
