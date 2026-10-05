@@ -2904,7 +2904,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
         </button>
         <button data-role="nav" aria-pressed="false">
           <span class="ri" aria-hidden="true">🧭</span>
-          <span class="rt">Штурман<small id="navHint">отец · по коду</small></span>
+          <span class="rt">Штурман<small id="navHint">отец</small></span>
         </button>
       </div>
     </div>
@@ -3227,7 +3227,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
         <div class="deckcol sht">
           <div class="dh">🧭 Штурман · взрослый</div>
           <ul>
-            <li>Вход по коду — четыре цифры, которые знаете только вы</li>
+            <li>Вход одним нажатием — без кода</li>
             <li>Всё то же самое, плюс пять вкладок</li>
             <li>Проверка — устный опрос и приёмка работ, ответы видны только здесь</li>
             <li>Курс, печать, прогресс — сохранение в файл и слабые места</li>
@@ -4339,7 +4339,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
     <div class="growrows" id="growRows"></div>
   </div>
 
-  <div class="sec" style="--sc2:var(--amber)">
+  <div class="sec" style="--sc2:var(--amber);display:none" data-pin-off="05.10">
     <h3>Код штурмана <em>чтобы ребёнок не открыл ответы</em></h3>
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
       <span id="pinState"></span>
@@ -14753,7 +14753,7 @@ function renderNav(){
   document.getElementById("capBackTitle").textContent = vt ? vt.label : "";
   document.querySelectorAll("#roleSwitch button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.role === state.role)));
   const nh = document.getElementById("navHint");
-  if(nh) nh.textContent = (state.askPin === false && hasPin()) ? "отец · код на паузе" : "отец · по коду";
+  if(nh) nh.textContent = "отец";
   document.getElementById("mastSub").textContent = state.role === "cap"
     ? "Твой журнал. Отмечай вахту сам — за тебя этого никто не делает."
     : "Ребёнок — капитан. Взрослый — штурман: даёт карты и ресурсы, но не крутит штурвал.";
@@ -14801,10 +14801,7 @@ function setRole(r){
 }
 document.querySelectorAll("#roleSwitch button").forEach(b=>b.addEventListener("click", ()=>{
   const r = b.dataset.role;
-  if(r === "nav" && state.role !== "nav" && state.askPin !== false){
-    if(!hasPin()){ openPin("new", ()=>{ navOk = true; setRole("nav"); }); return; }
-    if(!navOk){ openPin("ask", ()=>{ navOk = true; setRole("nav"); }); return; }
-  }
+  /* 05.10: код штурмана убран по просьбе папы — переключение без пароля */
   setRole(r);
 }));
 
