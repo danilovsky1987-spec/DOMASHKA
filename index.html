@@ -2569,6 +2569,12 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdp-tbl .c{width:40px;height:34px;border-radius:9px;border:2px solid #dfe3ee;background:#fff;font:900 15px Nunito,Arial;color:#111E42;cursor:pointer}.jdp-tbl .c[disabled]{cursor:default;opacity:.85}
 .jdp-tbl .c.y{background:#12A05E;border-color:#12A05E;color:#fff}.jdp-tbl .c.n{background:#E5484D;border-color:#E5484D;color:#fff}
 .jdp-tbl .st{font:800 12px Nunito,Arial;border-radius:99px;padding:2px 8px;white-space:nowrap}.jdp-tbl .st.ok{background:#E6F6EE;color:#0d7a47}.jdp-tbl .st.no{background:#FDECEC;color:#B4232A}.jdp-tbl .st.mid{background:#FFF3D6;color:#8a5a00}
+#content.jd-noladder details.fold-do:not(.jd-man),#content.jd-noladder .jd-steps:not(.jd-man){display:none!important}.jdr-prog .man{border:0;background:none;color:#1B6FE0;font:800 12.5px Nunito,Arial,sans-serif;cursor:pointer;padding:0 0 0 4px;white-space:nowrap}
+.jdr-st{position:relative}.jdr-st small{display:block;font:800 12px Nunito,Arial,sans-serif;color:#4a587a;min-height:15px;margin-top:2px}
+.jdr-st.ok .ph{background:#12A05E!important;border-color:#12A05E!important;color:#fff;font:900 26px Nunito,Arial,sans-serif}.jdr-st.ok small{color:#0d7a47}
+.jdr-st.now .ph{box-shadow:0 0 0 5px #F2A10466}.jdr-ship{position:absolute;top:-14px;left:50%;margin-left:18px;font-size:22px;z-index:2}
+.jdr-prog{display:flex;align-items:center;gap:10px;margin-top:10px;background:#fff;border-radius:12px;padding:8px 12px;color:#111E42}.jdrp-bar{flex:1;min-width:60px;height:10px;border-radius:99px;background:#dfe3ee;overflow:hidden;display:block}.jdrp-bar i{display:block;height:100%;background:#12A05E}.jdr-prog b{font:900 14px Nunito,Arial,sans-serif;white-space:nowrap}
+.jdg .jdr-st b{max-width:120px;white-space:normal;line-height:1.2}.jdr-how i{color:#5b6785;font-style:normal;font-size:13px}
 .jd-port{margin:18px 0 6px;background:linear-gradient(#d8e8fb,#bcd6f5);border-radius:18px;padding:14px 14px 16px;color:#111E42}
 .jd-port h3{margin:0 0 2px;font:900 19px Nunito,Arial,sans-serif;letter-spacing:0;text-transform:none}.jd-port .hs{font-size:14px;color:#3d4b6b;margin-bottom:6px}
 .jdp-rt{display:flex;align-items:flex-start;justify-content:space-around;gap:6px;position:relative;padding:22px 0 4px}
@@ -13894,7 +13900,7 @@ function jdStopEl(node,k){
   if(k==="recall"){ for(const d of node.querySelectorAll("details.fold")){const s=d.querySelector("summary");if(s&&/Правила темы|наизусть|Определени|Формы и сигналы|Функции/i.test(s.textContent)) return d;} return node.querySelector(".jd-learn"); }
   if(k==="example") return null;
   if(k==="words") return node.querySelector(".jd-wds");
-  if(k==="do") return node.querySelector(".jd-steps");
+  if(k==="do") return node.querySelector(".jdx-c, .acc")||node.querySelector(".jd-steps");
   if(k==="check") return node.querySelector('.acc[data-gate="answers"]');
   if(k==="test") return node.querySelector(".jd-port")||node.querySelector(".jdt,.jdb-bx")||[...node.querySelectorAll(".sec")].pop()||null;
 }
@@ -13907,7 +13913,7 @@ function jdPathDone(lid,k){
   if(k==="task"){ const arr=(state.steps&&state.steps[lid])||[]; if(arr.some(Boolean)) return true; }
   return !!v[k];
 }
-function jdPathRefresh(){ const w=document.querySelector("#content .jd-way"); if(w&&w.jdRender) w.jdRender(); }
+function jdPathRefresh(){ const w=document.querySelector("#content .jd-way"); if(w&&w.jdRender) w.jdRender(); const r=document.querySelector("#content .jdr"); if(r&&r.jdRefresh) r.jdRefresh(); }
 function jdPath(box,lid){
   const node=box.firstElementChild; if(!node||!node.querySelector(".jd-task")||node.querySelector(".jd-way")) return;
   const hero=node.querySelector(".hero"); if(!hero) return;
@@ -16566,7 +16572,7 @@ function jdrStrip(l){
   if(st.length < 2) return null;
   const d = document.createElement("div"); d.className = "jdr noprint";
   d.innerHTML = '<h4>Маршрут этого урока — из того, что задал учитель</h4><div class="hs">«'+esc(jdhTask(l).slice(0, 140))+'» · нажми остров — подскажу, как делать</div><div class="jdr-rt">'
-    + st.map((x,i)=>'<button type="button" class="jdr-st" data-i="'+i+'" style="--c:'+x[3]+'"><div class="ph">'+x[1]+'</div><b>'+x[2]+'</b></button>').join("") + '</div><div class="jdr-how" hidden></div>';
+    + st.map((x,i)=>'<button type="button" class="jdr-st" data-i="'+i+'" data-k="'+x[0]+'" style="--c:'+x[3]+'"><div class="ph">'+x[1]+'</div><b>'+x[2]+'</b></button>').join("") + '</div><div class="jdr-how" hidden></div>';
   const how = d.querySelector(".jdr-how");
   d.querySelectorAll(".jdr-st").forEach(b=>b.addEventListener("click", ()=>{ const x = st[+b.dataset.i];
     d.querySelectorAll(".jdr-st").forEach(y=>y.classList.toggle("on", y === b));
@@ -16582,6 +16588,7 @@ function jdrStrip(l){
       else if(x[0] === "ch" || x[0] === "di"){ state.rd = state.rd || {}; state.rd[l.id] = state.rd[l.id] || {}; state.rd[l.id][x[0]] = fmtDate(todayKey()); save(); try{ jdAutoTick(l.id, x[0] === "ch" ? /чит|перев/i : /диалог|наизусть/i); }catch(e){} bb.textContent = "✓ Отмечено — "+fmtDate(todayKey()); toast("Отмечено: "+x[2].toLowerCase()); }
       else if(x[0] === "up" || x[0] === "li" || x[0] === "pi"){ const box = document.getElementById("content"); const t = box.querySelector(x[0] === "pi" ? ".jdx-let, .jdx-c.write" : ".jdx-c.write, .jdx-c, .x-sec, details"); if(t) t.scrollIntoView({behavior:"smooth", block:"start"}); else toast("Упражнения — ниже в разборе"); }
       else if(x[0] === "te"){ show("test"); showIntro(QUIZ[l.id].map((q,i)=>Object.assign({lid:l.id,qi:i},q)), l.id, l.title, [l], l.subject+" · "+fmtDate(l.date)); } }); }));
+  try{ jdrProgress(d, l); }catch(e){ console.error(e); }
   return d;
 }
 /* --- папе по ситуации и сводка недели (на экране «Учёба») --- */
@@ -16914,10 +16921,40 @@ function jdpRender(){
         if(P.fi >= P.fin.length && P.fin.every(j=>P.fres[j])){ state.wdone = state.wdone || {}; state.wdone[P.lid] = todayKey(); save(); try{ jdAutoTick(P.lid, /слов/i); }catch(e){} } } }
     jdpRender(); });
 }
+
+/* 05.10 (Мокап 178, А): «Что делать» убран с экрана; прогресс шагов — на островах маршрута урока */
+const JDR_RX = {sl:/слов/i, ch:/чит|перев/i, di:/диалог|рол|наизусть/i, dk:/диктант/i, ts:/контрольн/i, pi:/письм/i, pr:/правил|граммат/i, up:/упр|р\.\s?т|рабоч|задач|предложен|таблиц/i, te:/тест|провер/i};
+function jdrProgress(d, l){
+  const a = document.getElementById(l.id); if(!a) return;
+  const lis = [...a.querySelectorAll("ol.how > li")]; if(!lis.length) return;
+  const btns = [...d.querySelectorAll(".jdr-st")], keys = btns.map(b=>b.dataset.k);
+  const own = lis.map(li=>{ const t = li.textContent; if(keys.includes("te") && JDR_RX.te.test(t) && !/слов/i.test(t)) return "te"; return keys.find(k=>k !== "te" && JDR_RX[k] && JDR_RX[k].test(t)) || null; });
+  let row = d.querySelector(".jdr-prog"); if(!row){ row = document.createElement("div"); row.className = "jdr-prog"; d.querySelector(".jdr-rt").after(row); }
+  d.jdRefresh = ()=>{
+    const st = jdStepState(l.id), done = lis.map((x,i)=>!!st[i]), n = done.filter(Boolean).length;
+    const mins = lis.reduce((m,li,i)=>m + (done[i] ? 0 : (+li.dataset.min || 0)), 0);
+    let nowSet = false;
+    btns.forEach(b=>{ const k = b.dataset.k, idx = own.map((o,i)=>o === k ? i : -1).filter(i=>i >= 0);
+      b.classList.remove("ok","now"); const old = b.querySelector(".jdr-ship"); if(old) old.remove();
+      let sm = b.querySelector("small"); if(!sm){ sm = document.createElement("small"); b.appendChild(sm); }
+      const ph = b.querySelector(".ph"); if(!ph.dataset.ic) ph.dataset.ic = ph.textContent;
+      if(!idx.length){ sm.textContent = ""; ph.textContent = ph.dataset.ic; return; }
+      const dn = idx.filter(i=>done[i]).length;
+      if(dn === idx.length){ b.classList.add("ok"); ph.textContent = "✓"; sm.textContent = "сделано"; }
+      else { ph.textContent = ph.dataset.ic; sm.textContent = idx.length > 1 ? dn+" из "+idx.length : "";
+        if(!nowSet){ nowSet = true; b.classList.add("now"); b.insertAdjacentHTML("afterbegin", '<span class="jdr-ship">⛵</span>'); sm.textContent = "ты здесь"+(idx.length > 1 ? " · "+dn+" из "+idx.length : ""); } } });
+    row.innerHTML = n === lis.length ? '<b>✓ Всё задание сделано</b><div class="jdrp-bar"><i style="width:100%"></i></div><b>🎉</b>'
+      : '<b>сделано '+n+' из '+lis.length+'</b><div class="jdrp-bar"><i style="width:'+(n/lis.length*100)+'%"></i></div>'+(mins ? '<b>≈ '+mins+' мин</b>' : '');
+    row.insertAdjacentHTML("beforeend", '<button type="button" class="man">отметить вручную</button>');
+    row.querySelector(".man").onclick = ()=>{ const box = document.getElementById("content"); box.querySelectorAll("details.fold-do, .jd-steps").forEach(x=>{ x.classList.toggle("jd-man"); if(x.tagName === "DETAILS") x.open = true; }); const t = box.querySelector(".jd-steps.jd-man, details.fold-do.jd-man"); if(t) t.scrollIntoView({behavior:"smooth", block:"center"}); };
+  };
+  d.jdRefresh();
+  const box = document.getElementById("content"); if(box) box.classList.add("jd-noladder");
+}
 function renderContent(){
   const src = document.getElementById(curLesson);
   const box = document.getElementById("content");
-  box.innerHTML = "";
+  box.innerHTML = ""; box.classList.remove("jd-noladder");
   if(!src) return;
   jduSeen(curLesson);
   const node = src.cloneNode(true);
@@ -20356,6 +20393,44 @@ function jdPort(){
   secs[0].parentNode.insertBefore(card, secs[0]); secs.forEach(x=>x.hidden=true);
 }
 ;(function(){ if(typeof renderContent==="function"){ const _rc2=renderContent; renderContent=function(){ const r=_rc2.apply(this,arguments); try{ jdPort(); }catch(e){ console.error(e); } return r; }; } })();
+
+/* 05.10 (Мокап 179, А): во всех остальных предметах — острова по шагам урока вместо «Что делать» */
+const JDG_IC = [[/тест|провер/i,"🎯","#E5484D"],[/таблиц/i,"📊","#12A05E"],[/лаборатор|опыт/i,"🔬","#0F9FB5"],[/доклад/i,"🎤","#d6336c"],[/задач|реш|пример/i,"✏️","#E8402A"],[/по ролям|роли/i,"🎭","#F2A104"],[/вопрос|ответ|устно|расскаж|размышля|пункт/i,"💬","#1B6FE0"],[/чит/i,"📖","#7A4FD1"],[/термин|дат|слов|определ/i,"🗂","#12A05E"],[/повтор/i,"🔁","#6a4fb3"],[/упр|тетрад|письм|написа|состав/i,"📒","#F2A104"],[/выбра|тем/i,"🎤","#d6336c"]];
+function jdgUntick(lid,k){ const arr = jdStepState(lid); arr[k] = false; save(); try{ jdAfterStep(lid); }catch(e){} try{ jdRenderAll(); }catch(e){} }
+function jdgStrip(){
+  const box = document.getElementById("content"), lid = curLesson; if(!box || !lid || box.querySelector(".jdr")) return;
+  const a = document.getElementById(lid); if(!a) return;
+  const lis = [...a.querySelectorAll("ol.how > li")]; if(lis.length < 2) return;
+  const sts = lis.map(li=>{ const t = li.textContent.replace(/\s+/g," ").trim(), b = (li.querySelector("b")||li).textContent.replace(/\s+/g," ").trim();
+    const em = b.match(/^(\p{Extended_Pictographic}️?)\s*(.*)$/u);
+    let ic = em ? em[1] : null, c = "#7A4FD1", lab = em ? em[2] : b;
+    const hit = JDG_IC.find(x=>x[0].test(t)); if(hit){ if(!ic) ic = hit[1]; c = hit[2]; } if(!ic) ic = "✅";
+    lab = lab.replace(/^(Новое|Повторение)\s*·\s*/i,"").replace(/[.—:]+$/,"");
+    if(lab.length > 22) lab = lab.slice(0, 20).replace(/\s+\S*$/,"")+"…";
+    lab = lab.charAt(0).toUpperCase()+lab.slice(1);
+    return {t:t, ic:ic, c:c, lab:lab, wh:li.dataset.where||"", min:+li.dataset.min||0, auto:hit && hit[1] === "🎯" && QUIZ[lid] && QUIZ[lid].length}; });
+  const d = document.createElement("div"); d.className = "jdr noprint jdg";
+  d.innerHTML = '<h4>Маршрут этого урока — из того, что задал учитель</h4><div class="hs">нажми остров — отметить «сделал»</div><div class="jdr-rt">'
+    + sts.map((x,i)=>'<button type="button" class="jdr-st" data-i="'+i+'" style="--c:'+x.c+'"><div class="ph">'+x.ic+'</div><b>'+esc(x.lab)+'</b><small></small></button>').join("")+'</div><div class="jdr-prog"></div><div class="jdr-how" hidden></div>';
+  const how = d.querySelector(".jdr-how"), row = d.querySelector(".jdr-prog"), btns = [...d.querySelectorAll(".jdr-st")];
+  let sel = -1;
+  d.jdRefresh = ()=>{ const st = jdStepState(lid), done = sts.map((x,i)=>!!st[i]), n = done.filter(Boolean).length, now = done.findIndex(x=>!x);
+    btns.forEach((b,i)=>{ const x = sts[i]; b.classList.toggle("ok", done[i]); b.classList.toggle("now", i === now); b.classList.toggle("on", i === sel);
+      const old = b.querySelector(".jdr-ship"); if(old) old.remove(); if(i === now) b.insertAdjacentHTML("afterbegin", '<span class="jdr-ship">⛵</span>');
+      b.querySelector(".ph").textContent = done[i] ? "✓" : x.ic; b.querySelector("small").textContent = done[i] ? "сделано" : (i === now ? "ты здесь" : x.wh); });
+    const mins = sts.reduce((m,x,i)=>m + (done[i] ? 0 : x.min), 0);
+    row.innerHTML = n === sts.length ? '<b>✓ Всё задание сделано</b><div class="jdrp-bar"><i style="width:100%"></i></div><b>🎉</b>'
+      : '<b>сделано '+n+' из '+sts.length+'</b><div class="jdrp-bar"><i style="width:'+(n/sts.length*100)+'%"></i></div>'+(mins ? '<b>≈ '+mins+' мин</b>' : '');
+    if(sel >= 0){ const x = sts[sel]; how.hidden = false;
+      how.innerHTML = '<span>'+x.ic+' '+esc(x.t)+(x.auto ? ' <i>— отметится сам, когда пройдёшь тест</i>' : '')+'</span>'
+        + (x.auto ? '<button type="button" data-a="test">🎯 Пройти тест</button>' : '<button type="button" data-a="tick">'+(done[sel] ? 'Снять отметку' : '✓ Сделал')+'</button>');
+      const bb = how.querySelector("button"); bb.onclick = ()=>{ if(bb.dataset.a === "test"){ const l = LESSONS.find(y=>y.id === lid); show("test"); showIntro(QUIZ[lid].map((q,i)=>Object.assign({lid:lid,qi:i},q)), lid, l.title, [l], l.subject+" · "+fmtDate(l.date)); return; }
+        if(jdStepState(lid)[sel]) jdgUntick(lid, sel); else { jdTick(lid, sel); toast("✓ Отмечено: «"+x.lab+"»"); } try{ d.jdRefresh(); }catch(e){} }; }
+    else how.hidden = true; };
+  btns.forEach((b,i)=>b.onclick = ()=>{ sel = sel === i ? -1 : i; d.jdRefresh(); });
+  box.insertBefore(d, box.firstChild); box.classList.add("jd-noladder"); d.jdRefresh();
+}
+;(function(){ if(typeof renderContent==="function"){ const _rc3=renderContent; renderContent=function(){ const r=_rc3.apply(this,arguments); try{ jdgStrip(); }catch(e){ console.error(e); } return r; }; } })();
 </script>
 </body>
 </html>
