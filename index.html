@@ -2704,6 +2704,72 @@ details.jd-rl>div .jd-fm{margin-top:0}
 @media (min-width:1000px){:root{--maxw:min(1520px,96vw)}}
 @media (pointer:coarse) and (min-width:700px){body{zoom:1.18}}
 @media (pointer:coarse) and (min-width:1100px){body{zoom:1.3}}
+
+/* ===== Мокап 162 (05.10): Учёба — маршрут недели, книги, «назад» ===== */
+#termChips{display:none}
+#view-lessons .bar{display:none!important}
+.jdu-by small u{text-decoration:none;color:#c27c00;font-weight:800}
+.jdu-bk{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;background:#111E42;color:#fff;border-radius:14px;padding:8px 10px;margin:0 0 14px;box-shadow:0 4px 14px rgba(16,27,51,.25)}
+.jdu-bk[hidden]{display:none}
+.jdu-bk button{border:0;border-radius:12px;background:#F2A104;color:#111E42;font:900 17px Nunito,Arial,sans-serif;padding:10px 18px;cursor:pointer;flex:none}
+.jdu-bk span{font-size:15px;color:#c9d4ea;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.jdu-bk span b{color:#fff}
+.jdu-home{display:block}
+.jdu-sea{position:relative;background:linear-gradient(#d9e8f6,#b9d3ee);border-radius:18px;padding:14px 14px 8px;color:#1d2a33}
+.jdu-sea h3{margin:0;font:900 19px Nunito,Arial,sans-serif;color:#1d2a33}.jdu-sea .hs{font-size:13.5px;color:#5b6b78}
+.jdu-bys{position:relative;display:flex;justify-content:space-between;padding:64px 4px 4px;gap:4px}
+.jdu-bys:before{content:"";position:absolute;left:30px;right:30px;top:94px;border-top:5px dotted #fff}
+.jdu-by{position:relative;text-align:center;flex:1;min-width:0;background:none;border:0;cursor:pointer;color:#1d2a33;font-family:inherit;padding:0}
+.jdu-by .bb{width:56px;height:56px;margin:0 auto;border-radius:50%;background:#fff;border:5px solid #F3E3B5;display:grid;place-items:center;font:900 21px Nunito,Arial,sans-serif;box-shadow:0 4px 10px rgba(16,27,51,.15);position:relative;transition:transform .15s}
+.jdu-by.on .bb{border-color:#F2A104;transform:scale(1.18);background:#fff7e3}.jdu-by.ok .bb{border-color:#12A05E}
+.jdu-by.ok .bb:after{content:"✓";position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#12A05E;color:#fff;font-size:13px;display:grid;place-items:center}
+.jdu-by b{display:block;margin-top:8px;font-size:16px}.jdu-by small{font-size:12.5px;color:#5b6b78}
+.jdu-ship{position:absolute;top:-62px;left:50%;transform:translateX(-50%);text-align:center;font:900 11px monospace;pointer-events:none}
+.jdu-ship span{background:#111E42;color:#fff;border-radius:99px;padding:1px 7px;white-space:nowrap}
+.jdu-hold{margin-top:12px;background:var(--surface,#fff);border-radius:18px;padding:12px 14px;box-shadow:0 2px 10px rgba(16,27,51,.08)}
+.jdu-hold h4{margin:0 0 8px;font:900 18px Nunito,Arial,sans-serif;color:var(--ink)}.jdu-hold h4 small{font-weight:600;font-size:14px;color:var(--ink-2)}
+.jdu-cr{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;border-left:8px solid var(--c);background:color-mix(in srgb,var(--c) 6%,var(--surface,#fff));margin:8px 0;cursor:pointer;width:100%;text-align:left;font-family:inherit;color:var(--ink);border-top:0;border-right:0;border-bottom:0}
+.jdu-ci{width:56px;height:56px;border-radius:14px;background:var(--c);display:grid;place-items:center;font-size:28px}
+.jdu-ct{min-width:0}.jdu-ct b{font-size:18px;margin-right:6px}.jdu-ct span.t{display:block;font-size:15px;margin-top:2px}.jdu-ct small{display:block;color:var(--ink-2);font-size:13px;margin-top:2px}
+.jdu-new{display:inline-block;background:#E5484D;color:#fff;font:900 11px Nunito,Arial,sans-serif;letter-spacing:.06em;border-radius:99px;padding:2px 9px;vertical-align:3px;animation:jduPul 1.6s infinite}
+@keyframes jduPul{50%{box-shadow:0 0 0 6px rgba(229,72,77,.2)}}
+.jdu-go{border:0;border-radius:12px;background:#12A05E;color:#fff;font:900 16px Nunito,Arial,sans-serif;padding:12px 16px;white-space:nowrap;cursor:pointer}
+.jdu-go.am{background:#F2A104;color:#2a1d00}.jdu-go.vi{background:#6a4fb3}.jdu-go.re{background:#E5484D}
+.jdu-gh{border:2px solid var(--line);border-radius:12px;background:var(--surface,#fff);color:var(--ink);font:800 14px Nunito,Arial,sans-serif;padding:9px 13px;cursor:pointer;white-space:nowrap}
+.jdu-ca{text-align:right}.jdu-ca .half{display:block;font-size:12.5px;color:#c27c00;font-weight:800;margin-bottom:4px}.jdu-ok{color:#12A05E;font-weight:900;display:block;margin-bottom:4px}
+.jdu-k7{margin-top:12px;background:var(--surface,#fff);border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 10px rgba(16,27,51,.08);flex-wrap:wrap}
+.jdu-k7 .bub{flex:1;min-width:200px}.jdu-k7 b{display:block;font-size:17px;color:var(--ink)}.jdu-k7 span{font-size:14px;color:var(--ink-2)}
+.jdu-k7 button{border:0;border-radius:12px;font:900 16px Nunito,Arial,sans-serif;padding:11px 20px;cursor:pointer}.jdu-k7 .y{background:#12A05E;color:#fff}.jdu-k7 .n{background:#e9e6dc;color:#1d2a33}
+.jdu-shelf{margin-top:14px;background:#7b5a3c;border-radius:16px;padding:12px 12px 0}
+.jdu-shelf h4{color:#fff;margin:0 0 10px;font:900 17px Nunito,Arial,sans-serif}.jdu-shelf h4 small{opacity:.8;font-weight:600;font-size:13.5px}
+.jdu-books{display:flex;gap:10px;overflow-x:auto;padding:8px 2px 14px;border-bottom:12px solid #5a3f27}
+.jdu-bo{position:relative;flex:0 0 108px;height:146px;border-radius:4px 12px 12px 4px;background:var(--c);color:#fff;padding:10px 8px 8px 16px;box-shadow:3px 4px 0 rgba(0,0,0,.28);border:0;text-align:left;cursor:pointer;font-family:inherit;transition:transform .15s}
+.jdu-bo:hover{transform:translateY(-4px)}
+.jdu-bo:before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:rgba(0,0,0,.25);border-radius:4px 0 0 4px}
+.jdu-bo .bi{font-size:28px;display:block}.jdu-bo b{display:block;font-size:14.5px;margin-top:8px;line-height:1.15}.jdu-bo small{display:block;font-size:12px;opacity:.92;margin-top:4px}
+.jdu-bo .nb{position:absolute;top:-9px;right:-6px;background:#fff;color:#E5484D;border:2px solid #E5484D;font:900 10.5px Nunito,Arial,sans-serif;border-radius:99px;padding:1px 7px}
+.jdu-cov{display:flex;gap:16px;align-items:center;background:var(--c);color:#fff;border-radius:18px;padding:14px}
+.jdu-cov .bi{flex:none;width:70px;height:92px;border-radius:4px 12px 12px 4px;background:#fff;display:grid;place-items:center;font-size:34px;box-shadow:3px 4px 0 rgba(0,0,0,.25)}
+.jdu-cov h2{margin:0;font:900 23px Nunito,Arial,sans-serif;color:#fff}.jdu-cov span{display:block;font-size:14.5px;opacity:.92}
+.jdu-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}
+.jdu-tl{background:var(--surface,#fff);border:2px solid var(--line);border-radius:16px;padding:12px;display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
+.jdu-tl:hover{border-color:var(--c)}.jdu-tl i{font-style:normal;font-size:30px}.jdu-tl b{display:block;font-size:16.5px}.jdu-tl small{font-size:13px;color:var(--ink-2)}
+.jdu-sec{font:900 13px Nunito,Arial,sans-serif;letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase;margin:14px 0 6px}
+.jdu-pages{background:#fffdf6;border-radius:18px;padding:6px 14px;color:#1d2a33;box-shadow:0 2px 10px rgba(16,27,51,.08)}
+.jdu-pg{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed #e0d8c0;cursor:pointer}.jdu-pg:last-child{border:0}
+.jdu-pd{text-align:center;background:#f1ece0;border-radius:12px;padding:5px 2px}.jdu-pd b{font-size:22px;display:block;line-height:1}.jdu-pd small{font-size:11.5px;color:#5b6b78}
+.jdu-pg.hot{background:#fff3d9;border-radius:14px;padding:10px 10px;margin:0 -10px;box-shadow:0 0 0 3px #F2A104 inset}.jdu-pg.hot .jdu-pd{background:#F2A104}.jdu-pg.hot .jdu-pd b,.jdu-pg.hot .jdu-pd small{color:#fff}
+.jdu-pg.done{opacity:.62}.jdu-pt b{font-size:16px}.jdu-pt small{display:block;font-size:13px;color:#5b6b78}
+.jdu-wk{font:900 12.5px Nunito,Arial,sans-serif;letter-spacing:.05em;color:#8a7a55;text-transform:uppercase;padding:10px 0 2px}
+.jdu-more{display:block;width:100%;margin:6px 0;border:2px dashed #d9cfb4;background:none;border-radius:12px;padding:10px;font:800 14px Nunito,Arial,sans-serif;color:#5b6b78;cursor:pointer}
+@media (max-width:600px){.jdu-cr{grid-template-columns:44px 1fr}.jdu-ci{width:44px;height:44px;font-size:22px}.jdu-ca{grid-column:1/-1;text-align:left;display:flex;align-items:center;gap:10px;justify-content:space-between}
+ .jdu-by .bb{width:44px;height:44px;font-size:17px}.jdu-bys:before{top:86px}.jdu-pg{grid-template-columns:58px 1fr}.jdu-pg>button{grid-column:1/-1}}
+/* «Проверь себя» вместо «Сравнил с тетрадью» */
+.jdx-cmp{display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px}
+.jdx-cmp span{grid-column:1/-1;font:800 15px Nunito,Arial,sans-serif!important;color:var(--ink)!important}
+.jdx-cmp button{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:86px!important;border:0!important;border-radius:16px!important;font:900 15px Nunito,Arial,sans-serif!important;padding:10px 6px}
+.jdx-cmp button i{font-style:normal;font-size:28px}.jdx-cmp button small{font-weight:600;font-size:12px}
+.jdx-cmp .x-y{background:#d8f1e3!important;color:#0b6a3d!important}.jdx-cmp .x-x{background:#fff1d0!important;color:#8a5a00!important}.jdx-cmp .x-v{background:#e8e2f7!important;color:#4a3590!important}
+.jdx-cmp button.x-on{box-shadow:0 0 0 3px currentColor inset}
 </style>
 </head>
 <body>
@@ -2749,6 +2815,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
 
 <main>
 
+<div class="jdu-bk noprint" id="jduBk" hidden><button type="button" id="jduBkBtn">← Назад</button><span id="jduBkPath"></span></div>
 <div class="capback noprint" id="capBack" hidden><button id="capBackBtn" type="button">← Сегодня</button><span id="capBackTitle"></span></div>
 
 <!-- ================= СЕГОДНЯ ================= -->
@@ -13727,9 +13794,11 @@ function jdxInit(box){
  });
  box.querySelectorAll('.jdx-c.write').forEach(c=>{ if(c.dataset.ready) return; c.dataset.ready=1;
   c.querySelector('.x-show').onclick=()=>c.classList.add('open');
+  jduCmp(c);
   const err=c.querySelector('.jdx-err'),y=c.querySelector('.jdx-cmp .x-y'),x=c.querySelector('.jdx-cmp .x-x');
   y.onclick=()=>{y.classList.add('x-on');x.classList.remove('x-on');err.hidden=true;jdxStep(c);};
   x.onclick=()=>{x.classList.add('x-on');y.classList.remove('x-on');err.hidden=false;};
+  { const v=c.querySelector('.jdx-cmp .x-v'); if(v) v.onclick=()=>{v.classList.add('x-on');x.classList.remove('x-on');y.classList.remove('x-on');err.hidden=true;jdxStep(c);}; }
   c.querySelectorAll('.x-opt').forEach(o=>o.onclick=()=>{const f=c.querySelector('.x-fix[data-f="'+o.dataset.o+'"]');const on=!f.classList.contains('x-on');f.classList.toggle('x-on',on);o.classList.toggle('x-on',on);});
   c.querySelectorAll('.x-fix .x-fixed').forEach(b=>b.onclick=()=>{const f=b.closest('.x-fix'),o=c.querySelector('.x-opt[data-o="'+f.dataset.f+'"]');f.classList.remove('x-on');o.classList.remove('x-on');o.classList.add('x-fixed-ok');
    if(![...c.querySelectorAll('.x-opt.x-on')].length) jdxStep(c);});
@@ -14500,7 +14569,8 @@ function renderNav(){
   const cur = D.find(d=>d.id === deck), A = attn();
   const ids = navFlat()
     ? TABS.filter(t=>t.role === "all" || t.role === state.role).map(t=>t.id)
-    : cur.ids;
+    : cur.ids.filter(id=>!JDU_EDU_HIDE.includes(id));
+  { const nv=document.querySelector("nav.subjects"); if(nv) nv.hidden = ids.length < 2; }
   document.getElementById("mainNav").innerHTML = ids.map(id=>{
     const t = TABS.find(x=>x.id === id);
     return '<button data-t="'+id+'" class="'+(id===flashId?"flash":"")+'" style="--tc:'+C[t.color]+'" aria-selected="'+(view===id)+'">'
@@ -14540,6 +14610,8 @@ function renderNav(){
 
 function show(v){
   if(!tabAllowed(v)) v = "today";
+  if(view === "lessons" && v !== "lessons") jduPrev = {m:lessonsMode, s:curSubject, l:curLesson};
+  else if(v !== "lessons" && !JDU_EDU_HIDE.includes(v)) jduPrev = null;
   view = v;
   deck = deckOf(v).id;
   TABS.forEach(t=>{ const el = document.getElementById("view-"+t.id); if(el) el.hidden = (t.id !== v); });
@@ -14563,6 +14635,7 @@ function show(v){
   if(v==="print") renderSheets();
   if(v==="prog") renderProgress();
   if(v==="how") window.scrollTo({top:0});
+  jduBar();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
@@ -15531,9 +15604,11 @@ function renderLessonsView(){
     if(q || termFilter) renderCards(); else renderSubjGrid();
   }
   const js=document.getElementById("jdsLes");
-  if(js){ js.hidden = lessonsMode === "all"; if(lessonsMode !== "all") jdsFill(js,"les"); }
+  if(js) js.hidden = true;
+  { const sb=document.getElementById("subjBack"); if(sb) sb.hidden = true; }
   if(lessonsMode === "subj") renderSubjScreen();
   else if(lessonsMode === "one"){ renderSubject(); renderContent(); }
+  jduBar();
 }
 function renderTermChips(){
   const subs = subjects().filter(s=>s.subject !== DIAG_SUBJ), ts = terms();
@@ -15791,11 +15866,151 @@ function toggleAcc(h){
   acc.classList.toggle("acc-open", willOpen);
   if(willOpen && typeof curLesson!=="undefined" && document.getElementById("content").contains(acc)) jdPathMark(curLesson,"check");
 }
+
+/* ===== Мокап 162 (5 октября): «Учёба» — маршрут недели и груз на день, полка книг-предметов,
+   книга предмета со страницами по датам, полоса «← Назад», «Проверь себя». Классы jdu-. ===== */
+const JDU_EDU_HIDE = ["gram","test","diag","words","oral"];
+let jduDay = null, jduLater = "", jduPrev = null, jduMore = {};
+const JDU_WD = ["Вс","Пн","Вт","Ср","Чт","Пт","Сб"], JDU_MN = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
+const JDU_DAYG = ["воскресенье","понедельник","вторник","среду","четверг","пятницу","субботу"];
+function jduD(k){ return new Date(k+"T12:00:00"); }
+function jduSeen(id){ state.seen = state.seen || {}; if(id && !state.seen[id]){ state.seen[id] = todayKey(); save(); } }
+function jduIsNew(l){ return !((state.seen||{})[l.id]) && jdsdState(l).k === "new" && daysBetween(l.date, todayKey()) <= 2; }
+function jduShort(l){ return (typeof JDL_SHORT !== "undefined" && JDL_SHORT[l.id]) || l.title; }
+function jduAct(l){
+  const s = jdsdState(l);
+  if(s.k === "new")  return {b:'<button type="button" class="jdu-go">Делать →</button>'};
+  if(s.k === "go")   return {h:s.w, b:'<button type="button" class="jdu-go am">Дальше →</button>'};
+  if(s.k === "test") return {h:"шаги сделаны", b:'<button type="button" class="jdu-go vi">Проверь себя →</button>'};
+  if(s.k === "rep")  return {h:s.w, b:'<button type="button" class="jdu-go re">Повторить →</button>'};
+  return {ok:1, b:'<button type="button" class="jdu-gh">Открыть</button>'};
+}
+function jduDates(){
+  const tk = todayKey();
+  const ds = [...new Set(LESSONS.filter(l=>l.subject !== DIAG_SUBJ && l.date >= tk).map(l=>l.date))].sort();
+  if(ds[0] !== tk && jduD(tk).getDay() % 6 !== 0) ds.unshift(tk);
+  return ds.slice(0, 6);
+}
+function jduOpen(id){ const l = LESSONS.find(x=>x.id === id); if(!l) return; openSubject(l.subject, l.id); }
+function renderSubjGrid(){
+  const g = document.getElementById("subjGrid"); g.className = "jdu-home";
+  const tk = todayKey(), ds = jduDates();
+  const of = d => LESSONS.filter(l=>l.subject !== DIAG_SUBJ && l.date === d);
+  const allOk = d => { const L = of(d); return L.length && L.every(l=>jdsdState(l).k === "ok"); };
+  if(!jduDay || !ds.includes(jduDay)) jduDay = ds.find(d=>of(d).length && !allOk(d)) || ds[0];
+  let h = '<div class="jdu-sea"><h3>Маршрут недели</h3><div class="hs">буй — учебный день · цифра — сколько заданий · нажми буй, чтобы увидеть груз</div><div class="jdu-bys">';
+  ds.forEach(d=>{ const D = jduD(d), n = of(d).length;
+    h += '<button type="button" class="jdu-by'+(d === jduDay ? ' on' : '')+(allOk(d) ? ' ok' : '')+'" data-d="'+d+'">'
+      + (d === jduDay ? '<div class="jdu-ship"><svg viewBox="0 0 46 40" width="44" height="38"><path d="M4 26h38l-6 10H10z" fill="#111E42"/><path d="M23 4v22M23 6l14 14H23z" fill="#fff" stroke="#111E42" stroke-width="2"/></svg><br><span>Даниил</span></div>' : '')
+      + '<div class="bb">'+n+'</div><b>'+JDU_WD[D.getDay()]+'</b><small>'+(d === tk ? '<u>сегодня</u>' : D.getDate()+' '+JDU_MN[D.getMonth()])+'</small></button>'; });
+  h += '</div></div>';
+  const L = of(jduDay), D = jduD(jduDay);
+  const left = L.filter(l=>jdsdState(l).k !== "ok"), min = left.reduce((a,l)=>a + (jdrMin(l.id) || 0), 0);
+  h += '<div class="jdu-hold"><h4>Груз на '+JDU_DAYG[D.getDay()]+', '+D.getDate()+' '+JDL_MON[D.getMonth()]+' <small>· '
+    + (L.length ? plu(L.length, "задание", "задания", "заданий") + (left.length ? (min ? ' · ≈ '+min+' мин' : '') : ' · всё сделано ✓') : 'заданий нет')+'</small></h4>';
+  L.forEach(l=>{ const a = jduAct(l), m = jdrMin(l.id);
+    let t = jdhTask(l); if(t.length > 120) t = t.slice(0, 117).replace(/\s+\S*$/, "") + "…";
+    h += '<div class="jdu-cr" role="button" tabindex="0" style="--c:'+C[l.color]+'" data-id="'+l.id+'"><div class="jdu-ci">'+subjIcon(l.subject)+'</div>'
+      + '<div class="jdu-ct"><b>'+esc(JDH_SH[l.subject] || l.subject)+'</b>'+(jduIsNew(l) ? '<span class="jdu-new">НОВОЕ</span>' : '')
+      + '<span class="t">'+esc(jduShort(l))+'</span><small>'+esc(t)+(m && !a.ok ? ' · ≈ '+m+' мин' : '')+'</small></div>'
+      + '<div class="jdu-ca">'+(a.ok ? '<span class="jdu-ok">✓ сделано</span>' : (a.h ? '<span class="half">'+esc(a.h)+'</span>' : ''))+a.b+'</div></div>'; });
+  if(!L.length) h += '<p style="color:var(--ink-2);margin:4px 0">На этот день ничего не задано. Нажми другой буй.</p>';
+  h += '</div>';
+  const first = left[0];
+  if(first && jduLater !== jduDay)
+    h += '<div class="jdu-k7"><div class="bub"><b>Начнём? Первым — '+esc(JDH_SH[first.subject] || first.subject)+'</b><span>'+esc(jduShort(first))+(jdrMin(first.id) ? ' · ≈ '+jdrMin(first.id)+' мин' : '')+'</span></div>'
+      + '<button type="button" class="y" data-id="'+first.id+'">Да!</button><button type="button" class="n">Потом</button></div>';
+  const subs = subjects().filter(x=>x.subject !== DIAG_SUBJ);
+  h += '<div class="jdu-shelf"><h4>Полка предметов <small>· нажми книгу — там все задания по датам</small></h4><div class="jdu-books">';
+  subs.forEach(x=>{ const ls = lessonsOf(x.subject), nw = ls.some(jduIsNew);
+    const up = ls.filter(l=>l.date >= tk && jdsdState(l).k !== "ok").sort((a,b)=>a.date.localeCompare(b.date))[0];
+    const lab = up ? 'на '+jduD(up.date).getDate()+' '+JDU_MN[jduD(up.date).getMonth()] : (ls[0] ? 'было '+jduD(ls[0].date).getDate()+' '+JDU_MN[jduD(ls[0].date).getMonth()] : '');
+    h += '<button type="button" class="jdu-bo" style="--c:'+C[x.color]+'" data-s="'+esc(x.subject)+'">'+(nw ? '<span class="nb">новое</span>' : '')
+      + '<span class="bi">'+subjIcon(x.subject)+'</span><b>'+esc(JDH_SH[x.subject] || x.subject)+'</b><small>'+lab+'</small></button>'; });
+  h += '</div></div>';
+  g.innerHTML = h;
+  g.querySelectorAll(".jdu-by").forEach(b=>b.addEventListener("click", ()=>{ jduDay = b.dataset.d; renderSubjGrid(); }));
+  g.querySelectorAll(".jdu-cr").forEach(b=>{ b.addEventListener("click", ()=>jduOpen(b.dataset.id)); b.addEventListener("keydown", e=>{ if(e.key === "Enter") jduOpen(b.dataset.id); }); });
+  const y = g.querySelector(".jdu-k7 .y"), n = g.querySelector(".jdu-k7 .n");
+  if(y) y.addEventListener("click", ()=>jduOpen(y.dataset.id));
+  if(n) n.addEventListener("click", ()=>{ jduLater = jduDay; renderSubjGrid(); });
+  g.querySelectorAll(".jdu-bo").forEach(b=>b.addEventListener("click", ()=>openSubject(b.dataset.s)));
+}
+function renderSubjScreen(){
+  const sub = curSubject, sb = subjects().find(x=>x.subject === sub) || {color:"blue"};
+  const col = C[sb.color], ls = lessonsOf(sub), st = subjStat(sub), tk = todayKey();
+  const isEng = sub === "Английский язык";
+  const ahead = ls.filter(l=>l.date >= tk && jdsdState(l).k !== "ok");
+  const hot = ahead.slice().sort((a,b)=>a.date.localeCompare(b.date))[0];
+  let tools = "";
+  if(st.q) tools += '<button type="button" class="jdu-tl" data-a="test"><i>📝</i><div><b>Тест по урокам</b><small>'+Math.min(20, st.q)+' вопросов из всех разборов предмета вперемешку</small></div></button>';
+  if(isEng){
+    tools += '<button type="button" class="jdu-tl" data-a="gram"><i>🏝</i><div><b>Грамматика</b><small>карта модуля: острова-темы, шторм и порт «Проверочная»</small></div></button>';
+    const wn = ls.reduce((n,l)=>n + (RECAP[l.id] ? RECAP[l.id].pairs.length : 0), 0);
+    if(wn) tools += '<button type="button" class="jdu-tl" data-a="words"><i>🗂</i><div><b>Учить слова</b><small>карточки «слово — перевод» из уроков, всего '+wn+'</small></div></button>';
+    const shoal = DIAG_IDS.filter(id=>{ const r = state.tests[id]; return r && r.total && diagLvl(r) !== "good"; }).length;
+    tools += '<button type="button" class="jdu-tl" data-a="diag"><i>🧭</i><div><b>Что помню с 5 класса</b><small>'+(shoal ? shoal+' умения подтянуть' : 'проверка 7 умений, без оценок')+'</small></div></button>';
+  }
+  if(state.role === "nav") tools += '<button type="button" class="jdu-tl" data-a="oral"><i>🎤</i><div><b>Рассказать папе</b><small>вопросы вслух — папа слушает и отмечает</small></div></button>';
+  const head = document.getElementById("subjHead");
+  head.className = "";
+  head.innerHTML = '<div class="jdu-cov" style="--c:'+col+'"><div class="bi">'+subjIcon(sub)+'</div><div><h2>'+esc(sub)+'</h2><span>'+esc(SUBJ_BOOK[sub] || "учебник не указан")+'</span>'
+    + '<span>'+(hot ? 'ближайшее: '+jduD(hot.date).getDate()+' '+JDU_MN[jduD(hot.date).getMonth()]+' · ' : '')+(ahead.length ? 'впереди '+plu(ahead.length, "задание", "задания", "заданий") : 'всё задание сделано ✓')+'</span></div></div>'
+    + (tools ? '<div class="jdu-tools" style="--c:'+col+'">'+tools+'</div>' : '');
+  const lim = jduMore[sub] ? 999 : 12;
+  let h = '<div class="jdu-sec">Страницы — задания по датам</div><div class="jdu-pages">', wk = "";
+  ls.slice(0, lim).forEach(l=>{ const D = jduD(l.date), a = jduAct(l);
+    const m = new Date(D); m.setDate(D.getDate() - ((D.getDay() + 6) % 7)); const e = new Date(m); e.setDate(m.getDate() + 6);
+    const wl = m.getDate()+(m.getMonth() !== e.getMonth() ? ' '+JDU_MN[m.getMonth()] : '')+'–'+e.getDate()+' '+JDU_MN[e.getMonth()];
+    if(wl !== wk){ wk = wl; h += '<div class="jdu-wk">неделя '+wl+'</div>'; }
+    const lab = a.ok ? 'сделано' : l.date === tk ? 'на сегодня' : l.date > tk ? 'на '+JDU_DAYG[D.getDay()]+(hot && l.id !== hot.id ? ' · можно заранее' : '') : 'не доделано';
+    h += '<div class="jdu-pg'+(hot && l.id === hot.id ? ' hot' : '')+(a.ok ? ' done' : '')+'" data-id="'+l.id+'"><div class="jdu-pd"><b>'+D.getDate()+'</b><small>'+JDU_MN[D.getMonth()]+' · '+JDU_WD[D.getDay()]+'</small></div>'
+      + '<div class="jdu-pt"><b>'+esc(jduShort(l))+'</b> '+(jduIsNew(l) ? '<span class="jdu-new">НОВОЕ</span>' : a.ok ? '<span class="jdu-ok" style="display:inline">✓</span>' : '')+'<small>'+esc(lab)+(a.h ? ' · '+esc(a.h) : '')+'</small></div>'+a.b+'</div>'; });
+  if(ls.length > lim) h += '<button type="button" class="jdu-more">Показать ещё '+(ls.length - lim)+' — старые задания</button>';
+  if(!ls.length) h += '<p>По этому предмету заданий пока нет.</p>';
+  h += '</div>';
+  const rows = document.getElementById("subjRows"); rows.innerHTML = h;
+  rows.querySelectorAll(".jdu-pg").forEach(b=>b.addEventListener("click", ()=>jdlOpen(b.dataset.id)));
+  const mo = rows.querySelector(".jdu-more"); if(mo) mo.addEventListener("click", ()=>{ jduMore[sub] = 1; renderSubjScreen(); });
+  head.querySelectorAll(".jdu-tl").forEach(b=>b.addEventListener("click", ()=>{
+    const a = b.dataset.a;
+    if(a === "test"){ show("test"); startSubjTest(sub); }
+    else show(a);
+  }));
+}
+function jduBar(){
+  const bk = document.getElementById("jduBk"); if(!bk) return;
+  let p = null;
+  if(view === "lessons" && lessonsMode === "subj") p = ["Учёба", curSubject];
+  else if(view === "lessons" && lessonsMode === "one"){ const l = LESSONS.find(x=>x.id === curLesson); p = ["Учёба", curSubject, l ? jduShort(l) : ""]; }
+  else if(JDU_EDU_HIDE.includes(view)){ const t = TABS.find(x=>x.id === view);
+    p = ["Учёба"].concat(jduPrev && jduPrev.m !== "all" && jduPrev.s ? [JDH_SH[jduPrev.s] || jduPrev.s] : []).concat([t ? t.label : ""]); }
+  bk.hidden = !p;
+  if(p){ document.getElementById("jduBkPath").innerHTML = p.slice(0, -1).map(x=>esc(JDH_SH[x] || x)).join(" › ") + " › <b>" + esc(p[p.length - 1]) + "</b>";
+    const cb = document.getElementById("capBack"); if(cb) cb.hidden = true; }
+}
+document.getElementById("jduBkBtn").addEventListener("click", ()=>{
+  if(view === "lessons" && lessonsMode === "one"){ lessonsMode = "subj"; renderLessonsView(); }
+  else if(view === "lessons" && lessonsMode === "subj"){ lessonsMode = "all"; renderLessonsView(); }
+  else if(jduPrev && jduPrev.m !== "all"){ const p = jduPrev; jduPrev = null; curSubject = p.s; curLesson = p.l; lessonsMode = p.m; show("lessons"); }
+  else { jduPrev = null; lessonsMode = "all"; show("lessons"); }
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+function jduCmp(c){
+  const m = c.querySelector(".jdx-cmp"); if(!m || m.dataset.j) return; m.dataset.j = "1";
+  m.innerHTML = '<span>Проверь себя: открой ответ выше и сравни со своей тетрадью</span>'
+    + '<button type="button" class="x-y"><i>👍</i>У меня так же<small>шаг готов</small></button>'
+    + '<button type="button" class="x-x"><i>🤔</i>Чуть иначе<small>покажи подсказку</small></button>'
+    + '<button type="button" class="x-v"><i>🎤</i>Скажу вслух<small>папа послушает</small></button>';
+  const eh = c.querySelector(".jdx-err .x-eh"); if(eh) eh.textContent = "Что вышло иначе? Нажми — покажу подсказку:";
+}
+
 function renderContent(){
   const src = document.getElementById(curLesson);
   const box = document.getElementById("content");
   box.innerHTML = "";
   if(!src) return;
+  jduSeen(curLesson);
   const node = src.cloneNode(true);
   node.removeAttribute("id");
   node.dataset.lid = curLesson;
@@ -18959,9 +19174,9 @@ function bookHint(sub){
 
 const DECKS = [
   {id:"day", n:"Сегодня",    c:"green", ids:["today","cal"]},
-  {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","gram","test","diag","words","oral","need"]},
+  {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","gram","test","diag","words","oral"]},
   {id:"bod", n:"Тело и дух", c:"red",   ids:["gto","chal","mine"]},
-  {id:"br",  n:"Рубка",      c:"amber", ids:["books","kurs","print","prog","how","why"], capN:"Справка"}
+  {id:"br",  n:"Рубка",      c:"amber", ids:["need","books","kurs","print","prog","how","why"], capN:"Справка"}
 ];
 let deck = "day", flashId = "";
 
@@ -18995,7 +19210,7 @@ function renderDecks(){
     const fc = (d.id !== deck && hit.length) ? C[A[hit[0]]] : null;
     return '<button class="deck" data-d="'+d.id+'" style="--dc:'+C[d.c]+'" aria-selected="'+(d.id===deck)+'">'
       + (fc ? '<span class="attn" style="--fc:'+fc+'"></span>' : '')
-      + d.n + '<small>' + d.ids.length + ' ' + nplural(d.ids.length) + '</small></button>';
+      + d.n + '<small>' + (d.id==="edu" ? "задания по дням" : d.ids.length + ' ' + nplural(d.ids.length)) + '</small></button>';
   }).join("");
   document.querySelectorAll("#decks .deck").forEach(b=>b.addEventListener("click", ()=>{
     const d = decks().find(x=>x.id===b.dataset.d);
