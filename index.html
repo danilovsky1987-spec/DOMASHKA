@@ -2878,6 +2878,13 @@ details.jd-rl>div .jd-fm{margin-top:0}
 
 .jdu-opt{background:transparent;border:3px dashed #c9d3dc;box-shadow:none}.jdu-opt h4{color:var(--ink-2)}.jdu-opt .jdu-cr{opacity:.8}
 .jdu-tg{display:inline-block;background:#eef0f3;color:#5b6b78;font:900 11px Nunito,Arial,sans-serif;letter-spacing:.05em;border-radius:99px;padding:2px 9px;vertical-align:3px;text-transform:uppercase}
+
+@media(max-width:700px){.jdm-sea{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px}.jdm-sea svg.rt,.jdm-ship{display:none}
+ .jdm-is{position:static;transform:none;width:auto;background:rgba(255,255,255,.55);border-radius:14px;padding:8px 4px}.jdm-is .ph{width:60px;height:60px;font-size:26px;border-width:5px}
+ .jdm-is.next{box-shadow:0 0 0 3px #F2A104}.jdm-leg{position:static;grid-column:1/-1;font-size:12px}
+ .jdu-bk span{font-size:13px}}
+
+.jdm-btns>*{max-width:100%}.jdm-btns .jdu-gh{white-space:normal;text-align:left}
 </style>
 </head>
 <body>
@@ -14932,7 +14939,7 @@ function jdDue(keep){
   const box=document.getElementById("jdhDue"); if(!box) return;
   /* 30.09 (Мокап 148, вариант A): стрелки листают и назад — неделя прошлых дней, открывается ближайший будущий */
   const tk=todayKey(), pd=new Date(tk+"T12:00:00"); pd.setDate(pd.getDate()-7); const pk=pd.toISOString().slice(0,10);
-  const les=LESSONS.filter(l=>/^L\d/.test(l.id)&&l.date>pk);
+  const les=LESSONS.filter(l=>/^L\d/.test(l.id)&&l.date>pk&&!/Подготовка|Работа над ошибками/.test(l.title)); /* 05.10: только задания учителя */
   const dates=[...new Set(les.map(l=>l.date))].sort();
   if(!keep){ const f=dates.findIndex(x=>x>tk); jdhIdx=f<0?dates.length-1:f; }
   const d0=new Date(tk+"T12:00:00"); d0.setDate(d0.getDate()+1); const tom=d0.getFullYear()+"-"+String(d0.getMonth()+1).padStart(2,"0")+"-"+String(d0.getDate()).padStart(2,"0");
@@ -15850,9 +15857,10 @@ function jdsdState(l){
 }
 function jdsdList(list){
   if(!list.length) return '<div class="none">Тем пока нет.</div>';
-  const tk=todayKey(), St={}; list.forEach(l=>St[l.id]=jdsdState(l));
+  const tk=todayKey(), St={}; list.forEach(l=>{ St[l.id]=jdsdState(l); if(/Подготовка/.test(l.title) && St[l.id].k==="new") St[l.id]=Object.assign({}, St[l.id], {w:"заранее", c:"#9aa6b2"}); });
   /* главное сейчас: в работе → задано вперёд → повторить → проверь себя → самое свежее «сделать» */
-  const pick = list.find(l=>St[l.id].k==="go") || [...list].reverse().find(l=>l.date>tk && St[l.id].k!=="ok")
+  const real = list.filter(l=>!/Подготовка/.test(l.title));
+  const pick = real.find(l=>St[l.id].k==="go") || [...real].reverse().find(l=>l.date>tk && St[l.id].k!=="ok") || list.find(l=>St[l.id].k==="go") || [...list].reverse().find(l=>l.date>tk && St[l.id].k!=="ok")
     || list.find(l=>St[l.id].k==="rep") || list.find(l=>St[l.id].k==="test") || list.find(l=>St[l.id].k==="new");
   let h='<button type="button" class="jdsd-back" data-back="1">← все темы</button>';
   if(pick){ const s=St[pick.id]; let t=jdhTask(pick); if(t.length>90) t=t.slice(0,87).replace(/\s+\S*$/,"")+"…";
@@ -16240,7 +16248,7 @@ function jdvCard(w, chip){ const e = jdvL(w.k), dop = (state.dop||[]).includes(w
     + jdvPip(w) + (chip ? '<button type="button" class="jdv-tp" data-topic="'+w.lid+'">'+(JDV_IC[w.lid]||"📘")+' '+esc(jdvTitle(w.lid))+'</button>' : '') + '</div>'; }
 function jdvNextCheck(){ /* ближайший урок английского с диктантом/тестом в задании, сегодня или позже */
   const tk = todayKey();
-  return LESSONS.filter(l=>l.subject === WORD_SUBJ && l.date >= tk && !/Подготовка/.test(l.title) && JDV_CHK.test(jdhTask(l))).sort((a,b)=>a.date.localeCompare(b.date))[0] || null; }
+  return LESSONS.filter(l=>l.subject === WORD_SUBJ && l.date >= tk && !/Подготовка|Работа над ошибками/.test(l.title) && JDV_CHK.test(jdhTask(l))).sort((a,b)=>a.date.localeCompare(b.date))[0] || null; }
 function renderDict(){
   const box = document.getElementById("dictBox"); if(!box) return;
   if(jdvK){ jdvKRender(); return; }
