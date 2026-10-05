@@ -2770,6 +2770,57 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdx-cmp button i{font-style:normal;font-size:28px}.jdx-cmp button small{font-weight:600;font-size:12px}
 .jdx-cmp .x-y{background:#d8f1e3!important;color:#0b6a3d!important}.jdx-cmp .x-x{background:#fff1d0!important;color:#8a5a00!important}.jdx-cmp .x-v{background:#e8e2f7!important;color:#4a3590!important}
 .jdx-cmp button.x-on{box-shadow:0 0 0 3px currentColor inset}
+
+/* ===== Мокап 166 (05.10): словарик, лестница памяти, контрольная по словам, маршрут урока. Классы jdv- ===== */
+.jdv{color:var(--ink)}
+.jdv-cov{display:flex;gap:16px;align-items:center;background:#6b3f1f;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 6px,transparent 6px 12px);color:#f7e7c8;border-radius:18px;padding:14px 16px;border:3px solid #a8743f;flex-wrap:wrap}
+.jdv-cov .bk{font-size:46px}.jdv-cov h2{margin:0;font:900 23px Nunito,Arial,sans-serif;color:#fff}.jdv-cov span{font-size:14.5px}
+.jdv-sts{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}.jdv-st{background:rgba(255,255,255,.12);border-radius:12px;padding:6px 12px;text-align:center;min-width:74px}.jdv-st b{display:block;font-size:22px;color:#fff}.jdv-st small{font-size:12px}
+.jdv-acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.jdv-act{border:0;border-radius:16px;padding:12px 14px;text-align:left;cursor:pointer;font-family:inherit;color:#fff;background:var(--c);display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:center}
+.jdv-act i{font-style:normal;font-size:28px}.jdv-act b{display:block;font:900 16.5px Nunito,Arial,sans-serif}.jdv-act small{font-size:13px;opacity:.92}
+.jdv-srch{width:100%;border:3px solid var(--line);border-radius:14px;padding:12px 14px;font-size:17px;background:var(--surface,#fff);color:var(--ink);margin:4px 0 10px}
+.jdv-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.jdv-ch{border:2px solid var(--line);border-radius:99px;padding:7px 14px;font:800 14px Nunito,Arial,sans-serif;background:var(--surface,#fff);color:var(--ink);cursor:pointer}.jdv-ch.on{background:#111E42;color:#fff;border-color:#111E42}
+.jdv-isls{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 12px}
+.jdv-isl{flex:0 0 128px;border:0;border-radius:16px;background:var(--surface,#fff);padding:10px 8px;text-align:center;box-shadow:0 2px 8px rgba(16,27,51,.1);font-family:inherit;color:var(--ink);cursor:pointer}
+.jdv-isl .ii{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 4px;border-radius:50%;background:#fff;border:5px solid #F3E3B5;font-size:24px;position:relative}
+.jdv-isl .ii u{position:absolute;right:-8px;top:-6px;text-decoration:none;font-size:15px}
+.jdv-isl.on{box-shadow:0 0 0 4px #F2A104}.jdv-isl.on .ii{border-color:#F2A104}.jdv-isl b{display:block;font-size:13.5px;line-height:1.15}.jdv-isl small{font-size:11.5px;color:var(--ink-2)}
+.jdv-page{background:#fffdf6;border-radius:18px;padding:12px 14px;box-shadow:0 2px 10px rgba(16,27,51,.1);color:#1d2a33;margin-bottom:12px}
+.jdv-page h3{margin:0 0 8px;font:900 18px Nunito,Arial,sans-serif;color:#1d2a33}.jdv-page h3 small{font-weight:600;color:#5b6b78;font-size:13.5px}
+.jdv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.jdv-wc{background:#fff;border:2px solid #ece4cf;border-radius:14px;padding:10px 12px}.jdv-wc.r{border-color:#f3b3b5;background:#fff7f7}.jdv-wc.k{border-color:#bfe6cf}
+.jdv-wc b{font-size:18px}.jdv-wc .ru{font-size:15.5px;margin-top:2px}
+.jdv-snd{border:0;background:#eef3fb;border-radius:8px;padding:2px 8px;font-size:14px;vertical-align:2px;cursor:pointer;margin-left:4px}
+.jdv-pip{display:inline-block;margin-top:6px;font:800 11.5px Nunito,Arial,sans-serif;border-radius:99px;padding:2px 8px;margin-right:4px}.jdv-pip.r{background:#ffe3e3;color:#b3261e}.jdv-pip.k{background:#d8f1e3;color:#0b6a3d}.jdv-pip.n{background:#eef0f3;color:#5b6b78}.jdv-pip.s{background:#fff1d0;color:#8a5a00}
+.jdv-tp{display:inline-block;margin-top:6px;font:800 11.5px Nunito,Arial,sans-serif;border-radius:99px;padding:2px 8px;border:2px solid #F2A104;cursor:pointer;background:none;color:#1d2a33}
+.jdv-k{background:linear-gradient(#d9e8f6,#b9d3ee);border-radius:20px;padding:14px;color:#1d2a33;margin-bottom:12px}
+.jdv-k h3{margin:0 0 4px;font:900 20px Nunito,Arial,sans-serif;color:#1d2a33}.jdv-k .hs{font-size:14px;color:#5b6b78;margin-bottom:10px}
+.jdv-pk{display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:9px 12px;font-weight:800;border:3px solid transparent;margin:6px 0;cursor:pointer;width:100%;font-family:inherit;color:#1d2a33;text-align:left;font-size:15px}
+.jdv-pk span{font-size:22px}.jdv-pk small{margin-left:auto;font-weight:600;color:#5b6b78}.jdv-pk.on{border-color:#12A05E}.jdv-pk.on:after{content:"✓";color:#12A05E;font-weight:900;font-size:18px}
+.jdv-big{width:100%;border:0;border-radius:14px;background:#12A05E;color:#fff;font:900 17px Nunito,Arial,sans-serif;padding:14px;cursor:pointer;margin-top:8px}.jdv-big.am{background:#F2A104;color:#2a1d00}.jdv-big.gh{background:#fff;color:#1d2a33;border:2px solid #c9d3dc}
+.jdv-q{background:#fff;border-radius:16px;padding:16px;text-align:center;max-width:560px;margin:0 auto}
+.jdv-q .tp{display:inline-block;border:2px solid #F2A104;border-radius:99px;padding:1px 10px;font-weight:800;font-size:13px}
+.jdv-q .qq{font:900 30px Nunito,Arial,sans-serif;margin:12px 0 2px}.jdv-q .qh{font-size:13.5px;color:#5b6b78}
+.jdv-q input{width:100%;margin:12px 0;border:3px solid #9fbfdf;border-radius:12px;padding:12px;font:700 22px Georgia,serif;text-align:center}
+.jdv-q input.good{border-color:#12A05E;background:#effaf3}.jdv-q input.bad{border-color:#E5484D;background:#fff4f4}
+.jdv-q .fb{min-height:24px;font-weight:800;margin-bottom:6px}
+.jdv-qb{display:flex;gap:8px}.jdv-qb button{flex:1;border:0;border-radius:12px;padding:13px;font:900 16px Nunito,Arial,sans-serif;cursor:pointer}.jdv-qb .ok{background:#12A05E;color:#fff}.jdv-qb .sk{background:#e9e6dc;color:#1d2a33}
+.jdv-bar{height:10px;background:#fff;border-radius:99px;overflow:hidden;margin:0 auto 10px;max-width:560px}.jdv-bar i{display:block;height:100%;background:#F2A104}
+.jdv-ri{display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:10px 12px;margin:6px 0;font-size:16px}.jdv-ri .fl{font-size:22px}.jdv-ri .sc{margin-left:auto;font-weight:900}
+.jdv-dw{display:flex;gap:8px;align-items:center;background:#fffdf6;border-radius:10px;padding:8px 10px;margin:4px 0;font-size:15.5px}
+.jdr{background:linear-gradient(#d9e8f6,#b9d3ee);border-radius:18px;padding:12px 14px;margin:0 0 16px;color:#1d2a33}
+.jdr h4{margin:0;font:900 16px Nunito,Arial,sans-serif;color:#1d2a33}.jdr .hs{font-size:13px;color:#5b6b78}
+.jdr-rt{display:flex;gap:6px;position:relative;margin-top:10px;flex-wrap:wrap}
+.jdr-st{flex:1 1 90px;text-align:center;background:none;border:0;cursor:pointer;font-family:inherit;color:#1d2a33;padding:0}
+.jdr-st .ph{width:62px;height:62px;margin:0 auto;border-radius:50%;background:#fff;border:5px solid var(--c);display:grid;place-items:center;font-size:27px;box-shadow:0 4px 10px rgba(16,27,51,.15)}
+.jdr-st.on .ph{transform:scale(1.1);box-shadow:0 0 0 4px #F2A104}.jdr-st b{display:inline-block;margin-top:6px;background:#fff;border-radius:8px;padding:1px 8px;font-size:13.5px}
+.jdr-how{margin-top:10px;background:#fff;border-radius:12px;padding:10px 12px;font-size:15px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.jdr-how button{border:0;border-radius:10px;background:#12A05E;color:#fff;font:900 14.5px Nunito,Arial,sans-serif;padding:9px 14px;cursor:pointer;margin-left:auto}
+.jdu-dad{margin-top:12px;background:#111E42;color:#fff;border-radius:16px;padding:12px 14px}
+.jdu-dad h4{margin:0 0 6px;font:900 16px Nunito,Arial,sans-serif;color:#F2A104}.jdu-dad .it{display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px solid rgba(255,255,255,.12);font-size:15px}
+.jdu-dad .it button{margin-left:auto;border:0;border-radius:10px;background:#F2A104;color:#111E42;font:900 14px Nunito,Arial,sans-serif;padding:8px 12px;cursor:pointer;white-space:nowrap}
+.jdu-sum{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.jdu-sum span{background:rgba(255,255,255,.12);border-radius:99px;padding:3px 10px;font-size:13.5px}
 </style>
 </head>
 <body>
@@ -3771,11 +3822,13 @@ details.jd-rl>div .jd-fm{margin-top:0}
   </div>
 </section>
 
+<section id="view-dict" hidden><div id="dictBox" class="jdv"></div></section>
+
 <section id="view-words" hidden>
   <div id="wordPick">
     <div class="hero" style="--hc:var(--blue)">
       <span class="eyebrow" id="wEyebrow">Английский · слова</span>
-      <h2>Слова вслух</h2>
+      <h2>Учить слова</h2>
       <p class="lede" id="wLede"></p>
     </div>
     <div class="sec" style="--sc2:var(--blue)">
@@ -14532,6 +14585,7 @@ const TABS = [
   {id:"test",    label:"Тесты",     color:"violet", role:"all"},
   {id:"diag",    label:"Диагностика",color:"blue",  role:"all"},
   {id:"words",   label:"Слова",     color:"cyan",   role:"all"},
+  {id:"dict",    label:"Словарик",  color:"amber",  role:"all"},
   {id:"chal",    label:"Вызовы",    color:"pink",   role:"all"},
   {id:"mine",    label:"Моё",       color:"gold",   role:"all"},
   {id:"gto",     label:"ГТО",       color:"red",    role:"all"},
@@ -14627,6 +14681,7 @@ function show(v){
   if(v==="test") showTests();
   if(v==="diag") renderDiag();
   if(v==="words") showWords();
+  if(v==="dict") renderDict();
   if(v==="chal") renderChallenges();
   if(v==="mine") renderMine();
   if(v==="gto") renderGto();
@@ -14912,6 +14967,7 @@ const CAP_MORE = [
   {id:"gto",  ic:"🏅",  t:"ГТО"},
   {id:"diag", ic:"🎯",  t:"Диагностика"},
   {id:"words",ic:"🗣",  t:"Слова"},
+  {id:"dict", ic:"📔",  t:"Словарик"},
   {id:"mine", ic:"✍️", t:"Моё"},
   {id:"how",  ic:"❓",  t:"Справка"}
 ];
@@ -15869,7 +15925,7 @@ function toggleAcc(h){
 
 /* ===== Мокап 162 (5 октября): «Учёба» — маршрут недели и груз на день, полка книг-предметов,
    книга предмета со страницами по датам, полоса «← Назад», «Проверь себя». Классы jdu-. ===== */
-const JDU_EDU_HIDE = ["gram","test","diag","words","oral"];
+const JDU_EDU_HIDE = ["gram","test","diag","words","oral","dict"];
 let jduDay = null, jduLater = "", jduPrev = null, jduMore = {};
 const JDU_WD = ["Вс","Пн","Вт","Ср","Чт","Пт","Сб"], JDU_MN = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
 const JDU_DAYG = ["воскресенье","понедельник","вторник","среду","четверг","пятницу","субботу"];
@@ -15915,11 +15971,19 @@ function renderSubjGrid(){
       + '<span class="t">'+esc(jduShort(l))+'</span><small>'+esc(t)+(m && !a.ok ? ' · ≈ '+m+' мин' : '')+'</small></div>'
       + '<div class="jdu-ca">'+(a.ok ? '<span class="jdu-ok">✓ сделано</span>' : (a.h ? '<span class="half">'+esc(a.h)+'</span>' : ''))+a.b+'</div></div>'; });
   if(!L.length) h += '<p style="color:var(--ink-2);margin:4px 0">На этот день ничего не задано. Нажми другой буй.</p>';
+  { const xs = [], chkL = L.find(l=>l.subject === WORD_SUBJ && !/Подготовка/.test(l.title) && JDV_CHK.test(jdhTask(l)));
+    if(chkL) xs.push(['kon','📔','Контрольная по словам','перед «'+(jdhTask(chkL).match(JDV_CHK)||[""])[0]+'» · 20 слов → итог по темам → доп. список','≈ 10 мин', chkL.id]);
+    if(chkL && /диктант/i.test(jdhTask(chkL))) xs.push(['dic','📝','Как в диктанте','русское → напиши по-английски, журнал проверит буквы','≈ 10 мин', chkL.id]);
+    if(jdvDop().length) xs.push(['dop','🔁','Добить доп. список', jdvDop().length+' забытых слов · письменно','≈ 5 мин','']);
+    if(jduDay === tk){ const due = jdvDue().length; if(due) xs.push(['due','⏰','Слова «пора»', due+' слов по лестнице памяти','≈ '+Math.max(3, Math.round(due*0.6))+' мин','']); }
+    if(jduDay === tk && jduD(tk).getDay() === 6 && !(state.kontr||[]).some(k=>k.d >= jdvAddDays(tk, -6))) xs.push(['kon','📔','Субботняя контрольная','на неделе диктанта не было · 20 слов','≈ 10 мин','']);
+    xs.forEach(x=>{ h += '<div class="jdu-cr" role="button" tabindex="0" style="--c:'+(x[0]==='due'?'#12A05E':x[0]==='dic'?'#6a4fb3':'#E5484D')+'" data-x="'+x[0]+'" data-l="'+x[5]+'"><div class="jdu-ci">'+x[1]+'</div><div class="jdu-ct"><b>'+x[2]+'</b><span class="t">'+esc(x[3])+'</span><small>'+x[4]+'</small></div><div class="jdu-ca"><button type="button" class="jdu-go">Начать →</button></div></div>'; }); }
   h += '</div>';
   const first = left[0];
   if(first && jduLater !== jduDay)
     h += '<div class="jdu-k7"><div class="bub"><b>Начнём? Первым — '+esc(JDH_SH[first.subject] || first.subject)+'</b><span>'+esc(jduShort(first))+(jdrMin(first.id) ? ' · ≈ '+jdrMin(first.id)+' мин' : '')+'</span></div>'
       + '<button type="button" class="y" data-id="'+first.id+'">Да!</button><button type="button" class="n">Потом</button></div>';
+  h += jduDadHtml(L);
   const subs = subjects().filter(x=>x.subject !== DIAG_SUBJ);
   h += '<div class="jdu-shelf"><h4>Полка предметов <small>· нажми книгу — там все задания по датам</small></h4><div class="jdu-books">';
   subs.forEach(x=>{ const ls = lessonsOf(x.subject), nw = ls.some(jduIsNew);
@@ -15930,11 +15994,18 @@ function renderSubjGrid(){
   h += '</div></div>';
   g.innerHTML = h;
   g.querySelectorAll(".jdu-by").forEach(b=>b.addEventListener("click", ()=>{ jduDay = b.dataset.d; renderSubjGrid(); }));
-  g.querySelectorAll(".jdu-cr").forEach(b=>{ b.addEventListener("click", ()=>jduOpen(b.dataset.id)); b.addEventListener("keydown", e=>{ if(e.key === "Enter") jduOpen(b.dataset.id); }); });
+  const jduX = b=>{ const x = b.dataset.x, l = b.dataset.l;
+    if(!x) return jduOpen(b.dataset.id);
+    if(x === "kon"){ jdvK = null; const ll = l ? LESSONS.find(y=>y.id === l) : null; jdvKStart(ll ? jdvLessons().filter(y=>y.date >= jdvAddDays(ll.date, -28) && y.date <= ll.date).map(y=>y.id).slice(0, 6) : null); }
+    else if(x === "dic"){ show("words"); startWords("DICT:"+l); }
+    else if(x === "dop"){ show("words"); startWords("DOP"); }
+    else if(x === "due"){ show("words"); startWords("DUE"); } };
+  g.querySelectorAll(".jdu-cr").forEach(b=>{ b.addEventListener("click", ()=>jduX(b)); b.addEventListener("keydown", e=>{ if(e.key === "Enter") jduX(b); }); });
   const y = g.querySelector(".jdu-k7 .y"), n = g.querySelector(".jdu-k7 .n");
   if(y) y.addEventListener("click", ()=>jduOpen(y.dataset.id));
   if(n) n.addEventListener("click", ()=>{ jduLater = jduDay; renderSubjGrid(); });
   g.querySelectorAll(".jdu-bo").forEach(b=>b.addEventListener("click", ()=>openSubject(b.dataset.s)));
+  jduDadBind(g);
 }
 function renderSubjScreen(){
   const sub = curSubject, sb = subjects().find(x=>x.subject === sub) || {color:"blue"};
@@ -15947,7 +16018,8 @@ function renderSubjScreen(){
   if(isEng){
     tools += '<button type="button" class="jdu-tl" data-a="gram"><i>🏝</i><div><b>Грамматика</b><small>карта модуля: острова-темы, шторм и порт «Проверочная»</small></div></button>';
     const wn = ls.reduce((n,l)=>n + (RECAP[l.id] ? RECAP[l.id].pairs.length : 0), 0);
-    if(wn) tools += '<button type="button" class="jdu-tl" data-a="words"><i>🗂</i><div><b>Учить слова</b><small>карточки «слово — перевод» из уроков, всего '+wn+'</small></div></button>';
+    tools += '<button type="button" class="jdu-tl" data-a="dict"><i>📔</i><div><b>Словарик</b><small>'+jdvAll().length+' слов по темам · контрольная и доп. список</small></div></button>';
+    if(wn) tools += '<button type="button" class="jdu-tl" data-a="words"><i>🗂</i><div><b>Учить слова</b><small>'+(jdvDue().length ? '⏰ сегодня пора: '+jdvDue().length+' слов' : 'карточки по лестнице памяти')+'</small></div></button>';
     const shoal = DIAG_IDS.filter(id=>{ const r = state.tests[id]; return r && r.total && diagLvl(r) !== "good"; }).length;
     tools += '<button type="button" class="jdu-tl" data-a="diag"><i>🧭</i><div><b>Что помню с 5 класса</b><small>'+(shoal ? shoal+' умения подтянуть' : 'проверка 7 умений, без оценок')+'</small></div></button>';
   }
@@ -15975,7 +16047,7 @@ function renderSubjScreen(){
   head.querySelectorAll(".jdu-tl").forEach(b=>b.addEventListener("click", ()=>{
     const a = b.dataset.a;
     if(a === "test"){ show("test"); startSubjTest(sub); }
-    else show(a);
+    else { if(a === "dict") jdvK = null; show(a); }
   }));
 }
 function jduBar(){
@@ -16005,6 +16077,235 @@ function jduCmp(c){
   const eh = c.querySelector(".jdx-err .x-eh"); if(eh) eh.textContent = "Что вышло иначе? Нажми — покажу подсказку:";
 }
 
+
+/* ===== Мокап 166 (5 октября, «делай»): словарик, лестница памяти, контрольная по словам с доп. списком,
+   режим «перед диктантом», маршрут урока по видам работы, папа по ситуации. Классы jdv-, jdr-. ===== */
+const JDV_SKIP = ["L11","L16","L35","L64","L72","L74","L75","L76","L77","L68","L73","L63","L67","L54","L66"];
+const JDV_IC = {L69:"🍋",L78:"🍽",L79:"🛒",L80:"🍳",L81:"☕",L53:"🏛",L44:"🧹",L50:"💌",L28:"🐍",L12:"🏞",L18:"🎫",L5:"🎡",L8:"🎡",L1:"🧭",L65:"🧭"};
+const JDV_GAP = [1,3,7,14,30];
+const JDV_CHK = /диктант|тест|контрольн|проверочн|стартов/i;
+let jdvForce = null, jdvTopic = "", jdvMode = "topic", jdvQ = "", jdvK = null;
+function jdvIsWord(p){ return /[а-яё]/i.test(p[1]) && !/[а-яё]/i.test(p[0]) && !/—/.test(p[1]); }
+function jdvLessons(){ const lim = jdvAddDays(todayKey(), 2);
+  return wordSets().filter(l=>!JDV_SKIP.includes(l.id) && l.date <= lim && RECAP[l.id].pairs.some(jdvIsWord)); }
+function jdvAddDays(k, n){ const d = new Date(k+"T12:00:00"); d.setDate(d.getDate()+n); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function jdvAll(){ const seen = {}, out = [];
+  jdvLessons().forEach(l=>RECAP[l.id].pairs.filter(jdvIsWord).forEach(p=>{ const en = String(p[0]).trim(), k = en.toLowerCase();
+    if(seen[k]) return; seen[k] = 1; out.push({en:en, ru:String(p[1]).trim(), lid:l.id, k:k}); }));
+  return out; }
+function jdvTitle(lid){ const r = RECAP[lid], l = LESSONS.find(x=>x.id === lid); return (r && r.title) || (l ? l.title : lid); }
+function jdvL(k){ return ((state.lad||{})[k]) || null; }
+function jdvLadder(k, ok, lid){
+  state.lad = state.lad || {}; const tk = todayKey(); const e = state.lad[k] || {s:0, due:tk, lid:lid};
+  if(e.last === tk){ return; }
+  e.last = tk; e.lid = e.lid || lid;
+  if(ok){ e.s = Math.min(5, (e.s||0) + 1); e.due = jdvAddDays(tk, JDV_GAP[e.s-1]); }
+  else { e.s = 0; e.due = jdvAddDays(tk, 1); e.miss = (e.miss||0) + 1; }
+  state.lad[k] = e; save();
+}
+function jdvDue(){ const tk = todayKey(), all = jdvAll();
+  const old = all.filter(w=>{ const e = jdvL(w.k); return e && e.due <= tk; });
+  const fresh = all.filter(w=>!jdvL(w.k) && LESSONS.find(l=>l.id === w.lid).date >= jdvAddDays(tk, -14)).slice(0, Math.max(0, 15 - Math.min(15, old.length)));
+  return old.concat(fresh); }
+function jdvDop(){ const all = jdvAll(); return (state.dop||[]).map(k=>all.find(w=>w.k === k)).filter(Boolean); }
+function jdvLessonWords(lid){ return (RECAP[lid] ? RECAP[lid].pairs : []).filter(jdvIsWord).map(p=>({en:String(p[0]).trim(), ru:String(p[1]).trim(), lid:lid, k:String(p[0]).trim().toLowerCase()})); }
+function jdvDeck(set){
+  if(set === "DUE") return {deck:jdvDue(), name:"⏰ Пора повторить"};
+  if(set === "DOP") return {deck:jdvDop(), name:"🔁 Доп. список — добить", force:{mode:"write", dir:"ru"}};
+  if(String(set).indexOf("DICT:") === 0){ const lid = set.slice(5); return {deck:jdvLessonWords(lid).length ? jdvLessonWords(lid) : jdvRecentWords(), name:"📝 Как в диктанте · "+jdvTitle(lid), force:{mode:"write", dir:"ru"}}; }
+  return null; }
+function jdvRecentWords(){ const tk = todayKey(); return jdvAll().filter(w=>{ const l = LESSONS.find(x=>x.id === w.lid); return l.date >= jdvAddDays(tk, -14); }); }
+function jdvSay(t){ try{ const u = new SpeechSynthesisUtterance(t); u.lang = "en-GB"; u.rate = .85; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){ toast("Озвучка недоступна в этом браузере"); } }
+function jdvPip(w){ const e = jdvL(w.k), dop = (state.dop||[]).includes(w.k);
+  if(dop) return '<span class="jdv-pip r">🔁 забыл — в доп. списке</span>';
+  if(!e) return '<span class="jdv-pip n">ещё не учил</span>';
+  if(e.s >= 5) return '<span class="jdv-pip k">🧰 в сундуке</span>';
+  if(e.s === 0) return '<span class="jdv-pip r">🔁 ступенька 1 · повтор '+jduD(e.due).getDate()+' '+JDU_MN[jduD(e.due).getMonth()]+'</span>';
+  return '<span class="jdv-pip s">ступенька '+(e.s+1)+' · повтор '+jduD(e.due).getDate()+' '+JDU_MN[jduD(e.due).getMonth()]+'</span>'; }
+function jdvCard(w, chip){ const e = jdvL(w.k), dop = (state.dop||[]).includes(w.k);
+  const cl = dop || (e && e.s === 0) ? " r" : (e && e.s >= 5 ? " k" : "");
+  return '<div class="jdv-wc'+cl+'"><b>'+esc(w.en)+'</b><button type="button" class="jdv-snd" data-say="'+esc(w.en)+'" title="послушать">🔊</button><div class="ru">'+esc(w.ru)+'</div>'
+    + jdvPip(w) + (chip ? '<button type="button" class="jdv-tp" data-topic="'+w.lid+'">'+(JDV_IC[w.lid]||"📘")+' '+esc(jdvTitle(w.lid))+'</button>' : '') + '</div>'; }
+function jdvNextCheck(){ /* ближайший урок английского с диктантом/тестом в задании, сегодня или позже */
+  const tk = todayKey();
+  return LESSONS.filter(l=>l.subject === WORD_SUBJ && l.date >= tk && !/Подготовка/.test(l.title) && JDV_CHK.test(jdhTask(l))).sort((a,b)=>a.date.localeCompare(b.date))[0] || null; }
+function renderDict(){
+  const box = document.getElementById("dictBox"); if(!box) return;
+  if(jdvK){ jdvKRender(); return; }
+  const all = jdvAll(), ls = jdvLessons();
+  if(!jdvTopic || !ls.some(l=>l.id === jdvTopic)) jdvTopic = (ls[0] || {}).id || "";
+  const chest = all.filter(w=>{ const e = jdvL(w.k); return e && e.s >= 5; }).length, due = jdvDue(), dop = jdvDop();
+  const nc = jdvNextCheck();
+  let h = '<div class="jdv-cov"><div class="bk">📔</div><div><h2>Словарик капитана</h2><span>все слова из уроков английского · у каждого — его урок-остров</span></div>'
+    + '<div class="jdv-sts"><div class="jdv-st"><b>'+all.length+'</b><small>слов</small></div><div class="jdv-st"><b>'+chest+'</b><small>🧰 в сундуке</small></div><div class="jdv-st"><b style="color:#ffb3b5">'+dop.length+'</b><small>добить</small></div></div></div>';
+  h += '<div class="jdv-acts">'
+    + '<button type="button" class="jdv-act" style="--c:#E5484D" data-a="k"><i>📔</i><div><b>Контрольная по словам</b><small>'+(nc ? (nc.date === todayKey() ? 'сегодня' : 'к '+jduD(nc.date).getDate()+' '+JDU_MN[jduD(nc.date).getMonth()])+' в задании «'+(jdhTask(nc).match(JDV_CHK)||[""])[0]+'» · ' : '')+'20 слов → итог по темам → доп. список</small></div></button>'
+    + (due.length ? '<button type="button" class="jdv-act" style="--c:#12A05E" data-a="due"><i>⏰</i><div><b>Пора повторить · '+due.length+'</b><small>лестница памяти · ≈ '+Math.max(3, Math.round(due.length*0.6))+' мин</small></div></button>' : '')
+    + (dop.length ? '<button type="button" class="jdv-act" style="--c:#b3261e" data-a="dop"><i>🔁</i><div><b>Добить доп. список · '+dop.length+'</b><small>письменно, как в диктанте; потом перепроверка</small></div></button>' : '')
+    + (nc && /диктант/i.test(jdhTask(nc)) ? '<button type="button" class="jdv-act" style="--c:#6a4fb3" data-a="dict" data-l="'+nc.id+'"><i>📝</i><div><b>Как в диктанте</b><small>русское → напиши по-английски, журнал проверит буквы</small></div></button>' : '')
+    + '</div>';
+  h += '<input class="jdv-srch" id="jdvS" type="search" placeholder="🔍 Найди слово — по-английски или по-русски" value="'+esc(jdvQ)+'">';
+  const m = jdvMode;
+  h += '<div class="jdv-chips">'+[["topic","По темам"],["all","Все слова"],["miss","🔁 Забытые"],["week","Новые за неделю"],["chest","🧰 В сундуке"]].map(c=>'<button type="button" class="jdv-ch'+(m === c[0] ? ' on' : '')+'" data-m="'+c[0]+'">'+c[1]+'</button>').join("")+'</div>';
+  h += '<div id="jdvBody"></div>';
+  box.innerHTML = h;
+  jdvBody();
+  box.querySelectorAll(".jdv-ch").forEach(b=>b.addEventListener("click", ()=>{ jdvMode = b.dataset.m; renderDict(); }));
+  const si = document.getElementById("jdvS"); si.addEventListener("input", ()=>{ jdvQ = si.value; jdvBody(); });
+  box.querySelectorAll(".jdv-act").forEach(b=>b.addEventListener("click", ()=>{ const a = b.dataset.a;
+    if(a === "k") jdvKStart(); else if(a === "due"){ show("words"); startWords("DUE"); } else if(a === "dop"){ show("words"); startWords("DOP"); } else if(a === "dict"){ show("words"); startWords("DICT:"+b.dataset.l); } }));
+}
+function jdvBody(){
+  const el = document.getElementById("jdvBody"); if(!el) return;
+  const all = jdvAll(), ls = jdvLessons(), q = jdvQ.trim().toLowerCase(), tk = todayKey();
+  let h = "";
+  if(q){ const f = all.filter(w=>w.en.toLowerCase().includes(q) || w.ru.toLowerCase().includes(q));
+    h = '<div class="jdv-page"><h3>Нашлось: '+f.length+'</h3><div class="jdv-grid">'+f.map(w=>jdvCard(w, true)).join("")+'</div></div>'; }
+  else if(jdvMode === "topic"){
+    h = '<div class="jdv-isls">'+ls.map(l=>{ const ws = jdvLessonWords(l.id), ch = ws.filter(w=>{ const e = jdvL(w.k); return e && e.s >= 5; }).length, ms = ws.filter(w=>(state.dop||[]).includes(w.k) || (jdvL(w.k) && jdvL(w.k).s === 0)).length;
+      return '<button type="button" class="jdv-isl'+(l.id === jdvTopic ? ' on' : '')+'" data-t="'+l.id+'"><span class="ii">'+(JDV_IC[l.id]||"📘")+(ms ? '<u>🔴</u>' : ch === ws.length && ws.length ? '<u>🟢</u>' : '')+'</span><b>'+esc(jdvTitle(l.id))+'</b><small>'+ws.length+' слов · '+jduD(l.date).getDate()+' '+JDU_MN[jduD(l.date).getMonth()]+'</small></button>'; }).join("")+'</div>';
+    const l = LESSONS.find(x=>x.id === jdvTopic);
+    if(l){ const ws = jdvLessonWords(l.id);
+      h += '<div class="jdv-page"><h3>'+(JDV_IC[l.id]||"📘")+' '+esc(jdvTitle(l.id))+' <small>· урок '+fmtDate(l.date)+' · '+ws.length+' слов · 🔊 — послушать</small></h3><div class="jdv-grid">'+ws.map(w=>jdvCard(w, false)).join("")+'</div>'
+        + '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="jdu-gh" data-go="cards">🗂 Учить эти слова карточками</button><button type="button" class="jdu-gh" data-go="write">📝 Как в диктанте</button><button type="button" class="jdu-gh" data-go="les">📖 Открыть урок</button></div></div>'; }
+  } else {
+    const f = all.filter(w=>{ const e = jdvL(w.k); const l = LESSONS.find(x=>x.id === w.lid);
+      if(jdvMode === "miss") return (state.dop||[]).includes(w.k) || (e && e.s === 0);
+      if(jdvMode === "week") return l.date >= jdvAddDays(tk, -7);
+      if(jdvMode === "chest") return e && e.s >= 5;
+      return true; });
+    h = '<div class="jdv-page"><h3>'+({all:"Все слова",miss:"🔁 Забытые",week:"Новые за неделю",chest:"🧰 В сундуке"})[jdvMode]+' <small>· '+f.length+'</small></h3>'
+      + (f.length ? '<div class="jdv-grid">'+f.map(w=>jdvCard(w, true)).join("")+'</div>' : '<p>Пока пусто.</p>') + '</div>';
+  }
+  el.innerHTML = h;
+  el.querySelectorAll(".jdv-isl").forEach(b=>b.addEventListener("click", ()=>{ jdvTopic = b.dataset.t; jdvBody(); }));
+  el.querySelectorAll("[data-say]").forEach(b=>b.addEventListener("click", e=>{ e.stopPropagation(); jdvSay(b.dataset.say); }));
+  el.querySelectorAll(".jdv-tp").forEach(b=>b.addEventListener("click", ()=>{ jdvTopic = b.dataset.topic; jdvMode = "topic"; jdvQ = ""; renderDict(); }));
+  el.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click", ()=>{ const g = b.dataset.go;
+    if(g === "cards"){ show("words"); startWords(jdvTopic); } else if(g === "write"){ show("words"); startWords("DICT:"+jdvTopic); } else jduOpen(jdvTopic); }));
+}
+/* --- контрольная по словам: темы → 20 слов письменно → итог по островам → доп. список --- */
+function jdvKStart(preset, only){
+  const ls = jdvLessons(), tk = todayKey();
+  const sel = preset || ls.filter(l=>l.date >= jdvAddDays(tk, -10)).map(l=>l.id).slice(0, 4);
+  jdvK = {step:only ? "run" : "pick", sel:sel.length ? sel : ls.slice(0, 2).map(l=>l.id), only:only || null, i:0, res:[]};
+  if(only) jdvKMake();
+  show("dict");
+}
+function jdvKMake(){
+  let pool;
+  if(jdvK.only) pool = jdvK.only.slice();
+  else { const per = {}; jdvK.sel.forEach(id=>per[id] = shuffle(jdvLessonWords(id)));
+    pool = []; let guard = 0; while(pool.length < 20 && guard++ < 60){ jdvK.sel.forEach(id=>{ if(pool.length < 20 && per[id].length) pool.push(per[id].shift()); }); }
+    const seen = {}; pool = pool.filter(w=>seen[w.k] ? false : (seen[w.k] = 1)); }
+  jdvK.items = shuffle(pool); jdvK.i = 0; jdvK.res = []; jdvK.step = "run"; jdvK.ans = null;
+}
+function jdvKRender(){
+  const box = document.getElementById("dictBox"), K = jdvK, ls = jdvLessons();
+  let h = '<div class="jdv-k">';
+  if(K.step === "pick"){
+    h += '<h3>📔 Контрольная по словам</h3><div class="hs">Выбери темы-острова. Будет до 20 слов: видишь русское — пишешь английское. Итог покажу по каждой теме, забытые слова уйдут в доп. список.</div>';
+    h += ls.slice(0, 12).map(l=>'<button type="button" class="jdv-pk'+(K.sel.includes(l.id) ? ' on' : '')+'" data-t="'+l.id+'"><span>'+(JDV_IC[l.id]||"📘")+'</span>'+esc(jdvTitle(l.id))+'<small>'+jdvLessonWords(l.id).length+' слов · '+jduD(l.date).getDate()+' '+JDU_MN[jduD(l.date).getMonth()]+'</small></button>').join("");
+    h += '<button type="button" class="jdv-big" data-a="go">Начать контрольную →</button><button type="button" class="jdv-big gh" data-a="x">Отмена</button>';
+  } else if(K.step === "run"){
+    const w = K.items[K.i], n = K.items.length;
+    h += '<div class="jdv-bar"><i style="width:'+(K.i/n*100)+'%"></i></div><div class="jdv-q"><span class="tp">'+(JDV_IC[w.lid]||"📘")+' '+esc(jdvTitle(w.lid))+'</span><div class="qh" style="margin-top:6px">вопрос '+(K.i+1)+' из '+n+'</div>'
+      + '<div class="qq">'+esc(w.ru)+'</div><div class="qh">напиши по-английски</div>'
+      + '<input id="jdvIn" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="latin"'+(K.ans ? ' disabled value="'+esc(K.ans.v)+'" class="'+(K.ans.ok ? 'good' : 'bad')+'"' : '')+'>'
+      + '<div class="fb" style="color:'+(K.ans ? (K.ans.ok ? '#12A05E' : '#E5484D') : 'inherit')+'">'+(K.ans ? (K.ans.ok ? '✓ Верно' : '✗ Правильно: '+esc(w.en)) : '')+'</div>'
+      + (K.ans ? '<div class="jdv-qb"><button type="button" class="ok" data-a="next">'+(K.i+1 < n ? 'Дальше →' : 'Итог →')+'</button></div>'
+               : '<div class="jdv-qb"><button type="button" class="ok" data-a="chk">Проверить</button><button type="button" class="sk" data-a="skip">Не помню</button></div>') + '</div>';
+  } else {
+    const ok = K.res.filter(r=>r.ok).length, n = K.res.length, miss = K.res.filter(r=>!r.ok).map(r=>r.w);
+    const by = {}; K.res.forEach(r=>{ (by[r.w.lid] = by[r.w.lid] || {a:0, b:0}); by[r.w.lid].b++; if(r.ok) by[r.w.lid].a++; });
+    h += '<h3>'+(miss.length ? 'Помнишь '+ok+' из '+n : 'Всё помнишь: '+ok+' из '+n+' 🎉')+'</h3><div class="hs">'+(K.only ? 'перепроверка доп. списка' : 'итог по островам')+'</div>';
+    if(!K.only) h += Object.keys(by).map(id=>{ const r = by[id], p = r.a/r.b; return '<div class="jdv-ri"><span class="fl">'+(p === 1 ? '🟢' : p >= .6 ? '🟡' : '🔴')+'</span>'+(JDV_IC[id]||"📘")+' <b>'+esc(jdvTitle(id))+'</b><span class="sc">'+r.a+' из '+r.b+'</span></div>'; }).join("");
+    if(miss.length){ h += '<h3 style="margin-top:14px;font-size:17px">Доп. список — добить ('+miss.length+')</h3>' + miss.map(w=>'<div class="jdv-dw">'+(JDV_IC[w.lid]||"📘")+' <b>'+esc(w.en)+'</b> — '+esc(w.ru)+'<button type="button" class="jdv-snd" data-say="'+esc(w.en)+'">🔊</button></div>').join("")
+      + '<button type="button" class="jdv-big" data-a="learn">🗂 Учить эти '+miss.length+' карточками</button><button type="button" class="jdv-big am" data-a="re">🔁 Перепроверка только этих '+miss.length+'</button>'; }
+    else if(K.only) h += '<p style="font-size:16px">Доп. список добит — все слова вспомнил. 🧰</p>';
+    h += '<button type="button" class="jdv-big gh" data-a="x">К словарику</button>';
+  }
+  box.innerHTML = h + '</div>';
+  box.querySelectorAll(".jdv-pk").forEach(b=>b.addEventListener("click", ()=>{ const t = b.dataset.t; K.sel = K.sel.includes(t) ? K.sel.filter(x=>x !== t) : K.sel.concat([t]); jdvKRender(); }));
+  box.querySelectorAll("[data-say]").forEach(b=>b.addEventListener("click", ()=>jdvSay(b.dataset.say)));
+  const inp = document.getElementById("jdvIn");
+  const chk = skip=>{ const w = K.items[K.i], v = skip ? "" : (inp.value || ""); const ok = !skip && wordSame(v, w.en);
+    K.ans = {v:v, ok:ok}; K.res.push({w:w, ok:ok}); jdvLadder(w.k, ok, w.lid); jdvKRender(); };
+  if(inp && !K.ans){ setTimeout(()=>{ try{ inp.focus(); }catch(e){} }, 30); inp.addEventListener("keydown", e=>{ if(e.key === "Enter") chk(false); }); }
+  box.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click", ()=>{ const a = b.dataset.a;
+    if(a === "go"){ if(!K.sel.length){ toast("Выбери хотя бы одну тему"); return; } jdvKMake(); jdvKRender(); }
+    else if(a === "x"){ jdvK = null; renderDict(); }
+    else if(a === "chk") chk(false); else if(a === "skip") chk(true);
+    else if(a === "next"){ K.ans = null; K.i++; if(K.i >= K.items.length) jdvKDone(); jdvKRender(); }
+    else if(a === "learn"){ jdvK = null; show("words"); startWords("DOP"); }
+    else if(a === "re"){ const only = jdvDop(); jdvK = null; if(only.length) jdvKStart(null, only); else renderDict(); } }));
+  if(K.ans){ const nb = box.querySelector('[data-a="next"]'); if(nb) setTimeout(()=>{ try{ nb.focus(); }catch(e){} }, 30); }
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function jdvKDone(){
+  const K = jdvK, miss = K.res.filter(r=>!r.ok).map(r=>r.w.k), okk = K.res.filter(r=>r.ok).map(r=>r.w.k);
+  let dop = (state.dop||[]).filter(k=>!okk.includes(k)); miss.forEach(k=>{ if(!dop.includes(k)) dop.push(k); });
+  state.dop = dop;
+  state.kontr = state.kontr || []; state.kontr.push({d:todayKey(), ok:okk.length, n:K.res.length, miss:miss.length, only:!!K.only});
+  save(); K.step = "done";
+}
+/* --- маршрут урока по видам работы (английский) --- */
+const JDR_T = [
+  ["sl","🗂","Слова","#12A05E",/слов/i,"Учи по словарику: слово → 🔊 → перевод. Потом карточки «скажи по-английски»."],
+  ["ch","📖","Чтение","#1f5f9e",/читать|чтени/i,"Абзац читаешь вслух по учебнику → переводишь сам устно → открываешь перевод в разборе и сверяешь."],
+  ["up","📒","Упражнения","#F2A104",/упр|р\.\s?т\.|рабоч|workbook/i,"Кадр с заданием → делаешь в тетради → «Проверь себя» 👍🤔🎤 → разбор ошибки."],
+  ["pi","💌","Письмо","#d6336c",/письм|написать|составить|реклам/i,"План-стикер → пишешь → «как проверяет учитель» → сверяешь по номерам."],
+  ["pr","🏝","Правило","#6a4fb3",/правил|образование|present|past|future|stative/i,"Правило в разборе → остров на карте «Грамматика»: игры → тест → ошибки."],
+  ["di","🗣","Диалог","#8a6d3b",/диалог/i,"Реплика закрыта → говоришь → открываешь → следующая. Потом с папой по ролям."],
+  ["li","🧾","Листок","#5b6b78",/вариант|листок|листк/i,"Как упражнения: задание → тетрадь → сверка."],
+  ["dk","📝","Диктант","#E5484D",/диктант/i,"Как в диктанте: русское слово → пишешь английское, журнал проверяет буквы."],
+  ["ts","📔","Контрольная по словам","#b3261e",/тест|контрольн|проверочн|стартов/i,"Перед тестом: контрольная по словам → итог по темам → доп. список → добить."]];
+function jdrStrip(l){
+  const t = jdhTask(l) + " " + (l.title||"");
+  const st = JDR_T.filter(x=>x[4].test(t));
+  if(QUIZ[l.id] && QUIZ[l.id].length) st.push(["te","🎯","Тест урока","#E5484D",null,"10–15 вопросов с объяснениями. Ошибки сами уходят в повторение."]);
+  if(st.length < 2) return null;
+  const d = document.createElement("div"); d.className = "jdr noprint";
+  d.innerHTML = '<h4>Маршрут этого урока — из того, что задал учитель</h4><div class="hs">«'+esc(jdhTask(l).slice(0, 140))+'» · нажми остров — подскажу, как делать</div><div class="jdr-rt">'
+    + st.map((x,i)=>'<button type="button" class="jdr-st" data-i="'+i+'" style="--c:'+x[3]+'"><div class="ph">'+x[1]+'</div><b>'+x[2]+'</b></button>').join("") + '</div><div class="jdr-how" hidden></div>';
+  const how = d.querySelector(".jdr-how");
+  d.querySelectorAll(".jdr-st").forEach(b=>b.addEventListener("click", ()=>{ const x = st[+b.dataset.i];
+    d.querySelectorAll(".jdr-st").forEach(y=>y.classList.toggle("on", y === b));
+    const act = {sl:"📔 Открыть слова в словарике", dk:"📝 Тренироваться как в диктанте", ts:"📔 Начать контрольную", te:"🎯 Пройти тест", pr:"🏝 Открыть «Грамматику»"}[x[0]];
+    how.hidden = false; how.innerHTML = '<span>'+x[1]+' <b>'+x[2]+':</b> '+esc(x[5])+'</span>'+(act ? '<button type="button">'+act+'</button>' : '');
+    const bb = how.querySelector("button"); if(bb) bb.addEventListener("click", ()=>{
+      if(x[0] === "sl"){ jdvTopic = l.id; jdvMode = "topic"; jdvQ = ""; jdvK = null; show("dict"); }
+      else if(x[0] === "dk"){ show("words"); startWords("DICT:"+l.id); }
+      else if(x[0] === "ts"){ jdvK = null; jdvKStart(jdvLessons().filter(y=>y.date >= jdvAddDays(l.date, -28) && y.date <= l.date).map(y=>y.id).slice(0, 6)); }
+      else if(x[0] === "pr") show("gram");
+      else if(x[0] === "te"){ show("test"); showIntro(QUIZ[l.id].map((q,i)=>Object.assign({lid:l.id,qi:i},q)), l.id, l.title, [l], l.subject+" · "+fmtDate(l.date)); } }); }));
+  return d;
+}
+/* --- папе по ситуации и сводка недели (на экране «Учёба») --- */
+function jduDadHtml(L){
+  if(state.role !== "nav") return "";
+  const en = L.filter(l=>l.subject === WORD_SUBJ && !/Подготовка/.test(l.title)), it = [];
+  en.forEach(l=>{ const t = jdhTask(l);
+    if(/диктант/i.test(t)) it.push(['📝','Диктант: продиктуйте 10 слов урока — лист с ответами','print',l.id]);
+    if(/письм/i.test(t)) it.push(['💌','Письмо: сверьте по блоку «как проверяет учитель»','open',l.id]);
+    if(/диалог|читать|чтени/i.test(t)) it.push(['🗣','Послушайте, как читает или говорит по ролям — 5 минут','open',l.id]);
+    if(/тест|контрольн/i.test(t)) it.push(['📔','Перед тестом: проследите, чтобы прошёл контрольную по словам','dict',l.id]); });
+  const all = jdvAll(), chest = all.filter(w=>{ const e = jdvL(w.k); return e && e.s >= 5; }).length;
+  const wk = (state.kontr||[]).filter(k=>k.d >= jdvAddDays(todayKey(), -7));
+  let h = '<div class="jdu-dad"><h4>Штурману</h4>' + it.map(x=>'<div class="it"><span>'+x[0]+'</span><span>'+x[1]+'</span><button type="button" data-dad="'+x[2]+'" data-l="'+x[3]+'">'+({print:"Лист",open:"Открыть",dict:"Словарик"})[x[2]]+'</button></div>').join("");
+  if(!it.length) h += '<div class="it"><span>✓</span><span>Сегодня от вас ничего не нужно — журнал ведёт сам.</span></div>';
+  h += '<div class="jdu-sum"><span>📊 неделя:</span><span>🧰 в сундуке '+chest+' из '+all.length+'</span><span>📔 контрольных '+wk.length+(wk.length ? ' · последняя '+wk[wk.length-1].ok+'/'+wk[wk.length-1].n : '')+'</span><span>🔁 добить '+(state.dop||[]).length+'</span></div></div>';
+  return h;
+}
+function jduDadBind(g){
+  g.querySelectorAll("[data-dad]").forEach(b=>b.addEventListener("click", ()=>{ const a = b.dataset.dad, lid = b.dataset.l;
+    if(a === "open") jduOpen(lid);
+    else if(a === "dict"){ jdvK = null; show("dict"); }
+    else { const ws = shuffle(jdvLessonWords(lid).length ? jdvLessonWords(lid) : jdvRecentWords()).slice(0, 10);
+      const w = window.open("", "_blank"); if(!w){ toast("Браузер не дал открыть лист"); return; }
+      w.document.write('<!doctype html><meta charset="utf-8"><title>Диктант · 10 слов</title><body style="font:18px Arial;padding:24px"><h2>Диктант · '+esc(jdvTitle(lid))+'</h2><p>Читайте по-русски, ребёнок пишет по-английски.</p><ol>'+ws.map(x=>'<li style="margin:10px 0">'+esc(x.ru)+' ______________________</li>').join("")+'</ol><hr style="margin:40px 0"><h3>Ответы</h3><ol>'+ws.map(x=>'<li>'+esc(x.en)+'</li>').join("")+'</ol><script>print()<\/script></body>'); w.document.close(); } }));
+}
+
 function renderContent(){
   const src = document.getElementById(curLesson);
   const box = document.getElementById("content");
@@ -16019,6 +16320,8 @@ function renderContent(){
   jdInit(box);
   jdSteps(box);
   jdPath(box, curLesson);
+  { const lx = LESSONS.find(x=>x.id === curLesson);
+    if(lx && lx.subject === WORD_SUBJ && !/Подготовка/.test(lx.title)){ const st = jdrStrip(lx); if(st) box.insertBefore(st, box.firstChild); } }
 
   /* кнопка «Пройти тест по теме» рядом с «Печать» */
   const l = LESSONS.find(x=>x.id===curLesson);
@@ -17908,6 +18211,9 @@ function renderWordList(){
     + '<div class="wm">' + learned + ' из ' + all.length + ' держатся твёрдо · два верных ответа подряд</div></div>'
     + '<div class="wn">' + all.length + '<span>слов</span></div></button>';
 
+  { const due = jdvDue();
+    if(due.length) html = '<button class="wcard" style="--wc:var(--green)" data-set="DUE"><div><div class="wt">⏰ Пора повторить</div><div class="wm">лестница памяти: только слова, которым сегодня пора · ≈ '+Math.max(3, Math.round(due.length*0.6))+' мин</div></div><div class="wn">'+due.length+'<span>слов</span></div></button>' + html;
+    const dop = jdvDop(); if(dop.length) html = '<button class="wcard" style="--wc:var(--red)" data-set="DOP"><div><div class="wt">🔁 Доп. список — добить</div><div class="wm">слова, забытые на контрольной · письменно</div></div><div class="wn">'+dop.length+'<span>слов</span></div></button>' + html; }
   if(weak.length)
     html += '<button class="wcard" style="--wc:var(--amber)" data-set="WEAK">'
       + '<div><div class="wt">Только слабые</div>'
@@ -17939,10 +18245,12 @@ function renderWordList(){
     : "Ребёнок отвечает вслух, взрослый нажимает «Верно» или «Ещё нет». Ответ спрятан, пока не нажали «Показать».";
 }
 function startWords(set){
-  const deck = set === "WEAK" ? wordWeak() : wordDeck(set);
+  const jv = jdvDeck(set);
+  jdvForce = (jv && jv.force) || null;
+  const deck = jv ? jv.deck : set === "WEAK" ? wordWeak() : wordDeck(set);
   if(!deck.length){ toast("В этом наборе пока нет слов"); return; }
   const l = LESSONS.find(x=>x.id === set);
-  wSetName = set === "ALL" ? "Все слова английского" : set === "WEAK" ? "Только слабые" : (l ? l.title : set);
+  wSetName = jv ? jv.name : set === "ALL" ? "Все слова английского" : set === "WEAK" ? "Только слабые" : (l ? l.title : set);
   wq = shuffle(deck.slice());
   wi = 0; wSeen = {}; wFirst = 0; wRe = []; wShown = false;
   document.getElementById("wordPick").hidden = true;
@@ -17953,12 +18261,13 @@ function startWords(set){
   window.scrollTo({top:0, behavior:"smooth"});
 }
 function wordDirNow(w){
-  const d = state.wdir || "ru";
+  const d = (jdvForce && jdvForce.dir) || state.wdir || "ru";
   if(d === "mix") return (w.k.length % 2) ? "ru" : "en";
   return d;
 }
 function wordModeNow(){
   /* письменно имеет смысл только там, где ответ английский */
+  if(jdvForce && jdvForce.mode) return jdvForce.mode;
   return (state.wmode === "write") ? "write" : "say";
 }
 /* сравнение написанного с правильным: регистр, пробелы, артикли, to, знаки — не считаются */
@@ -18034,6 +18343,7 @@ function wordVerdict(ok){
   state.words[w.k] = s;
   save();
 
+  jdvLadder(w.k, ok, w.lid);
   if(!wSeen[w.k]){ wSeen[w.k] = 1; if(ok) wFirst++; }
   if(!ok){
     if(wRe.indexOf(w.k) < 0) wRe.push(w.k);
@@ -19174,7 +19484,7 @@ function bookHint(sub){
 
 const DECKS = [
   {id:"day", n:"Сегодня",    c:"green", ids:["today","cal"]},
-  {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","gram","test","diag","words","oral"]},
+  {id:"edu", n:"Учёба",      c:"cyan",  ids:["lessons","gram","test","diag","words","oral","dict"]},
   {id:"bod", n:"Тело и дух", c:"red",   ids:["gto","chal","mine"]},
   {id:"br",  n:"Рубка",      c:"amber", ids:["need","books","kurs","print","prog","how","why"], capN:"Справка"}
 ];
