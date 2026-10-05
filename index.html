@@ -17365,8 +17365,10 @@ function showIntro(items, key2, title, lessons, meta, fullItems){
       + '<div class="rlist">'+r.pairs.map(p=>'<div class="rpair"><b>'+esc(p[0])+'</b><span>'+esc(p[1])+'</span></div>').join("")+'</div>'
       + (r.hint ? '<div class="recaphint">'+esc(r.hint)+'</div>' : '') + '</div>';
   });
-  document.getElementById("iRecap").innerHTML = parts.length
-    ? '<div class="termhead" style="padding-left:0">'+((lessons.length===1&&JDX_DRILL[lessons[0].id])?'Повтори слова перед тестом':'Шпаргалка — прочитай и закрой')+'</div>' + parts.join("") : "";
+  document.getElementById("iRecap").innerHTML = !parts.length ? ""
+    : lessons.length > 2
+      ? '<details class="fold" style="--fc2:var(--blue)"><summary>Шпаргалка по '+parts.length+' темам — открыть, если нужно<em>можно сразу начинать</em><span class="fold-x">+</span></summary><div class="fold-in">'+parts.join("")+'</div></details>'
+      : '<div class="termhead" style="padding-left:0">'+((lessons.length===1&&JDX_DRILL[lessons[0].id])?'Повтори слова перед тестом':'Шпаргалка — прочитай и закрой')+'</div>' + parts.join("");
   jdxDrill(document.getElementById("iRecap"));
   document.getElementById("iOpen").hidden = lessons.length !== 1;
   ["testPick","testRun","testDone"].forEach(i=>document.getElementById(i).hidden = true);
@@ -19822,7 +19824,9 @@ function renderDecks(){
   document.querySelectorAll("#decks .deck").forEach(b=>b.addEventListener("click", ()=>{
     const d = decks().find(x=>x.id===b.dataset.d);
     deck = d.id;
-    show(d.ids.includes(view) ? view : d.ids[0]);
+    /* 05.10: «Сегодня», «Учёба»… всегда открывают свой главный экран, а не последнюю вкладку (жалоба 02.10) */
+    if(d.id === "edu"){ lessonsMode = "all"; try{ jdmIsl = null; jdvK = null; }catch(e){} }
+    show(d.ids[0]);
   }));
 }
 
