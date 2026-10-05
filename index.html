@@ -2875,6 +2875,9 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdm-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .jdm-flag{font-size:17px;font-weight:900}
 @media(max-width:700px){.jdm-sea{height:640px}.jdm-is{width:110px}.jdm-is .ph{width:64px;height:64px;font-size:28px}.jdm-tr{grid-template-columns:1fr}}
+
+.jdu-opt{background:transparent;border:3px dashed #c9d3dc;box-shadow:none}.jdu-opt h4{color:var(--ink-2)}.jdu-opt .jdu-cr{opacity:.8}
+.jdu-tg{display:inline-block;background:#eef0f3;color:#5b6b78;font:900 11px Nunito,Arial,sans-serif;letter-spacing:.05em;border-radius:99px;padding:2px 9px;vertical-align:3px;text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -16042,26 +16045,30 @@ function jduOpen(id){ const l = LESSONS.find(x=>x.id === id); if(!l) return; ope
 function renderSubjGrid(){
   const g = document.getElementById("subjGrid"); g.className = "jdu-home";
   const tk = todayKey(), ds = jduDates();
-  const of = d => LESSONS.filter(l=>l.subject !== DIAG_SUBJ && l.date === d);
+  /* 05.10: «обязательно» — задания учителя; «Подготовка» — заранее, по желанию; «Работа над ошибками» живёт в книге и в модуле 1 */
+  const of = d => LESSONS.filter(l=>l.subject !== DIAG_SUBJ && l.date === d && !/Подготовка|Работа над ошибками/.test(l.title));
+  const opt = d => LESSONS.filter(l=>l.subject !== DIAG_SUBJ && l.date === d && /Подготовка/.test(l.title));
   const allOk = d => { const L = of(d); return L.length && L.every(l=>jdsdState(l).k === "ok"); };
-  if(!jduDay || !ds.includes(jduDay)) jduDay = ds.find(d=>of(d).length && !allOk(d)) || ds[0];
-  let h = '<div class="jdu-sea"><h3>Маршрут недели</h3><div class="hs">буй — учебный день · цифра — сколько заданий · нажми буй, чтобы увидеть груз</div><div class="jdu-bys">';
+  /* после уроков (с 13:00) задание «на сегодня» уже сдано — открываем ближайший следующий день */
+  const aft = (new Date()).getHours() >= 13;
+  if(!jduDay || !ds.includes(jduDay)) jduDay = ds.find(d=>(!aft || d > tk) && of(d).length && !allOk(d)) || ds.find(d=>d > tk) || ds[0];
+  let h = '<div class="jdu-sea"><h3>Маршрут недели</h3><div class="hs">буй — учебный день · цифра — сколько заданий учителя · нажми буй, чтобы увидеть груз</div><div class="jdu-bys">';
   ds.forEach(d=>{ const D = jduD(d), n = of(d).length;
     h += '<button type="button" class="jdu-by'+(d === jduDay ? ' on' : '')+(allOk(d) ? ' ok' : '')+'" data-d="'+d+'">'
       + (d === jduDay ? '<div class="jdu-ship"><svg viewBox="0 0 46 40" width="44" height="38"><path d="M4 26h38l-6 10H10z" fill="#111E42"/><path d="M23 4v22M23 6l14 14H23z" fill="#fff" stroke="#111E42" stroke-width="2"/></svg><br><span>Даниил</span></div>' : '')
-      + '<div class="bb">'+n+'</div><b>'+JDU_WD[D.getDay()]+'</b><small>'+(d === tk ? '<u>сегодня</u>' : D.getDate()+' '+JDU_MN[D.getMonth()])+'</small></button>'; });
+      + '<div class="bb">'+(n || (opt(d).length ? '🌱' : 0))+'</div><b>'+JDU_WD[D.getDay()]+'</b><small>'+(d === tk ? '<u>сегодня</u>' : D.getDate()+' '+JDU_MN[D.getMonth()])+'</small></button>'; });
   h += '</div></div>';
   const L = of(jduDay), D = jduD(jduDay);
   const left = L.filter(l=>jdsdState(l).k !== "ok"), min = left.reduce((a,l)=>a + (jdrMin(l.id) || 0), 0);
-  h += '<div class="jdu-hold"><h4>Груз на '+JDU_DAYG[D.getDay()]+', '+D.getDate()+' '+JDL_MON[D.getMonth()]+' <small>· '
-    + (L.length ? plu(L.length, "задание", "задания", "заданий") + (left.length ? (min ? ' · ≈ '+min+' мин' : '') : ' · всё сделано ✓') : 'заданий нет')+'</small></h4>';
+  h += '<div class="jdu-hold"><h4>✅ Обязательно на '+JDU_DAYG[D.getDay()]+', '+D.getDate()+' '+JDL_MON[D.getMonth()]+' <small>· '
+    + (L.length ? plu(L.length, "задание учителя", "задания учителя", "заданий учителя") + (left.length ? (min ? ' · ≈ '+min+' мин' : '') : ' · всё сделано ✓') : 'заданий нет')+'</small></h4>';
   L.forEach(l=>{ const a = jduAct(l), m = jdrMin(l.id);
     let t = jdhTask(l); if(t.length > 120) t = t.slice(0, 117).replace(/\s+\S*$/, "") + "…";
     h += '<div class="jdu-cr" role="button" tabindex="0" style="--c:'+C[l.color]+'" data-id="'+l.id+'"><div class="jdu-ci">'+subjIcon(l.subject)+'</div>'
       + '<div class="jdu-ct"><b>'+esc(JDH_SH[l.subject] || l.subject)+'</b>'+(jduIsNew(l) ? '<span class="jdu-new">НОВОЕ</span>' : '')
       + '<span class="t">'+esc(jduShort(l))+'</span><small>'+esc(t)+(m && !a.ok ? ' · ≈ '+m+' мин' : '')+'</small></div>'
       + '<div class="jdu-ca">'+(a.ok ? '<span class="jdu-ok">✓ сделано</span>' : (a.h ? '<span class="half">'+esc(a.h)+'</span>' : ''))+a.b+'</div></div>'; });
-  if(!L.length) h += '<p style="color:var(--ink-2);margin:4px 0">На этот день ничего не задано. Нажми другой буй.</p>';
+  if(!L.length) h += '<p style="color:var(--ink-2);margin:4px 0">На этот день учитель ничего не задал. Нажми другой буй.</p>';
   { const xs = [], chkL = L.find(l=>l.subject === WORD_SUBJ && !/Подготовка/.test(l.title) && JDV_CHK.test(jdhTask(l))), errL = chkL && /Работа над ошибками/.test(chkL.title);
     if(chkL && !errL) xs.push(['kon','📔','Контрольная по словам','перед «'+(jdhTask(chkL).match(JDV_CHK)||[""])[0]+'» · 20 слов → итог по темам → доп. список','≈ 10 мин', chkL.id]);
     if(chkL && /диктант/i.test(jdhTask(chkL))) xs.push(['dic','📝','Как в диктанте',(errL ? 'слова диктанта 23.09 · ' : '')+'русское → напиши по-английски, журнал проверит буквы','≈ 10 мин', chkL.id]);
@@ -16070,7 +16077,15 @@ function renderSubjGrid(){
     if(jduDay === tk && jduD(tk).getDay() === 6 && !(state.kontr||[]).some(k=>k.d >= jdvAddDays(tk, -6))) xs.push(['kon','📔','Субботняя контрольная','на неделе диктанта не было · 20 слов','≈ 10 мин','']);
     xs.forEach(x=>{ h += '<div class="jdu-cr" role="button" tabindex="0" style="--c:'+(x[0]==='due'?'#12A05E':x[0]==='dic'?'#6a4fb3':'#E5484D')+'" data-x="'+x[0]+'" data-l="'+x[5]+'"><div class="jdu-ci">'+x[1]+'</div><div class="jdu-ct"><b>'+x[2]+'</b><span class="t">'+esc(x[3])+'</span><small>'+x[4]+'</small></div><div class="jdu-ca"><button type="button" class="jdu-go">Начать →</button></div></div>'; }); }
   h += '</div>';
-  h += jdyHtml(L) + jdmTodayHtml() + jdhHtml();
+  h += jdyHtml(L) + jdmTodayHtml();
+  { const O = opt(jduDay).filter(l=>jdsdState(l).k !== "ok");
+    if(O.length){ h += '<div class="jdu-hold jdu-opt"><h4>🌱 Заранее, по желанию <small>· '+plu(O.length, "подготовка", "подготовки", "подготовок")+' · учитель не задавал — если остались силы</small></h4>';
+      O.forEach(l=>{ const a = jduAct(l), m = jdrMin(l.id);
+        h += '<div class="jdu-cr" role="button" tabindex="0" style="--c:#9aa6b2" data-id="'+l.id+'"><div class="jdu-ci">'+subjIcon(l.subject)+'</div>'
+          + '<div class="jdu-ct"><b>'+esc(JDH_SH[l.subject] || l.subject)+'</b><span class="jdu-tg">заранее</span><span class="t">'+esc(jduShort(l))+'</span><small>подготовка к теме'+(m ? ' · ≈ '+m+' мин' : '')+'</small></div>'
+          + '<div class="jdu-ca"><button type="button" class="jdu-gh">Открыть</button></div></div>'; });
+      h += '</div>'; } }
+  h += jdhHtml();
   const first = left[0];
   if(first && jduLater !== jduDay)
     h += '<div class="jdu-k7"><div class="bub"><b>Начнём? Первым — '+esc(JDH_SH[first.subject] || first.subject)+'</b><span>'+esc(jduShort(first))+(jdrMin(first.id) ? ' · ≈ '+jdrMin(first.id)+' мин' : '')+'</span></div>'
@@ -16093,7 +16108,7 @@ function renderSubjGrid(){
     else if(x === "dop"){ show("words"); startWords("DOP"); }
     else if(x === "due"){ show("words"); startWords("DUE"); } };
   g.querySelectorAll(".jdu-cr").forEach(b=>{ b.addEventListener("click", ()=>jduX(b)); b.addEventListener("keydown", e=>{ if(e.key === "Enter") jduX(b); }); });
-  const y = g.querySelector(".jdu-k7 .y"), n = g.querySelector(".jdu-k7 .n");
+  const y = g.querySelector(".jdu-k7 .y[data-id]"), n = g.querySelector(".jdu-k7 .n:not([data-m1])");
   if(y) y.addEventListener("click", ()=>jduOpen(y.dataset.id));
   if(n) n.addEventListener("click", ()=>{ jduLater = jduDay; renderSubjGrid(); });
   g.querySelectorAll(".jdu-bo").forEach(b=>b.addEventListener("click", ()=>openSubject(b.dataset.s)));
