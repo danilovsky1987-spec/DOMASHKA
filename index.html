@@ -16077,6 +16077,7 @@ function renderSubjGrid(){
       + (d === jduDay ? '<div class="jdu-ship"><svg viewBox="0 0 46 40" width="44" height="38"><path d="M4 26h38l-6 10H10z" fill="#111E42"/><path d="M23 4v22M23 6l14 14H23z" fill="#fff" stroke="#111E42" stroke-width="2"/></svg><br><span>Даниил</span></div>' : '')
       + '<div class="bb">'+(n || (opt(d).length ? '🌱' : 0))+'</div><b>'+JDU_WD[D.getDay()]+'</b><small>'+(d === tk ? '<u>сегодня</u>' : D.getDate()+' '+JDU_MN[D.getMonth()])+'</small></button>'; });
   h += '</div></div>';
+  const jduSeaEnd = h.length;
   const L = of(jduDay), D = jduD(jduDay);
   const left = L.filter(l=>jdsdState(l).k !== "ok"), min = left.reduce((a,l)=>a + (jdrMin(l.id) || 0), 0);
   h += '<div class="jdu-hold"><h4>✅ Обязательно на '+JDU_DAYG[D.getDay()]+', '+D.getDate()+' '+JDL_MON[D.getMonth()]+' <small>· '
@@ -16109,8 +16110,9 @@ function renderSubjGrid(){
   if(first && jduLater !== jduDay)
     h += '<div class="jdu-k7"><div class="bub"><b>Начнём? Первым — '+esc(JDH_SH[first.subject] || first.subject)+'</b><span>'+esc(jduShort(first))+(jdrMin(first.id) ? ' · ≈ '+jdrMin(first.id)+' мин' : '')+'</span></div>'
       + '<button type="button" class="y" data-id="'+first.id+'">Да!</button><button type="button" class="n">Потом</button></div>';
-  h += jduDadHtml(L);
+  const jduDadH = jduDadHtml(L);
   const subs = subjects().filter(x=>x.subject !== DIAG_SUBJ);
+  const jduShelfAt = h.length;
   h += '<div class="jdu-shelf"><h4>Полка предметов <small>· нажми книгу — там все задания по датам</small></h4><div class="jdu-books">';
   subs.forEach(x=>{ const ls = lessonsOf(x.subject), nw = ls.some(jduIsNew);
     const up = ls.filter(l=>l.date >= tk && jdsdState(l).k !== "ok").sort((a,b)=>a.date.localeCompare(b.date))[0];
@@ -16118,6 +16120,8 @@ function renderSubjGrid(){
     h += '<button type="button" class="jdu-bo" style="--c:'+C[x.color]+'" data-s="'+esc(x.subject)+'">'+(nw ? '<span class="nb">новое</span>' : '')
       + '<span class="bi">'+subjIcon(x.subject)+'</span><b>'+esc(JDH_SH[x.subject] || x.subject)+'</b><small>'+lab+'</small></button>'; });
   h += '</div></div>';
+  /* 05.10 (Мокап 172): полка и «Штурману» — сразу под маршрутом */
+  { const sh = h.slice(jduShelfAt); h = h.slice(0, jduShelfAt); h = h.slice(0, jduSeaEnd) + sh + jduDadH + h.slice(jduSeaEnd); }
   g.innerHTML = h;
   g.querySelectorAll(".jdu-by").forEach(b=>b.addEventListener("click", ()=>{ jduDay = b.dataset.d; renderSubjGrid(); }));
   const jduX = b=>{ const x = b.dataset.x, l = b.dataset.l;
@@ -16429,8 +16433,11 @@ function jduDadHtml(L){
     if(/тест|контрольн/i.test(t)) it.push(['📔','Перед тестом: проследите, чтобы прошёл контрольную по словам','dict',l.id]); });
   const all = jdvAll(), chest = all.filter(w=>{ const e = jdvL(w.k); return e && e.s >= 5; }).length;
   const wk = (state.kontr||[]).filter(k=>k.d >= jdvAddDays(todayKey(), -7));
-  let h = '<div class="jdu-dad"><h4>Штурману</h4>' + it.map(x=>'<div class="it"><span>'+x[0]+'</span><span>'+x[1]+'</span><button type="button" data-dad="'+x[2]+'" data-l="'+x[3]+'">'+({print:"Лист",open:"Открыть",dict:"Словарик"})[x[2]]+'</button></div>').join("");
-  if(!it.length) h += '<div class="it"><span>✓</span><span>Сегодня от вас ничего не нужно — журнал ведёт сам.</span></div>';
+  const dopN = (state.dop||[]).length;
+  if(dopN) it.unshift(['🔁','Доп. список: продиктуйте забытые слова ('+dopN+') — 5 минут','dop','']);
+  try{ if(typeof jdmFinal === "function" && !jdmFinal().pass) it.push(['🧪', !jdmZ() ? 'Замер модуля 1 — посидите рядом 12 минут, не подсказывайте: покажет, какие острова учить' : 'Модуль 1 — спросите, какой остров сегодня, и проверьте мини-тест','m1','']); }catch(e){}
+  let h = '<div class="jdu-dad"><h4>Штурману</h4>' + it.map(x=>'<div class="it"><span>'+x[0]+'</span><span>'+x[1]+'</span><button type="button" data-dad="'+x[2]+'" data-l="'+x[3]+'">'+({print:"Лист",open:"Открыть",dict:"Словарик",dop:"Лист",m1:"Открыть"})[x[2]]+'</button></div>').join("");
+  if(!it.length) h += '<div class="it"><span>✓</span><span>Сегодня от вас ничего не нужно: заданий для штурмана нет.</span></div>';
   h += '<div class="jdu-sum"><span>📊 неделя:</span><span>🧰 в сундуке '+chest+' из '+all.length+'</span><span>📔 контрольных '+wk.length+(wk.length ? ' · последняя '+wk[wk.length-1].ok+'/'+wk[wk.length-1].n : '')+'</span><span>🔁 добить '+(state.dop||[]).length+'</span></div></div>';
   return h;
 }
@@ -16438,9 +16445,10 @@ function jduDadBind(g){
   g.querySelectorAll("[data-dad]").forEach(b=>b.addEventListener("click", ()=>{ const a = b.dataset.dad, lid = b.dataset.l;
     if(a === "open") jduOpen(lid);
     else if(a === "dict"){ jdvK = null; show("dict"); }
-    else { const ws = shuffle(jdvLessonWords(lid).length ? jdvLessonWords(lid) : jdvRecentWords()).slice(0, 10);
+    else if(a === "m1"){ if(!jdmZ()) jdmStartZ(); else { jdmIsl = null; show("m1r"); } }
+    else { const all = a === "dop" ? jdvAll() : null; const ws = all ? (state.dop||[]).map(k=>all.find(w=>w.k === k)).filter(Boolean) : shuffle(jdvLessonWords(lid).length ? jdvLessonWords(lid) : jdvRecentWords()).slice(0, 10);
       const w = window.open("", "_blank"); if(!w){ toast("Браузер не дал открыть лист"); return; }
-      w.document.write('<!doctype html><meta charset="utf-8"><title>Диктант · 10 слов</title><body style="font:18px Arial;padding:24px"><h2>Диктант · '+esc(jdvTitle(lid))+'</h2><p>Читайте по-русски, ребёнок пишет по-английски.</p><ol>'+ws.map(x=>'<li style="margin:10px 0">'+esc(x.ru)+' ______________________</li>').join("")+'</ol><hr style="margin:40px 0"><h3>Ответы</h3><ol>'+ws.map(x=>'<li>'+esc(x.en)+'</li>').join("")+'</ol><script>print()<\/script></body>'); w.document.close(); } }));
+      w.document.write('<!doctype html><meta charset="utf-8"><title>Диктант · 10 слов</title><body style="font:18px Arial;padding:24px"><h2>Диктант · '+esc(lid ? jdvTitle(lid) : "доп. список")+'</h2><p>Читайте по-русски, ребёнок пишет по-английски.</p><ol>'+ws.map(x=>'<li style="margin:10px 0">'+esc(x.ru)+' ______________________</li>').join("")+'</ol><hr style="margin:40px 0"><h3>Ответы</h3><ol>'+ws.map(x=>'<li>'+esc(x.en)+'</li>').join("")+'</ol><script>print()<\/script></body>'); w.document.close(); } }));
 }
 
 
