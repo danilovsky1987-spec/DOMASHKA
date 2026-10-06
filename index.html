@@ -2575,6 +2575,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdr-st.now .ph{box-shadow:0 0 0 5px #F2A10466}.jdr-ship{position:absolute;top:-14px;left:50%;margin-left:18px;font-size:22px;z-index:2}
 .jdr-prog{display:flex;align-items:center;gap:10px;margin-top:10px;background:#fff;border-radius:12px;padding:8px 12px;color:#111E42}.jdrp-bar{flex:1;min-width:60px;height:10px;border-radius:99px;background:#dfe3ee;overflow:hidden;display:block}.jdrp-bar i{display:block;height:100%;background:#12A05E}.jdr-prog b{font:900 14px Nunito,Arial,sans-serif;white-space:nowrap}
 .jdg .jdr-st b{max-width:120px;white-space:normal;line-height:1.2}.jdr-how i{color:#5b6785;font-style:normal;font-size:13px}
+.jd-sb{display:inline-block;margin:4px 0 2px;background:#1c2d5c;border:1px solid #2f4a8a;border-radius:99px;padding:4px 11px;font:800 12.5px Nunito,Arial,sans-serif;color:#9be3bf;letter-spacing:0;text-transform:none}.jd-sb.bad{background:#4a1c22;border-color:#8a2f3a;color:#ffb3b5}
 .jd-port{margin:18px 0 6px;background:linear-gradient(#d8e8fb,#bcd6f5);border-radius:18px;padding:14px 14px 16px;color:#111E42}
 .jd-port h3{margin:0 0 2px;font:900 19px Nunito,Arial,sans-serif;letter-spacing:0;text-transform:none}.jd-port .hs{font-size:14px;color:#3d4b6b;margin-bottom:6px}
 .jdp-rt{display:flex;align-items:flex-start;justify-content:space-around;gap:6px;position:relative;padding:22px 0 4px}
@@ -2982,6 +2983,7 @@ details.jd-rl>div .jd-fm{margin-top:0}
     <div>
       <span class="eyebrow" id="mastEyebrow">Проект роста · 6-Я класс</span>
       <h1>Бортовой журнал</h1>
+      <span id="syncBadge" class="jd-sb" hidden></span>
       <p class="sub" id="mastSub">Ребёнок — капитан. Взрослый — штурман: даёт карты и ресурсы, но не крутит штурвал.</p>
       <div class="roleswitch" id="roleSwitch">
         <button data-role="cap" aria-pressed="true">
@@ -16951,6 +16953,25 @@ function jdrProgress(d, l){
   d.jdRefresh();
   const box = document.getElementById("content"); if(box) box.classList.add("jd-noladder");
 }
+
+/* 06.10 (Мокап 180, А + Б): «данные обновились» — значок в шапке и сообщение при приходе данных с другого устройства */
+function jdDev(){ const u = navigator.userAgent || ""; if(/iPad|Tablet/i.test(u) || (/Android/i.test(u) && !/Mobi/i.test(u))) return "планшета"; if(/Mobi|iPhone|Android/i.test(u)) return "телефона"; return "ПК"; }
+function jdHM(d){ return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+function jdSyncMark(kind, extra){ let m = {}; try{ m = JSON.parse(localStorage.getItem("bortovoy-sync-mark") || "{}"); }catch(e){}
+  const now = new Date().toISOString();
+  if(kind === "err"){ m.err = now; } else { m.ok = now; delete m.err; if(kind === "in"){ m.inAt = now; m.inDev = extra || ""; } if(kind === "out") m.outAt = now; }
+  try{ localStorage.setItem("bortovoy-sync-mark", JSON.stringify(m)); }catch(e){} jdSyncBadge(); }
+function jdSyncBadge(){ const el = document.getElementById("syncBadge"); if(!el) return;
+  if(typeof syncOn === "function" && !syncOn()){ el.hidden = true; return; }
+  let m = {}; try{ m = JSON.parse(localStorage.getItem("bortovoy-sync-mark") || "{}"); }catch(e){}
+  el.hidden = false; el.classList.toggle("bad", !!m.err);
+  const day = iso=>{ const d = new Date(iso), t = new Date(); return (d.toDateString() === t.toDateString() ? "" : d.getDate()+" "+["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"][d.getMonth()]+", ")+jdHM(d); };
+  if(m.err) el.textContent = "⚠ нет связи"+(m.ok ? " с "+day(m.ok) : "");
+  else if(m.inAt && (!m.outAt || m.inAt >= m.outAt || (new Date(m.outAt) - new Date(m.inAt)) < 180000)) el.textContent = "☁ обновлено "+day(m.inAt)+(m.inDev ? " · с "+m.inDev : "");
+  else if(m.outAt) el.textContent = "☁ отправлено "+day(m.outAt);
+  else if(m.ok) el.textContent = "☁ всё сходится · "+day(m.ok);
+  else el.textContent = "☁ ждёт связи";
+}
 function renderContent(){
   const src = document.getElementById(curLesson);
   const box = document.getElementById("content");
@@ -19846,12 +19867,13 @@ async function syncPull(quiet){
     if(!row){ if(!quiet) syncSay("ok","Подключено. На сервере пока пусто."); return null; }
     if(typeof row.rev === "number" && row.rev > SYNC.rev){
       SYNC.rev = row.rev; syncStore(); syncApply(row.data);
-      if(!quiet) toast("Журнал обновлён с другого устройства");
-    }
+      try{ const fr = row.dev || "другого устройства"; jdSyncMark("in", row.dev || ""); const d = new Date();
+        toast("🔄 Данные обновились · "+d.getDate()+" "+["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"][d.getMonth()]+", "+jdHM(d)+" · пришло с "+fr); }catch(e){}
+    } else { try{ jdSyncMark("ok"); }catch(e){} }
     if(!quiet) syncSay("ok","Всё сходится. Обновление №" + SYNC.rev);
     return row;
   }catch(e){
-    syncSay("err","Нет связи: " + e.message + ". Журнал в устройстве цел.");
+    syncSay("err","Нет связи: " + e.message + ". Журнал в устройстве цел."); try{ jdSyncMark("err"); }catch(e){}
     return null;
   }
 }
@@ -19860,14 +19882,15 @@ async function syncPush(){
   syncSay("wait","Отправляю…");
   try{
     SYNC.rev++;
-    const body = {data: syncPack(), rev: SYNC.rev, updated_at: new Date().toISOString()};
+    const body = {data: syncPack(), rev: SYNC.rev, updated_at: new Date().toISOString(), dev: jdDev()};
     const r = await fetch(syncUrl(), {method:"PUT", headers:{"Content-Type":"application/json"},
       body: JSON.stringify(body)});
     if(!r.ok) throw new Error("сервер ответил " + r.status);
     syncStore();
     syncSay("ok","Сохранено. Обновление №" + SYNC.rev);
+    try{ jdSyncMark("out"); }catch(e){}
   }catch(e){
-    syncSay("err","Не отправилось: " + e.message + ". Попробую позже.");
+    syncSay("err","Не отправилось: " + e.message + ". Попробую позже."); try{ jdSyncMark("err"); }catch(e){}
   }
 }
 /* Пока ребёнок щёлкает пункты вахты подряд, слать на каждый незачем. */
@@ -19881,8 +19904,9 @@ function syncStart(){
   const u = document.getElementById("syncUrl"), rm = document.getElementById("syncRoom");
   if(u && SYNC.cfg) u.value = SYNC.cfg.url || "";
   if(rm && SYNC.cfg) rm.value = SYNC.cfg.room || "";
+  try{ jdSyncBadge(); }catch(e){}
   if(!syncOn()){ syncSay("off","Синхронизация выключена — журнал только на этом устройстве"); return; }
-  try{ if(!localStorage.getItem("bortovoy-syncfix-1006")){ fetch(syncUrl(), {cache:"no-store"}).then(r=>r.ok ? r.json() : null).then(row=>{ if(row && row.data){ SYNC.rev = Math.max(SYNC.rev, row.rev||0); syncStore(); syncApply(row.data); syncTouch(); } try{ localStorage.setItem("bortovoy-syncfix-1006", "1"); }catch(e){} }).catch(()=>{}); } }catch(e){}
+  try{ if(!localStorage.getItem("bortovoy-syncfix-1006")){ fetch(syncUrl(), {cache:"no-store"}).then(r=>r.ok ? r.json() : null).then(row=>{ if(row && row.data){ SYNC.rev = Math.max(SYNC.rev, row.rev||0); syncStore(); syncApply(row.data); try{ jdSyncMark("in", row.dev || ""); const d = new Date(); toast("🔄 Данные обновились · "+d.getDate()+" "+["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"][d.getMonth()]+", "+jdHM(d)+" · пришло с "+(row.dev || "другого устройства")); }catch(e){} syncTouch(); } try{ localStorage.setItem("bortovoy-syncfix-1006", "1"); }catch(e){} }).catch(()=>{}); } }catch(e){}
   syncPull(true);
   SYNC.poll = setInterval(()=>{ if(!document.hidden) syncPull(true); }, 20000);
 }
