@@ -19803,6 +19803,19 @@ function mergeState(mine, theirs){
   const mS = Object.assign({}, mine.steps || {}), tS = Object.assign({}, theirs.steps || {});
   for(const k in out.stepsAt){ if(sa[k] && sb[k] && sa[k] !== sb[k]){ if(sa[k] < sb[k]) delete mS[k]; else delete tS[k]; } }
   const st = jdMergeLoose(mS, tS); if(st !== undefined) out.steps = st;
+  /* 06.10: разделы, появившиеся после 25.09 (лестница памяти, доп. список, контрольные, трюм, модуль 1,
+     «Слова с папой», непонятные фразы…), не сливались — данные с телефона не доезжали до ПК.
+     Теперь сливается всё, кроме дела устройства. */
+  const DONE = new Set(["checks","remind","verified","manual","oral","qstats","ostats","words","omonth","tests","todo","myq","mych","taken","gto","gtoPick","history","feed","gtoSnap","bonus","stage","v","stepsAt","steps"].concat(JD_LOOSE));
+  const DEV = new Set(["role","pin","askPin","nav","wdir","gtoOnly","slips","view","stepView","wmode"]);
+  const byLast = (a,b,f)=>{ const o = Object.assign({}, a||{}); for(const k in (b||{})){ const x = o[k], y = b[k]; o[k] = !x ? y : (!y ? x : ((y[f]||"") > (x[f]||"") ? y : x)); } return o; };
+  const uniq = (a,b,key)=>{ const seen = {}, o = []; (a||[]).concat(b||[]).forEach(x=>{ const k = key(x); if(!seen[k]){ seen[k] = 1; o.push(x); } }); return o; };
+  for(const k in theirs){ if(DONE.has(k) || DEV.has(k)) continue; const a = mine[k], b = theirs[k];
+    if(a == null){ out[k] = b; continue; } if(b == null) continue;
+    if(k === "lad") out[k] = byLast(a, b, "last");
+    else if(k === "kontr" && Array.isArray(a) && Array.isArray(b)) out[k] = uniq(a, b, x=>JSON.stringify(x));
+    else if(Array.isArray(a) && Array.isArray(b) && (a.concat(b)).every(x=>typeof x !== "object")) out[k] = uniq(a, b, x=>String(x));
+    else { const v = jdMergeLoose(a, b); if(v !== undefined) out[k] = v; } }
   return out;
 }
 
@@ -19869,6 +19882,7 @@ function syncStart(){
   if(u && SYNC.cfg) u.value = SYNC.cfg.url || "";
   if(rm && SYNC.cfg) rm.value = SYNC.cfg.room || "";
   if(!syncOn()){ syncSay("off","Синхронизация выключена — журнал только на этом устройстве"); return; }
+  try{ if(!localStorage.getItem("bortovoy-syncfix-1006")){ fetch(syncUrl(), {cache:"no-store"}).then(r=>r.ok ? r.json() : null).then(row=>{ if(row && row.data){ SYNC.rev = Math.max(SYNC.rev, row.rev||0); syncStore(); syncApply(row.data); syncTouch(); } try{ localStorage.setItem("bortovoy-syncfix-1006", "1"); }catch(e){} }).catch(()=>{}); } }catch(e){}
   syncPull(true);
   SYNC.poll = setInterval(()=>{ if(!document.hidden) syncPull(true); }, 20000);
 }
