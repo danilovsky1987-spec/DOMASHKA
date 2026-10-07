@@ -2589,6 +2589,8 @@ details.jd-rl>div .jd-fm{margin-top:0}
 .jdp-tbl .c.y{background:#12A05E;border-color:#12A05E;color:#fff}.jdp-tbl .c.n{background:#E5484D;border-color:#E5484D;color:#fff}
 .jdp-tbl .st{font:800 12px Nunito,Arial;border-radius:99px;padding:2px 8px;white-space:nowrap}.jdp-tbl .st.ok{background:#E6F6EE;color:#0d7a47}.jdp-tbl .st.no{background:#FDECEC;color:#B4232A}.jdp-tbl .st.mid{background:#FFF3D6;color:#8a5a00}
 #content.jd-noladder details.fold-do:not(.jd-man),#content.jd-noladder .jd-steps:not(.jd-man){display:none!important}.jdr-prog .man{border:0;background:none;color:#1B6FE0;font:800 12.5px Nunito,Arial,sans-serif;cursor:pointer;padding:0 0 0 4px;white-space:nowrap}
+.jdpb{display:flex;align-items:center;gap:12px;width:100%;margin:12px 0 16px;padding:14px 18px;border:0;border-radius:18px;background:#12A05E;color:#fff;cursor:pointer;text-align:left;box-shadow:0 4px 0 #0b6b3f;font-family:Nunito,Arial,sans-serif}.jdpb .i{font-size:26px}.jdpb .t{flex:1}.jdpb b{display:block;font:800 18px Nunito,Arial,sans-serif}.jdpb small{display:block;font:700 13px Nunito,Arial,sans-serif;opacity:.9}.jdpb .a{font:900 22px Nunito,Arial,sans-serif}.jdpb:active{transform:translateY(2px);box-shadow:0 2px 0 #0b6b3f}
+.jdr-how button+button{margin-left:6px}
 .jdr-st{position:relative}.jdr-st small{display:block;font:800 12px Nunito,Arial,sans-serif;color:#4a587a;min-height:15px;margin-top:2px}
 .jdr-st.ok .ph{background:#12A05E!important;border-color:#12A05E!important;color:#fff;font:900 26px Nunito,Arial,sans-serif}.jdr-st.ok small{color:#0d7a47}
 .jdr-st.now .ph{box-shadow:0 0 0 5px #F2A10466}.jdr-ship{position:absolute;top:-14px;left:50%;margin-left:18px;font-size:22px;z-index:2}
@@ -16727,6 +16729,12 @@ function jdrStrip(l){
   const how = d.querySelector(".jdr-how");
   d.querySelectorAll(".jdr-st").forEach(b=>b.addEventListener("click", ()=>{ const x = st[+b.dataset.i];
     d.querySelectorAll(".jdr-st").forEach(y=>y.classList.toggle("on", y === b));
+    /* 07.10 (А+Б): остров «Слова» сразу открывает «Слова с папой», словарик — второй кнопкой */
+    if(x[0] === "sl" && typeof jdvLessonWords === "function" && jdvLessonWords(l.id).length){
+      how.hidden = false; how.innerHTML = '<span>🗂 <b>Слова:</b> папа читает русское — ты говоришь по-английски. Вперемешку, пока все не станут ✓.</span><button type="button" data-p>👨‍👦 Слова с папой</button><button type="button" data-v>📔 Учить по словарику</button>';
+      how.querySelector("[data-p]").onclick = ()=>jdpOpen(l.id);
+      how.querySelector("[data-v]").onclick = ()=>{ jdvTopic = l.id; jdvMode = "topic"; jdvQ = ""; jdvK = null; show("dict"); };
+      jdpOpen(l.id); return; }
     const rd = ((state.rd||{})[l.id]||{})[x[0]];
     const act = {sl:"📔 Открыть слова в словарике", dk:"📝 Тренироваться как в диктанте", ts:"📔 Начать контрольную", te:"🎯 Пройти тест", pr:"🏝 Открыть «Грамматику»",
       ch:rd ? "✓ Прочитал вслух — "+rd : "✓ Прочитал вслух папе", di:rd ? "✓ Рассказал по ролям — "+rd : "✓ Рассказал по ролям", up:"↓ К упражнениям", li:"↓ К заданию", pi:"↓ К письму"}[x[0]];
@@ -16740,6 +16748,12 @@ function jdrStrip(l){
       else if(x[0] === "up" || x[0] === "li" || x[0] === "pi"){ const box = document.getElementById("content"); const t = box.querySelector(x[0] === "pi" ? ".jdx-let, .jdx-c.write" : ".jdx-c.write, .jdx-c, .x-sec, details"); if(t) t.scrollIntoView({behavior:"smooth", block:"start"}); else toast("Упражнения — ниже в разборе"); }
       else if(x[0] === "te"){ show("test"); showIntro(QUIZ[l.id].map((q,i)=>Object.assign({lid:l.id,qi:i},q)), l.id, l.title, [l], l.subject+" · "+fmtDate(l.date)); } }); }));
   try{ jdrProgress(d, l); }catch(e){ console.error(e); }
+  try{ if(st.some(x=>x[0] === "sl") && typeof jdvLessonWords === "function"){ const ws = jdvLessonWords(l.id); if(ws.length){
+    const pb = document.createElement("button"); pb.type = "button"; pb.className = "jdpb noprint";
+    const draw = ()=>{ const ok = ws.filter(w=>jdpStat(l.id, w.k)[0] === "ok").length, no = ws.filter(w=>jdpStat(l.id, w.k)[0] === "no").length;
+      pb.innerHTML = '<span class="i">👨‍👦</span><span class="t"><b>Слова с папой</b><small>'+ws.length+' слов · вперемешку'+(ok||no ? ' · выучено '+ok+(no ? ' · ещё нет '+no : '') : '')+'</small></span><span class="a">→</span>'; };
+    draw(); pb.onclick = ()=>jdpOpen(l.id); d.jdpDraw = draw;
+    setTimeout(()=>{ if(d.parentNode && !d.nextElementSibling?.classList?.contains("jdpb")) d.after(pb); }, 0); } } }catch(e){ console.error(e); }
   return d;
 }
 /* --- папе по ситуации и сводка недели (на экране «Учёба») --- */
@@ -17005,7 +17019,7 @@ function jdpStat(lid, k){ const m = (jdpMarks(lid)[k]) || {}, ds = Object.keys(m
   if(v.length && v[v.length-1] === "n") return ["no","ещё нет"];
   return v.length ? ["mid","почти"] : ["","—"]; }
 function jdpOpen(lid){ const ws = jdvLessonWords(lid); if(!ws.length){ toast("В этом уроке нет слов"); return; }
-  jdp = {lid:lid, ws:ws, tab:"ask", st:1, cur:{}, hide:true, q:[], shown:false, round:1, fin:[], fi:0, fres:{}};
+  jdp = {lid:lid, ws:shuffle(ws.slice()), tab:"ask", st:1, cur:{}, hide:true, q:[], shown:false, round:1, fin:[], fi:0, fres:{}};
   ws.forEach(w=>{ const m = jdpMarks(lid)[w.k]; if(m && m[todayKey()]) jdp.cur[w.k] = m[todayKey()]; });
   let el = document.getElementById("jdpBox"); if(!el){ el = document.createElement("div"); el.id = "jdpBox"; document.body.appendChild(el); }
   el.hidden = false; document.body.style.overflow = "hidden"; jdpRender(); }
@@ -17067,7 +17081,7 @@ function jdpRender(){
     else if(a === "s") P.shown = true;
     else if(a === "y" || a === "n"){
       if(P.st === 2){ const i = P.q[0], w = P.ws[i]; P.shown = false;
-        if(a === "y"){ jdpMark(w, true); P.q.shift(); } else { P.q.push(P.q.shift()); if(P.q.length === 1 || P.q[0] === i) P.round++; } }
+        if(a === "y"){ jdpMark(w, true); P.q.shift(); } else { P.q.shift(); jdRandIns(P.q, -1, i); if(P.q.length === 1 || P.q[0] === i) P.round++; } }
       else if(P.st === 3){ const i = P.fin[P.fi], w = P.ws[i]; P.fres[i] = a === "y"; jdpMark(w, a === "y"); if(a === "y") jdvLadder(w.k, true, P.lid); P.fi++; P.shown = false;
         if(P.fi >= P.fin.length && P.fin.every(j=>P.fres[j])){ state.wdone = state.wdone || {}; state.wdone[P.lid] = todayKey(); save(); try{ jdAutoTick(P.lid, /слов/i); }catch(e){} } } }
     jdpRender(); });
@@ -19076,6 +19090,9 @@ function renderWordList(){
     mcur === "write" ? "Ребёнок печатает ответ, журнал сверяет сам. Регистр, точки и артикли не считаются ошибкой. В направлении «англ → рус» письменный режим не включается — там отвечают вслух."
     : "Ребёнок отвечает вслух, взрослый нажимает «Верно» или «Ещё нет». Ответ спрятан, пока не нажали «Показать».";
 }
+/* 07.10: слова всегда вперемешку — ошибочное слово возвращается в случайное место впереди, не в конец */
+function jdRandIns(arr, from, item){ const lo = Math.min(arr.length, from + 2), hi = arr.length; const pos = lo + Math.floor(Math.random() * (hi - lo + 1)); arr.splice(pos, 0, item); }
+let wDirAt = -1, wDirV = "ru";
 function startWords(set){
   const jv = jdvDeck(set);
   wLid = String(set).replace(/^DICT:/, "");
@@ -19085,7 +19102,7 @@ function startWords(set){
   const l = LESSONS.find(x=>x.id === set);
   wSetName = jv ? jv.name : set === "ALL" ? "Все слова английского" : set === "WEAK" ? "Только слабые" : (l ? l.title : set);
   wq = shuffle(deck.slice());
-  wi = 0; wSeen = {}; wFirst = 0; wRe = []; wShown = false;
+  wi = 0; wDirAt = -1; wSeen = {}; wFirst = 0; wRe = []; wShown = false;
   document.getElementById("wordPick").hidden = true;
   document.getElementById("wordDone").hidden = true;
   document.getElementById("wordRun").hidden = false;
@@ -19095,7 +19112,7 @@ function startWords(set){
 }
 function wordDirNow(w){
   const d = (jdvForce && jdvForce.dir) || state.wdir || "ru";
-  if(d === "mix") return (w.k.length % 2) ? "ru" : "en";
+  if(d === "mix"){ if(wDirAt !== wi){ wDirAt = wi; wDirV = Math.random() < .5 ? "ru" : "en"; } return wDirV; }
   return d;
 }
 function wordModeNow(){
@@ -19180,7 +19197,7 @@ function wordVerdict(ok){
   if(!wSeen[w.k]){ wSeen[w.k] = 1; if(ok) wFirst++; }
   if(!ok){
     if(wRe.indexOf(w.k) < 0) wRe.push(w.k);
-    wq.push(w);                      /* вернётся в конце очереди */
+    jdRandIns(wq, wi, w);            /* вернётся в случайном месте впереди */
   }
   wi++;
   renderWordCard();
