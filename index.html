@@ -21525,7 +21525,7 @@ function mergeState(mine, theirs){
   out.taken    = mergeIdSet(mine.taken, theirs.taken);
   out.gto      = mergeGto(mine.gto, theirs.gto);
   out.gtoPick  = mergeGtoPick(mine.gtoPick, theirs.gtoPick);
-  out.history  = mergeUniqueList(mine.history, theirs.history, x=>x.d+"|"+x.title+"|"+x.r+"|"+x.t, 200);
+  out.history  = mergeUniqueList(mine.history, theirs.history, x=>x.nov26Run ? "NOV26:"+x.nov26Run : x.d+"|"+x.title+"|"+x.r+"|"+x.t, 200);
   out.feed     = mergeUniqueList(mine.feed, theirs.feed, x=>x.d+"|"+x.t, 400);
   out.gtoSnap  = mergeUniqueList(mine.gtoSnap, theirs.gtoSnap, x=>x.kk+"|"+x.iso, 200);
   out.bonus    = Math.max(mine.bonus||0, theirs.bonus||0);
@@ -22260,7 +22260,7 @@ window.addEventListener('message',function(e){var d=e.data;if(!d||!d.nov26)retur
     rec.pass=pct>=0.8?(rec.pass||0)+1:0;rec.nov26Run=data.runId;
     if(!rec.awarded&&pct>=0.8){rec.awarded=true;state.bonus=(state.bonus||0)+5;}
     state.tests[lid]=rec;
-    state.history=state.history||[];state.history.unshift({d:tk,title:'Английский · 25 слов · проверка смысла',r:q.first,t:6});state.history=state.history.slice(0,200);
+    state.history=state.history||[];state.history.unshift({d:tk,title:'Английский · 25 слов · проверка смысла',r:q.first,t:6,nov26Run:'q:'+data.runId});state.history=state.history.slice(0,200);
     changed=true;
    }
   }
@@ -22268,7 +22268,7 @@ window.addEventListener('message',function(e){var d=e.data;if(!d||!d.nov26)retur
   if(d.id&&d.total>0&&d.at>=d.queue.length&&logged.indexOf(d.id)<0){
    logged.push(d.id);
    var label=d.group==='all'?'все 25 слов':'слова '+(Number(d.group)*5+1)+'–'+(Number(d.group)*5+5);
-   state.history=state.history||[];state.history.unshift({d:todayKey(),title:'Английский · диктант · '+label+' · первая попытка',r:d.first,t:d.total,nov26Run:d.id});state.history=state.history.slice(0,200);
+   state.history=state.history||[];state.history.unshift({d:todayKey(),title:'Английский · диктант · '+label+' · первая попытка',r:d.first,t:d.total,nov26Run:'d:'+d.id});state.history=state.history.slice(0,200);
    changed=true;
   }
   save();
